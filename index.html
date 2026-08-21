@@ -695,11 +695,7 @@ footer a{color:#F0DFDA}
     <form class="form" id="form-first" novalidate>
       <div class="form-body">
         <h3>Записаться на первый визит</h3>
-        <p class="fnote">Оставьте имя и телефон — администратор перезвонит в течение 15 минут, покажет свободные окна и ответит на вопросы. За вашим номером закрепим цену 600 ₽.</p>
-        <div class="field">
-          <label for="f1-name">Как к вам обращаться</label>
-          <input id="f1-name" name="name" type="text" placeholder="Например, Анна" autocomplete="name" required>
-        </div>
+        <p class="fnote">Оставьте номер телефона — администратор перезвонит в течение 15 минут, покажет свободные окна и ответит на вопросы. За вашим номером закрепим цену 600 ₽.</p>
         <div class="field">
           <label for="f1-phone">Телефон, на который позвонить</label>
           <input id="f1-phone" name="phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
@@ -956,10 +952,6 @@ footer a{color:#F0DFDA}
             <button type="button" class="qopt"><span class="qi"><svg class="ic"><use href="#i-check"/></svg></span>В Telegram</button>
             <button type="button" class="qopt"><span class="qi"><svg class="ic"><use href="#i-check"/></svg></span>Позвоните мне — расскажу подробнее</button>
             <button type="button" class="qopt"><span class="qi"><svg class="ic"><use href="#i-check"/></svg></span>SMS</button>
-          </div>
-          <div class="field">
-            <label for="q-name">Как вас зовут</label>
-            <input id="q-name" type="text" placeholder="Например, Анна" autocomplete="name">
           </div>
           <div class="field">
             <label for="q-phone">Номер, на который отправить программу</label>
@@ -1241,11 +1233,7 @@ footer a{color:#F0DFDA}
     <form class="form" id="form-final" novalidate>
       <div class="form-body">
         <h3>Занять окно на этой неделе</h3>
-        <p class="fnote">Оставьте контакты — администратор перезвонит, предложит ближайшие свободные окна и закрепит за вами цену первого визита 600 ₽.</p>
-        <div class="field">
-          <label for="f4-name">Имя</label>
-          <input id="f4-name" type="text" placeholder="Например, Анна" autocomplete="name" required>
-        </div>
+        <p class="fnote">Оставьте номер — администратор перезвонит, предложит ближайшие свободные окна и закрепит за вами цену первого визита 600 ₽.</p>
         <div class="field">
           <label for="f4-phone">Телефон</label>
           <input id="f4-phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
@@ -1423,8 +1411,7 @@ footer a{color:#F0DFDA}
       var agree = f.querySelector('input[type=checkbox]');
       if(agree && !agree.checked){ agree.focus(); return; }
       var data = {form:id, phone:phone.value};
-      var name = f.querySelector('input[type=text]');   if(name) data.name = name.value;
-      var sel  = f.querySelector('select');             if(sel)  data.extra = sel.value;
+      var sel = f.querySelector('select');   if(sel) data.extra = sel.value;
       sendLead(data);
       done(f);
     });
@@ -1474,13 +1461,11 @@ footer a{color:#F0DFDA}
       if(!validPhone(phone.value)){ shake(phone); return; }
       var agree = quiz.querySelector('.qstep[data-step="6"] input[type=checkbox]');
       if(agree && !agree.checked){ agree.focus(); return; }
-      answers['Имя'] = document.getElementById('q-name').value;
       answers['Телефон'] = phone.value;
       sendLead(Object.assign({form:'quiz'}, answers));
 
       var ch = answers['Куда отправить'] || '';
       var text = 'Здравствуйте! Прошла тест на сайте, хочу записаться на первый визит за 600 ₽.\n'
-        + 'Имя: ' + (answers['Имя'] || '—') + '\n'
         + 'Зона: ' + (answers['Зона'] || '—') + '\n'
         + 'Задача: ' + (answers['Задача'] || '—') + '\n'
         + 'Опыт: ' + (answers['Опыт'] || '—') + '\n'
