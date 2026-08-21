@@ -417,6 +417,7 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:v
   color:transparent;-webkit-text-fill-color:transparent}
 .benefit h3{margin-bottom:5px;color:var(--plum)}
 .benefit p{font-size:15.5px;color:var(--ink-2);line-height:1.5}
+.benefit .bnum.tight{min-width:44px}
 
 /* квиз */
 .quiz{background:#fff;border-radius:28px;border:1px solid var(--line);overflow:hidden;
@@ -536,11 +537,14 @@ details.sp:hover{box-shadow:0 22px 44px -32px rgba(74,34,51,.7)}
 .safe .bi svg{width:13px;height:13px;stroke-width:2.6}
 .gal{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .gal figure{border-radius:20px;overflow:hidden;background:#fff;border:1px solid var(--line);
-  box-shadow:var(--sh-sm);transition:transform .28s,box-shadow .28s}
+  box-shadow:var(--sh-sm);transition:transform .28s,box-shadow .28s;display:flex;flex-direction:column}
 .gal figure:hover{transform:translateY(-5px);box-shadow:var(--sh-lift)}
 .gal img{aspect-ratio:3/4;object-fit:cover;width:100%;transition:transform .6s cubic-bezier(.2,.7,.3,1)}
 .gal figure:hover img{transform:scale(1.05)}
-.gal figcaption{font-size:13px;color:var(--ink-2);padding:12px 15px;line-height:1.35}
+.gal figcaption{flex:1;font-size:14.5px;font-weight:700;color:var(--plum);padding:14px 16px 16px;
+  line-height:1.4;background:linear-gradient(135deg,#FDF0E6,#FBE7E7);border-top:2px solid transparent;
+  border-image:var(--g-cta) 1;position:relative}
+.gal figcaption b{color:var(--cta);font-weight:800}
 .gal-3{grid-template-columns:repeat(3,1fr)}
 @media(max-width:640px){.gal-3{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
@@ -648,6 +652,7 @@ footer a{color:#F3E2DC}
   body{padding-bottom:76px}
   .fgrid{grid-template-columns:1fr;gap:28px}
   .benefit .bnum{font-size:40px;min-width:84px}
+  .benefit .bnum.tight{min-width:38px}
   .hero-badge{left:0;top:4%}
   .ticker span{font-size:19px;padding:0 18px}
 }
@@ -874,7 +879,7 @@ footer a{color:#F3E2DC}
   <div class="wrap offer-grid">
     <div>
       <span class="eyebrow">Знакомство со студией</span>
-      <h2>Первый визит за 600 ₽:<br>приходите и <span class="it">проверьте на себе</span></h2>
+      <h2>Первый визит за 600 ₽:<br>приходите и <span class="it">убедитесь сами</span></h2>
       <p class="lead">Это не демо на пять минут и не «консультация ради консультации». Вы получаете полноценную процедуру и понятный план — а решаете уже потом, дома, спокойно.</p>
       <ul class="offer-list">
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Консультация и анкета здоровья — проверим, нет ли противопоказаний</span></li>
@@ -949,11 +954,11 @@ footer a{color:#F3E2DC}
         <div><h3>Цена одной процедуры в абонементе</h3><p>Абонемент на 40 процедур стоит 22 000 ₽ вместо 40 000 ₽ поштучно — экономия 18 000 ₽. Абонемент можно оформить уже после первого визита, когда вы увидите свои цифры.</p></div>
       </div>
       <div class="benefit">
-        <div class="bnum">7</div>
+        <div class="bnum tight">7</div>
         <div><h3>Методик под разные задачи</h3><p>Кавитация, RF-лифтинг тела, лазерный липолиз, вакуумный массаж с RF, миостимуляция, прессотерапия и вибромассаж. Отёки, дряблость и локальный жир требуют разного — мы не лечим всё одним аппаратом.</p></div>
       </div>
       <div class="benefit">
-        <div class="bnum">0</div>
+        <div class="bnum tight">0</div>
         <div><h3>Боли во время процедуры</h3><p>Тепло, лёгкая вибрация и ощущение массажа — всё. Наши гостьи чаще всего засыпают под прессотерапию. Никаких проколов, инъекций и разрезов.</p></div>
       </div>
     </div>
@@ -1265,9 +1270,9 @@ footer a{color:#F3E2DC}
       <p class="lead">Стаж более 10 лет, проверенные пигменты и аккуратная форма под ваши черты — без «татуажа из нулевых». Заживление сопровождаем: уходовые средства отдаём с собой.</p>
     </div>
     <div class="gal gal-3 rv">
-      <figure><img src="assets/img/ba-brows.jpg" alt="Перманентный макияж бровей: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption>Брови: до и после</figcaption></figure>
-      <figure><img src="assets/img/ba-lips.jpg" alt="Перманентный макияж губ: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption>Губы: до и после</figcaption></figure>
-      <figure><img src="assets/img/ba-lashes.jpg" alt="Межресничка: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption>Межресничка: до и после</figcaption></figure>
+      <figure><img src="assets/img/ba-brows.jpg" alt="Перманентный макияж бровей: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption><b>Брови</b> — до и после</figcaption></figure>
+      <figure><img src="assets/img/ba-lips.jpg" alt="Перманентный макияж губ: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption><b>Губы</b> — до и после</figcaption></figure>
+      <figure><img src="assets/img/ba-lashes.jpg" alt="Межресничка: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption><b>Межресничка</b> — до и после</figcaption></figure>
     </div>
     <div class="center" style="margin-top:26px">
       <a href="#first" class="btn btn-ghost">Записаться на консультацию по перманенту</a>
@@ -1300,16 +1305,28 @@ footer a{color:#F3E2DC}
 
     <div class="grid g3 rv">
       <div class="quote">
-        <p><mark>После первой процедуры увидела результат, уменьшился живот.</mark> Приятная атмосфера, релаксирующая музыка.</p>
-        <div class="qmeta"><span class="qav"><svg class="ic" style="width:16px;height:16px"><use href="#i-star"/></svg></span><span>Отзыв на Яндекс.Картах · прессотерапия</span></div>
+        <p>Действительно хорошее место. <mark>За 3 сеанса живот втянулся, нарисовалась талия</mark>.</p>
+        <div class="qmeta"><span class="qav">Ю</span><span><b style="color:var(--plum);display:block;font-size:14.5px">Юлия Каминская</b>Яндекс.Карты · ноябрь 2025</span></div>
       </div>
       <div class="quote">
-        <p>Была на комплексе для лица. <mark>Результат увидела после 1-й процедуры.</mark> Мастера всё объясняют и предлагают оптимальную схему.</p>
-        <div class="qmeta"><span class="qav"><svg class="ic" style="width:16px;height:16px"><use href="#i-star"/></svg></span><span>Отзыв на Яндекс.Картах · косметология</span></div>
+        <p>Очень хороший мастер! Всё понравилось, <mark>было не больно, наоборот спать даже захотела</mark>.</p>
+        <div class="qmeta"><span class="qav">О</span><span><b style="color:var(--plum);display:block;font-size:14.5px">Олеся Носова</b>Яндекс.Карты · отзыв о процедуре</span></div>
       </div>
       <div class="quote">
-        <p>Ходила на коррекцию фигуры: <mark>уже после пары сеансов одежда стала сидеть по-другому.</mark> Персонал очень вежливый и открытый.</p>
-        <div class="qmeta"><span class="qav"><svg class="ic" style="width:16px;height:16px"><use href="#i-star"/></svg></span><span>Отзыв на Яндекс.Картах · коррекция фигуры</span></div>
+        <p>Был сегодня на сеансе прессотерапии. <mark>Отлично! Мастер Надежда знаток дела</mark>.</p>
+        <div class="qmeta"><span class="qav">И</span><span><b style="color:var(--plum);display:block;font-size:14.5px">Игорь Ленол</b>Яндекс.Карты · октябрь 2025</span></div>
+      </div>
+      <div class="quote">
+        <p>Сегодня <mark>первый раз была в данной студии и осталась в полном восторге</mark>.</p>
+        <div class="qmeta"><span class="qav">А</span><span><b style="color:var(--plum);display:block;font-size:14.5px">Анна Кузнецова</b>Яндекс.Карты · первый визит</span></div>
+      </div>
+      <div class="quote">
+        <p>Всем советую: <mark>корректируют не только тело, но и душу</mark>, у Нади золотые ручки.</p>
+        <div class="qmeta"><span class="qav">К</span><span><b style="color:var(--plum);display:block;font-size:14.5px">Ксения Орлова</b>Яндекс.Карты · сентябрь 2025</span></div>
+      </div>
+      <div class="quote">
+        <p><mark>Замечательная студия. Релаксирующая музыка</mark>. Делала RF-лифтинг лица, кавитацию.</p>
+        <div class="qmeta"><span class="qav">А</span><span><b style="color:var(--plum);display:block;font-size:14.5px">Алекса Ммм</b>Яндекс.Карты · апрель 2025</span></div>
       </div>
     </div>
 
@@ -1388,7 +1405,7 @@ footer a{color:#F3E2DC}
     <div class="simg rv"><img src="assets/img/room.jpg" alt="Кабинет студии Дофамин: кушетка и аппарат для коррекции фигуры" loading="lazy"></div>
     <div>
       <span class="eyebrow plain">Наша студия</span>
-      <h2>Маленькая студия, где вас <span class="it">помнят по имени</span></h2>
+      <h2>Уютная студия, где вас <span class="it">помнят по имени</span></h2>
       <p class="lead" style="margin-bottom:22px">Мы не сеть и не «конвейер»: записи разводим по времени, чтобы вы не ждали в коридоре. Поэтому у нас тихо, никто не подгоняет, а мастер помнит, на какой процедуре курса вы находитесь, без напоминаний.</p>
       <ul class="safe">
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>Одноразовые костюм, носочки, шапочка и бахилы каждому гостю</li>
@@ -1407,10 +1424,10 @@ footer a{color:#F3E2DC}
 
   <div class="wrap" style="margin-top:56px">
     <div class="gal rv">
-      <figure><img src="assets/img/team.jpg" alt="Мастера студии Дофамин" loading="lazy" style="aspect-ratio:3/4"><figcaption>Мастера студии: аппаратная коррекция, косметология, перманент</figcaption></figure>
-      <figure><img src="assets/img/reception.jpg" alt="Стойка администратора с неоновой вывеской Дофамин" loading="lazy"><figcaption>Ресепшн: здесь начинается ваш визит</figcaption></figure>
-      <figure><img src="assets/img/award.jpg" alt="Награда 2ГИС на стойке студии Дофамин" loading="lazy"><figcaption>Награда 2ГИС и QR для отзыва — на стойке</figcaption></figure>
-      <figure><img src="assets/img/certs.jpg" alt="Подарочные сертификаты студии Дофамин" loading="lazy"><figcaption>Подарочные сертификаты на любую сумму и услугу</figcaption></figure>
+      <figure><img src="assets/img/team.jpg" alt="Мастера студии Дофамин" loading="lazy" style="aspect-ratio:3/4"><figcaption><b>Мастера студии</b> — аппаратная коррекция, косметология и перманент</figcaption></figure>
+      <figure><img src="assets/img/reception.jpg" alt="Стойка администратора с неоновой вывеской Дофамин" loading="lazy"><figcaption><b>Ресепшн</b> — здесь начинается ваш визит</figcaption></figure>
+      <figure><img src="assets/img/award.jpg" alt="Награда 2ГИС на стойке студии Дофамин" loading="lazy"><figcaption><b>Награда 2ГИС</b> и QR для отзыва — прямо на стойке</figcaption></figure>
+      <figure><img src="assets/img/certs.jpg" alt="Подарочные сертификаты студии Дофамин" loading="lazy"><figcaption><b>Подарочные сертификаты</b> — на любую сумму и услугу</figcaption></figure>
     </div>
   </div>
 </section>
