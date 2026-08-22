@@ -262,6 +262,23 @@ header{
 .bullets .bi svg{width:14px;height:14px;stroke-width:2.6}
 .bullets b{font-weight:800}
 .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+/* стрелка-указатель слева от главной кнопки первого экрана.
+   В самом ряду слева места нет — колонка начинается ровно с края кнопки,
+   поэтому стрелка вынесена абсолютом в левое поле страницы */
+.cta-wrap{position:relative;display:inline-flex}
+.cta-arrow{position:absolute;right:100%;top:50%;margin-right:9px;
+  transform:translateY(-50%);pointer-events:none}
+.cta-arrow svg{display:block;overflow:visible;
+  filter:drop-shadow(0 4px 7px rgba(192,83,121,.28));
+  animation:cta-point 2.9s ease-in-out infinite}
+.cta-arrow .a-body,.cta-arrow .a-head{fill:url(#ag)}
+/* только покачивание к кнопке: анимация появления оставляла стрелку
+   невидимой до своего старта, а рисунок должен быть виден сразу */
+@keyframes cta-point{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+@media(prefers-reduced-motion:reduce){.cta-arrow svg{animation:none}}
+/* левое поле страницы = (ширина окна − 1200)/2 + 22. Стрелке нужно 67px
+   плюс воздух до края экрана, иначе она липнет к нему — ниже 1360px убираем */
+@media(max-width:1359px){.cta-arrow{display:none}}
 .hero-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px;padding-top:22px;
   border-top:1px solid var(--line-2)}
 @media(max-width:1180px) and (min-width:981px){.hero-trust{grid-template-columns:1fr 1fr}}
@@ -939,7 +956,18 @@ footer a{color:#F3E2DC}
       </ul>
 
       <div class="cta-row">
-        <a href="#first" class="btn btn-lg">Записаться за 600 ₽</a>
+        <span class="cta-wrap">
+          <span class="cta-arrow" aria-hidden="true">
+            <svg viewBox="0 4 60 19" width="58" height="18">
+              <defs><linearGradient id="ag" x1="0" y1="0" x2="1" y2=".8">
+                <stop offset="0" stop-color="#F2C8D5"/><stop offset=".45" stop-color="#D2648B"/>
+                <stop offset="1" stop-color="#B8446C"/></linearGradient></defs>
+              <path class="a-body" d="M1.9 5.1 L2.4 6.0 L3.0 6.9 L3.6 7.8 L4.3 8.6 L5.0 9.3 L5.7 10.1 L6.4 10.7 L7.2 11.4 L7.9 12.0 L8.7 12.6 L9.5 13.2 L10.4 13.7 L11.2 14.2 L12.1 14.6 L12.9 15.1 L13.8 15.5 L14.7 15.8 L15.6 16.2 L16.6 16.5 L17.5 16.8 L18.4 17.0 L19.4 17.3 L20.4 17.5 L21.3 17.7 L22.3 17.9 L23.3 18.0 L24.3 18.1 L25.3 18.2 L26.3 18.3 L27.3 18.4 L28.3 18.5 L29.4 18.5 L30.4 18.5 L31.4 18.5 L32.4 18.5 L33.4 18.5 L34.5 18.5 L35.5 18.5 L36.5 18.4 L37.5 18.4 L38.6 18.3 L39.6 18.3 L40.6 18.2 L41.6 18.1 L42.6 18.0 L43.6 18.0 L44.6 17.9 L45.6 17.8 L45.0 12.9 L44.0 13.0 L43.0 13.2 L42.1 13.3 L41.1 13.5 L40.1 13.6 L39.1 13.8 L38.1 13.9 L37.1 14.0 L36.2 14.2 L35.2 14.3 L34.2 14.4 L33.2 14.5 L32.2 14.6 L31.3 14.6 L30.3 14.7 L29.3 14.8 L28.4 14.8 L27.4 14.8 L26.5 14.8 L25.5 14.8 L24.6 14.8 L23.6 14.8 L22.7 14.7 L21.8 14.6 L20.9 14.5 L19.9 14.4 L19.0 14.3 L18.1 14.1 L17.3 13.9 L16.4 13.7 L15.5 13.5 L14.7 13.2 L13.8 13.0 L13.0 12.6 L12.1 12.3 L11.3 11.9 L10.5 11.5 L9.7 11.1 L8.9 10.6 L8.1 10.2 L7.3 9.6 L6.6 9.1 L5.8 8.5 L5.1 7.8 L4.3 7.1 L3.6 6.4 L2.9 5.7 L2.1 4.9Z"/>
+              <path class="a-head" d="M57.7 13.8 L46.0 21.3 Q49.1 14.9 44.6 9.4Z"/>
+            </svg>
+          </span>
+          <a href="#first" class="btn btn-lg">Записаться за 600 ₽</a>
+        </span>
         <a href="#quiz" class="btn btn-ghost">Подобрать программу</a>
       </div>
       <p class="note">Перезвоним в течение 15 минут в рабочее время и подтвердим удобное окно.</p>
