@@ -665,6 +665,101 @@ footer a{color:#F3E2DC}
   .scrollhint svg,.ticker-row{animation:none}
 }
 
+
+/* ══════════ МОБИЛЬНАЯ ВЕРСИЯ ══════════
+   Тот же URL и та же страница: на узких экранах меняется композиция.
+   По методике: 10–12 блоков вместо 17, все формы захвата на месте,
+   один блок = один экран, спойлеры вместо простыней, крупные тапы,
+   липкая панель действий внизу. */
+.m-only{display:none}
+@media(max-width:760px){
+  /* — воздух и ритм — */
+  body{font-size:16.5px;line-height:1.58}
+  section{padding:52px 0}
+  .wrap{padding:0 18px}
+  h1{font-size:clamp(29px,7.6vw,34px);line-height:1.08}
+  h2{font-size:clamp(25px,6.6vw,30px);line-height:1.1}
+  .lead{font-size:16px}
+  .grid{gap:14px}
+  .center{margin-bottom:26px}
+
+  /* — всё кликабельное крупное и в зоне большого пальца — */
+  .btn{min-height:56px;padding:17px 20px}
+  .btn-ghost{min-height:54px}
+  .msg{min-height:48px;padding:12px 17px}
+  .qopt{min-height:58px;padding:15px 16px;font-size:16px}
+  details.sp summary{padding:19px 52px 19px 20px;font-size:16.5px;min-height:58px}
+  details.sp .spb{padding:0 20px 20px;font-size:15.5px}
+  .field input,.field select{min-height:56px;font-size:16px}  /* 16px — иначе iOS зумит */
+  .agree input{width:20px;height:20px}
+  .hd-phone a{font-size:17px}
+
+  /* — формы целиком в один экран — */
+  .form{padding:24px 18px;border-radius:22px}
+  .form h3{font-size:22px}
+  .form .fnote{font-size:14px;margin-bottom:16px}
+  .field{margin-bottom:12px}
+  .quiz{border-radius:22px}
+  .quiz-head{padding:20px 18px 0}
+  .quiz-body{padding:20px 18px 26px}
+  .qstep h3{font-size:22px}
+  .qstep .qsub{font-size:14px;margin-bottom:16px}
+
+  /* — 10–12 блоков: лишние карточки прячем — */
+  .m-extra{display:none}
+  .m-open .m-extra{display:block}
+  .m-open .mcard.m-extra{display:flex}
+  .m-only{display:block}
+  .m-more{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;
+    margin-top:14px;min-height:54px;padding:15px 18px;border-radius:99px;cursor:pointer;
+    font-weight:700;font-size:15.5px;color:var(--plum);
+    background:linear-gradient(#fff,#fff) padding-box,linear-gradient(140deg,#EFC3D0,#E6C88E) border-box;
+    border:1.5px solid transparent;box-shadow:var(--sh-sm)}
+  .m-more svg{width:17px;height:17px;transition:transform .25s}
+  .m-open .m-more svg{transform:rotate(180deg)}
+
+  /* — компактнее блоки — */
+  .pain{padding:17px 18px;border-radius:16px}
+  .pain p{font-size:15.5px}
+  .pain .q{font-size:32px;margin-top:6px}
+  .pain-after{font-size:21px;margin-top:26px;line-height:1.4}
+  .step{padding:24px 20px}
+  .step::before{font-size:44px;top:14px;right:18px}
+  .stats{gap:11px}
+  .stat{padding:18px 14px}
+  .stat .sv{font-size:33px}
+  .stat .sl{font-size:13px}
+  .benefit{gap:13px}
+  .mcard .mbody{padding:18px 18px 20px}
+  .mcard .mimg{aspect-ratio:16/10}
+  .mcard p{font-size:14.5px}
+  .quote{padding:22px 20px}
+  .quote p{font-size:16px}
+  .rbox{min-width:0;width:100%;padding:16px 20px}
+  .rating{gap:10px;margin-bottom:22px}
+  .ptable{border-radius:18px}
+  .plist li{font-size:15px}
+  .gal{gap:11px}
+  .gal figcaption{font-size:13.5px;padding:11px 13px 13px}
+  .split{gap:26px}
+  .crow .ci{width:44px;height:44px}
+  .offer-price{padding:16px 18px;gap:14px}
+  .offer-price .v{font-size:38px}
+  .ticker span{font-size:18px;padding:0 16px;gap:16px}
+  .scrollhint{display:none}          /* на телефоне листают и без подсказки */
+
+  /* — липкая панель: позвонить, написать, записаться — */
+  .sticky{display:flex;gap:9px;padding:9px 12px calc(9px + env(safe-area-inset-bottom))}
+  .sticky .btn{flex:1;min-height:52px;padding:14px 10px;font-size:15.5px}
+  .sticky .btn-ghost{flex:none;width:52px;padding:0;min-height:52px}
+}
+@media(max-width:400px){
+  .wrap{padding:0 15px}
+  h1{font-size:27.5px}
+  .btn{font-size:16px}
+  .stat .sv{font-size:30px}
+}
+
 /* адаптив */
 @media(max-width:1020px){
   .g4{grid-template-columns:repeat(2,1fr)}
@@ -881,8 +976,8 @@ footer a{color:#F3E2DC}
       <div class="pain"><span class="q">«</span><p>Вес вроде нормальный, а живот и бока не уходят — хоть ешь как птичка</p></div>
       <div class="pain"><span class="q">«</span><p>После родов или похудения кожа обвисла и сама в тонус не возвращается</p></div>
       <div class="pain"><span class="q">«</span><p>«Апельсиновая корка» видна даже там, где лишнего почти нет</p></div>
-      <div class="pain"><span class="q">«</span><p>На спортзал нет ни времени, ни сил, а результат нужен к отпуску</p></div>
-      <div class="pain"><span class="q">«</span><p>Липосакции боюсь: наркоз, швы, две недели из жизни — это не для меня</p></div>
+      <div class="pain m-extra"><span class="q">«</span><p>На спортзал нет ни времени, ни сил, а результат нужен к отпуску</p></div>
+      <div class="pain m-extra"><span class="q">«</span><p>Липосакции боюсь: наркоз, швы, две недели из жизни — это не для меня</p></div>
     </div>
     <p class="pain-after rv">Дело чаще всего не в силе воли, а в <span class="it">лишней межклеточной жидкости</span> и локальных жировых «ловушках». Их не убирают ни диета, ни планка — но убирает аппарат.</p>
   </div>
@@ -999,11 +1094,11 @@ footer a{color:#F3E2DC}
         <div class="bnum">30 мин</div>
         <div><h3>Столько занимает один визит</h3><p>Без наркоза, швов и восстановления: после процедуры вы одеваетесь и идёте по делам. Записываться можно даже в обеденный перерыв — БЦ «Лидер» стоит прямо у проспекта.</p></div>
       </div>
-      <div class="benefit">
+      <div class="benefit m-extra">
         <div class="bnum">550 ₽</div>
         <div><h3>Цена одной процедуры в абонементе</h3><p>Абонемент на 40 процедур стоит 22 000 ₽ вместо 40 000 ₽ поштучно — экономия 18 000 ₽. Абонемент можно оформить уже после первого визита, когда вы увидите свои цифры.</p></div>
       </div>
-      <div class="benefit">
+      <div class="benefit m-extra">
         <div class="bnum">7</div>
         <div><h3>Методик под разные задачи</h3><p>Кавитация, RF-лифтинг тела, лазерный липолиз, вакуумный массаж с RF, миостимуляция, прессотерапия и вибромассаж. Отёки, дряблость и локальный жир требуют разного — мы не лечим всё одним аппаратом.</p></div>
       </div>
@@ -1067,7 +1162,7 @@ footer a{color:#F3E2DC}
         </div>
       </article>
 
-      <article class="mcard">
+      <article class="mcard m-extra">
         <div class="mimg"><img src="assets/img/estetik.jpg" alt="Аппарат для RF-лифтинга тела в студии Дофамин" loading="lazy"></div>
         <div class="mbody">
           <span class="mtag t-gold">Тонус кожи</span>
@@ -1077,7 +1172,7 @@ footer a{color:#F3E2DC}
         </div>
       </article>
 
-      <article class="mcard">
+      <article class="mcard m-extra">
         <div class="mimg"><img src="assets/img/myostim.jpg" alt="Миостимуляция — пояса на теле" loading="lazy"></div>
         <div class="mbody">
           <span class="mtag t-sage">Мышцы и рельеф</span>
@@ -1087,7 +1182,7 @@ footer a{color:#F3E2DC}
         </div>
       </article>
 
-      <article class="mcard">
+      <article class="mcard m-extra">
         <div class="mimg"><img src="assets/img/lipo-device.jpg" alt="Аппаратура студии Дофамин" loading="lazy"></div>
         <div class="mbody">
           <span class="mtag t-plum">Расслабление</span>
@@ -1097,7 +1192,7 @@ footer a{color:#F3E2DC}
         </div>
       </article>
 
-      <article class="mcard">
+      <article class="mcard m-extra">
         <div class="mimg"><img src="assets/img/face.jpg" alt="Косметология лица в студии Дофамин" loading="lazy"></div>
         <div class="mbody">
           <span class="mtag t-gold">Лицо</span>
@@ -1107,7 +1202,7 @@ footer a{color:#F3E2DC}
         </div>
       </article>
 
-      <article class="mcard">
+      <article class="mcard m-extra">
         <div class="mimg"><img src="assets/img/pm-brows.jpg" alt="Перманентный макияж бровей — мастер за работой" loading="lazy"></div>
         <div class="mbody">
           <span class="mtag t-plum">Перманент</span>
@@ -1118,6 +1213,10 @@ footer a{color:#F3E2DC}
       </article>
     </div>
 
+    <button type="button" class="m-more m-only" data-more="Показать ещё 5 процедур" data-less="Свернуть список">
+      <span>Показать ещё 5 процедур</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
     <p class="note center" style="margin-top:28px">Ещё в студии: классический и лимфодренажный массаж, массаж спины в магнитно-рефлекторной технике, ламинирование ресниц. Полный прайс — <a href="#prices" style="color:var(--cta);font-weight:700">ниже на странице</a>.</p>
   </div>
 </section>
@@ -1271,7 +1370,7 @@ footer a{color:#F3E2DC}
         </ul>
       </div>
 
-      <div class="card rv">
+      <div class="card rv m-extra">
         <div class="icon-round gold"><svg class="ic"><use href="#i-sparkle"/></svg></div>
         <h3 style="font-size:23px;margin-bottom:16px">Перманентный макияж</h3>
         <ul class="plist">
@@ -1287,6 +1386,11 @@ footer a{color:#F3E2DC}
         <p class="note" style="margin-top:14px">Мастер со стажем более 10 лет. Уходовые средства на период заживления отдаём с собой.</p>
       </div>
     </div>
+
+    <button type="button" class="m-more m-only" data-more="Показать прайс на перманент" data-less="Свернуть прайс">
+      <span>Показать прайс на перманент</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
 
     <!-- форма №3: короткая, только телефон -->
     <div class="card rv pfcard">
@@ -1370,15 +1474,15 @@ footer a{color:#F3E2DC}
         <p>Был сегодня на сеансе прессотерапии. <mark>Отлично! Мастер Надежда знаток дела</mark>.</p>
         <div class="qmeta"><span class="qav">И</span><span><b style="color:var(--plum);display:block;font-size:14.5px">Игорь Ленол</b>Яндекс.Карты · октябрь 2025</span></div>
       </div>
-      <div class="quote">
+      <div class="quote m-extra">
         <p>Сегодня <mark>первый раз была в данной студии и осталась в полном восторге</mark>.</p>
         <div class="qmeta"><span class="qav">А</span><span><b style="color:var(--plum);display:block;font-size:14.5px">Анна Кузнецова</b>Яндекс.Карты · первый визит</span></div>
       </div>
-      <div class="quote">
+      <div class="quote m-extra">
         <p>Всем советую: <mark>корректируют не только тело, но и душу</mark>, у Нади золотые ручки.</p>
         <div class="qmeta"><span class="qav">К</span><span><b style="color:var(--plum);display:block;font-size:14.5px">Ксения Орлова</b>Яндекс.Карты · сентябрь 2025</span></div>
       </div>
-      <div class="quote">
+      <div class="quote m-extra">
         <p><mark>Замечательная студия. Релаксирующая музыка</mark>. Делала RF-лифтинг лица, кавитацию.</p>
         <div class="qmeta"><span class="qav">А</span><span><b style="color:var(--plum);display:block;font-size:14.5px">Алекса Ммм</b>Яндекс.Карты · апрель 2025</span></div>
       </div>
@@ -1632,6 +1736,7 @@ footer a{color:#F3E2DC}
 
 <div class="sticky">
   <a href="tel:88005508604" class="btn btn-ghost" aria-label="Позвонить"><svg class="ic"><use href="#i-phone"/></svg></a>
+  <a href="https://wa.me/79214334760" target="_blank" rel="noopener" class="btn btn-ghost" aria-label="Написать в WhatsApp"><svg class="ic"><use href="#i-wa"/></svg></a>
   <a href="#first" class="btn">Записаться за 600 ₽</a>
 </div>
 
@@ -1750,6 +1855,20 @@ footer a{color:#F3E2DC}
 
     render();
   }
+
+  /* ---- «показать ещё» на мобильном ---- */
+  document.querySelectorAll('.m-more').forEach(function(b){
+    b.addEventListener('click', function(){
+      var box = b.closest('section');
+      var open = box.classList.toggle('m-open');
+      var label = b.querySelector('span');
+      if(label) label.textContent = open ? b.dataset.less : b.dataset.more;
+      if(!open){
+        var y = box.getBoundingClientRect().top + window.pageYOffset - 70;
+        window.scrollTo({top:y, behavior:'smooth'});
+      }
+    });
+  });
 
   /* ---- индикатор прочитанного в шапке ---- */
   var hdr = document.querySelector('header'), tick = false;
