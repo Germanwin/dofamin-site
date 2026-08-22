@@ -87,10 +87,10 @@
   --r:22px;
   --r-sm:16px;
   --c:1200px;
-  --sh:0 26px 60px -34px rgba(78,46,56,.5);
-  --sh-sm:0 12px 30px -20px rgba(78,46,56,.4);
-  --sh-warm:0 26px 60px -30px rgba(192,83,121,.4);
-  --sh-lift:0 34px 70px -34px rgba(78,46,56,.48);
+  --sh:0 20px 36px -20px rgba(78,46,56,.5);
+  --sh-sm:0 9px 18px -12px rgba(78,46,56,.4);
+  --sh-warm:0 20px 36px -18px rgba(192,83,121,.4);
+  --sh-lift:0 26px 42px -20px rgba(78,46,56,.48);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -138,7 +138,7 @@ h3{font-size:20px;font-weight:800;line-height:1.28;letter-spacing:-.01em}
   letter-spacing:.14em;text-transform:uppercase;color:#8C6A2A;
   background:linear-gradient(#FFFBF8,#FFFBF8) padding-box,var(--g-gold) border-box;
   border:1.5px solid transparent;padding:9px 17px;border-radius:99px;margin-bottom:20px;
-  box-shadow:0 10px 24px -18px rgba(74,34,51,.5)
+  box-shadow:0 8px 14px -11px rgba(74,34,51,.5)
 }
 .eyebrow.plain{background:linear-gradient(120deg,#F8E3E8,#F9EBDC);border-color:transparent;box-shadow:none;color:#8C6A2A}
 .hr-flower{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--gold);margin:0 0 18px}
@@ -152,7 +152,7 @@ h3{font-size:20px;font-weight:800;line-height:1.28;letter-spacing:-.01em}
   position:relative;overflow:hidden;isolation:isolate;
   background:var(--g-cta);color:#fff;border:0;cursor:pointer;text-decoration:none;
   font-weight:800;font-size:17px;letter-spacing:-.01em;padding:19px 34px;border-radius:99px;
-  box-shadow:0 16px 34px -14px rgba(169,66,104,.7),inset 0 1px 0 rgba(255,255,255,.3);
+  box-shadow:0 12px 20px -8px rgba(169,66,104,.7),inset 0 1px 0 rgba(255,255,255,.3);
   transition:transform .22s cubic-bezier(.2,.7,.3,1),box-shadow .22s,background .22s;
 }
 .btn::after{
@@ -161,18 +161,18 @@ h3{font-size:20px;font-weight:800;line-height:1.28;letter-spacing:-.01em}
   transform:skewX(-18deg);transition:left .55s cubic-bezier(.2,.7,.3,1);
 }
 .btn:hover{background:var(--g-cta-hi);transform:translateY(-3px);
-  box-shadow:0 24px 44px -16px rgba(208,96,138,.75),inset 0 1px 0 rgba(255,255,255,.35)}
+  box-shadow:0 18px 26px -10px rgba(208,96,138,.75),inset 0 1px 0 rgba(255,255,255,.35)}
 .btn:hover::after{left:120%}
 .btn:active{transform:translateY(-1px)}
 .btn-lg{padding:22px 42px;font-size:18px}
 .btn-ghost{
   background:linear-gradient(#fff,#fff) padding-box,var(--g-warm) border-box;
-  color:var(--plum);border:1.5px solid transparent;box-shadow:0 12px 26px -20px rgba(74,34,51,.6);
+  color:var(--plum);border:1.5px solid transparent;box-shadow:0 9px 16px -12px rgba(74,34,51,.6);
   padding:18px 30px;font-weight:700
 }
 .btn-ghost::after{display:none}
 .btn-ghost:hover{background:linear-gradient(#FFFAF6,#FFFAF6) padding-box,var(--g-gold) border-box;
-  color:var(--plum);transform:translateY(-3px);box-shadow:0 20px 34px -22px rgba(184,145,63,.85)}
+  color:var(--plum);transform:translateY(-3px);box-shadow:0 15px 20px -13px rgba(184,145,63,.85)}
 .btn-white{background:#fff;color:var(--plum);box-shadow:var(--sh-sm)}
 .btn-white:hover{background:#fff;color:var(--cta)}
 .btn-wide{width:100%}
@@ -224,7 +224,7 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:1
 .bullets li{display:flex;gap:11px;align-items:flex-start;font-size:15.8px;line-height:1.42}
 .bullets .bi{width:27px;height:27px;flex:none;border-radius:50%;
   background:linear-gradient(135deg,#F6D3DE,#F8E5D2);color:var(--gold);
-  display:grid;place-items:center;margin-top:1px;box-shadow:0 6px 14px -8px rgba(206,83,52,.6)}
+  display:grid;place-items:center;margin-top:1px;box-shadow:0 4px 8px -5px rgba(206,83,52,.6)}
 .bullets .bi svg{width:14px;height:14px;stroke-width:2.6}
 .bullets b{font-weight:800}
 .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
@@ -234,14 +234,14 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:1
 @media(max-width:520px){.hero-trust{grid-template-columns:1fr}}
 .tchip{display:flex;align-items:center;gap:9px;background:linear-gradient(150deg,rgba(255,255,255,.88),rgba(253,231,239,.82));
   border:1px solid rgba(255,255,255,.85);border-radius:16px;padding:11px 15px;font-size:13.5px;
-  line-height:1.25;box-shadow:0 14px 30px -22px rgba(74,34,51,.7);
+  line-height:1.25;box-shadow:0 10px 18px -13px rgba(74,34,51,.7);
 }
 .tchip b{display:block;font-size:15px;font-weight:800;color:var(--plum)}
 .tchip .stars{color:var(--gold);font-size:13px;letter-spacing:1px}
 
 .hero-art{position:relative;min-height:560px}
 .hero-art .ph{position:absolute;border-radius:28px;overflow:hidden;
-  box-shadow:0 40px 80px -40px rgba(74,34,51,.65);border:6px solid #fff}
+  box-shadow:0 30px 48px -24px rgba(74,34,51,.65);border:6px solid #fff}
 .hero-art .ph::after{content:"";position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(150deg,rgba(255,214,180,.18),rgba(214,150,170,.14) 60%,transparent)}
 .hero-art .ph img{width:100%;height:100%;object-fit:cover}
@@ -251,7 +251,7 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:1
   position:absolute;left:-4%;top:14%;z-index:3;border-radius:20px;padding:17px 21px;max-width:225px;
   background:linear-gradient(150deg,rgba(255,255,255,.92),rgba(253,229,238,.88));
   border:1px solid rgba(255,255,255,.9);
-  box-shadow:0 26px 50px -28px rgba(74,34,51,.7)
+  box-shadow:0 20px 30px -17px rgba(74,34,51,.7)
 }
 .hero-badge .big{font-family:'Cormorant',Georgia,serif;font-size:40px;font-weight:600;line-height:1;
   background:var(--g-text);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
@@ -259,7 +259,7 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:1
 .hero-price{
   position:absolute;right:2%;bottom:-2%;z-index:3;background:var(--g-band);
   color:#fff;border-radius:20px;padding:16px 24px;text-align:center;
-  box-shadow:0 26px 54px -24px rgba(60,26,42,.85);border:1px solid rgba(255,255,255,.14)
+  box-shadow:0 20px 32px -14px rgba(60,26,42,.85);border:1px solid rgba(255,255,255,.14)
 }
 .hero-price .s{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#E9CD9A}
 .hero-price .p{font-family:'Cormorant',Georgia,serif;font-size:35px;font-weight:600;line-height:1.1;
@@ -302,23 +302,23 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:1
 .card p{font-size:15.5px;color:var(--ink-2);line-height:1.55}
 .icon-round{width:52px;height:52px;border-radius:18px;display:grid;place-items:center;margin-bottom:17px;
   background:linear-gradient(135deg,#FBDCE8,#F7E5DC);color:var(--fuchsia);
-  box-shadow:0 14px 26px -18px rgba(212,92,139,.9)}
+  box-shadow:0 10px 16px -11px rgba(212,92,139,.9)}
 .icon-round svg{width:25px;height:25px}
 .icon-round.warm{background:linear-gradient(135deg,#F8DED0,#F1C9B6);color:#A9603F;
-  box-shadow:0 14px 26px -18px rgba(206,83,52,.9)}
+  box-shadow:0 10px 16px -11px rgba(206,83,52,.9)}
 .icon-round.pink{background:linear-gradient(135deg,#FBD8E7,#F6BFD6);color:#B44872;
-  box-shadow:0 14px 26px -18px rgba(180,72,114,.9)}
+  box-shadow:0 10px 16px -11px rgba(180,72,114,.9)}
 .icon-round.gold{background:linear-gradient(135deg,#F8EBD2,#F0DBAA);color:#96701F;
-  box-shadow:0 14px 26px -18px rgba(185,140,60,.9)}
+  box-shadow:0 10px 16px -11px rgba(185,140,60,.9)}
 .icon-round.sage{background:linear-gradient(135deg,#E7EFE4,#D9E6D6);color:#4F6E4E;
-  box-shadow:0 14px 26px -18px rgba(111,140,109,.9)}
+  box-shadow:0 10px 16px -11px rgba(111,140,109,.9)}
 
 /* боли */
 .pain{display:flex;gap:14px;align-items:flex-start;border-radius:20px;padding:22px 24px;
   background:linear-gradient(#fff,#fff) padding-box,linear-gradient(140deg,#EFC3D0,#E6C88E) border-box;
-  border:1.5px solid transparent;box-shadow:0 16px 34px -26px rgba(74,34,51,.7);
+  border:1.5px solid transparent;box-shadow:0 12px 20px -16px rgba(74,34,51,.7);
   transition:transform .25s,box-shadow .25s}
-.pain:hover{transform:translateY(-3px);box-shadow:0 26px 46px -28px rgba(74,34,51,.7)}
+.pain:hover{transform:translateY(-3px);box-shadow:0 20px 28px -17px rgba(74,34,51,.7)}
 .pain .q{font-family:'Cormorant',Georgia,serif;font-size:38px;line-height:.8;flex:none;margin-top:8px;
   background:var(--g-text);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .pain p{font-size:16px;line-height:1.5}
@@ -340,9 +340,9 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:1
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
 .stat{border-radius:20px;padding:24px 22px;text-align:center;
   background:linear-gradient(#fff,#fff) padding-box,linear-gradient(140deg,#EFC3D0,#E6C88E) border-box;
-  border:1.5px solid transparent;box-shadow:0 18px 38px -28px rgba(74,34,51,.7);
+  border:1.5px solid transparent;box-shadow:0 14px 23px -17px rgba(74,34,51,.7);
   transition:transform .25s,box-shadow .25s}
-.stat:hover{transform:translateY(-4px);box-shadow:0 28px 50px -30px rgba(74,34,51,.7)}
+.stat:hover{transform:translateY(-4px);box-shadow:0 21px 30px -18px rgba(74,34,51,.7)}
 .stat .sv{font-family:'Cormorant',Georgia,serif;font-size:44px;font-weight:600;line-height:1;
   background:var(--g-text);-webkit-background-clip:text;background-clip:text;color:transparent;
   -webkit-text-fill-color:transparent;margin-bottom:7px;padding-right:.08em}
@@ -382,13 +382,12 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:1
 .band.pink{background:var(--g-pinkband)}
 .band.pink::after{background:radial-gradient(circle,rgba(255,232,205,.34) 0%,rgba(255,232,205,0) 68%)}
 .band.pink .lead{color:#FCE4EA}
-.band.pink .it{background:linear-gradient(100deg,#FFE7C4,#FFF3F6);-webkit-background-clip:text;
-  background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.band.pink .it{background:none;color:#FCDFA8;-webkit-text-fill-color:#FCDFA8}
 
 /* формы */
 .form{background:linear-gradient(160deg,#FFFDFC 0%,#FDEFF3 100%);border-radius:26px;padding:34px;
   border:1px solid rgba(255,255,255,.7);
-  box-shadow:0 40px 80px -40px rgba(40,16,26,.75)}
+  box-shadow:0 30px 48px -24px rgba(40,16,26,.75)}
 .form h3{font-size:24px;color:var(--plum);margin-bottom:6px;font-family:'Cormorant',Georgia,serif;font-weight:600}
 .form .fnote{font-size:14.5px;color:var(--ink-2);margin-bottom:20px;line-height:1.45}
 .field{margin-bottom:14px}
@@ -407,7 +406,7 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:1
 .form-ok{display:none;text-align:center;padding:16px 4px}
 .form-ok .ok-ic{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;margin:0 auto 16px;
   background:linear-gradient(135deg,#E8F1E5,#DCE9D8);color:var(--sage);
-  box-shadow:0 18px 34px -22px rgba(111,140,109,.9)}
+  box-shadow:0 14px 20px -13px rgba(111,140,109,.9)}
 .form-ok .ok-ic svg{width:31px;height:31px;stroke-width:2.2}
 .form-ok h4{font-family:'Cormorant',Georgia,serif;font-size:28px;font-weight:600;color:var(--plum);margin-bottom:8px}
 .form-ok p{font-size:15px;color:var(--ink-2);margin-bottom:16px}
@@ -455,7 +454,7 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:1
 /* квиз */
 .quiz{background:linear-gradient(165deg,#FFFDFC 0%,#FDEFF3 60%,#FCE8EF 100%);border-radius:28px;
   border:1px solid #F7DCE4;overflow:hidden;
-  max-width:840px;margin:0 auto;box-shadow:0 44px 90px -46px rgba(40,16,26,.65)}
+  max-width:840px;margin:0 auto;box-shadow:0 33px 54px -28px rgba(40,16,26,.65)}
 .quiz-head{padding:28px 34px 0}
 .quiz-bar{height:8px;background:linear-gradient(90deg,#FADCE7,#F9E9DC);border-radius:99px;
   overflow:hidden;margin:16px 0 6px}
@@ -475,11 +474,11 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:1
   padding:16px 18px;cursor:pointer;background:rgba(255,255,255,.72);transition:.2s;font-size:15.5px;
   line-height:1.35;text-align:left}
 .qopt:hover{border-color:var(--gold-2);background:linear-gradient(135deg,#FFF9FB,#FDF4EF);
-  transform:translateY(-2px);box-shadow:0 14px 26px -20px rgba(184,145,63,.8)}
+  transform:translateY(-2px);box-shadow:0 10px 16px -12px rgba(184,145,63,.8)}
 .qopt .qi{width:23px;height:23px;border-radius:50%;border:1.5px solid var(--rose);flex:none;
   display:grid;place-items:center;transition:.2s}
 .qopt.sel{border-color:transparent;background:linear-gradient(135deg,#FDE2EC,#FBE7DE);
-  box-shadow:0 14px 28px -20px rgba(212,92,139,.9)}
+  box-shadow:0 10px 17px -12px rgba(212,92,139,.9)}
 .qopt.sel .qi{background:var(--g-cta);border-color:transparent;color:#fff}
 .qopt .qi svg{width:12px;height:12px;stroke-width:3;opacity:0}
 .qopt.sel .qi svg{opacity:1}
@@ -506,7 +505,7 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:1
 .prow .save{color:#9C7526;font-weight:800}
 .prow .badge{display:inline-block;background:linear-gradient(120deg,#E8CB8C,#BE9440);color:#4A2E38;
   font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;
-  border-radius:99px;margin-left:8px;vertical-align:2px;box-shadow:0 8px 18px -10px rgba(190,148,64,.95)}
+  border-radius:99px;margin-left:8px;vertical-align:2px;box-shadow:0 6px 11px -6px rgba(190,148,64,.95)}
 .plist{list-style:none;display:grid;gap:11px}
 .plist li{display:flex;justify-content:space-between;gap:16px;padding-bottom:11px;
   border-bottom:1px dashed var(--line-2);font-size:15.5px}
@@ -527,7 +526,7 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:1
 .rating{display:flex;gap:18px;flex-wrap:wrap;align-items:stretch;margin-bottom:34px}
 .rbox{border-radius:20px;padding:20px 26px;display:flex;gap:15px;align-items:center;min-width:238px;
   background:linear-gradient(#fff,#fff) padding-box,linear-gradient(140deg,#EFC3D0,#E6C88E) border-box;
-  border:1.5px solid transparent;box-shadow:0 18px 36px -26px rgba(74,34,51,.7)}
+  border:1.5px solid transparent;box-shadow:0 14px 22px -16px rgba(74,34,51,.7)}
 .rbox .rv-val{font-family:'Cormorant',Georgia,serif;font-size:46px;font-weight:600;line-height:1;
   background:var(--g-text);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .rbox .rt{font-size:13.5px;color:var(--ink-2);line-height:1.35}
@@ -560,10 +559,10 @@ details.sp[open] summary::after{transform:translateY(-30%) rotate(225deg);
   border-color:var(--gold)}
 details.sp .spb{padding:0 26px 24px;font-size:15.5px;color:var(--ink-2);line-height:1.6}
 details.sp .spb b{color:var(--plum)}
-details.sp[open]{border-color:transparent;box-shadow:0 26px 50px -34px rgba(74,34,51,.7);
+details.sp[open]{border-color:transparent;box-shadow:0 20px 30px -20px rgba(74,34,51,.7);
   background:linear-gradient(#fff,#fff) padding-box,linear-gradient(140deg,#EFC3D0,#E6C88E) border-box;
   border:1.5px solid transparent}
-details.sp:hover{box-shadow:0 22px 44px -32px rgba(74,34,51,.7)}
+details.sp:hover{box-shadow:0 16px 26px -19px rgba(74,34,51,.7)}
 
 /* безопасность / галерея */
 .safe{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
@@ -585,7 +584,7 @@ details.sp:hover{box-shadow:0 22px 44px -32px rgba(74,34,51,.7)}
 @media(max-width:640px){.gal-3{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
 .split .simg{border-radius:26px;overflow:hidden;border:7px solid #fff;position:relative;
-  box-shadow:0 40px 80px -44px rgba(74,34,51,.7)}
+  box-shadow:0 30px 48px -26px rgba(74,34,51,.7)}
 .split .simg::after{content:"";position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(150deg,rgba(255,208,170,.16),transparent 60%)}
 .split .simg img{width:100%;aspect-ratio:4/3;object-fit:cover}
@@ -597,7 +596,7 @@ details.sp:hover{box-shadow:0 22px 44px -32px rgba(74,34,51,.7)}
 .crow{display:flex;gap:16px;align-items:flex-start}
 .crow .ci{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;flex:none;
   background:linear-gradient(135deg,#FBE9E0,#F8EEDB);color:var(--cta);
-  box-shadow:0 14px 28px -20px rgba(206,83,52,.9)}
+  box-shadow:0 10px 17px -12px rgba(206,83,52,.9)}
 .crow .ct{font-size:12.5px;color:var(--ink-2);letter-spacing:.08em;text-transform:uppercase;font-weight:800}
 .crow .cv{font-size:17px;font-weight:700;color:var(--plum);line-height:1.4}
 .crow .cv a{text-decoration:none}
@@ -607,11 +606,11 @@ details.sp:hover{box-shadow:0 22px 44px -32px rgba(74,34,51,.7)}
 .msg{display:inline-flex;align-items:center;gap:9px;border-radius:99px;padding:12px 20px;font-size:15px;
   font-weight:700;text-decoration:none;color:var(--plum);
   background:linear-gradient(#fff,#fff) padding-box,linear-gradient(140deg,#EFC3D0,#E6C88E) border-box;
-  border:1.5px solid transparent;box-shadow:0 12px 26px -22px rgba(74,34,51,.8);transition:.2s}
-.msg:hover{transform:translateY(-3px);color:var(--cta);box-shadow:0 20px 34px -22px rgba(206,83,52,.9)}
+  border:1.5px solid transparent;box-shadow:0 9px 16px -13px rgba(74,34,51,.8);transition:.2s}
+.msg:hover{transform:translateY(-3px);color:var(--cta);box-shadow:0 15px 20px -13px rgba(206,83,52,.9)}
 .msg svg{width:19px;height:19px}
 .mapcard{border-radius:26px;overflow:hidden;border:7px solid #fff;position:relative;display:block;
-  box-shadow:0 40px 80px -44px rgba(74,34,51,.7)}
+  box-shadow:0 30px 48px -26px rgba(74,34,51,.7)}
 .mapcard img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s}
 .mapcard:hover img{transform:scale(1.04)}
 .mapcard .mo{position:absolute;left:0;right:0;bottom:0;padding:24px;color:#fff;
@@ -642,7 +641,7 @@ footer a{color:#F3E2DC}
 .sticky{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;gap:10px;
   padding:10px 14px calc(10px + env(safe-area-inset-bottom));
   background:#FDF1EF;
-  border-top:1px solid #F5DBE1;box-shadow:0 -10px 30px -20px rgba(74,34,51,.8)}
+  border-top:1px solid #F5DBE1;box-shadow:0 -8px 18px -12px rgba(74,34,51,.8)}
 .sticky .btn{flex:1;padding:16px 12px;font-size:15.5px;width:auto}
 .sticky .btn-ghost{flex:none;width:56px;padding:16px 0}
 
@@ -655,6 +654,9 @@ footer a{color:#F3E2DC}
   .scrollhint svg,.ticker-row{animation:none}
 }
 
+
+/* секции вне экрана не отрисовываются, пока до них не долистают */
+#pains,#benefits,#works,#action{content-visibility:auto;contain-intrinsic-size:0 1100px}
 
 /* ══════════ МОБИЛЬНАЯ ВЕРСИЯ ══════════
    Тот же URL и та же страница: на узких экранах меняется композиция.
@@ -882,7 +884,6 @@ footer a{color:#F3E2DC}
 <section class="hero">
   <div class="blob b-peach b1"></div>
   <div class="blob b-rose b2"></div>
-  <div class="blob b-gold" style="width:260px;height:260px;left:38%;bottom:-90px;opacity:.4"></div>
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <span class="eyebrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-pin"/></svg> СПб, пр. Энергетиков 37 · 10 минут от «Ладожской»</span>
@@ -953,7 +954,6 @@ footer a{color:#F3E2DC}
 <!-- ═══════════ 2. БОЛИ ═══════════ -->
 <section class="sand" id="pains">
   <div class="blob b-rose" style="width:380px;height:380px;left:-130px;top:4%"></div>
-  <div class="blob b-gold" style="width:300px;height:300px;right:-90px;bottom:8%"></div>
   <div class="wrap">
     <div class="center" style="margin-bottom:38px">
       <div class="hr-flower"><svg class="ic" style="width:18px;height:18px"><use href="#i-sparkle"/></svg></div>
@@ -1064,7 +1064,6 @@ footer a{color:#F3E2DC}
 
 <!-- ═══════════ 5. ВЫГОДЫ ═══════════ -->
 <section id="benefits">
-  <div class="blob b-rose" style="width:380px;height:380px;right:-140px;top:14%"></div>
   <div class="wrap">
     <div class="center" style="margin-bottom:44px">
       <span class="eyebrow plain">Что вы получите</span>
@@ -1102,7 +1101,6 @@ footer a{color:#F3E2DC}
 <!-- ═══════════ 6. МЕТОДИКИ ═══════════ -->
 <section class="sand" id="methods">
   <div class="blob b-peach" style="width:420px;height:420px;right:-160px;bottom:4%"></div>
-  <div class="blob b-rose" style="width:340px;height:340px;left:-120px;top:8%"></div>
   <div class="wrap">
     <div class="center" style="margin-bottom:40px">
       <span class="eyebrow plain">Процедуры для тела</span>
@@ -1112,7 +1110,7 @@ footer a{color:#F3E2DC}
 
     <div class="grid g3 rv">
       <article class="mcard">
-        <div class="mimg"><img decoding="async" src="assets/img/cavitation-2.jpg" alt="Кавитация — ультразвуковая коррекция живота" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/cavitation-2.jpg" alt="Кавитация — ультразвуковая коррекция живота" loading="lazy" width="640" height="640"></div>
         <div class="mbody">
           <span class="mtag t-warm">Локальный жир</span>
           <h3>Кавитация</h3>
@@ -1122,7 +1120,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard">
-        <div class="mimg"><img decoding="async" src="assets/img/vacuum.jpg" alt="Вакуумный массаж с RF-лифтингом" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/vacuum.jpg" alt="Вакуумный массаж с RF-лифтингом" loading="lazy" width="640" height="632"></div>
         <div class="mbody">
           <span class="mtag t-pink">Целлюлит</span>
           <h3>Вакуумный массаж с RF</h3>
@@ -1132,7 +1130,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard">
-        <div class="mimg"><img decoding="async" src="assets/img/lipolysis.jpg" alt="Лазерный липолиз тела — пластины на животе" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/lipolysis.jpg" alt="Лазерный липолиз тела — пластины на животе" loading="lazy" width="640" height="560"></div>
         <div class="mbody">
           <span class="mtag t-warm">Контуры тела</span>
           <h3>Лазерный липолиз</h3>
@@ -1142,7 +1140,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard">
-        <div class="mimg"><img decoding="async" src="assets/img/presso.jpg" alt="Прессотерапия — костюм лимфодренажного массажа" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/presso.jpg" alt="Прессотерапия — костюм лимфодренажного массажа" loading="lazy" width="577" height="800"></div>
         <div class="mbody">
           <span class="mtag t-sage">Отёки</span>
           <h3>Прессотерапия</h3>
@@ -1152,7 +1150,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard m-extra">
-        <div class="mimg"><img decoding="async" src="assets/img/estetik.jpg" alt="Аппарат для RF-лифтинга тела в студии Дофамин" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/estetik.jpg" alt="Аппарат для RF-лифтинга тела в студии Дофамин" loading="lazy" width="600" height="800"></div>
         <div class="mbody">
           <span class="mtag t-gold">Тонус кожи</span>
           <h3>RF-лифтинг тела</h3>
@@ -1162,7 +1160,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard m-extra">
-        <div class="mimg"><img decoding="async" src="assets/img/myostim.jpg" alt="Миостимуляция — пояса на теле" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/myostim.jpg" alt="Миостимуляция — пояса на теле" loading="lazy" width="640" height="668"></div>
         <div class="mbody">
           <span class="mtag t-sage">Мышцы и рельеф</span>
           <h3>Миостимуляция</h3>
@@ -1172,7 +1170,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard m-extra">
-        <div class="mimg"><img decoding="async" src="assets/img/lipo-device.jpg" alt="Аппаратура студии Дофамин" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/lipo-device.jpg" alt="Аппаратура студии Дофамин" loading="lazy" width="600" height="800"></div>
         <div class="mbody">
           <span class="mtag t-plum">Расслабление</span>
           <h3>Вибромассаж</h3>
@@ -1182,7 +1180,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard m-extra">
-        <div class="mimg"><img decoding="async" src="assets/img/face.jpg" alt="Косметология лица в студии Дофамин" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/face.jpg" alt="Косметология лица в студии Дофамин" loading="lazy" width="583" height="800"></div>
         <div class="mbody">
           <span class="mtag t-gold">Лицо</span>
           <h3>Косметология лица</h3>
@@ -1192,7 +1190,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard m-extra">
-        <div class="mimg"><img decoding="async" src="assets/img/pm-brows.jpg" alt="Перманентный макияж бровей — мастер за работой" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/pm-brows.jpg" alt="Перманентный макияж бровей — мастер за работой" loading="lazy" width="640" height="640"></div>
         <div class="mbody">
           <span class="mtag t-plum">Перманент</span>
           <h3>Перманентный макияж</h3>
@@ -1326,7 +1324,6 @@ footer a{color:#F3E2DC}
 <!-- ═══════════ 8. ЦЕНЫ ═══════════ -->
 <section class="sand" id="prices">
   <div class="blob b-rose" style="width:420px;height:420px;right:-150px;top:10%"></div>
-  <div class="blob b-mauve" style="width:320px;height:320px;left:-110px;bottom:6%"></div>
   <div class="wrap">
     <div class="center" style="margin-bottom:36px">
       <span class="eyebrow plain">Прозрачные цены</span>
@@ -1408,7 +1405,6 @@ footer a{color:#F3E2DC}
 
 <!-- ═══════════ 8б. РАБОТЫ МАСТЕРОВ ═══════════ -->
 <section id="works" style="padding-top:0">
-  <div class="blob b-mauve" style="width:360px;height:360px;right:-130px;top:0"></div>
   <div class="wrap">
     <div class="center" style="margin-bottom:30px">
       <span class="eyebrow plain">До и после</span>
@@ -1416,9 +1412,9 @@ footer a{color:#F3E2DC}
       <p class="lead">Стаж более 10 лет, проверенные пигменты и аккуратная форма под ваши черты — без «татуажа из нулевых». Заживление сопровождаем: уходовые средства отдаём с собой.</p>
     </div>
     <div class="gal gal-3 rv">
-      <figure><img decoding="async" src="assets/img/ba-brows.jpg" alt="Перманентный макияж бровей: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption><b>Брови</b> — до и после</figcaption></figure>
-      <figure><img decoding="async" src="assets/img/ba-lips.jpg" alt="Перманентный макияж губ: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption><b>Губы</b> — до и после</figcaption></figure>
-      <figure><img decoding="async" src="assets/img/ba-lashes.jpg" alt="Межресничка: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption><b>Межресничка</b> — до и после</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/ba-brows.jpg" alt="Перманентный макияж бровей: до и после" loading="lazy" style="aspect-ratio:4/5" width="640" height="640"><figcaption><b>Брови</b> — до и после</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/ba-lips.jpg" alt="Перманентный макияж губ: до и после" loading="lazy" style="aspect-ratio:4/5" width="524" height="800"><figcaption><b>Губы</b> — до и после</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/ba-lashes.jpg" alt="Межресничка: до и после" loading="lazy" style="aspect-ratio:4/5" width="521" height="800"><figcaption><b>Межресничка</b> — до и после</figcaption></figure>
     </div>
     <div class="center" style="margin-top:26px">
       <a href="#first" class="btn btn-ghost">Записаться на консультацию по перманенту</a>
@@ -1549,7 +1545,7 @@ footer a{color:#F3E2DC}
 <!-- ═══════════ 11. БЕЗОПАСНОСТЬ И СТУДИЯ ═══════════ -->
 <section id="studio">
   <div class="wrap split">
-    <div class="simg rv"><img decoding="async" src="assets/img/room.jpg" alt="Кабинет студии Дофамин: кушетка и аппарат для коррекции фигуры" loading="lazy"></div>
+    <div class="simg rv"><img decoding="async" src="assets/img/room.jpg" alt="Кабинет студии Дофамин: кушетка и аппарат для коррекции фигуры" loading="lazy" width="600" height="800"></div>
     <div>
       <span class="eyebrow plain">Наша студия</span>
       <h2>Уютная студия, где вас <span class="it">помнят по имени</span></h2>
@@ -1571,10 +1567,10 @@ footer a{color:#F3E2DC}
 
   <div class="wrap" style="margin-top:56px">
     <div class="gal rv">
-      <figure><img decoding="async" src="assets/img/team.jpg" alt="Мастера студии Дофамин" loading="lazy" style="aspect-ratio:3/4"><figcaption><b>Мастера студии</b> — аппаратная коррекция, косметология и перманент</figcaption></figure>
-      <figure><img decoding="async" src="assets/img/reception.jpg" alt="Стойка администратора с неоновой вывеской Дофамин" loading="lazy"><figcaption><b>Ресепшн</b> — здесь начинается ваш визит</figcaption></figure>
-      <figure><img decoding="async" src="assets/img/award.jpg" alt="Награда 2ГИС на стойке студии Дофамин" loading="lazy"><figcaption><b>Награда 2ГИС</b> и QR для отзыва — прямо на стойке</figcaption></figure>
-      <figure><img decoding="async" src="assets/img/certs.jpg" alt="Подарочные сертификаты студии Дофамин" loading="lazy"><figcaption><b>Подарочные сертификаты</b> — на любую сумму и услугу</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/team.jpg" alt="Мастера студии Дофамин" loading="lazy" style="aspect-ratio:3/4" width="760" height="476"><figcaption><b>Мастера студии</b> — аппаратная коррекция, косметология и перманент</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/reception.jpg" alt="Стойка администратора с неоновой вывеской Дофамин" loading="lazy" width="560" height="800"><figcaption><b>Ресепшн</b> — здесь начинается ваш визит</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/award.jpg" alt="Награда 2ГИС на стойке студии Дофамин" loading="lazy" width="600" height="800"><figcaption><b>Награда 2ГИС</b> и QR для отзыва — прямо на стойке</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/certs.jpg" alt="Подарочные сертификаты студии Дофамин" loading="lazy" width="600" height="800"><figcaption><b>Подарочные сертификаты</b> — на любую сумму и услугу</figcaption></figure>
     </div>
   </div>
 </section>
@@ -1670,7 +1666,7 @@ footer a{color:#F3E2DC}
 
       <div>
         <a class="mapcard" href="https://yandex.ru/maps/org/dofamin/101290040598/" target="_blank" rel="noopener" style="display:block;text-decoration:none">
-          <img decoding="async" src="assets/img/cards.jpg" alt="Студия Дофамин — визитки с акцией первого визита" loading="lazy">
+          <img decoding="async" src="assets/img/cards.jpg" alt="Студия Дофамин — визитки с акцией первого визита" loading="lazy" width="640" height="640">
           <div class="mo">
             <b>пр. Энергетиков, 37 · БЦ «Лидер», офис 813</b>
             <span>Открыть в Яндекс.Картах →</span>
