@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Дофамин — аппаратная коррекция фигуры в СПб | Первый визит 600 ₽</title>
-<meta name="description" content="Студия аппаратной коррекции фигуры и косметологии «Дофамин», СПб, пр. Энергетиков 37. Кавитация, RF-лифтинг, лазерный липолиз, прессотерапия. Минус 0,5–2 см за сеанс. Первый визит с замерами и подбором программы — 600 ₽ вместо 1 000 ₽.">
+<meta name="description" content="Студия аппаратной коррекции фигуры и косметологии «Дофамин», СПб, пр. Энергетиков 37. Кавитация, RF-лифтинг, лазерный липолиз, прессотерапия. Минус 0,5–2 см за сеанс. Первый визит с замерами, консультацией, процедурой и программой курса — 600 ₽ вместо 4 800 ₽ по прайсу.">
 <meta name="theme-color" content="#F7EDE6">
 <!-- Демо-превью для клиента: закрыто от индексации, чтобы не путалось с настоящим сайтом студии.
      После покупки и переезда на домен клиента эту строку нужно удалить. -->
@@ -14,7 +14,7 @@
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Дофамин">
 <meta property="og:title" content="Минус 0,5–2 см объёмов за один сеанс — студия «Дофамин», СПб">
-<meta property="og:description" content="Аппаратная коррекция фигуры у Ладожской. Первый визит с замерами и индивидуальной программой — 600 ₽ вместо 1 000 ₽.">
+<meta property="og:description" content="Аппаратная коррекция фигуры у Ладожской. Первый визит с замерами, процедурой и программой курса — 600 ₽ вместо 4 800 ₽ по прайсу.">
 <meta property="og:image" content="assets/img/reception.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23A87C86'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23FDF9F5' text-anchor='middle'%3E%D0%94%3C/text%3E%3C/svg%3E">
 <!-- Сюда вставьте счётчик Яндекс.Метрики (с вебвизором) и/или Google Analytics.
@@ -419,15 +419,56 @@ header{
   background:linear-gradient(135deg,rgba(255,255,255,.3),rgba(255,255,255,.12));
   color:#fff;display:grid;place-items:center;margin-top:1px;border:1px solid rgba(255,255,255,.22)}
 .offer-list .bi svg{width:14px;height:14px;stroke-width:2.6}
-.offer-price{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.25);border-radius:20px;
-  padding:20px 24px;margin-top:28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+/* ── «чек» первого визита: распакованная ценность шага ──────────────── */
+.value-card{background:#FFFCFB;color:var(--ink);border-radius:var(--r);
+  padding:26px 28px 24px;margin-top:26px;box-shadow:0 26px 44px -26px rgba(74,23,35,.6)}
+.vc-top{display:flex;gap:22px;align-items:flex-start;margin-bottom:20px}
+.vc-intro h3{color:var(--plum);margin-bottom:7px}
+.vc-intro p{font-size:15px;color:var(--ink-2);line-height:1.5}
+
+/* нарисованный предмет: программа, которую гость уносит с собой */
+.vc-doc{flex:none;width:168px;padding:15px 15px 13px;border-radius:12px;position:relative;
+  background:linear-gradient(160deg,#FDF6F1,#F9E9EC);border:1px solid var(--line);
+  box-shadow:0 12px 22px -14px rgba(74,23,35,.55);transform:rotate(-2.5deg)}
+.vc-doc::before{content:"";position:absolute;inset:5px;border:1px dashed var(--line-2);
+  border-radius:8px;pointer-events:none}
+.vd-title{font-family:'Cormorant',Georgia,serif;font-size:19px;font-weight:600;line-height:1.1;
+  color:var(--plum);margin-bottom:9px;position:relative}
+.vd-row{display:flex;justify-content:space-between;gap:8px;font-size:10.5px;line-height:1.3;
+  padding:4px 0;border-top:1px solid var(--line);position:relative}
+.vd-row span{color:var(--ink-2)}
+.vd-row b{color:var(--plum);text-align:right}
+.vd-stamp{margin-top:9px;display:inline-block;font-size:9px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold);border:1.5px solid var(--gold-2);border-radius:99px;
+  padding:4px 9px;transform:rotate(-3deg);position:relative}
+
+.vc-list{list-style:none;display:grid;gap:0}
+.vc-list li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  font-size:15px;line-height:1.4;padding:11px 0;border-top:1px dashed var(--line-2)}
+.vc-list li b{flex:none;font-size:15.5px;color:var(--plum);font-variant-numeric:tabular-nums}
+
+.vc-sum{margin-top:16px;padding-top:16px;border-top:2px solid var(--line-2);
+  display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.vc-old span,.vc-new span{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-2);margin-bottom:2px}
+.vc-old b{font-family:'Cormorant',Georgia,serif;font-size:30px;font-weight:600;color:var(--ink-2);
+  text-decoration:line-through;text-decoration-thickness:1.5px}
+.vc-new{text-align:right}
+.vc-new b{font-family:'Cormorant',Georgia,serif;font-size:46px;font-weight:600;line-height:1;
+  background:var(--g-cta);-webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;padding-right:.06em}
+.vc-note{margin-top:14px;font-size:13px;color:var(--ink-2);line-height:1.45}
+@media(max-width:600px){
+  .value-card{padding:22px 18px 20px}
+  .vc-top{flex-direction:column;gap:16px}
+  .vc-doc{width:100%;max-width:230px;align-self:center;transform:rotate(-1.5deg)}
+  .vc-list li{font-size:14.5px;gap:12px}
+  .vc-new b{font-size:40px}
 }
 .offer-price .v{font-family:'Cormorant',Georgia,serif;font-size:46px;font-weight:600;line-height:1;
   background:linear-gradient(120deg,#F6E2B4,#DDBC78 55%,#F0D9A4);-webkit-background-clip:text;
   background-clip:text;color:transparent;-webkit-text-fill-color:transparent;padding-right:.1em}
 .offer-price .v s{-webkit-text-fill-color:#EBD2CC;color:#EBD2CC}
-.offer-price s{opacity:.55;font-size:20px}
-.offer-price .t{font-size:14px;color:#EDD3CC;line-height:1.35}
 
 /* розовая плашка */
 .band.pink{background:var(--g-pinkband)}
@@ -792,8 +833,6 @@ footer a{color:#F3E2DC}
   .gal figcaption{font-size:13.5px;padding:11px 13px 13px}
   .split{gap:26px}
   .crow .ci{width:44px;height:44px}
-  .offer-price{padding:16px 18px;gap:14px}
-  .offer-price .v{font-size:38px}
   .ticker span{font-size:18px;padding:0 16px;gap:16px}
   .scrollhint{display:none}          /* на телефоне листают и без подсказки */
 
@@ -952,7 +991,7 @@ footer a{color:#F3E2DC}
     <div class="hero-copy">
       <span class="eyebrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-pin"/></svg> СПб, пр. Энергетиков 37 · 10 минут от «Ладожской»</span>
       <h1>Коррекция фигуры <span class="it">без диет и операций</span>: минус <span class="num">0,5–2&nbsp;см</span> объёмов за один сеанс</h1>
-      <p class="lead">Аппаратные методики в студии «Дофамин» у «Ладожской»: кавитация, RF-лифтинг, лазерный липолиз и лимфодренаж. Первый визит с замерами, консультацией и полноценной процедурой — <b>600&nbsp;₽ вместо 1&nbsp;000&nbsp;₽</b>.</p>
+      <p class="lead">Аппаратные методики в студии «Дофамин» у «Ладожской»: кавитация, RF-лифтинг, лазерный липолиз и лимфодренаж. Первый визит с замерами, консультацией, процедурой и программой курса — <b>600&nbsp;₽ вместо 4&nbsp;800&nbsp;₽</b>.</p>
 
       <ul class="bullets">
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>30 минут</b> на процедуру — успеете в обед или после работы, без реабилитации и следов</span></li>
@@ -994,7 +1033,7 @@ footer a{color:#F3E2DC}
       </div>
       <div class="hero-price">
         <div class="s">Первый визит</div>
-        <div class="p">600 ₽ <s>1 000 ₽</s></div>
+        <div class="p">600 ₽ <s>4 800 ₽</s></div>
       </div>
     </div>
   </div>
@@ -1089,16 +1128,37 @@ footer a{color:#F3E2DC}
       <span class="eyebrow">Знакомство со студией</span>
       <h2>Первый визит за 600 ₽:<br>приходите и <span class="it">убедитесь сами</span></h2>
       <p class="lead">Это не демо на пять минут и не «консультация ради консультации». Вы получаете полноценную процедуру и понятный план — а решаете уже потом, дома, спокойно.</p>
-      <ul class="offer-list">
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Консультация и анкета здоровья — проверим, нет ли противопоказаний</span></li>
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Замеры сантиметром до и после процедуры — цифры записываем в вашу карту</span></li>
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Полноценная процедура 30 минут на выбранной зоне</span></li>
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Одноразовый комплект: костюм, носочки, шапочка, бахилы</span></li>
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Индивидуальная программа с расчётом стоимости курса — на руки</span></li>
-      </ul>
-      <div class="offer-price">
-        <div class="v">600 ₽ <s>1 000 ₽</s></div>
-        <div class="t">Действует один раз на первое посещение.<br>Приходите с подругой — её первый визит тоже 600 ₽.</div>
+      <!-- ЦЕНЫ-ЗАГЛУШКИ: суммы по каждой позиции придуманы как реалистичный пример,
+           согласовать со студией и заменить на настоящий прайс -->
+      <div class="value-card">
+        <div class="vc-top">
+          <div class="vc-doc" aria-hidden="true">
+            <div class="vd-title">Индивидуальная<br>программа</div>
+            <div class="vd-row"><span>Зона</span><b>живот и бока</b></div>
+            <div class="vd-row"><span>Замеры</span><b>84,0 → 82,5 см</b></div>
+            <div class="vd-row"><span>Курс</span><b>10 процедур</b></div>
+            <div class="vd-row"><span>Цена курса</span><b>7 000 ₽</b></div>
+            <div class="vd-stamp">Ваш экземпляр</div>
+          </div>
+          <div class="vc-intro">
+            <h3>Что вы уносите домой</h3>
+            <p>Распечатанную программу с вашими замерами до и после, расчётом курса и ценой — с ней можно уйти думать и сравнивать. Ничего не подписываете на месте.</p>
+          </div>
+        </div>
+
+        <ul class="vc-list">
+          <li><span>Консультация и анкета здоровья — проверим противопоказания</span><b>1 000 ₽</b></li>
+          <li><span>Замеры сантиметром до и после, карта динамики</span><b>500 ₽</b></li>
+          <li><span>Полноценная процедура 30 минут на выбранной зоне</span><b>1 000 ₽</b></li>
+          <li><span>Одноразовый комплект: костюм, носочки, шапочка, бахилы</span><b>300 ₽</b></li>
+          <li><span>Индивидуальная программа с расчётом курса — на руки</span><b>2 000 ₽</b></li>
+        </ul>
+
+        <div class="vc-sum">
+          <div class="vc-old"><span>Всё вместе по прайсу</span><b>4 800 ₽</b></div>
+          <div class="vc-new"><span>Первый визит</span><b>600 ₽</b></div>
+        </div>
+        <p class="vc-note">Действует один раз на первое посещение. Приходите с подругой — её первый визит тоже 600 ₽.</p>
       </div>
     </div>
 
@@ -1289,7 +1349,7 @@ footer a{color:#F3E2DC}
     <div class="center" style="margin-bottom:34px">
       <span class="eyebrow plain">1 минута · 5 вопросов</span>
       <h2>Подберите свою программу <span class="it">и узнайте цену курса</span></h2>
-      <p class="lead">Ответьте на пять простых вопросов — соберём программу под вашу зону, посчитаем количество процедур и стоимость с учётом абонемента. В подарок за прохождение — первый визит за 600 ₽ вместо 1 000 ₽.</p>
+      <p class="lead">Ответьте на пять простых вопросов — соберём программу под вашу зону, посчитаем количество процедур и стоимость с учётом абонемента. В подарок за прохождение — первый визит за 600 ₽ вместо 4 800 ₽ по прайсу.</p>
     </div>
 
     <form class="quiz" id="quiz-form" novalidate>
@@ -1360,7 +1420,7 @@ footer a{color:#F3E2DC}
         <div class="qstep" data-step="6">
           <div class="qgift">
             <svg class="ic"><use href="#i-gift"/></svg>
-            <p><b>Готово! Программа собрана.</b> Куда отправить расчёт и подобранную программу? За вашим номером закрепляем первый визит за 600 ₽ вместо 1 000 ₽.</p>
+            <p><b>Готово! Программа собрана.</b> Куда отправить расчёт и подобранную программу? За вашим номером закрепляем первый визит за 600 ₽ вместо 4 800 ₽.</p>
           </div>
           <div class="qopts" data-name="Куда отправить" style="margin-bottom:16px">
             <button type="button" class="qopt sel"><span class="qi"><svg class="ic"><use href="#i-check"/></svg></span>В WhatsApp</button>
@@ -1658,7 +1718,7 @@ footer a{color:#F3E2DC}
       <h2>Приходите с подругой — <span class="it">её первый визит тоже 600 ₽</span></h2>
       <p class="lead">Вдвоём и не так волнительно, и веселее: можно прийти в один день, лечь в соседние окна и потом вместе сравнить замеры. А если хотите сделать подарок — у нас есть сертификаты на любую сумму и любую услугу.</p>
       <ul class="offer-list">
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Первый визит за 600 ₽ вместо 1 000 ₽ — и вам, и подруге</span></li>
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Первый визит за 600 ₽ вместо 4 800 ₽ по прайсу — и вам, и подруге</span></li>
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Подарочный сертификат — на процедуру, курс или любую сумму</span></li>
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Свободные окна публикуем в Telegram — иногда остаются на сегодня</span></li>
       </ul>
