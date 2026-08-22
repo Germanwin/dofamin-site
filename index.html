@@ -496,7 +496,7 @@ header{
 /* выгоды */
 .benefit{display:flex;gap:18px;align-items:flex-start}
 .benefit .bnum{font-family:'Cormorant',Georgia,serif;font-size:50px;font-weight:600;line-height:.95;
-  flex:none;min-width:104px;text-align:right;background:var(--g-text);-webkit-background-clip:text;
+  flex:none;width:194px;text-align:right;background:var(--g-text);-webkit-background-clip:text;
   background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
   padding-right:.08em;margin-right:-.08em}
 .benefit h3{margin-bottom:5px;color:var(--plum)}
@@ -843,9 +843,15 @@ footer a{color:#F3E2DC}
   .sticky{display:flex}
   body{padding-bottom:76px}
   .fgrid{grid-template-columns:1fr;gap:28px}
-  .benefit .bnum{font-size:40px;min-width:84px}
+  .benefit .bnum{font-size:40px;width:156px}
   .hero-badge{left:0;top:4%}
   .ticker span{font-size:19px;padding:0 18px}
+}
+/* на узком экране колонка чисел съедала бы почти половину ширины,
+   поэтому число встаёт над текстом — тексты всё равно от одной вертикали */
+@media(max-width:560px){
+  .benefit{flex-direction:column;gap:4px}
+  .benefit .bnum{width:auto;text-align:left;font-size:38px}
 }
 @media(max-width:620px){
   .hd > .btn{display:none}          /* CTA живёт в липкой панели снизу */
