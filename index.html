@@ -104,7 +104,7 @@ body{
     linear-gradient(180deg,#FAEDEB 0%,#F6DFE2 55%,#FAEAE3 100%);
   -webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative;
 }
-img{max-width:100%;display:block}
+img{max-width:100%;display:block;height:auto}
 a{color:inherit}
 button,input,select,textarea{font:inherit;color:inherit}
 .wrap{max-width:var(--c);margin:0 auto;padding:0 22px;position:relative;z-index:2}
@@ -113,6 +113,40 @@ section.sand,section.blush,section.band,footer{border-radius:60px 60px 0 0;overf
 section.band+section{border-radius:60px 60px 0 0}
 @media(max-width:760px){section.sand,section.blush,section.band,footer,section.band+section{border-radius:34px 34px 0 0}}
 .sand{background:linear-gradient(165deg,#F8E2DA 0%,#F3D3DC 55%,#F6DED6 100%)}
+
+/* страница высотой ~17 700 px: всё, что вне экрана, браузер пропускает */
+main>section:not(.hero),footer{content-visibility:auto}
+#pains{contain-intrinsic-size:auto 603px}
+#how{contain-intrinsic-size:auto 803px}
+#first{contain-intrinsic-size:auto 631px}
+#benefits{contain-intrinsic-size:auto 1100px}
+#methods{contain-intrinsic-size:auto 2116px}
+#quiz{contain-intrinsic-size:auto 717px}
+#prices{contain-intrinsic-size:auto 1646px}
+#works{contain-intrinsic-size:auto 1025px}
+#reviews{contain-intrinsic-size:auto 823px}
+#faq{contain-intrinsic-size:auto 1145px}
+#studio{contain-intrinsic-size:auto 1133px}
+#action{contain-intrinsic-size:auto 1100px}
+#contacts{contain-intrinsic-size:auto 626px}
+footer{contain-intrinsic-size:auto 298px}
+/* на телефоне блоки перестраиваются — оценки высот другие */
+@media(max-width:560px){
+  #pains{contain-intrinsic-size:auto 709px}
+  #how{contain-intrinsic-size:auto 1577px}
+  #first{contain-intrinsic-size:auto 1284px}
+  #methods{contain-intrinsic-size:auto 2564px}
+  #quiz{contain-intrinsic-size:auto 993px}
+  #prices{contain-intrinsic-size:auto 2127px}
+  #reviews{contain-intrinsic-size:auto 1207px}
+  #faq{contain-intrinsic-size:auto 1350px}
+  #studio{contain-intrinsic-size:auto 1718px}
+  #contacts{contain-intrinsic-size:auto 1134px}
+  footer{contain-intrinsic-size:auto 878px}
+}
+/* на время программной прокрутки раскладку разворачиваем целиком,
+   иначе якорь промахнётся мимо блока */
+html.cv-off main>section,html.cv-off footer{content-visibility:visible}
 .blush{background:linear-gradient(165deg,#F2CFDC 0%,#F7DFD8 100%)}
 h1,h2,h3.serif,.serif{font-family:'Cormorant',Georgia,'Times New Roman',serif;font-weight:600}
 h1{font-size:clamp(33px,3.95vw,53px);line-height:1.04;letter-spacing:-.005em;color:var(--plum)}
@@ -184,8 +218,8 @@ header{
   position:sticky;top:0;z-index:70;background:#FDF1EF;
   border-bottom:1px solid #F5DBE1
 }
-header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:100%;
-  background:var(--g-cta);transform:scaleX(var(--sp,0));transform-origin:0 50%;will-change:transform}
+.hbar{position:absolute;left:0;bottom:-1px;height:2px;width:100%;
+  background:var(--g-cta);transform:scaleX(0);transform-origin:0 50%;will-change:transform}
 .hd{display:flex;align-items:center;gap:20px;height:74px}
 .logo{font-family:'Cormorant',Georgia,serif;font-size:30px;font-weight:600;color:var(--plum);
   letter-spacing:.01em;text-decoration:none;line-height:1;white-space:nowrap;display:inline-flex;align-items:baseline;gap:2px}
@@ -383,6 +417,7 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:1
 .band.pink::after{background:radial-gradient(circle,rgba(255,232,205,.34) 0%,rgba(255,232,205,0) 68%)}
 .band.pink .lead{color:#FCE4EA}
 .band.pink .it{background:none;color:#FCDFA8;-webkit-text-fill-color:#FCDFA8}
+#action h2 .it{color:#F5DDAF;-webkit-text-fill-color:#F5DDAF;font-weight:500}
 
 /* формы */
 .form{background:linear-gradient(160deg,#FFFDFC 0%,#FDEFF3 100%);border-radius:26px;padding:34px;
@@ -574,13 +609,18 @@ details.sp:hover{box-shadow:0 16px 26px -19px rgba(74,34,51,.7)}
 .gal figure{border-radius:20px;overflow:hidden;background:var(--g-card);border:1px solid #F6DCE2;
   box-shadow:var(--sh-sm);transition:transform .28s,box-shadow .28s;display:flex;flex-direction:column}
 .gal figure:hover{transform:translateY(-5px);box-shadow:var(--sh-lift)}
-.gal img{aspect-ratio:3/4;object-fit:cover;width:100%;transition:transform .6s cubic-bezier(.2,.7,.3,1)}
+.gal img{aspect-ratio:1/1;object-fit:cover;width:100%;height:auto;transition:transform .6s cubic-bezier(.2,.7,.3,1)}
 .gal figure:hover img{transform:scale(1.05)}
 .gal figcaption{flex:1;font-size:14.5px;font-weight:700;color:var(--plum);padding:14px 16px 16px;
   line-height:1.4;background:linear-gradient(135deg,#FAE3EA,#F9E6DC);border-top:2px solid transparent;
   border-image:var(--g-cta) 1;position:relative}
 .gal figcaption b{color:#9C7526;font-weight:800}
 .gal-3{grid-template-columns:repeat(3,1fr)}
+@media(min-width:761px){
+  #works .gal-3{max-width:940px;margin:0 auto}
+  #studio .gal{max-width:1000px;margin:0 auto}
+  #studio .simg{max-width:450px}
+}
 @media(max-width:640px){.gal-3{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
 .split .simg{border-radius:26px;overflow:hidden;border:7px solid #fff;position:relative;
@@ -859,6 +899,7 @@ footer a{color:#F3E2DC}
 </svg>
 
 <header>
+  <i class="hbar"></i>
   <div class="wrap hd">
     <a href="#top" class="logo">Дофамин<span>.</span></a>
     <div class="desc">Студия аппаратной коррекции фигуры, косметологии и перманента · СПб</div>
@@ -1412,9 +1453,9 @@ footer a{color:#F3E2DC}
       <p class="lead">Стаж более 10 лет, проверенные пигменты и аккуратная форма под ваши черты — без «татуажа из нулевых». Заживление сопровождаем: уходовые средства отдаём с собой.</p>
     </div>
     <div class="gal gal-3 rv">
-      <figure><img decoding="async" src="assets/img/ba-brows.jpg" alt="Перманентный макияж бровей: до и после" loading="lazy" style="aspect-ratio:4/5" width="800" height="800"><figcaption><b>Брови</b> — до и после</figcaption></figure>
-      <figure><img decoding="async" src="assets/img/ba-lips.jpg" alt="Перманентный макияж губ: до и после" loading="lazy" style="aspect-ratio:4/5" width="524" height="800"><figcaption><b>Губы</b> — до и после</figcaption></figure>
-      <figure><img decoding="async" src="assets/img/ba-lashes.jpg" alt="Межресничка: до и после" loading="lazy" style="aspect-ratio:4/5" width="521" height="800"><figcaption><b>Межресничка</b> — до и после</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/ba-brows.jpg" alt="Перманентный макияж бровей: до и после" loading="lazy" width="800" height="800"><figcaption><b>Брови</b> — до и после</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/ba-lips.jpg" alt="Перманентный макияж губ: до и после" loading="lazy" width="800" height="800"><figcaption><b>Губы</b> — до и после</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/ba-lashes.jpg" alt="Межресничка: до и после" loading="lazy" width="800" height="800"><figcaption><b>Межресничка</b> — до и после</figcaption></figure>
     </div>
     <div class="center" style="margin-top:26px">
       <a href="#first" class="btn btn-ghost">Записаться на консультацию по перманенту</a>
@@ -1545,7 +1586,7 @@ footer a{color:#F3E2DC}
 <!-- ═══════════ 11. БЕЗОПАСНОСТЬ И СТУДИЯ ═══════════ -->
 <section id="studio">
   <div class="wrap split">
-    <div class="simg rv"><img decoding="async" src="assets/img/room.jpg" alt="Кабинет студии Дофамин: кушетка и аппарат для коррекции фигуры" loading="lazy" width="600" height="800"></div>
+    <div class="simg rv"><img decoding="async" src="assets/img/room.jpg" alt="Кабинет студии Дофамин: кушетка и аппарат для коррекции фигуры" loading="lazy" width="800" height="600"></div>
     <div>
       <span class="eyebrow plain">Наша студия</span>
       <h2>Уютная студия, где вас <span class="it">помнят по имени</span></h2>
@@ -1567,10 +1608,10 @@ footer a{color:#F3E2DC}
 
   <div class="wrap" style="margin-top:56px">
     <div class="gal rv">
-      <figure><img decoding="async" src="assets/img/team.jpg" alt="Мастера студии Дофамин" loading="lazy" style="aspect-ratio:3/4" width="1000" height="626"><figcaption><b>Мастера студии</b> — аппаратная коррекция, косметология и перманент</figcaption></figure>
-      <figure><img decoding="async" src="assets/img/reception.jpg" alt="Стойка администратора с неоновой вывеской Дофамин" loading="lazy" width="560" height="800"><figcaption><b>Ресепшн</b> — здесь начинается ваш визит</figcaption></figure>
-      <figure><img decoding="async" src="assets/img/award.jpg" alt="Награда 2ГИС на стойке студии Дофамин" loading="lazy" width="600" height="800"><figcaption><b>Награда 2ГИС</b> и QR для отзыва — прямо на стойке</figcaption></figure>
-      <figure><img decoding="async" src="assets/img/certs.jpg" alt="Подарочные сертификаты студии Дофамин" loading="lazy" width="600" height="800"><figcaption><b>Подарочные сертификаты</b> — на любую сумму и услугу</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/team.jpg" alt="Мастера студии Дофамин" loading="lazy" width="800" height="800"><figcaption><b>Мастера студии</b> — аппаратная коррекция, косметология и перманент</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/reception.jpg" alt="Стойка администратора с неоновой вывеской Дофамин" loading="lazy" width="800" height="800"><figcaption><b>Ресепшн</b> — здесь начинается ваш визит</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/award.jpg" alt="Награда 2ГИС на стойке студии Дофамин" loading="lazy" width="800" height="800"><figcaption><b>Награда 2ГИС</b> и QR для отзыва — прямо на стойке</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/certs.jpg" alt="Подарочные сертификаты студии Дофамин" loading="lazy" width="800" height="800"><figcaption><b>Подарочные сертификаты</b> — на любую сумму и услугу</figcaption></figure>
     </div>
   </div>
 </section>
@@ -1729,6 +1770,28 @@ footer a{color:#F3E2DC}
 (function(){
   'use strict';
 
+  /* ---- прокрутка с учётом content-visibility ----
+     Пока часть секций не отрисована, их высота — оценка, и якорь промахнётся.
+     Поэтому на время перехода раскладку разворачиваем целиком. */
+  var root = document.documentElement, cvTimer = 0;
+  function cvBack(){
+    clearTimeout(cvTimer);
+    window.removeEventListener('scrollend', cvBack);
+    root.classList.remove('cv-off');
+    measure();
+  }
+  function scrollToY(getY){
+    root.classList.add('cv-off');
+    void document.body.offsetHeight;          /* форсируем полную раскладку */
+    window.scrollTo({top: Math.max(0, getY()), behavior:'smooth'});
+    /* возвращаем экономию только когда прокрутка реально закончилась,
+       иначе блоки схлопнутся на лету и якорь промахнётся */
+    clearTimeout(cvTimer);
+    window.removeEventListener('scrollend', cvBack);
+    window.addEventListener('scrollend', cvBack);
+    cvTimer = setTimeout(cvBack, 2500);
+  }
+
   /* ---- появление блоков при скролле ---- */
   var rv = document.querySelectorAll('.rv');
   if ('IntersectionObserver' in window) {
@@ -1756,8 +1819,7 @@ footer a{color:#F3E2DC}
   }
   function done(form){
     form.classList.add('is-done');
-    var top = form.getBoundingClientRect().top + window.pageYOffset - 110;
-    window.scrollTo({top: top, behavior:'smooth'});
+    scrollToY(function(){ return form.getBoundingClientRect().top + window.pageYOffset - 110; });
   }
 
   /* ---- простые формы ---- */
@@ -1857,23 +1919,29 @@ footer a{color:#F3E2DC}
       var label = b.querySelector('span');
       if(label) label.textContent = open ? b.dataset.less : b.dataset.more;
       if(!open){
-        var y = box.getBoundingClientRect().top + window.pageYOffset - 70;
-        window.scrollTo({top:y, behavior:'smooth'});
+        scrollToY(function(){ return box.getBoundingClientRect().top + window.pageYOffset - 70; });
       }
     });
   });
 
-  /* ---- индикатор прочитанного в шапке ---- */
-  var hdr = document.querySelector('header'), tick = false;
+  /* ---- индикатор прочитанного в шапке ----
+     scrollHeight читаем не каждый кадр (это форсировало пересчёт раскладки),
+     а только когда высота документа реально меняется. */
+  var bar = document.querySelector('.hbar'), maxY = 0, lastP = -1, tick = false;
+  function measure(){ maxY = document.documentElement.scrollHeight - window.innerHeight; }
   function progress(){
-    var h = document.documentElement.scrollHeight - window.innerHeight;
-    var p = h > 0 ? Math.min(100, window.pageYOffset / h * 100) : 0;
-    hdr.style.setProperty('--sp', (p / 100).toFixed(3));
     tick = false;
+    var p = maxY > 0 ? Math.min(1, window.pageYOffset / maxY) : 0;
+    if (Math.abs(p - lastP) < 0.002) return;
+    lastP = p;
+    if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
   }
   window.addEventListener('scroll', function(){
     if(!tick){ tick = true; requestAnimationFrame(progress); }
   }, {passive:true});
+  window.addEventListener('resize', function(){ measure(); progress(); });
+  if ('ResizeObserver' in window) new ResizeObserver(measure).observe(document.body);
+  measure();
   progress();
 
   /* ---- плавный переход по якорям с учётом липкой шапки ---- */
@@ -1884,8 +1952,7 @@ footer a{color:#F3E2DC}
       var t = document.querySelector(id);
       if(!t) return;
       e.preventDefault();
-      var y = t.getBoundingClientRect().top + window.pageYOffset - 84;
-      window.scrollTo({top:y, behavior:'smooth'});
+      scrollToY(function(){ return t.getBoundingClientRect().top + window.pageYOffset - 84; });
       history.replaceState(null, '', id);
     });
   });
