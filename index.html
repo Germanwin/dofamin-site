@@ -102,14 +102,7 @@ body{
     radial-gradient(820px 620px at 0% 18%, #F6DCCB 0%, rgba(246,220,203,0) 56%),
     radial-gradient(760px 580px at 50% 100%, #EBD2E2 0%, rgba(235,210,226,0) 60%),
     linear-gradient(180deg,#FAEDEB 0%,#F6DFE2 55%,#FAEAE3 100%);
-  background-attachment:fixed;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative;
-}
-/* лёгкое зерно поверх всей страницы — даёт «бумажную» тактильность */
-body::before{
-  content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
-  mix-blend-mode:multiply;
 }
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -134,7 +127,7 @@ h3{font-size:20px;font-weight:800;line-height:1.28;letter-spacing:-.01em}
 .num{font-variant-numeric:tabular-nums}
 
 /* декоративные цветные пятна */
-.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;z-index:0}
+.blob{position:absolute;border-radius:50%;opacity:.75;pointer-events:none;z-index:0}
 .b-peach{background:radial-gradient(circle,#F9C9A4 0%,rgba(249,201,164,0) 70%)}
 .b-rose{background:radial-gradient(circle,#F4BBC6 0%,rgba(244,187,198,0) 70%)}
 .b-gold{background:radial-gradient(circle,#F0DCA8 0%,rgba(240,220,168,0) 70%)}
@@ -188,12 +181,11 @@ h3{font-size:20px;font-weight:800;line-height:1.28;letter-spacing:-.01em}
 
 /* ---------- шапка ---------- */
 header{
-  position:sticky;top:0;z-index:70;background:rgba(255,246,244,.86);
-  backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);
+  position:sticky;top:0;z-index:70;background:#FDF1EF;
   border-bottom:1px solid #F5DBE1
 }
-header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:var(--sp,0%);
-  background:var(--g-cta);transition:width .1s linear}
+header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:100%;
+  background:var(--g-cta);transform:scaleX(var(--sp,0));transform-origin:0 50%;will-change:transform}
 .hd{display:flex;align-items:center;gap:20px;height:74px}
 .logo{font-family:'Cormorant',Georgia,serif;font-size:30px;font-weight:600;color:var(--plum);
   letter-spacing:.01em;text-decoration:none;line-height:1;white-space:nowrap;display:inline-flex;align-items:baseline;gap:2px}
@@ -243,7 +235,7 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:v
 .tchip{display:flex;align-items:center;gap:9px;background:linear-gradient(150deg,rgba(255,255,255,.88),rgba(253,231,239,.82));
   border:1px solid rgba(255,255,255,.85);border-radius:16px;padding:11px 15px;font-size:13.5px;
   line-height:1.25;box-shadow:0 14px 30px -22px rgba(74,34,51,.7);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+}
 .tchip b{display:block;font-size:15px;font-weight:800;color:var(--plum)}
 .tchip .stars{color:var(--gold);font-size:13px;letter-spacing:1px}
 
@@ -259,7 +251,6 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:v
   position:absolute;left:-4%;top:14%;z-index:3;border-radius:20px;padding:17px 21px;max-width:225px;
   background:linear-gradient(150deg,rgba(255,255,255,.92),rgba(253,229,238,.88));
   border:1px solid rgba(255,255,255,.9);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   box-shadow:0 26px 50px -28px rgba(74,34,51,.7)
 }
 .hero-badge .big{font-family:'Cormorant',Georgia,serif;font-size:40px;font-weight:600;line-height:1;
@@ -289,7 +280,7 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:v
 .ticker::before,.ticker::after{content:"";position:absolute;top:0;bottom:0;width:120px;z-index:2}
 .ticker::before{left:0;background:linear-gradient(90deg,#8A4A5E,rgba(138,74,94,0))}
 .ticker::after{right:0;background:linear-gradient(270deg,#DDA3AF,rgba(221,163,175,0))}
-.ticker-row{display:flex;gap:0;width:max-content;animation:slide 42s linear infinite}
+.ticker-row{display:flex;gap:0;width:max-content;animation:slide 42s linear infinite;will-change:transform}
 .ticker span{font-family:'Cormorant',Georgia,serif;font-size:23px;font-style:italic;
   padding:0 26px;white-space:nowrap;display:inline-flex;align-items:center;gap:26px}
 .ticker span::after{content:"✦";font-style:normal;font-size:12px;color:#F0D49A}
@@ -380,7 +371,7 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:v
 .offer-list .bi svg{width:14px;height:14px;stroke-width:2.6}
 .offer-price{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.25);border-radius:20px;
   padding:20px 24px;margin-top:28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+}
 .offer-price .v{font-family:'Cormorant',Georgia,serif;font-size:46px;font-weight:600;line-height:1;
   background:linear-gradient(120deg,#F6E2B4,#DDBC78 55%,#F0D9A4);-webkit-background-clip:text;
   background-clip:text;color:transparent;-webkit-text-fill-color:transparent;padding-right:.1em}
@@ -651,7 +642,7 @@ footer a{color:#F3E2DC}
 /* липкая мобильная панель */
 .sticky{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;gap:10px;
   padding:10px 14px calc(10px + env(safe-area-inset-bottom));
-  background:rgba(255,246,244,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:#FDF1EF;
   border-top:1px solid #F5DBE1;box-shadow:0 -10px 30px -20px rgba(74,34,51,.8)}
 .sticky .btn{flex:1;padding:16px 12px;font-size:15.5px;width:auto}
 .sticky .btn-ghost{flex:none;width:56px;padding:16px 0}
@@ -811,7 +802,6 @@ footer a{color:#F3E2DC}
   .cta-row .btn,.center .btn,.form .btn,.quiz .btn{width:100%;padding:18px 22px;font-size:16.5px}
   .cta-row{gap:11px}
   .eyebrow{font-size:11.5px;letter-spacing:.1em}
-  .blob{filter:blur(50px)}
 }
 </style>
 <script type="application/ld+json">
@@ -921,8 +911,8 @@ footer a{color:#F3E2DC}
     </div>
 
     <div class="hero-art">
-      <div class="ph ph-main"><img src="assets/img/cavitation.jpg" alt="Процедура кавитации в студии Дофамин: аппаратная коррекция живота" width="1000" height="740"></div>
-      <div class="ph ph-sub"><img src="assets/img/reception.jpg" alt="Стойка администратора студии Дофамин с неоновой вывеской" width="700" height="900" loading="lazy"></div>
+      <div class="ph ph-main"><img decoding="async" src="assets/img/cavitation.jpg" alt="Процедура кавитации в студии Дофамин: аппаратная коррекция живота" width="1000" height="740"></div>
+      <div class="ph ph-sub"><img decoding="async" src="assets/img/reception.jpg" alt="Стойка администратора студии Дофамин с неоновой вывеской" width="700" height="900" loading="lazy"></div>
       <div class="hero-badge">
         <div class="big">−0,5…2 см</div>
         <div class="cap">в объёмах после первого сеанса прессотерапии — по замерам сантиметром</div>
@@ -1123,7 +1113,7 @@ footer a{color:#F3E2DC}
 
     <div class="grid g3 rv">
       <article class="mcard">
-        <div class="mimg"><img src="assets/img/cavitation-2.jpg" alt="Кавитация — ультразвуковая коррекция живота" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/cavitation-2.jpg" alt="Кавитация — ультразвуковая коррекция живота" loading="lazy"></div>
         <div class="mbody">
           <span class="mtag t-warm">Локальный жир</span>
           <h3>Кавитация</h3>
@@ -1133,7 +1123,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard">
-        <div class="mimg"><img src="assets/img/vacuum.jpg" alt="Вакуумный массаж с RF-лифтингом" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/vacuum.jpg" alt="Вакуумный массаж с RF-лифтингом" loading="lazy"></div>
         <div class="mbody">
           <span class="mtag t-pink">Целлюлит</span>
           <h3>Вакуумный массаж с RF</h3>
@@ -1143,7 +1133,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard">
-        <div class="mimg"><img src="assets/img/lipolysis.jpg" alt="Лазерный липолиз тела — пластины на животе" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/lipolysis.jpg" alt="Лазерный липолиз тела — пластины на животе" loading="lazy"></div>
         <div class="mbody">
           <span class="mtag t-warm">Контуры тела</span>
           <h3>Лазерный липолиз</h3>
@@ -1153,7 +1143,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard">
-        <div class="mimg"><img src="assets/img/presso.jpg" alt="Прессотерапия — костюм лимфодренажного массажа" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/presso.jpg" alt="Прессотерапия — костюм лимфодренажного массажа" loading="lazy"></div>
         <div class="mbody">
           <span class="mtag t-sage">Отёки</span>
           <h3>Прессотерапия</h3>
@@ -1163,7 +1153,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard m-extra">
-        <div class="mimg"><img src="assets/img/estetik.jpg" alt="Аппарат для RF-лифтинга тела в студии Дофамин" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/estetik.jpg" alt="Аппарат для RF-лифтинга тела в студии Дофамин" loading="lazy"></div>
         <div class="mbody">
           <span class="mtag t-gold">Тонус кожи</span>
           <h3>RF-лифтинг тела</h3>
@@ -1173,7 +1163,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard m-extra">
-        <div class="mimg"><img src="assets/img/myostim.jpg" alt="Миостимуляция — пояса на теле" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/myostim.jpg" alt="Миостимуляция — пояса на теле" loading="lazy"></div>
         <div class="mbody">
           <span class="mtag t-sage">Мышцы и рельеф</span>
           <h3>Миостимуляция</h3>
@@ -1183,7 +1173,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard m-extra">
-        <div class="mimg"><img src="assets/img/lipo-device.jpg" alt="Аппаратура студии Дофамин" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/lipo-device.jpg" alt="Аппаратура студии Дофамин" loading="lazy"></div>
         <div class="mbody">
           <span class="mtag t-plum">Расслабление</span>
           <h3>Вибромассаж</h3>
@@ -1193,7 +1183,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard m-extra">
-        <div class="mimg"><img src="assets/img/face.jpg" alt="Косметология лица в студии Дофамин" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/face.jpg" alt="Косметология лица в студии Дофамин" loading="lazy"></div>
         <div class="mbody">
           <span class="mtag t-gold">Лицо</span>
           <h3>Косметология лица</h3>
@@ -1203,7 +1193,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard m-extra">
-        <div class="mimg"><img src="assets/img/pm-brows.jpg" alt="Перманентный макияж бровей — мастер за работой" loading="lazy"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/pm-brows.jpg" alt="Перманентный макияж бровей — мастер за работой" loading="lazy"></div>
         <div class="mbody">
           <span class="mtag t-plum">Перманент</span>
           <h3>Перманентный макияж</h3>
@@ -1427,9 +1417,9 @@ footer a{color:#F3E2DC}
       <p class="lead">Стаж более 10 лет, проверенные пигменты и аккуратная форма под ваши черты — без «татуажа из нулевых». Заживление сопровождаем: уходовые средства отдаём с собой.</p>
     </div>
     <div class="gal gal-3 rv">
-      <figure><img src="assets/img/ba-brows.jpg" alt="Перманентный макияж бровей: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption><b>Брови</b> — до и после</figcaption></figure>
-      <figure><img src="assets/img/ba-lips.jpg" alt="Перманентный макияж губ: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption><b>Губы</b> — до и после</figcaption></figure>
-      <figure><img src="assets/img/ba-lashes.jpg" alt="Межресничка: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption><b>Межресничка</b> — до и после</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/ba-brows.jpg" alt="Перманентный макияж бровей: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption><b>Брови</b> — до и после</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/ba-lips.jpg" alt="Перманентный макияж губ: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption><b>Губы</b> — до и после</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/ba-lashes.jpg" alt="Межресничка: до и после" loading="lazy" style="aspect-ratio:4/5"><figcaption><b>Межресничка</b> — до и после</figcaption></figure>
     </div>
     <div class="center" style="margin-top:26px">
       <a href="#first" class="btn btn-ghost">Записаться на консультацию по перманенту</a>
@@ -1560,7 +1550,7 @@ footer a{color:#F3E2DC}
 <!-- ═══════════ 11. БЕЗОПАСНОСТЬ И СТУДИЯ ═══════════ -->
 <section id="studio">
   <div class="wrap split">
-    <div class="simg rv"><img src="assets/img/room.jpg" alt="Кабинет студии Дофамин: кушетка и аппарат для коррекции фигуры" loading="lazy"></div>
+    <div class="simg rv"><img decoding="async" src="assets/img/room.jpg" alt="Кабинет студии Дофамин: кушетка и аппарат для коррекции фигуры" loading="lazy"></div>
     <div>
       <span class="eyebrow plain">Наша студия</span>
       <h2>Уютная студия, где вас <span class="it">помнят по имени</span></h2>
@@ -1582,10 +1572,10 @@ footer a{color:#F3E2DC}
 
   <div class="wrap" style="margin-top:56px">
     <div class="gal rv">
-      <figure><img src="assets/img/team.jpg" alt="Мастера студии Дофамин" loading="lazy" style="aspect-ratio:3/4"><figcaption><b>Мастера студии</b> — аппаратная коррекция, косметология и перманент</figcaption></figure>
-      <figure><img src="assets/img/reception.jpg" alt="Стойка администратора с неоновой вывеской Дофамин" loading="lazy"><figcaption><b>Ресепшн</b> — здесь начинается ваш визит</figcaption></figure>
-      <figure><img src="assets/img/award.jpg" alt="Награда 2ГИС на стойке студии Дофамин" loading="lazy"><figcaption><b>Награда 2ГИС</b> и QR для отзыва — прямо на стойке</figcaption></figure>
-      <figure><img src="assets/img/certs.jpg" alt="Подарочные сертификаты студии Дофамин" loading="lazy"><figcaption><b>Подарочные сертификаты</b> — на любую сумму и услугу</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/team.jpg" alt="Мастера студии Дофамин" loading="lazy" style="aspect-ratio:3/4"><figcaption><b>Мастера студии</b> — аппаратная коррекция, косметология и перманент</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/reception.jpg" alt="Стойка администратора с неоновой вывеской Дофамин" loading="lazy"><figcaption><b>Ресепшн</b> — здесь начинается ваш визит</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/award.jpg" alt="Награда 2ГИС на стойке студии Дофамин" loading="lazy"><figcaption><b>Награда 2ГИС</b> и QR для отзыва — прямо на стойке</figcaption></figure>
+      <figure><img decoding="async" src="assets/img/certs.jpg" alt="Подарочные сертификаты студии Дофамин" loading="lazy"><figcaption><b>Подарочные сертификаты</b> — на любую сумму и услугу</figcaption></figure>
     </div>
   </div>
 </section>
@@ -1681,7 +1671,7 @@ footer a{color:#F3E2DC}
 
       <div>
         <a class="mapcard" href="https://yandex.ru/maps/org/dofamin/101290040598/" target="_blank" rel="noopener" style="display:block;text-decoration:none">
-          <img src="assets/img/cards.jpg" alt="Студия Дофамин — визитки с акцией первого визита" loading="lazy">
+          <img decoding="async" src="assets/img/cards.jpg" alt="Студия Дофамин — визитки с акцией первого визита" loading="lazy">
           <div class="mo">
             <b>пр. Энергетиков, 37 · БЦ «Лидер», офис 813</b>
             <span>Открыть в Яндекс.Картах →</span>
@@ -1856,6 +1846,14 @@ footer a{color:#F3E2DC}
     render();
   }
 
+  /* ---- бегущая строка крутится только когда видна ---- */
+  var tick_row = document.querySelector('.ticker-row');
+  if (tick_row && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function(es){
+      tick_row.style.animationPlayState = es[0].isIntersecting ? 'running' : 'paused';
+    }, {threshold:0}).observe(tick_row);
+  }
+
   /* ---- «показать ещё» на мобильном ---- */
   document.querySelectorAll('.m-more').forEach(function(b){
     b.addEventListener('click', function(){
@@ -1875,7 +1873,7 @@ footer a{color:#F3E2DC}
   function progress(){
     var h = document.documentElement.scrollHeight - window.innerHeight;
     var p = h > 0 ? Math.min(100, window.pageYOffset / h * 100) : 0;
-    hdr.style.setProperty('--sp', p.toFixed(1) + '%');
+    hdr.style.setProperty('--sp', (p / 100).toFixed(3));
     tick = false;
   }
   window.addEventListener('scroll', function(){
