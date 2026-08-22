@@ -237,6 +237,23 @@ header{
 .hd-phone a{font-weight:800;font-size:17.5px;text-decoration:none;white-space:nowrap;color:var(--plum)}
 .hd-phone span{display:block;font-size:11.5px;color:var(--ink-2);letter-spacing:.02em}
 @media(max-width:1180px){.desc{display:none}}
+/* стрелка-указатель к кнопке в шапке */
+.hd-cta{display:flex;align-items:center;gap:4px}
+.cta-arrow{display:block;flex:none;color:var(--gold);pointer-events:none;
+  animation:cta-point 2.8s ease-in-out infinite}
+.cta-arrow svg{display:block;fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round;
+  /* прорисовка при появлении: линия «рисуется» слева направо.
+     Видимое состояние — базовое, анимация только доводит к нему (backwards),
+     чтобы стрелка не пропала, если анимация не отработает */
+  stroke-dasharray:56;animation:cta-draw .9s ease-out .5s backwards}
+@keyframes cta-draw{from{stroke-dashoffset:56}to{stroke-dashoffset:0}}
+@keyframes cta-point{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+@media(prefers-reduced-motion:reduce){
+  .cta-arrow,.cta-arrow svg{animation:none}
+}
+/* в тесной шапке стрелке не хватает воздуха — убираем */
+@media(max-width:900px){.cta-arrow{display:none}}
 @media(max-width:1080px){.hd-nav{display:none}}
 @media(max-width:600px){.hd{height:64px;gap:12px}.logo{font-size:26px}.hd-phone a{font-size:16px}}
 
@@ -915,7 +932,15 @@ footer a{color:#F3E2DC}
       <a href="tel:88005508604">8 800 550-86-04</a>
       <span>звонок бесплатный</span>
     </div>
-    <a href="#first" class="btn" style="padding:13px 22px;font-size:15.5px">Записаться</a>
+    <div class="hd-cta">
+      <span class="cta-arrow" aria-hidden="true">
+        <svg viewBox="0 0 32 16" width="28" height="14">
+          <path d="M2 4C12 2.4 22 5 29.6 12.6"/>
+          <path d="M22.6 10.8 29.6 12.6 27.8 5.6"/>
+        </svg>
+      </span>
+      <a href="#first" class="btn" style="padding:13px 22px;font-size:15.5px">Записаться</a>
+    </div>
   </div>
 </header>
 
