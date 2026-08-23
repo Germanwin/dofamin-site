@@ -726,18 +726,20 @@ footer a{color:#F3E2DC;text-decoration:none}
 <!-- ═══ 6. КВИЗ: подбор программы (точка захвата №2) ═══ -->
 <section class="blush" id="podbor">
   <div class="wrap">
-    <span class="eyebrow">1 минута · 3 вопроса</span>
+    <span class="eyebrow">1 минута · 5 вопросов</span>
     <h2>Подберите программу <span class="it">и узнайте цену курса</span></h2>
+    <p class="lead" style="margin-bottom:16px">Пять вопросов — и мы посчитаем ваш курс с учётом абонемента.</p>
 
     <form class="quiz" id="quiz" novalidate>
       <div class="quiz-head">
-        <div class="quiz-meta"><span id="q-label">Шаг 1 из 4</span><span id="q-pct">Заполнено на 25%</span></div>
+        <div class="quiz-meta"><span id="q-label">Шаг 1 из 6</span><span id="q-pct">Заполнено на 17%</span></div>
         <div class="quiz-bar"><i id="q-bar"></i></div>
       </div>
 
       <div class="quiz-body">
         <div class="qstep on" data-step="1">
           <h3>С какой зоной поработаем?</h3>
+          <p class="qsub">Можно начать с одной — остальные подключим позже.</p>
           <div class="qopts" data-name="Зона">
             <button type="button" class="qopt"><span class="qi"></span>Живот и бока</button>
             <button type="button" class="qopt"><span class="qi"></span>Бёдра и ягодицы</button>
@@ -750,16 +752,39 @@ footer a{color:#F3E2DC;text-decoration:none}
 
         <div class="qstep" data-step="2">
           <h3>Что беспокоит больше всего?</h3>
+          <p class="qsub">От задачи зависит, какие методики подберём.</p>
           <div class="qopts" data-name="Задача">
             <button type="button" class="qopt"><span class="qi"></span>Объёмы не уходят от диеты</button>
             <button type="button" class="qopt"><span class="qi"></span>Отёки и тяжесть к вечеру</button>
-            <button type="button" class="qopt"><span class="qi"></span>Дряблость после родов</button>
+            <button type="button" class="qopt"><span class="qi"></span>Дряблость после родов или похудения</button>
             <button type="button" class="qopt"><span class="qi"></span>«Апельсиновая корка»</button>
+            <button type="button" class="qopt"><span class="qi"></span>Хочу просто расслабиться</button>
           </div>
         </div>
 
         <div class="qstep" data-step="3">
+          <h3>Был опыт аппаратных процедур?</h3>
+          <p class="qsub">Новичкам начинаем мягче и объясняем каждый шаг.</p>
+          <div class="qopts" data-name="Опыт">
+            <button type="button" class="qopt"><span class="qi"></span>Ни разу не пробовала</button>
+            <button type="button" class="qopt"><span class="qi"></span>Пробовала давно</button>
+            <button type="button" class="qopt"><span class="qi"></span>Хожу регулярно</button>
+          </div>
+        </div>
+
+        <div class="qstep" data-step="4">
+          <h3>Есть срок, к которому нужен результат?</h3>
+          <p class="qsub">Если дата близко — соберём курс плотнее.</p>
+          <div class="qopts" data-name="Срок">
+            <button type="button" class="qopt"><span class="qi"></span>Через 2–4 недели</button>
+            <button type="button" class="qopt"><span class="qi"></span>Через 2–3 месяца</button>
+            <button type="button" class="qopt"><span class="qi"></span>Срока нет, хочу вдолгую</button>
+          </div>
+        </div>
+
+        <div class="qstep" data-step="5">
           <h3>Когда удобно приходить?</h3>
+          <p class="qsub">Подберём окна под ваш график.</p>
           <div class="qopts" data-name="Время">
             <button type="button" class="qopt"><span class="qi"></span>Утром до работы</button>
             <button type="button" class="qopt"><span class="qi"></span>В обеденный перерыв</button>
@@ -768,7 +793,7 @@ footer a{color:#F3E2DC;text-decoration:none}
           </div>
         </div>
 
-        <div class="qstep" data-step="4">
+        <div class="qstep" data-step="6">
           <h3>Куда отправить программу?</h3>
           <p class="qsub">Пришлём расчёт курса и закрепим первый визит за 600 ₽.</p>
           <div class="qopts" data-name="Куда отправить" style="margin-bottom:14px">
