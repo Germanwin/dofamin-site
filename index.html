@@ -1976,7 +1976,7 @@ footer a{color:#F3E2DC}
   if(quiz){
     var steps = quiz.querySelectorAll('.qstep');
     var total = steps.length, cur = 1;
-    var bar   = document.getElementById('q-bar');
+    var qbar  = document.getElementById('q-bar');
     var label = document.getElementById('q-label');
     var pct   = document.getElementById('q-pct');
     var back  = document.getElementById('q-back');
@@ -1986,7 +1986,7 @@ footer a{color:#F3E2DC}
     function render(){
       steps.forEach(function(s){ s.classList.toggle('active', +s.dataset.step === cur); });
       var p = Math.round(cur/total*100);
-      bar.style.width = p + '%';
+      qbar.style.width = p + '%';
       label.textContent = 'Шаг ' + cur + ' из ' + total;
       pct.textContent = 'Заполнено на ' + p + '%';
       back.hidden = cur === 1;
@@ -2057,6 +2057,8 @@ footer a{color:#F3E2DC}
   });
 
   /* ---- индикатор прочитанного в шапке ----
+     ВНИМАНИЕ: var здесь общий с кодом выше по файлу — имена не переиспользовать
+     (полоса квиза уже ломалась из-за второго `var bar` в этой же области).
      scrollHeight читаем не каждый кадр (это форсировало пересчёт раскладки),
      а только когда высота документа реально меняется. */
   var bar = document.querySelector('.hbar'), maxY = 0, lastP = -1, tick = false;
