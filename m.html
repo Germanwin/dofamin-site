@@ -196,19 +196,23 @@ main>section{position:relative}
 
 /* цифры результата: цифра в плитке фиксированного размера — все строки ровные */
 .nums{display:grid;gap:10px}
-.num{display:grid;grid-template-columns:78px 1fr;gap:14px;align-items:center;
+.num{display:grid;grid-template-columns:104px 1fr;gap:14px;align-items:center;
   background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
-.num b{width:78px;height:78px;flex:none;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:3px;
-  border-radius:16px;border:1px solid var(--line);
+.num b{width:104px;height:62px;flex:none;display:flex;align-items:baseline;
+  justify-content:center;gap:5px;position:relative;overflow:hidden;
+  border-radius:14px;border:1px solid var(--line);
   background:linear-gradient(150deg,#FDF1F4 0%,#FBF2E9 100%)}
+/* мягкий блик по диагонали, чтобы плитка не была плоской заливкой */
+.num b::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(150deg,rgba(255,255,255,.85),rgba(255,255,255,0) 58%)}
+.num b i,.num b u{position:relative;z-index:1}
 .num b i{font-style:normal;font-family:'Cormorant',Georgia,serif;
-  font-size:30px;font-weight:600;line-height:1;letter-spacing:.01em;
+  font-size:29px;font-weight:600;line-height:1;letter-spacing:.01em;
   background:var(--g-num);-webkit-background-clip:text;background-clip:text;
   color:transparent;-webkit-text-fill-color:transparent;
   padding-right:.06em;margin-right:-.06em}
-.num b u{text-decoration:none;font-size:10.5px;font-weight:800;letter-spacing:.09em;
-  text-transform:uppercase;color:var(--gold)}
+.num b u{text-decoration:none;font-size:10.5px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--gold);white-space:nowrap}
 .num span{font-size:14.5px;line-height:1.45;color:var(--ink-2)}
 
 /* работы мастера: до и после — вертикальные кадры, подпись под каждым */
@@ -405,6 +409,10 @@ details[open].is-closing summary::after{transform:rotate(45deg) translateY(-3px)
   .d-body,.d-body>p{transition:none}
 }
 details p b{color:var(--plum)}
+/* фото методики внутри спойлера: фиксированная высота — раскрытие не прыгает,
+   пока картинка ещё грузится */
+.d-pic{width:100%;height:172px;object-fit:cover;border-radius:12px;
+  border:1px solid var(--line);margin:2px 0 11px}
 .sum-price{font-size:13px;font-weight:800;color:var(--cta);white-space:nowrap}
 .tag-s{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.04em;
   border-radius:99px;padding:3px 9px;margin-right:7px;vertical-align:middle;white-space:nowrap}
@@ -585,8 +593,8 @@ footer a{color:var(--plum)}
         по данным МРТ-исследования хирургов из Нью-Йорка</span></div>
       <div class="num"><b><i>30</i><u>мин</u></b><span>занимает визит: без наркоза, швов и восстановления,
         сразу идёте по делам</span></div>
-      <div class="num"><b><i>0</i><u>боли</u></b><span>во время процедуры: тепло, лёгкая вибрация и
-        ощущение массажа</span></div>
+      <div class="num"><b><i>0</i><u>уколов</u></b><span>и разрезов — во время процедуры только тепло,
+        лёгкая вибрация и ощущение массажа</span></div>
     </div>
 <div class="g3">
       <figure><img src="assets/img/cavitation-2.jpg" width="800" height="800" loading="lazy"
@@ -690,13 +698,13 @@ footer a{color:var(--plum)}
     <h2>Подберём методику <span class="it">под вашу зону</span></h2>
     <p class="lead" style="margin-bottom:16px">Любая — <b>от 550 ₽ в абонементе</b>, чередуем внутри курса.</p>
 
-    <details><summary><span class="tag-s t-warm">Локальный жир</span>Кавитация</summary><div class="d-body"><p>Ультразвук разрушает жировые клетки точечно — живот, бока, галифе.</p></div></details>
-    <details><summary><span class="tag-s t-pink">Целлюлит</span>Вакуумный массаж с RF</summary><div class="d-body"><p>Разгоняет застой и подтягивает: «апельсиновая корка» становится ровнее.</p></div></details>
-    <details><summary><span class="tag-s t-warm">Контуры</span>Лазерный липолиз</summary><div class="d-body"><p>Работает по жиру, который не уходит на диете. Минус до 17% объёма за курс.</p></div></details>
-    <details><summary><span class="tag-s t-sage">Отёки</span>Прессотерапия</summary><div class="d-body"><p>Минус 0,5–2 см и лёгкие ноги уже после первого сеанса.</p></div></details>
-    <details><summary><span class="tag-s t-gold">Тонус кожи</span>RF-лифтинг тела</summary><div class="d-body"><p>Подтягивает кожу после родов и похудения — без «мешочка».</p></div></details>
-    <details><summary><span class="tag-s t-sage">Мышцы</span>Миостимуляция</summary><div class="d-body"><p>Мышцы работают как на тренировке, только лёжа. Пресс и ягодицы.</p></div></details>
-    <details><summary><span class="tag-s t-plum">Расслабление</span>Вибромассаж</summary><div class="d-body"><p>Глубокая проработка мышц и ощущение лёгкости после рабочего дня.</p></div></details>
+    <details><summary><span class="tag-s t-warm">Локальный жир</span>Кавитация</summary><div class="d-body"><p><img class="d-pic" src="assets/img/cavitation-2.jpg" alt="Кавитация — ультразвуковая коррекция живота" loading="lazy" decoding="async">Ультразвук разрушает жировые клетки точечно — живот, бока, галифе.</p></div></details>
+    <details><summary><span class="tag-s t-pink">Целлюлит</span>Вакуумный массаж с RF</summary><div class="d-body"><p><img class="d-pic" src="assets/img/vacuum.jpg" alt="Вакуумный массаж с RF-лифтингом" loading="lazy" decoding="async">Разгоняет застой и подтягивает: «апельсиновая корка» становится ровнее.</p></div></details>
+    <details><summary><span class="tag-s t-warm">Контуры</span>Лазерный липолиз</summary><div class="d-body"><p><img class="d-pic" src="assets/img/lipolysis.jpg" alt="Лазерный липолиз тела — пластины на животе" loading="lazy" decoding="async">Работает по жиру, который не уходит на диете. Минус до 17% объёма за курс.</p></div></details>
+    <details><summary><span class="tag-s t-sage">Отёки</span>Прессотерапия</summary><div class="d-body"><p><img class="d-pic" src="assets/img/presso.jpg" alt="Прессотерапия — костюм лимфодренажного массажа" loading="lazy" decoding="async">Минус 0,5–2 см и лёгкие ноги уже после первого сеанса.</p></div></details>
+    <details><summary><span class="tag-s t-gold">Тонус кожи</span>RF-лифтинг тела</summary><div class="d-body"><p><img class="d-pic" src="assets/img/estetik.jpg" alt="Аппарат для RF-лифтинга тела в студии «Дофамин»" loading="lazy" decoding="async">Подтягивает кожу после родов и похудения — без «мешочка».</p></div></details>
+    <details><summary><span class="tag-s t-sage">Мышцы</span>Миостимуляция</summary><div class="d-body"><p><img class="d-pic" src="assets/img/myostim.jpg" alt="Миостимуляция — пояса на теле" loading="lazy" decoding="async">Мышцы работают как на тренировке, только лёжа. Пресс и ягодицы.</p></div></details>
+    <details><summary><span class="tag-s t-plum">Расслабление</span>Вибромассаж</summary><div class="d-body"><p><img class="d-pic" src="assets/img/lipo-device.jpg" alt="Вибромассаж в студии «Дофамин»" loading="lazy" decoding="async">Глубокая проработка мышц и ощущение лёгкости после рабочего дня.</p></div></details>
   </div>
 </section>
 
@@ -912,8 +920,8 @@ footer a{color:var(--plum)}
 
     <details><summary>Это больно?</summary><div class="d-body"><p>Нет. Тепло, вибрация и ощущение массажа — гостьи чаще засыпают. Ни проколов, ни разрезов.</p></div></details>
     <details><summary>А вдруг не сработает и деньги зря?</summary><div class="d-body"><p>Поэтому первый визит стоит 600 ₽, а не курс. Замеры при вас — результат в цифрах сразу.</p></div></details>
-    <details><summary>Мне впарят курс?</summary><div class="d-body"><p>Считаем <b>минимум</b> под задачу. Абонемент можно не покупать и ходить поштучно.</p></div></details>
-        <details><summary>Стыдно раздеваться при чужом человеке</summary><div class="d-body"><p>Кабинет закрытый, мастер — женщина. Можно в своём белье, комплект выдаём одноразовый.</p></div></details>
+    <details><summary>Обязательно ли покупать курс?</summary><div class="d-body"><p>Считаем <b>минимум</b> под задачу. Абонемент можно не покупать и ходить поштучно.</p></div></details>
+        <details><summary>Как проходит процедура — нужно ли раздеваться?</summary><div class="d-body"><p>Кабинет закрытый, мастер — женщина. Можно в своём белье, комплект выдаём одноразовый.</p></div></details>
         <details><summary>Некогда, работаю до вечера</summary><div class="d-body"><p>30 минут без следов — можно в обед. Есть окна в выходные, с ребёнком тоже можно.</p></div></details>
   </div>
 </section>
