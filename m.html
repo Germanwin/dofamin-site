@@ -194,15 +194,21 @@ main>section{position:relative}
 .g2 img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;
   box-shadow:0 10px 20px -14px rgba(74,34,46,.6)}
 
-/* цифры результата */
+/* цифры результата: цифра в плитке фиксированного размера — все строки ровные */
 .nums{display:grid;gap:10px}
-.num{display:grid;grid-template-columns:94px 1fr;gap:15px;align-items:center;
+.num{display:grid;grid-template-columns:78px 1fr;gap:14px;align-items:center;
   background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
-.num b{display:grid;place-items:center;font-family:'Cormorant',Georgia,serif;
-  font-size:31px;font-weight:500;line-height:1;letter-spacing:.01em;
+.num b{width:78px;height:78px;flex:none;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:3px;
+  border-radius:16px;border:1px solid var(--line);
+  background:linear-gradient(150deg,#FDF1F4 0%,#FBF2E9 100%)}
+.num b i{font-style:normal;font-family:'Cormorant',Georgia,serif;
+  font-size:30px;font-weight:600;line-height:1;letter-spacing:.01em;
   background:var(--g-num);-webkit-background-clip:text;background-clip:text;
   color:transparent;-webkit-text-fill-color:transparent;
-  border-right:1px solid var(--line);padding-right:14px}
+  padding-right:.06em;margin-right:-.06em}
+.num b u{text-decoration:none;font-size:10.5px;font-weight:800;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--gold)}
 .num span{font-size:14.5px;line-height:1.45;color:var(--ink-2)}
 
 /* работы мастера: до и после — вертикальные кадры, подпись под каждым */
@@ -308,6 +314,17 @@ main>section{position:relative}
 /* ───── формы ───── */
 .form{background:#fff;border:1px solid var(--line);border-radius:var(--r);
   padding:20px 16px;box-shadow:var(--sh)}
+/* шапка «Приходите с подругой» — те же цвета, что в версии для компа */
+.form-pink{padding-top:0;overflow:hidden}
+.pinkhead{margin:0 -16px 18px;padding:22px 18px 20px;text-align:center;
+  background:linear-gradient(135deg,#A94D74 0%,#C4638A 45%,#E2A3B6 100%)}
+.pinkhead h2{color:#fff}
+.pinkhead .it{color:#FCDFA8}
+.form .pinkhead .fnote{color:#FCE4EA;margin-bottom:0}
+.form-pink.is-done{padding-top:20px}
+.pinkhead .hr::before{background:linear-gradient(90deg,transparent,rgba(252,223,168,.95))}
+.pinkhead .hr::after{background:linear-gradient(270deg,transparent,rgba(252,223,168,.95))}
+.pinkhead .hr i{background:#FCDFA8}
 .form h2{margin-bottom:8px}
 .form .fnote{font-size:14.5px;color:var(--ink-2);line-height:1.45;margin-bottom:16px}
 .field{margin-bottom:14px}
@@ -562,13 +579,13 @@ footer a{color:var(--plum)}
     <span class="eyebrow">Что вы получите</span>
     <h2>Результат, который <span class="it">можно измерить</span></h2>
     <div class="nums">
-      <div class="num"><b>−2 см</b><span>объёмов уже после первого сеанса прессотерапии —
+      <div class="num"><b><i>−2</i><u>см</u></b><span>объёмов уже после первого сеанса прессотерапии —
         замеряем сантиметром до и после</span></div>
-      <div class="num"><b>−17%</b><span>объёма жира в зоне за курс лазерного липолиза —
+      <div class="num"><b><i>−17</i><u>%</u></b><span>объёма жира в зоне за курс лазерного липолиза —
         по данным МРТ-исследования хирургов из Нью-Йорка</span></div>
-      <div class="num"><b>30 мин</b><span>занимает визит: без наркоза, швов и восстановления,
+      <div class="num"><b><i>30</i><u>мин</u></b><span>занимает визит: без наркоза, швов и восстановления,
         сразу идёте по делам</span></div>
-      <div class="num"><b>0</b><span>боли во время процедуры: тепло, лёгкая вибрация и
+      <div class="num"><b><i>0</i><u>боли</u></b><span>во время процедуры: тепло, лёгкая вибрация и
         ощущение массажа</span></div>
     </div>
 <div class="g3">
@@ -870,8 +887,8 @@ footer a{color:var(--plum)}
       <div class="row"><span class="av av-3">А</span><div class="who"><b>Алекса Ммм</b><span class="st">★★★★★</span> апрель 2025</div></div>
     </a>
 
-    <a class="btn btn-ghost" href="https://yandex.ru/maps/org/dofamin/" target="_blank" rel="noopener"
-       style="margin-top:14px">Читать все 28 отзывов</a>
+    <a class="btn btn-ghost" href="https://yandex.ru/maps/org/dofamin/101290040598/reviews/"
+       target="_blank" rel="noopener" style="margin-top:14px">Читать все 28 отзывов</a>
   </div>
 </section>
 
@@ -948,11 +965,13 @@ footer a{color:var(--plum)}
 <!-- ═══ 11. ФИНАЛЬНАЯ ФОРМА + КОНТАКТЫ ═══ -->
 <section class="blush" id="contacts">
   <div class="wrap">
-    <form class="form" id="f2" novalidate style="margin-bottom:22px">
+    <form class="form form-pink" id="f2" novalidate style="margin-bottom:22px">
       <div class="form-body">
-        <div class="hr"><i></i></div>
-        <h2 style="text-align:center">Приходите <span class="it">с подругой</span></h2>
-        <p class="fnote">Её первый визит тоже 600 ₽. Подберём время, когда свободны два окна подряд.</p>
+        <div class="pinkhead">
+          <div class="hr"><i></i></div>
+          <h2>Приходите с подругой — <span class="it">её первый визит тоже 600 ₽</span></h2>
+          <p class="fnote">Подберём время, когда свободны два окна подряд.</p>
+        </div>
         <div class="field">
           <label for="f2-phone">Телефон</label>
           <input id="f2-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
