@@ -18,7 +18,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23C05379'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23FDF9F5' text-anchor='middle'%3E%D0%94%3C/text%3E%3C/svg%3E">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/cormorant-cyrillic-500.woff2" crossorigin>
-<link rel="preload" as="image" href="assets/img/client.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/vacuum.jpg" fetchpriority="high">
 <style>
 /* Шрифты хостим локально: Google Fonts из РФ отдаётся нестабильно */
 @font-face{font-family:'Manrope';font-style:normal;font-weight:400 800;font-display:swap;
@@ -114,7 +114,11 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);
   font-size:14.5px;font-weight:800;text-decoration:none}
 
 /* ───── первый экран ───── */
-.hero{padding:16px 0 30px;background:linear-gradient(180deg,#FFF8F6,#FFFFFF 70%)}
+.hero{padding:16px 0 30px;
+  background:
+    radial-gradient(520px 380px at 92% -6%, #FBDDE4 0%, rgba(251,221,228,0) 62%),
+    radial-gradient(420px 320px at -8% 12%, #FBE7D8 0%, rgba(251,231,216,0) 60%),
+    linear-gradient(180deg,#FFF8F6,#FFFFFF 72%)}
 .hero .place{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;
   color:var(--ink-2);margin-bottom:12px}
 .hero h1{margin-bottom:12px}
@@ -122,7 +126,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);
 .hero .lead b{color:var(--ink);font-weight:800;white-space:nowrap}
 .hero-photo{position:relative;border-radius:var(--r);overflow:hidden;margin-bottom:14px;
   box-shadow:var(--sh)}
-.hero-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 20%}
+.hero-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 58%}
 .hero-price{position:absolute;left:10px;bottom:10px;display:flex;align-items:baseline;gap:7px;
   background:rgba(255,255,255,.95);border-radius:12px;padding:7px 12px;
   box-shadow:0 8px 16px -10px rgba(74,34,46,.7)}
@@ -133,9 +137,39 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);
   color:var(--ink-2);line-height:1.25}
 .bullets{list-style:none;display:grid;gap:8px;margin-bottom:16px}
 .bullets li{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;line-height:1.4}
-.bullets .bi{width:23px;height:23px;flex:none;border-radius:50%;background:var(--bg-3);
-  color:var(--cta);display:grid;place-items:center;margin-top:1px}
+.bullets .bi{width:24px;height:24px;flex:none;border-radius:50%;
+  background:linear-gradient(135deg,#F7E7CE,#F6D9DF);color:var(--gold);
+  display:grid;place-items:center;margin-top:1px;
+  box-shadow:0 4px 8px -6px rgba(120,90,30,.9)}
 .bullets .bi svg{width:13px;height:13px;stroke-width:2.6}
+
+/* ── слоистость: каждая секция ложится на предыдущую скруглением, как на десктопе ── */
+main>section+section{border-radius:28px 28px 0 0;margin-top:-22px;padding-top:52px;
+  position:relative;z-index:2}
+main>section{position:relative}
+
+/* золотой разделитель со ромбом — фирменная деталь десктопа */
+.hr{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 0 16px}
+.hr::before,.hr::after{content:"";height:1px;width:54px;
+  background:linear-gradient(90deg,transparent,#DCC08A)}
+.hr::after{background:linear-gradient(270deg,transparent,#DCC08A)}
+.hr i{width:6px;height:6px;flex:none;transform:rotate(45deg);background:#DCC08A;border-radius:1px}
+
+/* чипы доверия под кнопкой первого экрана */
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.chip{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);
+  border-radius:99px;padding:7px 12px;font-size:12.5px;font-weight:700;color:var(--plum)}
+.chip .st{color:var(--gold);letter-spacing:1px}
+
+/* сетки фотографий: «покажи, а не расскажи» */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.g3 figure{margin:0}
+.g3 img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;
+  box-shadow:0 8px 16px -12px rgba(74,34,46,.6)}
+.g3 figcaption{margin-top:6px;font-size:11.5px;line-height:1.25;color:var(--ink-2);text-align:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px}
+.g2 img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;
+  box-shadow:0 10px 20px -14px rgba(74,34,46,.6)}
 
 /* ───── боли ───── */
 .pains{display:grid;gap:10px}
@@ -311,8 +345,8 @@ footer a{color:var(--plum)}
       Первый визит — <b>600 ₽ вместо 4 800 ₽</b>.</p>
 
     <div class="hero-photo">
-      <img src="assets/img/client.jpg" width="712" height="800" fetchpriority="high"
-           alt="Гостья студии «Дофамин» у фирменной вывески после курса коррекции фигуры">
+      <img src="assets/img/vacuum.jpg" width="800" height="790" fetchpriority="high"
+           alt="Мастер студии «Дофамин» ведёт вакуумный массаж с RF-лифтингом">
       <div class="hero-price">
         <span>Первый<br>визит</span><b>600 ₽</b><s>4 800 ₽</s>
       </div>
@@ -336,12 +370,19 @@ footer a{color:var(--plum)}
       <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener">
         <svg class="ic ic-f"><use href="#i-tg"/></svg> Telegram</a>
     </div>
+
+    <div class="chips">
+      <span class="chip"><span class="st">★★★★★</span> 5,0 · 28 отзывов</span>
+      <span class="chip">Награда 2ГИС</span>
+      <span class="chip">Работаем с 2024 года</span>
+    </div>
   </div>
 </section>
 
 <!-- ═══ 2. БОЛЬ: «узнаёте себя?» ═══ -->
 <section class="sand">
   <div class="wrap">
+    <span class="eyebrow">Знакомая история</span>
     <h2>Узнаёте себя?</h2>
     <div class="pains">
       <div class="pain">Ем как птичка, а живот и бока на месте</div>
@@ -355,6 +396,7 @@ footer a{color:var(--plum)}
 <!-- ═══ 3. РЕШЕНИЕ: три шага ═══ -->
 <section>
   <div class="wrap">
+    <span class="eyebrow">Как это работает</span>
     <h2>Как аппарат <span class="it">убирает объёмы</span></h2>
     <div class="steps">
       <div class="step"><span class="sn">1</span><div>
@@ -370,12 +412,22 @@ footer a{color:var(--plum)}
         <p>RF-лифтинг греет глубокие слои, чтобы не осталось пустого «мешочка».</p>
       </div></div>
     </div>
+
+    <div class="g3">
+      <figure><img src="assets/img/cavitation-2.jpg" width="800" height="800" loading="lazy"
+        alt="Кавитация: ультразвуковая манипула на животе"><figcaption>Кавитация</figcaption></figure>
+      <figure><img src="assets/img/myostim.jpg" width="766" height="800" loading="lazy"
+        alt="Миостимуляция: пояса на теле"><figcaption>Миостимуляция</figcaption></figure>
+      <figure><img src="assets/img/estetik.jpg" width="600" height="800" loading="lazy"
+        alt="Аппарат для RF-лифтинга и лазерного липолиза в студии"><figcaption>RF-лифтинг</figcaption></figure>
+    </div>
   </div>
 </section>
 
 <!-- ═══ 4. ЦЕННОСТЬ ПЕРВОГО ВИЗИТА ═══ -->
 <section class="blush">
   <div class="wrap">
+    <span class="eyebrow">Знакомство со студией</span>
     <h2>Первый визит за 600 ₽</h2>
     <p class="lead" style="margin-bottom:16px">Это не демо на пять минут: вы получаете
       полноценную процедуру и уносите программу с вашими цифрами.</p>
@@ -405,7 +457,8 @@ footer a{color:var(--plum)}
   <div class="wrap">
     <form class="form" id="f1" novalidate>
       <div class="form-body">
-        <h2>Записаться <span class="it">за 600 ₽</span></h2>
+        <div class="hr"><i></i></div>
+        <h2 style="text-align:center">Записаться <span class="it">за 600 ₽</span></h2>
         <p class="fnote">Оставьте номер — администратор перезвонит за 15 минут, покажет
           свободные окна и закрепит за вами цену.</p>
         <div class="field">
@@ -428,6 +481,7 @@ footer a{color:var(--plum)}
         <label class="agree"><input type="checkbox" checked required>
           <span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a>
           и на обработку персональных данных</span></label>
+        <p class="under">Звоним один раз по делу. Никаких рассылок и «просто напомнить»</p>
       </div>
       <div class="form-ok">
         <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
@@ -448,6 +502,7 @@ footer a{color:var(--plum)}
 <!-- ═══ 6. МЕТОДИКИ — спойлеры, а не слайдер ═══ -->
 <section class="sand">
   <div class="wrap">
+    <span class="eyebrow">Процедуры для тела</span>
     <h2>Семь методик <span class="it">под вашу задачу</span></h2>
     <p class="lead" style="margin-bottom:16px">Все входят в один абонемент — можно чередовать
       внутри курса.</p>
@@ -479,6 +534,7 @@ footer a{color:var(--plum)}
 <!-- ═══ 7. ЦЕНЫ ═══ -->
 <section>
   <div class="wrap">
+    <span class="eyebrow">Цены и абонементы</span>
     <h2>Чем длиннее курс — <span class="it">тем ниже цена</span></h2>
     <p class="lead" style="margin-bottom:16px">В абонемент входят все аппаратные процедуры.</p>
     <div class="tar">
@@ -497,7 +553,14 @@ footer a{color:var(--plum)}
 <!-- ═══ 8. ДОВЕРИЕ И ОТЗЫВЫ ═══ -->
 <section class="sand">
   <div class="wrap">
+    <span class="eyebrow">Что говорят гостьи</span>
     <h2>5,0 из 5 <span class="it">по 28 отзывам</span></h2>
+    <div class="g2">
+      <img src="assets/img/client.jpg" width="712" height="800" loading="lazy"
+           alt="Гостья студии «Дофамин» у фирменной вывески">
+      <img src="assets/img/award.jpg" width="800" height="800" loading="lazy"
+           alt="Награда 2ГИС на стойке студии «Дофамин»">
+    </div>
     <div class="rate">
       <div class="rv">5,0</div>
       <div class="rt"><span class="stars">★★★★★</span><br>28 отзывов на Яндекс.Картах<br>
@@ -521,6 +584,7 @@ footer a{color:var(--plum)}
 <!-- ═══ 9. СТРАХИ И ВОЗРАЖЕНИЯ ═══ -->
 <section>
   <div class="wrap">
+    <span class="eyebrow">Отвечаем честно</span>
     <h2>Что обычно <span class="it">спрашивают</span></h2>
 
     <details><summary>Это больно?</summary>
@@ -550,10 +614,17 @@ footer a{color:var(--plum)}
 <!-- ═══ 10. СТУДИЯ ═══ -->
 <section class="sand">
   <div class="wrap">
+    <span class="eyebrow">Где вас ждут</span>
     <h2>Уютная студия, <span class="it">где вас помнят</span></h2>
     <div class="studio-photo">
       <img src="assets/img/room.jpg" width="800" height="600" loading="lazy"
            alt="Кабинет студии «Дофамин»: кушетка и аппарат для коррекции фигуры">
+    </div>
+    <div class="g2">
+      <img src="assets/img/reception.jpg" width="800" height="800" loading="lazy"
+           alt="Стойка администратора с неоновой вывеской «Дофамин»">
+      <img src="assets/img/team.jpg" width="800" height="800" loading="lazy"
+           alt="Мастера студии «Дофамин»">
     </div>
     <ul class="facts">
       <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
@@ -573,7 +644,8 @@ footer a{color:var(--plum)}
   <div class="wrap">
     <form class="form" id="f2" novalidate style="margin-bottom:22px">
       <div class="form-body">
-        <h2>Приходите <span class="it">с подругой</span></h2>
+        <div class="hr"><i></i></div>
+        <h2 style="text-align:center">Приходите <span class="it">с подругой</span></h2>
         <p class="fnote">Её первый визит тоже 600 ₽. Оставьте номер — подберём время,
           когда свободны два окна подряд.</p>
         <div class="field">
