@@ -19,6 +19,21 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23A87C86'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23FDF9F5' text-anchor='middle'%3E%D0%94%3C/text%3E%3C/svg%3E">
 <!-- Сюда вставьте счётчик Яндекс.Метрики (с вебвизором) и/или Google Analytics.
      Цели уже вызываются из кода формы: ym(0,'reachGoal','lead') и gtag('event','generate_lead'). -->
+<script>
+/* Мобильная версия живёт отдельным файлом m.html: на телефоне у неё своя,
+   сокращённая структура. Уводим туда до первой отрисовки, чтобы не мигало.
+   «Полная версия сайта» открывается по ссылке из подвала m.html (?full=1)
+   и запоминается на время сессии. */
+(function(){
+  try{
+    if(location.search.indexOf('full=1') > -1){ sessionStorage.setItem('dof-full','1'); return; }
+    if(sessionStorage.getItem('dof-full') === '1') return;
+    if(window.matchMedia && matchMedia('(max-width:700px)').matches){
+      location.replace('m.html' + location.hash);
+    }
+  }catch(e){}
+})();
+</script>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/cormorant-cyrillic-500.woff2" crossorigin>
 <style>
