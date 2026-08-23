@@ -76,6 +76,18 @@ button,input,select{font:inherit;color:inherit}
 section{padding:40px 0}
 .sand{background:linear-gradient(170deg,#FDF4EF,#FBEDE9)}
 .blush{background:linear-gradient(170deg,#FBECEF,#F8E7EE)}
+/* тёмная плашка первого визита — те же цвета, что у .band на десктопе */
+/* цвет назначаем адресно, а не наследованием: внутри плашки лежат белые
+   карточки (прайс, форма), они должны сохранить свою тёмную типографику */
+.band{background:linear-gradient(150deg,#4A2937 0%,#7A4457 52%,#B27F92 100%)}
+.band>.wrap>h2{color:#fff}
+.band>.wrap>.lead{color:#F0D8D0}
+.band>.wrap>.eyebrow{background:rgba(255,255,255,.13);color:#F8DED4}
+.band .sheet-t{color:#EBD3D2}
+.band .sheet-t b{color:#fff}
+/* перфорация бланка имитирует цвет подложки — на тёмной плашке она лишняя */
+.band .sheet::after{display:none}
+.band .sheet{border-radius:12px}
 .cream{background:linear-gradient(170deg,#FCF3E9,#FBEFE6)}
 .lilac{background:linear-gradient(170deg,#F8F0F5,#F4EAF1)}
 /* мягкое цветное пятно в углу секции — воздух и глубина, но текст не трогает */
@@ -84,6 +96,7 @@ main>section::after{content:"";position:absolute;width:260px;height:260px;border
   background:radial-gradient(circle,rgba(240,190,205,.5) 0%,rgba(240,190,205,0) 70%)}
 main>section.cream::after{background:radial-gradient(circle,rgba(240,205,170,.45) 0%,rgba(240,205,170,0) 70%)}
 main>section.lilac::after{background:radial-gradient(circle,rgba(205,185,225,.4) 0%,rgba(205,185,225,0) 70%)}
+main>section.band::after{background:radial-gradient(circle,rgba(255,232,205,.28) 0%,rgba(255,232,205,0) 70%)}
 main>section .wrap{position:relative;z-index:1}
 main>section{overflow:hidden}
 
@@ -196,23 +209,27 @@ main>section{position:relative}
 
 /* цифры результата: цифра в плитке фиксированного размера — все строки ровные */
 .nums{display:grid;gap:10px}
-.num{display:grid;grid-template-columns:104px 1fr;gap:14px;align-items:center;
+.num{display:grid;grid-template-columns:84px 1fr;gap:15px;align-items:center;
   background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
-.num b{width:104px;height:62px;flex:none;display:flex;align-items:baseline;
-  justify-content:center;gap:5px;position:relative;overflow:hidden;
-  border-radius:14px;border:1px solid var(--line);
-  background:linear-gradient(150deg,#FDF1F4 0%,#FBF2E9 100%)}
-/* мягкий блик по диагонали, чтобы плитка не была плоской заливкой */
-.num b::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(150deg,rgba(255,255,255,.85),rgba(255,255,255,0) 58%)}
+.num b{width:84px;height:84px;place-self:center;flex:none;display:flex;align-items:center;
+  justify-content:center;gap:4px;position:relative;overflow:hidden;
+  border-radius:50%;border:1px solid var(--line);
+  background:linear-gradient(150deg,#FDF1F4 0%,#FBF2E9 100%);
+  box-shadow:0 10px 20px -14px rgba(74,34,46,.55)}
+/* мягкий блик по диагонали, чтобы круг не был плоской заливкой */
+.num b::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:linear-gradient(150deg,rgba(255,255,255,.9),rgba(255,255,255,0) 56%)}
 .num b i,.num b u{position:relative;z-index:1}
 .num b i{font-style:normal;font-family:'Cormorant',Georgia,serif;
-  font-size:29px;font-weight:600;line-height:1;letter-spacing:.01em;
+  font-size:26px;font-weight:600;line-height:1;letter-spacing:.01em;
   background:var(--g-num);-webkit-background-clip:text;background-clip:text;
   color:transparent;-webkit-text-fill-color:transparent;
   padding-right:.06em;margin-right:-.06em}
-.num b u{text-decoration:none;font-size:10.5px;font-weight:800;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--gold);white-space:nowrap}
+/* единицу опускаем на базовую линию числа — оптически ровно, но без
+   flex-baseline, который прижимает всю строку к верху круга */
+.num b u{text-decoration:none;font-size:9.5px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--gold);white-space:nowrap;
+  align-self:center;margin-top:7px}
 .num span{font-size:14.5px;line-height:1.45;color:var(--ink-2)}
 
 /* работы мастера: до и после — вертикальные кадры, подпись под каждым */
@@ -395,16 +412,18 @@ summary::after{content:"";position:absolute;right:18px;top:50%;width:11px;height
   border-right:2.2px solid var(--cta);border-bottom:2.2px solid var(--cta);
   transform:translateY(-70%) rotate(45deg);transition:transform .2s}
 details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
-/* плавное раскрытие: анимируем строку грида, содержимое не прыгает */
-.d-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s cubic-bezier(.3,.7,.3,1)}
+/* плавное раскрытие: анимируем ТОЛЬКО строку грида. Раньше поверх этого
+   шла ещё и WAAPI-анимация height — две анимации на одном узле дёргались. */
+.d-body{display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .3s cubic-bezier(.3,.7,.3,1)}
 .d-body>p{overflow:hidden;min-height:0;padding:0 16px 0;font-size:14.5px;color:var(--ink-2);
-  line-height:1.5;opacity:0;transition:opacity .22s ease,padding-bottom .32s ease}
+  line-height:1.5;opacity:0;transition:opacity .3s ease,padding-bottom .3s cubic-bezier(.3,.7,.3,1)}
 details[open] .d-body{grid-template-rows:1fr}
 details[open] .d-body>p{opacity:1;padding-bottom:15px}
 /* фаза закрытия: атрибут open ещё стоит, но высота уже едет к нулю */
 details[open].is-closing .d-body{grid-template-rows:0fr}
 details[open].is-closing .d-body>p{opacity:0;padding-bottom:0}
-details[open].is-closing summary::after{transform:rotate(45deg) translateY(-3px)}
+details[open].is-closing summary::after{transform:translateY(-70%) rotate(45deg)}
 @media(prefers-reduced-motion:reduce){
   .d-body,.d-body>p{transition:none}
 }
@@ -608,7 +627,7 @@ footer a{color:var(--plum)}
 </section>
 
 <!-- ═══ 4. ЦЕННОСТЬ ПЕРВОГО ВИЗИТА + ФОРМА ═══ -->
-<section class="blush" id="zapis">
+<section class="band" id="zapis">
   <div class="wrap">
     <span class="eyebrow">Знакомство со студией</span>
     <h2>Первый визит за 600 ₽</h2>
@@ -954,8 +973,8 @@ footer a{color:var(--plum)}
            alt="Кабинет студии «Дофамин»: кушетка и аппарат для коррекции фигуры">
     </div>
     <div class="g2">
-      <img src="assets/img/client.jpg" width="717" height="800" loading="lazy"
-           alt="Гостья студии «Дофамин» после курса коррекции фигуры">
+      <img src="assets/img/relax.jpg" width="800" height="800" loading="lazy"
+           alt="Расслабляющий массаж в студии «Дофамин»">
       <img src="assets/img/team.jpg" width="1000" height="626" loading="lazy"
            alt="Мастера студии «Дофамин»">
     </div>
@@ -1149,9 +1168,11 @@ footer a{color:var(--plum)}
     qRender();
   }
 
-  /* Спойлеры. Закрытый <details> браузер прячет мгновенно, поэтому закрытие
-     ведём вручную: сначала анимация, потом снимаем атрибут open. */
+  /* Спойлеры. Раскрытие целиком на CSS (grid-template-rows: 0fr → 1fr).
+     Вручную ведём только закрытие: закрытый <details> браузер прячет
+     мгновенно, поэтому сначала проигрываем переход и лишь потом снимаем open. */
   var MOTION_OK = !window.matchMedia || !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var D_MS = 300;
   document.querySelectorAll('details').forEach(function(d){
     var sum = d.querySelector('summary');
     var body = d.querySelector('.d-body');
@@ -1161,50 +1182,25 @@ footer a{color:var(--plum)}
       e.preventDefault();
       if(d.classList.contains('is-busy')) return;
 
-      /* состояние переключаем по таймеру, а не по onfinish: если вкладка неактивна
-         или анимации отключены системой, обработчик может не прийти вовсе */
-      function done(fn, ms){
-        var called = false;
-        function run(){ if(called) return; called = true; fn(); }
-        setTimeout(run, ms);
-        return run;
-      }
-
       if(!d.open){
-        d.open = true;
-        if(MOTION_OK){
-          d.classList.add('is-busy');
-          var h = body.scrollHeight;
-          var run = done(function(){ d.classList.remove('is-busy'); }, 320);
-          try {
-            body.animate(
-              [{height:'0px', opacity:0}, {height:h+'px', opacity:1}],
-              {duration:280, easing:'cubic-bezier(.3,.7,.3,1)'}
-            ).onfinish = run;
-          } catch(err){ run(); }
-        }
+        d.open = true;               /* дальше высоту разворачивает сам CSS */
         /* открытый ответ подтягиваем к экрану, чтобы не листать вслепую */
         setTimeout(function(){
           var r = d.getBoundingClientRect();
           if(r.top < 56 || r.bottom > window.innerHeight - 90){
             window.scrollTo({top:r.top + window.pageYOffset - 70, behavior:'smooth'});
           }
-        }, 300);
-      } else {
-        if(!MOTION_OK){ d.open = false; return; }
-        d.classList.add('is-busy','is-closing');
-        var hc = body.scrollHeight;
-        var close = done(function(){
-          d.open = false;
-          d.classList.remove('is-busy','is-closing');
-        }, 260);
-        try {
-          body.animate(
-            [{height:hc+'px', opacity:1}, {height:'0px', opacity:0}],
-            {duration:240, easing:'cubic-bezier(.3,.7,.3,1)'}
-          ).onfinish = close;
-        } catch(err){ close(); }
+        }, D_MS + 20);
+        return;
       }
+
+      if(!MOTION_OK){ d.open = false; return; }
+      d.classList.add('is-busy','is-closing');
+      /* по таймеру, а не по transitionend: в неактивной вкладке событие может не прийти */
+      setTimeout(function(){
+        d.open = false;
+        d.classList.remove('is-busy','is-closing');
+      }, D_MS);
     });
   });
 })();
