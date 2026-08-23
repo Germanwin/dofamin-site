@@ -173,6 +173,23 @@ main>section{position:relative}
 .g2 img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;
   box-shadow:0 10px 20px -14px rgba(74,34,46,.6)}
 
+/* указатель к главной кнопке: внимание идёт за направлением */
+.cta-wrap{position:relative}
+.cta-arrow{position:absolute;right:8px;bottom:100%;margin-bottom:-4px;pointer-events:none;
+  animation:cta-point 2.9s ease-in-out infinite}
+.cta-arrow svg{display:block;filter:drop-shadow(0 4px 6px rgba(192,83,121,.3))}
+@keyframes cta-point{0%,100%{transform:translate(0,0)}50%{transform:translate(-2px,4px)}}
+@media(prefers-reduced-motion:reduce){.cta-arrow{animation:none}}
+@media(max-width:340px){.cta-arrow{display:none}}
+
+/* цифры результата */
+.nums{display:grid;gap:10px}
+.num{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:var(--r);padding:15px 16px}
+.num b{flex:none;width:86px;font-family:'Cormorant',Georgia,serif;font-size:31px;font-weight:600;
+  line-height:1;color:var(--cta);text-align:right}
+.num span{font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+
 /* ───── боли ───── */
 .pains{display:grid;gap:10px}
 .pain{background:#fff;border:1px solid var(--line);border-radius:var(--r);
@@ -236,6 +253,35 @@ main>section{position:relative}
   color:var(--cta);display:grid;place-items:center}
 .ok-ic svg{width:26px;height:26px;stroke-width:2.4}
 
+/* ───── квиз: вовлекающая форма захвата вместо ещё одного поля ───── */
+.quiz{background:#fff;border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--sh);overflow:hidden}
+.quiz-head{padding:18px 16px 0}
+.quiz-meta{display:flex;justify-content:space-between;font-size:12px;font-weight:800;
+  color:var(--ink-2);margin-bottom:8px}
+.quiz-bar{height:7px;background:var(--bg-3);border-radius:99px;overflow:hidden}
+.quiz-bar i{display:block;height:100%;width:17%;border-radius:99px;background:var(--cta);
+  transition:width .35s cubic-bezier(.2,.7,.3,1)}
+.quiz-body{padding:16px}
+.qstep{display:none}
+.qstep.on{display:block}
+.qstep h3{font-family:'Cormorant',Georgia,serif;font-size:24px;font-weight:600;line-height:1.15;
+  color:var(--plum);margin-bottom:4px}
+.qstep .qsub{font-size:13.5px;color:var(--ink-2);margin-bottom:14px}
+.qopts{display:grid;gap:8px}
+.qopt{display:flex;align-items:center;gap:10px;width:100%;min-height:54px;text-align:left;
+  padding:12px 14px;background:#fff;border:1.5px solid var(--line-2);border-radius:14px;
+  font-size:15.5px;font-weight:700;color:var(--plum);cursor:pointer}
+.qopt .qi{width:20px;height:20px;flex:none;border-radius:50%;border:1.5px solid var(--line-2)}
+.qopt.sel{border-color:var(--cta);background:var(--bg-3)}
+.qopt.sel .qi{background:var(--cta);border-color:var(--cta)}
+.q-back{display:inline-flex;align-items:center;min-height:44px;margin-top:12px;
+  background:none;border:0;color:var(--ink-2);font-size:14px;font-weight:700;cursor:pointer}
+.q-hint{margin-top:10px;font-size:12.5px;color:var(--ink-2);line-height:1.4}
+.quiz.is-done .quiz-head,.quiz.is-done .quiz-body{display:none}
+.quiz-ok{display:none;padding:24px 16px;text-align:center}
+.quiz.is-done .quiz-ok{display:block}
+
 /* ───── спойлеры вместо слайдеров ───── */
 details{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:9px;
   overflow:hidden}
@@ -271,8 +317,9 @@ details p b{color:var(--plum)}
   line-height:1;color:var(--cta)}
 .rate .stars{color:var(--gold);font-size:14px;letter-spacing:2px}
 .rate .rt{font-size:13.5px;color:var(--ink-2);line-height:1.35}
-.quote{background:#fff;border:1px solid var(--line);border-radius:var(--r);
-  padding:15px 16px;margin-bottom:10px}
+.quote{display:block;text-decoration:none;color:inherit;background:#fff;
+  border:1px solid var(--line);border-radius:var(--r);padding:15px 16px;margin-bottom:10px}
+.quote .who .st{color:var(--gold);letter-spacing:1px;font-size:11px}
 .quote p{font-size:15px;line-height:1.5;margin-bottom:9px}
 .quote mark{background:linear-gradient(180deg,transparent 55%,var(--gold-soft) 55%);color:inherit}
 .quote .who{font-size:12.5px;color:var(--ink-2)}
@@ -366,8 +413,18 @@ footer a{color:var(--plum)}
         <span><b>Одноразовый комплект</b> каждому гостю</span></li>
     </ul>
 
-    <a class="btn" href="#zapis">Записаться за 600 ₽</a>
+    <div class="cta-wrap">
+      <span class="cta-arrow" aria-hidden="true">
+        <svg viewBox="0 0 44 30" width="42" height="29">
+          <path d="M4 3c9.5-1.2 19 2.4 24.5 10.6" fill="none" stroke="#C05379" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M31.5 19.4 22.6 14.2 32 10.6Z" fill="#C05379"/>
+        </svg>
+      </span>
+      <a class="btn" href="#zapis">Записаться за 600 ₽</a>
+    </div>
     <p class="under">Перезвоним в течение 15 минут и подтвердим удобное окно</p>
+    <p class="under" style="margin-top:6px">
+      Неудобно звонить? <a href="#zapis" style="color:var(--cta);font-weight:800">Перезвоним сами →</a></p>
 
     <div class="msgs">
       <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener">
@@ -425,6 +482,24 @@ footer a{color:var(--plum)}
         alt="Вакуумный массаж с RF-лифтингом"><figcaption>Вакуум с RF</figcaption></figure>
       <figure><img src="assets/img/estetik.jpg" width="600" height="800" loading="lazy"
         alt="Аппарат для RF-лифтинга и лазерного липолиза в студии"><figcaption>RF-лифтинг</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ РЕЗУЛЬТАТ В ЦИФРАХ ═══ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Что вы получите</span>
+    <h2>Результат, который <span class="it">можно измерить</span></h2>
+    <div class="nums">
+      <div class="num"><b>−2 см</b><span>объёмов уже после первого сеанса прессотерапии —
+        замеряем сантиметром до и после</span></div>
+      <div class="num"><b>−17%</b><span>объёма жира в зоне за курс лазерного липолиза —
+        по данным МРТ-исследования хирургов из Нью-Йорка</span></div>
+      <div class="num"><b>30 мин</b><span>занимает визит: без наркоза, швов и восстановления,
+        сразу идёте по делам</span></div>
+      <div class="num"><b>0</b><span>боли во время процедуры: тепло, лёгкая вибрация и
+        ощущение массажа</span></div>
     </div>
   </div>
 </section>
@@ -487,6 +562,10 @@ footer a{color:var(--plum)}
           <span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a>
           и на обработку персональных данных</span></label>
         <p class="under">Звоним один раз по делу. Никаких рассылок и «просто напомнить»</p>
+        <!-- СОГЛАСОВАТЬ СО СТУДИЕЙ: срок брони цены. Механика стандартная,
+             но обещание должно быть выполнимым для администратора. -->
+        <p class="under" style="color:var(--cta);font-weight:700;margin-top:8px">
+          Цена 600 ₽ закрепляется за вашим номером на 3 дня</p>
       </div>
       <div class="form-ok">
         <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
@@ -536,6 +615,116 @@ footer a{color:var(--plum)}
   </div>
 </section>
 
+<!-- ═══ КВИЗ: подбор программы, вторая точка захвата ═══ -->
+<section class="blush" id="podbor">
+  <div class="wrap">
+    <span class="eyebrow">1 минута · 5 вопросов</span>
+    <h2>Подберите программу <span class="it">и узнайте цену курса</span></h2>
+    <p class="lead" style="margin-bottom:16px">Ответьте на пять простых вопросов — соберём
+      программу под вашу зону и посчитаем курс с учётом абонемента.</p>
+
+    <form class="quiz" id="quiz" novalidate>
+      <div class="quiz-head">
+        <div class="quiz-meta"><span id="q-label">Шаг 1 из 6</span><span id="q-pct">Заполнено на 17%</span></div>
+        <div class="quiz-bar"><i id="q-bar"></i></div>
+      </div>
+
+      <div class="quiz-body">
+        <div class="qstep on" data-step="1">
+          <h3>С какой зоной поработаем?</h3>
+          <p class="qsub">Можно начать с одной — остальные подключим позже.</p>
+          <div class="qopts" data-name="Зона">
+            <button type="button" class="qopt"><span class="qi"></span>Живот и бока</button>
+            <button type="button" class="qopt"><span class="qi"></span>Бёдра и ягодицы</button>
+            <button type="button" class="qopt"><span class="qi"></span>Руки</button>
+            <button type="button" class="qopt"><span class="qi"></span>Подбородок и овал лица</button>
+            <button type="button" class="qopt"><span class="qi"></span>Всё тело целиком</button>
+            <button type="button" class="qopt"><span class="qi"></span>Не знаю — нужна консультация</button>
+          </div>
+        </div>
+
+        <div class="qstep" data-step="2">
+          <h3>Что беспокоит больше всего?</h3>
+          <p class="qsub">От задачи зависит, какие методики подберём.</p>
+          <div class="qopts" data-name="Задача">
+            <button type="button" class="qopt"><span class="qi"></span>Объёмы не уходят от диеты</button>
+            <button type="button" class="qopt"><span class="qi"></span>Отёки и тяжесть к вечеру</button>
+            <button type="button" class="qopt"><span class="qi"></span>Дряблость после родов или похудения</button>
+            <button type="button" class="qopt"><span class="qi"></span>«Апельсиновая корка»</button>
+            <button type="button" class="qopt"><span class="qi"></span>Хочу просто расслабиться</button>
+          </div>
+        </div>
+
+        <div class="qstep" data-step="3">
+          <h3>Был опыт аппаратных процедур?</h3>
+          <p class="qsub">Новичкам начинаем мягче и объясняем каждый шаг.</p>
+          <div class="qopts" data-name="Опыт">
+            <button type="button" class="qopt"><span class="qi"></span>Ни разу не пробовала</button>
+            <button type="button" class="qopt"><span class="qi"></span>Пробовала давно</button>
+            <button type="button" class="qopt"><span class="qi"></span>Хожу регулярно</button>
+          </div>
+        </div>
+
+        <div class="qstep" data-step="4">
+          <h3>Есть срок, к которому нужен результат?</h3>
+          <p class="qsub">Если дата близко — соберём курс плотнее.</p>
+          <div class="qopts" data-name="Срок">
+            <button type="button" class="qopt"><span class="qi"></span>Через 2–4 недели</button>
+            <button type="button" class="qopt"><span class="qi"></span>Через 2–3 месяца</button>
+            <button type="button" class="qopt"><span class="qi"></span>Срока нет, хочу вдолгую</button>
+          </div>
+        </div>
+
+        <div class="qstep" data-step="5">
+          <h3>Когда удобно приходить?</h3>
+          <p class="qsub">Подберём окна под ваш график.</p>
+          <div class="qopts" data-name="Время">
+            <button type="button" class="qopt"><span class="qi"></span>Утром до работы</button>
+            <button type="button" class="qopt"><span class="qi"></span>В обеденный перерыв</button>
+            <button type="button" class="qopt"><span class="qi"></span>Вечером после работы</button>
+            <button type="button" class="qopt"><span class="qi"></span>В выходные</button>
+          </div>
+        </div>
+
+        <div class="qstep" data-step="6">
+          <h3>Куда отправить программу?</h3>
+          <p class="qsub">Пришлём расчёт курса и закрепим первый визит за 600 ₽.</p>
+          <div class="qopts" data-name="Куда отправить" style="margin-bottom:14px">
+            <button type="button" class="qopt sel"><span class="qi"></span>В WhatsApp</button>
+            <button type="button" class="qopt"><span class="qi"></span>В Telegram</button>
+            <button type="button" class="qopt"><span class="qi"></span>Позвоните мне</button>
+          </div>
+          <div class="field">
+            <label for="q-phone">Номер, на который отправить</label>
+            <input id="q-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
+                   placeholder="+7 999 123-45-67" required>
+          </div>
+          <button type="submit" class="btn">Получить программу и цену курса</button>
+          <label class="agree"><input type="checkbox" checked required>
+            <span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a>
+            и на обработку персональных данных</span></label>
+        </div>
+
+        <button type="button" class="q-back" id="q-back" hidden>← Назад</button>
+        <p class="q-hint" id="q-hint">Выберите один вариант — перейдём к следующему вопросу</p>
+      </div>
+
+      <div class="quiz-ok">
+        <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
+        <h2>Программа собрана</h2>
+        <p class="lead">Администратор пришлёт расчёт курса и свободные окна.
+          Хотите быстрее — напишите сами:</p>
+        <div class="msgs">
+          <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener">
+            <svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
+          <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener">
+            <svg class="ic ic-f"><use href="#i-tg"/></svg> Telegram</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
 <!-- ═══ 7. ЦЕНЫ ═══ -->
 <section>
   <div class="wrap">
@@ -551,7 +740,28 @@ footer a{color:var(--plum)}
     <p class="under" style="text-align:left;margin-top:12px">Абонемент на 40 процедур экономит
       <b>18 000 ₽</b> против оплаты поштучно. Оформить можно после первого визита — когда
       увидите свои цифры.</p>
-    <a class="btn btn-ghost" href="#zapis" style="margin-top:14px">Узнать, сколько нужно мне</a>
+    <form class="form" id="f3" novalidate style="margin-top:18px">
+      <div class="form-body">
+        <h3 style="font-family:'Cormorant',Georgia,serif;font-size:23px;font-weight:600;color:var(--plum);margin-bottom:6px">
+          Сколько процедур нужно именно вам?</h3>
+        <p class="fnote">Оставьте номер — мастер посчитает курс под вашу зону и назовёт точную
+          сумму. Без записи и обязательств.</p>
+        <div class="field">
+          <label for="f3-phone">Телефон</label>
+          <input id="f3-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
+                 placeholder="+7 999 123-45-67" required>
+        </div>
+        <button type="submit" class="btn">Посчитать мой курс</button>
+        <label class="agree"><input type="checkbox" checked required>
+          <span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a>
+          и на обработку персональных данных</span></label>
+      </div>
+      <div class="form-ok">
+        <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
+        <h2>Заявка у нас</h2>
+        <p class="lead">Мастер посчитает курс и перезвонит с номера 8 800 550-86-04.</p>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -571,18 +781,20 @@ footer a{color:var(--plum)}
       <div class="rt"><span class="stars">★★★★★</span><br>28 отзывов на Яндекс.Картах<br>
         Награда 2ГИС стоит на стойке</div>
     </div>
-    <div class="quote">
+    <a class="btn btn-ghost" href="https://yandex.ru/maps/org/dofamin/" target="_blank" rel="noopener"
+       style="margin-bottom:12px">Читать отзывы на Яндекс.Картах</a>
+    <a class="quote" href="https://yandex.ru/maps/org/dofamin/" target="_blank" rel="noopener">
       <p>Действительно хорошее место. <mark>За 3 сеанса живот втянулся, нарисовалась талия</mark>.</p>
-      <div class="who"><b>Юлия Каминская</b>Яндекс.Карты · ноябрь 2025</div>
-    </div>
-    <div class="quote">
+      <div class="who"><b>Юлия Каминская</b><span class="st">★★★★★</span> Яндекс.Карты · ноябрь 2025</div>
+    </a>
+    <a class="quote" href="https://yandex.ru/maps/org/dofamin/" target="_blank" rel="noopener">
       <p>Очень хороший мастер! <mark>Было не больно, наоборот спать захотела</mark>.</p>
-      <div class="who"><b>Олеся Носова</b>Яндекс.Карты · отзыв о процедуре</div>
-    </div>
-    <div class="quote">
+      <div class="who"><b>Олеся Носова</b><span class="st">★★★★★</span> Яндекс.Карты · отзыв о процедуре</div>
+    </a>
+    <a class="quote" href="https://yandex.ru/maps/org/dofamin/" target="_blank" rel="noopener">
       <p>Сегодня <mark>первый раз была в данной студии и осталась в полном восторге</mark>.</p>
-      <div class="who"><b>Анна Кузнецова</b>Яндекс.Карты · первый визит</div>
-    </div>
+      <div class="who"><b>Анна Кузнецова</b><span class="st">★★★★★</span> Яндекс.Карты · первый визит</div>
+    </a>
   </div>
 </section>
 
@@ -590,7 +802,24 @@ footer a{color:var(--plum)}
 <section>
   <div class="wrap">
     <span class="eyebrow">Отвечаем честно</span>
-    <h2>Что обычно <span class="it">спрашивают</span></h2>
+    <h2>Наши обещания <span class="it">и ваши вопросы</span></h2>
+    <!-- ЗАГЛУШКА ДЛЯ СОГЛАСОВАНИЯ: если студия готова дать гарантию-компенсацию
+         («не ушло ни сантиметра — процедура за наш счёт»), добавить её первым пунктом. -->
+<ul class="facts">
+      <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
+        <span><b>Замеряем при вас.</b> Сантиметром до и после, цифры пишем в вашу карту —
+        результат видно в тот же день, а не «на глаз»</span></li>
+      <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
+        <span><b>Считаем минимум, а не максимум.</b> Если хватит пяти процедур — предложим пять.
+        Иногда прямо говорим: вам это не нужно</span></li>
+      <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
+        <span><b>Курс не обязателен.</b> Можно ходить поштучно, абонемент оформляется только
+        после того, как вы увидите свои цифры</span></li>
+      <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
+        <span><b>Проверяем противопоказания.</b> Анкета здоровья до процедуры: если нельзя —
+        честно откажем и вернём деньги</span></li>
+    </ul>
+    <div class="hr" style="margin:22px 0 16px"><i></i></div>
 
     <details><summary>Это больно?</summary>
       <p>Нет. Тепло, лёгкая вибрация и ощущение массажа — всё. Гостьи чаще всего засыпают под
@@ -693,7 +922,12 @@ footer a{color:var(--plum)}
         <span><b>Адрес</b>пр. Энергетиков, 37, БЦ «Лидер», офис 813</span></a>
       <div><svg class="ic"><use href="#i-clock"/></svg>
         <span><b>Работаем</b>ежедневно 10:00–21:00, есть окна в выходные</span></div>
+      <div><svg class="ic"><use href="#i-car"/></svg>
+        <span><b>Как добраться</b>10 минут от «Ладожской», вход со стороны проспекта,
+        наземная парковка у здания. Мы на 8 этаже, офис 813</span></div>
     </div>
+    <a class="btn btn-ghost" href="https://yandex.ru/maps/?rtext=~Санкт-Петербург, проспект Энергетиков 37"
+       target="_blank" rel="noopener" style="margin-bottom:12px">Построить маршрут</a>
     <div class="msgs">
       <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener">
         <svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
@@ -709,6 +943,9 @@ footer a{color:var(--plum)}
   <div class="wrap">
     Студия аппаратной коррекции фигуры, косметологии и перманентного макияжа «Дофамин».
     СПб, пр. Энергетиков, 37. Работаем с 2024 года.<br>
+    <!-- ЗАПОЛНИТЬ ПОСЛЕ ПОЛУЧЕНИЯ ОТ СТУДИИ: ИП/ООО, ИНН, ОГРНИП — базовый признак
+         нескамности. Строка ниже раскомментируется, когда придут реквизиты.
+    <br>ИП Фамилия И. О. · ИНН 000000000000 · ОГРНИП 000000000000000 -->
     <a href="privacy.html">Политика конфиденциальности</a>
     <a class="desk-link" href="index.html?full=1">Полная версия сайта →</a>
   </div>
@@ -740,7 +977,7 @@ footer a{color:var(--plum)}
     if (window.gtag){ try { gtag('event','generate_lead'); } catch(e){} }
   }
 
-  document.querySelectorAll('form').forEach(function(f){
+  document.querySelectorAll('form:not(#quiz)').forEach(function(f){
     f.addEventListener('submit', function(e){
       e.preventDefault();
       var phone = f.querySelector('input[type=tel]');
@@ -757,6 +994,64 @@ footer a{color:var(--plum)}
       window.scrollTo({top:y, behavior:'smooth'});
     });
   });
+
+/* ── квиз ─────────────────────────────────────────────────────────
+     Имена переменных не переиспользуем: полоса прогресса уже ломалась
+     на десктопе из-за второго `var bar` в общей области видимости. */
+  var quizForm = document.getElementById('quiz');
+  if(quizForm){
+    var qSteps = quizForm.querySelectorAll('.qstep');
+    var qTotal = qSteps.length, qCur = 1;
+    var qBar   = document.getElementById('q-bar');
+    var qLabel = document.getElementById('q-label');
+    var qPct   = document.getElementById('q-pct');
+    var qBack  = document.getElementById('q-back');
+    var qHint  = document.getElementById('q-hint');
+    var qAns   = {'Куда отправить':'В WhatsApp'};
+
+    function qRender(){
+      qSteps.forEach(function(st){ st.classList.toggle('on', +st.dataset.step === qCur); });
+      var p = Math.round(qCur/qTotal*100);
+      qBar.style.width = p + '%';
+      qLabel.textContent = 'Шаг ' + qCur + ' из ' + qTotal;
+      qPct.textContent = 'Заполнено на ' + p + '%';
+      qBack.hidden = qCur === 1;
+      qHint.textContent = qCur === qTotal
+        ? 'Только номер — без почты и спама'
+        : 'Выберите один вариант — перейдём к следующему вопросу';
+    }
+
+    quizForm.querySelectorAll('.qopts').forEach(function(group){
+      group.querySelectorAll('.qopt').forEach(function(opt){
+        opt.addEventListener('click', function(){
+          group.querySelectorAll('.qopt').forEach(function(o){ o.classList.remove('sel'); });
+          opt.classList.add('sel');
+          qAns[group.dataset.name] = opt.textContent.trim();
+          var step = +opt.closest('.qstep').dataset.step;
+          if(step < qTotal){
+            setTimeout(function(){ if(qCur === step){ qCur = step + 1; qRender(); } }, 220);
+          }
+        });
+      });
+    });
+
+    qBack.addEventListener('click', function(){ if(qCur > 1){ qCur--; qRender(); } });
+
+    quizForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var ph = document.getElementById('q-phone');
+      if(!validPhone(ph.value)){ shake(ph); return; }
+      var ag = quizForm.querySelector('.qstep[data-step="6"] input[type=checkbox]');
+      if(ag && !ag.checked){ ag.focus(); return; }
+      qAns['Телефон'] = ph.value;
+      sendLead(Object.assign({form:'quiz'}, qAns));
+      quizForm.classList.add('is-done');
+      var y = quizForm.getBoundingClientRect().top + window.pageYOffset - 70;
+      window.scrollTo({top:y, behavior:'smooth'});
+    });
+
+    qRender();
+  }
 
   /* спойлеры: открытый ответ подтягиваем к верху экрана, чтобы не листать вслепую */
   document.querySelectorAll('details').forEach(function(d){
