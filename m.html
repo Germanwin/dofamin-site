@@ -18,7 +18,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23C05379'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23FDF9F5' text-anchor='middle'%3E%D0%94%3C/text%3E%3C/svg%3E">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/cormorant-cyrillic-500.woff2" crossorigin>
-<link rel="preload" as="image" href="assets/img/hero-studio.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/client.jpg" fetchpriority="high">
 <style>
 /* Шрифты хостим локально: Google Fonts из РФ отдаётся нестабильно */
 @font-face{font-family:'Manrope';font-style:normal;font-weight:400 800;font-display:swap;
@@ -143,7 +143,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,250,248,.95);
 .hero .lead b{color:var(--ink);font-weight:800;white-space:nowrap}
 .hero-photo{position:relative;border-radius:var(--r);overflow:hidden;margin-bottom:14px;
   box-shadow:var(--sh)}
-.hero-photo img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center 32%}
+.hero-photo img{width:100%;aspect-ratio:16/11;object-fit:cover;object-position:center 22%}
 .hero-price{position:absolute;left:10px;bottom:10px;display:flex;align-items:baseline;gap:7px;
   background:rgba(255,255,255,.95);border-radius:12px;padding:7px 12px;
   box-shadow:0 8px 16px -10px rgba(74,34,46,.7)}
@@ -213,6 +213,24 @@ main>section{position:relative}
 .works img{width:100%;height:auto;display:block}
 .works figcaption{padding:10px 14px;font-size:13.5px;color:var(--ink-2)}
 .works figcaption b{color:var(--plum)}
+
+.visit-photo{border-radius:var(--r);overflow:hidden;margin-bottom:16px;
+  box-shadow:0 14px 26px -18px rgba(74,34,46,.6)}
+.visit-photo img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center 40%}
+
+/* цены: две карточки вместо таблицы — выгода считывается за секунду */
+.pcards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:15px 14px;
+  text-align:center}
+.pcard span{display:block;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--ink-2);margin-bottom:5px}
+.pcard b{display:block;font-family:'Cormorant',Georgia,serif;font-size:31px;font-weight:600;
+  line-height:1;color:var(--ink-2)}
+.pcard i{display:block;font-style:normal;font-size:12.5px;color:var(--ink-2);margin-top:5px}
+.pcard.hit{border-color:var(--cta);background:linear-gradient(170deg,#FFF6F9,#FBE9EF);
+  box-shadow:0 12px 22px -16px rgba(169,66,104,.8)}
+.pcard.hit b{background:var(--g-cta);-webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;font-size:34px}
 
 /* ───── боли ───── */
 .pains{display:grid;gap:10px}
@@ -439,8 +457,8 @@ footer a{color:var(--plum)}
       Первый визит — <b>600 ₽ вместо 4 800 ₽</b>.</p>
 
     <div class="hero-photo">
-      <img src="assets/img/hero-studio.jpg" width="1088" height="812" fetchpriority="high"
-           alt="Кабинет студии «Дофамин»: гостья в фирменном халате и аппарат для коррекции фигуры">
+      <img src="assets/img/client.jpg" width="717" height="800" fetchpriority="high"
+           alt="Гостья студии «Дофамин» после курса коррекции фигуры">
       <div class="hero-price">
         <span>Первый<br>визит</span><b>600 ₽</b><s>4 800 ₽</s>
       </div>
@@ -494,38 +512,6 @@ footer a{color:var(--plum)}
       <div class="pain">Ем как птичка, а живот и бока на месте</div>
       <div class="pain">К вечеру ноги гудят, туфли жмут, кольца не надеваются</div>
       <div class="pain">После родов кожа не вернулась, живот мягкий</div>
-      <div class="pain">Липосакции боюсь: наркоз, швы, две недели из жизни</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 3. РЕШЕНИЕ: три шага ═══ -->
-<section>
-  <div class="wrap">
-    <span class="eyebrow">Как это работает</span>
-    <h2>Как аппарат <span class="it">убирает объёмы</span></h2>
-    <div class="steps">
-      <div class="step"><span class="sn">1</span><div>
-        <h3>Разбивает жир</h3>
-        <p>Кавитация и лазерный липолиз работают точечно по зоне, а не по всему телу.</p>
-      </div></div>
-      <div class="step"><span class="sn">2</span><div>
-        <h3>Выводит лишнее</h3>
-        <p>Прессотерапия запускает лимфу: уходят отёки и первые сантиметры.</p>
-      </div></div>
-      <div class="step"><span class="sn">3</span><div>
-        <h3>Подтягивает кожу</h3>
-        <p>RF-лифтинг греет глубокие слои, чтобы не осталось пустого «мешочка».</p>
-      </div></div>
-    </div>
-
-    <div class="g3">
-      <figure><img src="assets/img/cavitation-2.jpg" width="800" height="800" loading="lazy"
-        alt="Кавитация: ультразвуковая манипула на животе"><figcaption>Кавитация</figcaption></figure>
-      <figure><img src="assets/img/vacuum.jpg" width="800" height="790" loading="lazy"
-        alt="Вакуумный массаж с RF-лифтингом"><figcaption>Вакуум с RF</figcaption></figure>
-      <figure><img src="assets/img/estetik.jpg" width="600" height="800" loading="lazy"
-        alt="Аппарат для RF-лифтинга и лазерного липолиза в студии"><figcaption>RF-лифтинг</figcaption></figure>
     </div>
   </div>
 </section>
@@ -545,16 +531,23 @@ footer a{color:var(--plum)}
       <div class="num"><b>0</b><span>боли во время процедуры: тепло, лёгкая вибрация и
         ощущение массажа</span></div>
     </div>
+<div class="g3">
+      <figure><img src="assets/img/cavitation-2.jpg" width="800" height="800" loading="lazy"
+        alt="Кавитация: ультразвуковая манипула на животе"><figcaption>Кавитация</figcaption></figure>
+      <figure><img src="assets/img/vacuum.jpg" width="800" height="790" loading="lazy"
+        alt="Вакуумный массаж с RF-лифтингом"><figcaption>Вакуум с RF</figcaption></figure>
+      <figure><img src="assets/img/estetik.jpg" width="600" height="800" loading="lazy"
+        alt="Аппарат для RF-лифтинга и лазерного липолиза в студии"><figcaption>RF-лифтинг</figcaption></figure>
+    </div>
   </div>
 </section>
 
-<!-- ═══ 4. ЦЕННОСТЬ ПЕРВОГО ВИЗИТА ═══ -->
-<section class="blush">
+<!-- ═══ 4. ЦЕННОСТЬ ПЕРВОГО ВИЗИТА + ФОРМА ═══ -->
+<section class="blush" id="zapis">
   <div class="wrap">
     <span class="eyebrow">Знакомство со студией</span>
     <h2>Первый визит за 600 ₽</h2>
-    <p class="lead" style="margin-bottom:16px">Это не демо на пять минут: вы получаете
-      полноценную процедуру и уносите программу с вашими цифрами.</p>
+    <p class="lead" style="margin-bottom:16px">Полноценная процедура, замеры и программа курса — уносите с собой.</p>
 
     <!-- ЦЕНЫ-ЗАГЛУШКИ: согласовать со студией и заменить на настоящий прайс -->
     <div class="doc">
@@ -573,18 +566,12 @@ footer a{color:var(--plum)}
         <div class="new"><span>Первый визит</span><b>600 ₽</b></div>
       </div>
     </ul>
-  </div>
-</section>
 
-<!-- ═══ 5. ФОРМА ЗАХВАТА №1 — целиком в один экран ═══ -->
-<section id="zapis">
-  <div class="wrap">
-    <form class="form" id="f1" novalidate>
+    <form class="form" id="f1" novalidate style="margin-top:18px">
       <div class="form-body">
         <div class="hr"><i></i></div>
         <h2 style="text-align:center">Записаться <span class="it">за 600 ₽</span></h2>
-        <p class="fnote">Оставьте номер — администратор перезвонит за 15 минут, покажет
-          свободные окна и закрепит за вами цену.</p>
+        <p class="fnote">Перезвоним за 15 минут, покажем свободные окна и закрепим цену.</p>
         <div class="field">
           <label for="f1-phone">Телефон</label>
           <input id="f1-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
@@ -631,31 +618,23 @@ footer a{color:var(--plum)}
 <section class="sand">
   <div class="wrap">
     <span class="eyebrow">Процедуры для тела</span>
-    <h2>Семь методик <span class="it">под вашу задачу</span></h2>
-    <p class="lead" style="margin-bottom:16px">Все входят в один абонемент — можно чередовать
-      внутри курса.</p>
+    <h2>Подберём методику <span class="it">под вашу зону</span></h2>
+    <p class="lead" style="margin-bottom:16px">Все входят в один абонемент — чередуем внутри курса.</p>
 
     <details><summary><span class="tag-s t-warm">Локальный жир</span>Кавитация <span class="sum-price">от 550 ₽</span></summary>
-      <p>Ультразвук разрушает мембраны жировых клеток в конкретной зоне — живот, бока, галифе.
-        Содержимое выводится естественным путём. <b>Локальный жир.</b></p></details>
+      <p>Ультразвук разрушает жировые клетки точечно — живот, бока, галифе.</p></details>
     <details><summary><span class="tag-s t-pink">Целлюлит</span>Вакуумный массаж с RF <span class="sum-price">от 550 ₽</span></summary>
-      <p>Вакуум разгоняет застой, RF прогревает и подтягивает. «Апельсиновая корка» становится
-        заметно ровнее. <b>Целлюлит.</b></p></details>
+      <p>Разгоняет застой и подтягивает: «апельсиновая корка» становится ровнее.</p></details>
     <details><summary><span class="tag-s t-warm">Контуры</span>Лазерный липолиз <span class="sum-price">от 550 ₽</span></summary>
-      <p>Пластины укладываются на зону, лазер работает по жировым «ловушкам», которые не уходят
-        на диете. <b>Контуры тела.</b></p></details>
+      <p>Работает по жиру, который не уходит на диете. Минус до 17% объёма за курс.</p></details>
     <details><summary><span class="tag-s t-sage">Отёки</span>Прессотерапия <span class="sum-price">от 550 ₽</span></summary>
-      <p>Костюм со сжатым воздухом прокачивает лимфу от стоп вверх. Уходят отёки и тяжесть,
-        минус 0,5–2 см за сеанс. <b>Отёки.</b></p></details>
+      <p>Минус 0,5–2 см и лёгкие ноги уже после первого сеанса.</p></details>
     <details><summary><span class="tag-s t-gold">Тонус кожи</span>RF-лифтинг тела <span class="sum-price">от 550 ₽</span></summary>
-      <p>Прогрев глубоких слоёв запускает выработку коллагена: работает с дряблостью после родов
-        и похудения. <b>Тонус кожи.</b></p></details>
+      <p>Подтягивает кожу после родов и похудения — без «мешочка».</p></details>
     <details><summary><span class="tag-s t-sage">Мышцы</span>Миостимуляция <span class="sum-price">от 550 ₽</span></summary>
-      <p>Импульсы заставляют мышцы работать как на тренировке, только лёжа. Подтягивает пресс
-        и ягодицы. <b>Мышцы и рельеф.</b></p></details>
+      <p>Мышцы работают как на тренировке, только лёжа. Пресс и ягодицы.</p></details>
     <details><summary><span class="tag-s t-plum">Расслабление</span>Вибромассаж <span class="sum-price">от 550 ₽</span></summary>
-      <p>Глубокая проработка мышц, разгон кровообращения, ощущение лёгкости после рабочего дня.
-        <b>Расслабление.</b></p></details>
+      <p>Глубокая проработка мышц и ощущение лёгкости после рабочего дня.</p></details>
   </div>
 </section>
 
@@ -664,8 +643,7 @@ footer a{color:var(--plum)}
   <div class="wrap">
     <span class="eyebrow">1 минута · 5 вопросов</span>
     <h2>Подберите программу <span class="it">и узнайте цену курса</span></h2>
-    <p class="lead" style="margin-bottom:16px">Ответьте на пять простых вопросов — соберём
-      программу под вашу зону и посчитаем курс с учётом абонемента.</p>
+    <p class="lead" style="margin-bottom:16px">Пять вопросов — и мы посчитаем ваш курс с учётом абонемента.</p>
 
     <form class="quiz" id="quiz" novalidate>
       <div class="quiz-head">
@@ -773,23 +751,20 @@ footer a{color:var(--plum)}
 <section>
   <div class="wrap">
     <span class="eyebrow">Цены и абонементы</span>
-    <h2>Чем длиннее курс — <span class="it">тем ниже цена</span></h2>
-    <p class="lead" style="margin-bottom:16px">В абонемент входят все аппаратные процедуры.</p>
-    <div class="tar">
-      <div class="row"><span>1 процедура</span><span><b>1 000 ₽</b></span></div>
-      <div class="row"><span>5 процедур</span><span><b>4 000 ₽</b> <span class="per">· 800 ₽ за раз</span></span></div>
-      <div class="row hit"><span>10 процедур <span class="tag">хит</span></span><span><b>7 000 ₽</b> <span class="per">· 700 ₽</span></span></div>
-      <div class="row"><span>40 процедур</span><span><b>22 000 ₽</b> <span class="per">· 550 ₽</span></span></div>
+    <h2>Процедура <span class="it">от 550 ₽</span> в абонементе</h2>
+    <div class="pcards">
+      <div class="pcard"><span>Разово</span><b>1 000 ₽</b><i>за процедуру</i></div>
+      <div class="pcard hit"><span>В абонементе</span><b>от 550 ₽</b><i>за ту же процедуру</i></div>
     </div>
-    <p class="under" style="text-align:left;margin-top:12px">Абонемент на 40 процедур экономит
-      <b>18 000 ₽</b> против оплаты поштучно. Оформить можно после первого визита — когда
-      увидите свои цифры.</p>
-    <form class="form" id="f3" novalidate style="margin-top:18px">
+    <p class="under" style="text-align:left;margin-top:12px">Абонемент на 40 процедур —
+      <b>22 000 ₽ вместо 40 000 ₽</b>. Экономия 18 000 ₽. Оформляется после первого визита,
+      когда увидите свои цифры.</p>
+
+<form class="form" id="f3" novalidate style="margin-top:18px">
       <div class="form-body">
         <h3 style="font-family:'Cormorant',Georgia,serif;font-size:23px;font-weight:600;color:var(--plum);margin-bottom:6px">
           Сколько процедур нужно именно вам?</h3>
-        <p class="fnote">Оставьте номер — мастер посчитает курс под вашу зону и назовёт точную
-          сумму. Без записи и обязательств.</p>
+        <p class="fnote">Мастер посчитает курс под вашу зону и назовёт сумму. Без обязательств.</p>
         <div class="field">
           <label for="f3-phone">Телефон</label>
           <input id="f3-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
@@ -835,11 +810,7 @@ footer a{color:var(--plum)}
       <p>Очень хороший мастер! <mark>Было не больно, наоборот спать захотела</mark>.</p>
       <div class="row"><span class="av av-2">О</span><div class="who"><b>Олеся Носова</b><span class="st">★★★★★</span> Яндекс.Карты · отзыв о процедуре</div></div>
     </a>
-    <a class="quote" href="https://yandex.ru/maps/org/dofamin/" target="_blank" rel="noopener">
-      <p>Сегодня <mark>первый раз была в данной студии и осталась в полном восторге</mark>.</p>
-      <div class="row"><span class="av av-3">А</span><div class="who"><b>Анна Кузнецова</b><span class="st">★★★★★</span> Яндекс.Карты · первый визит</div></div>
-    </a>
-  </div>
+      </div>
 </section>
 
 <!-- ═══ 9. СТРАХИ И ВОЗРАЖЕНИЯ ═══ -->
@@ -851,41 +822,25 @@ footer a{color:var(--plum)}
          («не ушло ни сантиметра — процедура за наш счёт»), добавить её первым пунктом. -->
 <ul class="facts">
       <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
-        <span><b>Замеряем при вас.</b> Сантиметром до и после, цифры пишем в вашу карту —
-        результат видно в тот же день, а не «на глаз»</span></li>
+        <span><b>Замеряем при вас</b> — до и после, цифры в вашу карту. Результат видно в тот же день</span></li>
       <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
-        <span><b>Считаем минимум, а не максимум.</b> Если хватит пяти процедур — предложим пять.
-        Иногда прямо говорим: вам это не нужно</span></li>
+        <span><b>Считаем минимум, а не максимум.</b> Хватит пяти процедур — предложим пять</span></li>
       <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
-        <span><b>Курс не обязателен.</b> Можно ходить поштучно, абонемент оформляется только
-        после того, как вы увидите свои цифры</span></li>
-      <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
-        <span><b>Проверяем противопоказания.</b> Анкета здоровья до процедуры: если нельзя —
-        честно откажем и вернём деньги</span></li>
+        <span><b>Курс не обязателен.</b> Можно ходить поштучно — решаете после первого визита</span></li>
+      
     </ul>
     <div class="hr" style="margin:22px 0 16px"><i></i></div>
 
     <details><summary>Это больно?</summary>
-      <p>Нет. Тепло, лёгкая вибрация и ощущение массажа — всё. Гостьи чаще всего засыпают под
-        прессотерапию. Никаких проколов, инъекций и разрезов. Мощность можно снизить в любой момент.</p></details>
+      <p>Нет. Тепло, вибрация и ощущение массажа — гостьи чаще засыпают. Ни проколов, ни разрезов.</p></details>
     <details><summary>А вдруг не сработает и деньги зря?</summary>
-      <p>Поэтому первый визит стоит 600 ₽, а не курс сразу. Замеры делаем сантиметром до и после
-        при вас и записываем в карту — результат видно в цифрах в тот же день.</p></details>
+      <p>Поэтому первый визит стоит 600 ₽, а не курс. Замеры при вас — результат в цифрах сразу.</p></details>
     <details><summary>Мне впарят курс?</summary>
-      <p>Мастер считает <b>минимально необходимое</b> количество процедур под задачу, а не максимальное.
-        Абонемент можно не покупать вовсе и ходить поштучно. Иногда мы прямо говорим: вам это не нужно.</p></details>
-    <details><summary>Есть противопоказания?</summary>
-      <p>Да, как у любой аппаратной методики: беременность, онкология, кардиостимулятор, эпилепсия,
-        острые воспаления. Перед процедурой заполняем анкету здоровья и проверяем всё вместе.</p></details>
-    <details><summary>Стыдно раздеваться при чужом человеке</summary>
-      <p>Кабинет закрытый, мастер — женщина, в комнате только вы вдвоём. Можно остаться в своём белье,
-        а на процедуру выдаём одноразовый комплект: костюм, носочки, шапочку, бахилы.</p></details>
-    <details><summary>Жир вернётся обратно?</summary>
-      <p>Честно: разрушенные жировые клетки не восстанавливаются, но новые могут вырасти, если сильно
-        набирать вес. Держать результат помогает обычный режим питания — без диет и голодовок.</p></details>
-    <details><summary>Некогда, работаю до вечера</summary>
-      <p>Процедура — 30 минут, без реабилитации и следов: можно в обед или после работы. Есть окна
-        в выходные. Если не с кем оставить ребёнка — приходите вместе, подождёт рядом.</p></details>
+      <p>Считаем <b>минимум</b> под задачу. Абонемент можно не покупать и ходить поштучно.</p></details>
+        <details><summary>Стыдно раздеваться при чужом человеке</summary>
+      <p>Кабинет закрытый, мастер — женщина. Можно в своём белье, комплект выдаём одноразовый.</p></details>
+        <details><summary>Некогда, работаю до вечера</summary>
+      <p>30 минут без следов — можно в обед. Есть окна в выходные, с ребёнком тоже можно.</p></details>
   </div>
 </section>
 
@@ -894,8 +849,7 @@ footer a{color:var(--plum)}
   <div class="wrap">
     <span class="eyebrow">До и после</span>
     <h2>Работы мастера <span class="it">перманентного макияжа</span></h2>
-    <p class="lead" style="margin-bottom:16px">Брови, губы, межресничка и стрелки. Стаж более
-      10 лет, проверенные пигменты и форма под ваши черты — без «татуажа из нулевых».</p>
+    <p class="lead" style="margin-bottom:16px">Брови, губы, межресничка. Стаж 10+ лет, форма под ваши черты — без «татуажа из нулевых».</p>
     <div class="works">
       <figure><img src="assets/img/ba-brows.jpg" width="800" height="800" loading="lazy"
         alt="Перманентный макияж бровей: до и после"><figcaption><b>Брови</b> — до и после</figcaption></figure>
@@ -916,20 +870,18 @@ footer a{color:var(--plum)}
            alt="Кабинет студии «Дофамин»: кушетка и аппарат для коррекции фигуры">
     </div>
     <div class="g2">
-      <img src="assets/img/reception.jpg" width="800" height="800" loading="lazy"
-           alt="Стойка администратора с неоновой вывеской «Дофамин»">
-      <img src="assets/img/team.jpg" width="800" height="800" loading="lazy"
+      <img src="assets/img/team.jpg" width="1000" height="626" loading="lazy"
            alt="Мастера студии «Дофамин»">
+      <img src="assets/img/reception.jpg" width="560" height="800" loading="lazy"
+           alt="Стойка администратора с неоновой вывеской «Дофамин»">
     </div>
     <ul class="facts">
       <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
-        Записи разводим по времени — в коридоре не ждёте</li>
+        Записи разводим по времени — не ждёте в коридоре</li>
       <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
-        Аппараты и кушетку обрабатываем после каждого визита</li>
-      <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
-        Мастер помнит, на какой процедуре курса вы находитесь</li>
+        Аппараты обрабатываем после каждого визита</li>
       <li><span class="bi"><svg class="ic"><use href="#i-car"/></svg></span>
-        БЦ «Лидер» у проспекта, наземная парковка у дома</li>
+        БЦ «Лидер» у проспекта, парковка у дома</li>
     </ul>
   </div>
 </section>
@@ -941,8 +893,7 @@ footer a{color:var(--plum)}
       <div class="form-body">
         <div class="hr"><i></i></div>
         <h2 style="text-align:center">Приходите <span class="it">с подругой</span></h2>
-        <p class="fnote">Её первый визит тоже 600 ₽. Оставьте номер — подберём время,
-          когда свободны два окна подряд.</p>
+        <p class="fnote">Её первый визит тоже 600 ₽. Подберём время, когда свободны два окна подряд.</p>
         <div class="field">
           <label for="f2-phone">Телефон</label>
           <input id="f2-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
@@ -984,8 +935,7 @@ footer a{color:var(--plum)}
       <div><svg class="ic"><use href="#i-clock"/></svg>
         <span><b>Работаем</b>ежедневно 10:00–21:00, есть окна в выходные</span></div>
       <div><svg class="ic"><use href="#i-car"/></svg>
-        <span><b>Как добраться</b>10 минут от «Ладожской», вход со стороны проспекта,
-        наземная парковка у здания. Мы на 8 этаже, офис 813</span></div>
+        <span><b>Как добраться</b>10 минут от «Ладожской», парковка у здания, 8 этаж</span></div>
     </div>
     <a class="btn btn-ghost" href="https://yandex.ru/maps/?rtext=~Санкт-Петербург, проспект Энергетиков 37"
        target="_blank" rel="noopener" style="margin-bottom:12px">Построить маршрут</a>
@@ -1002,8 +952,7 @@ footer a{color:var(--plum)}
 
 <footer>
   <div class="wrap">
-    Студия аппаратной коррекции фигуры, косметологии и перманентного макияжа «Дофамин».
-    СПб, пр. Энергетиков, 37. Работаем с 2024 года.<br>
+    Студия «Дофамин» · СПб, пр. Энергетиков, 37 · работаем с 2024 года<br>
     <!-- ЗАПОЛНИТЬ ПОСЛЕ ПОЛУЧЕНИЯ ОТ СТУДИИ: ИП/ООО, ИНН, ОГРНИП — базовый признак
          нескамности. Строка ниже раскомментируется, когда придут реквизиты.
     <br>ИП Фамилия И. О. · ИНН 000000000000 · ОГРНИП 000000000000000 -->
