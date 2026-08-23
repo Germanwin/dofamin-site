@@ -417,20 +417,25 @@ details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
 /* плавное раскрытие: анимируем ТОЛЬКО строку грида. Раньше поверх этого
    шла ещё и WAAPI-анимация height — две анимации на одном узле дёргались. */
 .d-body{display:grid;grid-template-rows:0fr;
-  transition:grid-template-rows .32s cubic-bezier(.3,.7,.3,1)}
+  transition:grid-template-rows .34s cubic-bezier(.3,.7,.3,1)}
 /* клипуем обёртку, а не текст: фото внутри выкатывается вместе с содержимым,
    а не проявляется прозрачностью поверх уже раскрытого блока */
 .d-in{overflow:hidden;min-height:0}
 .d-body p{padding:0 16px 15px;font-size:14.5px;color:var(--ink-2);line-height:1.5;
-  opacity:0;transition:opacity .26s ease .05s}
+  opacity:0;transition:opacity .24s ease .06s}
 details[open] .d-body{grid-template-rows:1fr}
 details[open] .d-body p{opacity:1}
-/* фаза закрытия: атрибут open ещё стоит, но высота уже едет к нулю */
-details[open].is-closing .d-body{grid-template-rows:0fr}
-details[open].is-closing .d-body p{opacity:0;transition-delay:0s}
-details[open].is-closing summary::after{transform:translateY(-70%) rotate(45deg)}
+/* JS-режим: атрибут open стоит всегда, состояние держит .is-open.
+   Иначе закрытый <details> браузер не рендерит вовсе — переходу не от чего
+   стартовать, и содержимое просто возникает без анимации. */
+details.js-sp .d-body{grid-template-rows:0fr}
+details.js-sp .d-body p{opacity:0;transition-delay:0s}
+details.js-sp summary::after{transform:translateY(-70%) rotate(45deg)}
+details.js-sp.is-open .d-body{grid-template-rows:1fr}
+details.js-sp.is-open .d-body p{opacity:1;transition-delay:.06s}
+details.js-sp.is-open summary::after{transform:translateY(-30%) rotate(225deg)}
 @media(prefers-reduced-motion:reduce){
-  .d-body,.d-body>p{transition:none}
+  .d-body,.d-body p{transition:none}
 }
 details p b{color:var(--plum)}
 /* фото методики внутри спойлера: фиксированная высота — раскрытие не прыгает,
@@ -965,7 +970,7 @@ footer a{color:#F3E2DC;text-decoration:none}
     <details><summary>Это больно?</summary><div class="d-body"><div class="d-in"><p>Нет. Тепло, вибрация и ощущение массажа — гостьи чаще засыпают. Ни проколов, ни разрезов.</p></div></div></details>
     <details><summary>А вдруг не сработает и деньги зря?</summary><div class="d-body"><div class="d-in"><p>Поэтому первый визит стоит 600 ₽, а не курс. Замеры при вас — результат в цифрах сразу.</p></div></div></details>
     <details><summary>Обязательно ли покупать курс?</summary><div class="d-body"><div class="d-in"><p>Считаем <b>минимум</b> под задачу. Абонемент можно не покупать и ходить поштучно.</p></div></div></details>
-        <details><summary>Как проходит процедура — нужно ли раздеваться?</summary><div class="d-body"><div class="d-in"><p>Кабинет закрытый, мастер — женщина. Можно в своём белье, комплект выдаём одноразовый.</p></div></div></details>
+        <details><summary>Стесняюсь — как всё будет проходить?</summary><div class="d-body"><div class="d-in"><p>Кабинет закрытый, мастер — женщина, кроме вас в кабинете никого. Можно остаться в своём белье, одноразовый комплект тоже выдаём.</p></div></div></details>
         <details><summary>Некогда, работаю до вечера</summary><div class="d-body"><div class="d-in"><p>30 минут без следов — можно в обед. Есть окна в выходные, с ребёнком тоже можно.</p></div></div></details>
   </div>
 </section>
@@ -1244,39 +1249,35 @@ footer a{color:#F3E2DC;text-decoration:none}
     } else { preload(); }
   }
 
-  /* Спойлеры. Раскрытие целиком на CSS (grid-template-rows: 0fr → 1fr).
-     Вручную ведём только закрытие: закрытый <details> браузер прячет
-     мгновенно, поэтому сначала проигрываем переход и лишь потом снимаем open. */
-  var MOTION_OK = !window.matchMedia || !matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var D_MS = 300;
+  /* Спойлеры. Атрибут open ставим один раз и больше не трогаем: закрытый
+     <details> браузер не рендерит (content-visibility на ::details-content),
+     поэтому переход высоты стартовать не с чего — блок просто возникал.
+     Держим содержимое в потоке, а открытие/закрытие ведёт класс .is-open,
+     так что и текст, и фото плавно выкатываются в обе стороны. */
+  var D_MS = 340;
   document.querySelectorAll('details').forEach(function(d){
     var sum = d.querySelector('summary');
     var body = d.querySelector('.d-body');
     if(!sum || !body) return;
 
+    var wasOpen = d.open;
+    d.classList.add('js-sp');
+    d.open = true;
+    if(wasOpen) d.classList.add('is-open');
+    sum.setAttribute('aria-expanded', wasOpen ? 'true' : 'false');
+
     sum.addEventListener('click', function(e){
       e.preventDefault();
-      if(d.classList.contains('is-busy')) return;
-
-      if(!d.open){
-        d.open = true;               /* дальше высоту разворачивает сам CSS */
-        /* открытый ответ подтягиваем к экрану, чтобы не листать вслепую */
-        setTimeout(function(){
-          var r = d.getBoundingClientRect();
-          if(r.top < 56 || r.bottom > window.innerHeight - 90){
-            window.scrollTo({top:r.top + window.pageYOffset - 70, behavior:'smooth'});
-          }
-        }, D_MS + 20);
-        return;
-      }
-
-      if(!MOTION_OK){ d.open = false; return; }
-      d.classList.add('is-busy','is-closing');
-      /* по таймеру, а не по transitionend: в неактивной вкладке событие может не прийти */
+      var open = d.classList.toggle('is-open');
+      sum.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if(!open) return;
+      /* открытый ответ подтягиваем к экрану, чтобы не листать вслепую */
       setTimeout(function(){
-        d.open = false;
-        d.classList.remove('is-busy','is-closing');
-      }, D_MS);
+        var r = d.getBoundingClientRect();
+        if(r.top < 56 || r.bottom > window.innerHeight - 90){
+          window.scrollTo({top:r.top + window.pageYOffset - 70, behavior:'smooth'});
+        }
+      }, D_MS + 20);
     });
   });
 })();
