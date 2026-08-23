@@ -195,12 +195,12 @@ main>section{position:relative}
 
 /* цифры результата */
 .nums{display:grid;gap:10px}
-.num{display:grid;grid-template-columns:92px 1fr;gap:14px;align-items:center;
-  background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:15px 16px}
-.num b{font-family:'Cormorant',Georgia,serif;font-size:30px;font-weight:600;line-height:1;
-  text-align:center;background:var(--g-num);-webkit-background-clip:text;background-clip:text;
-  color:transparent;-webkit-text-fill-color:transparent;
-  border-right:1px solid var(--line);padding-right:14px}
+.num{display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:center;
+  background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:13px 14px}
+.num b{display:grid;place-items:center;min-height:66px;border-radius:14px;
+  font-family:'Cormorant',Georgia,serif;font-size:27px;font-weight:600;line-height:1;
+  background:linear-gradient(150deg,#FDF1E4,#FBE4EC);border:1px solid #F2DCC8;
+  box-shadow:inset 0 1px 0 #fff;color:#A94268}
 .num span{font-size:14.5px;line-height:1.45;color:var(--ink-2)}
 
 /* работы мастера: до и после — вертикальные кадры, подпись под каждым */
@@ -268,12 +268,29 @@ main>section{position:relative}
   .sheet{width:100%;max-width:210px;align-self:center}
 }
 
+/* форма «вдвоём»: тёплая оправа и наглядные два визита по 600 ₽ */
+.form-duo{background:linear-gradient(170deg,#FFFDFC,#FFF4F7);border-color:#F0D6DE;
+  box-shadow:0 18px 34px -24px rgba(169,66,104,.75)}
+.duo{display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:12px;
+  font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+.duo span{background:#fff;border:1px solid var(--line-2);border-radius:99px;padding:6px 13px}
+.duo i{font-style:normal;color:var(--cta);font-size:15px}
+.duo-price{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 0 16px;
+  padding:13px 10px;border-radius:16px;background:#fff;border:1px dashed var(--line-2)}
+.duo-price div{text-align:center;min-width:88px}
+.duo-price span{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-2);margin-bottom:3px}
+.duo-price b{font-family:'Cormorant',Georgia,serif;font-size:29px;font-weight:600;line-height:1;
+  background:var(--g-cta);-webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent}
+.duo-price i{font-style:normal;font-size:18px;color:var(--gold)}
+
 /* ───── боли ───── */
 .pains{display:grid;gap:10px}
 .pain{background:#fff;border:1px solid var(--line);border-radius:var(--r);
   padding:14px 16px;font-size:15.5px;line-height:1.45;color:var(--plum)}
-.pain::before,.pain::after{font-family:'Cormorant',Georgia,serif;font-size:26px;
-  color:var(--cta);line-height:0;position:relative;top:6px}
+.pain::before,.pain::after{font-family:'Cormorant',Georgia,serif;font-size:24px;
+  color:var(--cta);line-height:1;position:relative;top:4px}
 .pain::before{content:"«";margin-right:4px}
 .pain::after{content:"»";margin-left:4px}
 
@@ -367,11 +384,12 @@ summary::-webkit-details-marker{display:none}
 #faq summary{justify-content:flex-start;gap:10px}
 #faq summary::before{content:"";width:8px;height:8px;flex:none;border-radius:50%;
   background:var(--cta);opacity:.55}
-#faq summary::after{margin-left:auto}
-summary::after{content:"";width:11px;height:11px;flex:none;border-right:2.2px solid var(--cta);
-  border-bottom:2.2px solid var(--cta);transform:rotate(45deg) translateY(-3px);
-  transition:transform .2s}
-details[open] summary::after{transform:rotate(225deg) translateY(-3px)}
+
+summary{position:relative;padding-right:42px}
+summary::after{content:"";position:absolute;right:18px;top:50%;width:11px;height:11px;
+  border-right:2.2px solid var(--cta);border-bottom:2.2px solid var(--cta);
+  transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
 /* плавное раскрытие: анимируем строку грида, содержимое не прыгает */
 .d-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s cubic-bezier(.3,.7,.3,1)}
 .d-body>p{overflow:hidden;min-height:0;padding:0 16px 0;font-size:14.5px;color:var(--ink-2);
@@ -394,7 +412,7 @@ details p b{color:var(--plum)}
 .t-sage{background:#E7F0E6;color:#4F6E4D}
 .t-gold{background:#F8EEDB;color:#8A6A1E}
 .t-plum{background:#F1E6EF;color:#6D4160}
-#methods summary{flex-wrap:wrap;row-gap:4px}
+#methods summary{gap:9px}
 
 /* ───── цены ───── */
 .tar{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
@@ -416,22 +434,22 @@ details p b{color:var(--plum)}
 .rate .stars{color:var(--gold);font-size:14px;letter-spacing:2px}
 .rate .rt{font-size:13.5px;color:var(--ink-2);line-height:1.35}
 .quote{display:block;text-decoration:none;color:inherit;background:#fff;
-  border:1px solid var(--line);border-radius:var(--r);padding:15px 16px;margin-bottom:10px}
+  border:1px solid var(--line);border-radius:15px;padding:12px 14px;margin-bottom:8px}
 .quote .who .st{color:var(--gold);letter-spacing:1px;font-size:11px}
-.quote .row{display:flex;gap:11px;align-items:center}
-.av{width:38px;height:38px;flex:none;border-radius:50%;display:grid;place-items:center;
-  font-size:15px;font-weight:800;color:#fff}
+.quote .row{display:flex;gap:9px;align-items:center}
+.av{width:30px;height:30px;flex:none;border-radius:50%;display:grid;place-items:center;
+  font-size:13px;font-weight:800;color:#fff}
 .av-1{background:linear-gradient(135deg,#E7A9BE,#C4638A)}
 .av-2{background:linear-gradient(135deg,#EFC98F,#C89A3F)}
 .av-3{background:linear-gradient(135deg,#B9CDB6,#6F8C6D)}
-.quote p{font-size:15px;line-height:1.5;margin-bottom:9px}
+.quote p{font-size:14.5px;line-height:1.45;margin-bottom:8px}
 .quote mark{background:linear-gradient(180deg,transparent 55%,var(--gold-soft) 55%);color:inherit}
-.quote .who{font-size:12.5px;color:var(--ink-2)}
-.quote .who b{color:var(--plum);font-size:13.5px;display:block}
+.quote .who{font-size:11.5px;color:var(--ink-2);line-height:1.3}
+.quote .who b{color:var(--plum);font-size:13px;display:block}
 
 /* ───── студия ───── */
 .studio-photo{border-radius:var(--r);overflow:hidden;margin-bottom:16px;box-shadow:var(--sh)}
-.studio-photo img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.studio-photo img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center 55%}
 .facts{list-style:none;display:grid;gap:9px}
 .facts li{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;line-height:1.4}
 .facts .bi{width:23px;height:23px;flex:none;border-radius:50%;background:#fff;
@@ -668,15 +686,15 @@ footer a{color:var(--plum)}
   <div class="wrap">
     <span class="eyebrow">Процедуры для тела</span>
     <h2>Подберём методику <span class="it">под вашу зону</span></h2>
-    <p class="lead" style="margin-bottom:16px">Все входят в один абонемент — чередуем внутри курса.</p>
+    <p class="lead" style="margin-bottom:16px">Любая — <b>от 550 ₽ в абонементе</b>, чередуем внутри курса.</p>
 
-    <details><summary><span class="tag-s t-warm">Локальный жир</span>Кавитация <span class="sum-price">от 550 ₽</span></summary><div class="d-body"><p>Ультразвук разрушает жировые клетки точечно — живот, бока, галифе.</p></div></details>
-    <details><summary><span class="tag-s t-pink">Целлюлит</span>Вакуумный массаж с RF <span class="sum-price">от 550 ₽</span></summary><div class="d-body"><p>Разгоняет застой и подтягивает: «апельсиновая корка» становится ровнее.</p></div></details>
-    <details><summary><span class="tag-s t-warm">Контуры</span>Лазерный липолиз <span class="sum-price">от 550 ₽</span></summary><div class="d-body"><p>Работает по жиру, который не уходит на диете. Минус до 17% объёма за курс.</p></div></details>
-    <details><summary><span class="tag-s t-sage">Отёки</span>Прессотерапия <span class="sum-price">от 550 ₽</span></summary><div class="d-body"><p>Минус 0,5–2 см и лёгкие ноги уже после первого сеанса.</p></div></details>
-    <details><summary><span class="tag-s t-gold">Тонус кожи</span>RF-лифтинг тела <span class="sum-price">от 550 ₽</span></summary><div class="d-body"><p>Подтягивает кожу после родов и похудения — без «мешочка».</p></div></details>
-    <details><summary><span class="tag-s t-sage">Мышцы</span>Миостимуляция <span class="sum-price">от 550 ₽</span></summary><div class="d-body"><p>Мышцы работают как на тренировке, только лёжа. Пресс и ягодицы.</p></div></details>
-    <details><summary><span class="tag-s t-plum">Расслабление</span>Вибромассаж <span class="sum-price">от 550 ₽</span></summary><div class="d-body"><p>Глубокая проработка мышц и ощущение лёгкости после рабочего дня.</p></div></details>
+    <details><summary><span class="tag-s t-warm">Локальный жир</span>Кавитация</summary><div class="d-body"><p>Ультразвук разрушает жировые клетки точечно — живот, бока, галифе.</p></div></details>
+    <details><summary><span class="tag-s t-pink">Целлюлит</span>Вакуумный массаж с RF</summary><div class="d-body"><p>Разгоняет застой и подтягивает: «апельсиновая корка» становится ровнее.</p></div></details>
+    <details><summary><span class="tag-s t-warm">Контуры</span>Лазерный липолиз</summary><div class="d-body"><p>Работает по жиру, который не уходит на диете. Минус до 17% объёма за курс.</p></div></details>
+    <details><summary><span class="tag-s t-sage">Отёки</span>Прессотерапия</summary><div class="d-body"><p>Минус 0,5–2 см и лёгкие ноги уже после первого сеанса.</p></div></details>
+    <details><summary><span class="tag-s t-gold">Тонус кожи</span>RF-лифтинг тела</summary><div class="d-body"><p>Подтягивает кожу после родов и похудения — без «мешочка».</p></div></details>
+    <details><summary><span class="tag-s t-sage">Мышцы</span>Миостимуляция</summary><div class="d-body"><p>Мышцы работают как на тренировке, только лёжа. Пресс и ягодицы.</p></div></details>
+    <details><summary><span class="tag-s t-plum">Расслабление</span>Вибромассаж</summary><div class="d-body"><p>Глубокая проработка мышц и ощущение лёгкости после рабочего дня.</p></div></details>
   </div>
 </section>
 
@@ -846,13 +864,29 @@ footer a{color:var(--plum)}
        style="margin-bottom:12px">Читать отзывы на Яндекс.Картах</a>
     <a class="quote" href="https://yandex.ru/maps/org/dofamin/" target="_blank" rel="noopener">
       <p>Действительно хорошее место. <mark>За 3 сеанса живот втянулся, нарисовалась талия</mark>.</p>
-      <div class="row"><span class="av av-1">Ю</span><div class="who"><b>Юлия Каминская</b><span class="st">★★★★★</span> Яндекс.Карты · ноябрь 2025</div></div>
+      <div class="row"><span class="av av-1">Ю</span><div class="who"><b>Юлия Каминская</b><span class="st">★★★★★</span> ноябрь 2025</div></div>
     </a>
     <a class="quote" href="https://yandex.ru/maps/org/dofamin/" target="_blank" rel="noopener">
       <p>Очень хороший мастер! <mark>Было не больно, наоборот спать захотела</mark>.</p>
-      <div class="row"><span class="av av-2">О</span><div class="who"><b>Олеся Носова</b><span class="st">★★★★★</span> Яндекс.Карты · отзыв о процедуре</div></div>
+      <div class="row"><span class="av av-2">О</span><div class="who"><b>Олеся Носова</b><span class="st">★★★★★</span> о процедуре</div></div>
     </a>
-      </div>
+    <a class="quote" href="https://yandex.ru/maps/org/dofamin/" target="_blank" rel="noopener">
+      <p>Всем советую: <mark>корректируют не только тело, но и душу</mark>, у Нади золотые ручки.</p>
+      <div class="row"><span class="av av-3">К</span><div class="who"><b>Ксения Орлова</b><span class="st">★★★★★</span> сентябрь 2025</div></div>
+    </a>
+    <a class="quote" href="https://yandex.ru/maps/org/dofamin/" target="_blank" rel="noopener">
+      <p>Был на сеансе прессотерапии. <mark>Отлично! Мастер Надежда знаток дела</mark>.</p>
+      <div class="row"><span class="av av-1">И</span><div class="who"><b>Игорь Ленол</b><span class="st">★★★★★</span> октябрь 2025</div></div>
+    </a>
+    <a class="quote" href="https://yandex.ru/maps/org/dofamin/" target="_blank" rel="noopener">
+      <p>Сегодня <mark>первый раз была в студии и осталась в полном восторге</mark>.</p>
+      <div class="row"><span class="av av-2">А</span><div class="who"><b>Анна Кузнецова</b><span class="st">★★★★★</span> первый визит</div></div>
+    </a>
+    <a class="quote" href="https://yandex.ru/maps/org/dofamin/" target="_blank" rel="noopener">
+      <p>Замечательная студия, <mark>релаксирующая музыка</mark>. Делала RF-лифтинг лица и кавитацию.</p>
+      <div class="row"><span class="av av-3">А</span><div class="who"><b>Алекса Ммм</b><span class="st">★★★★★</span> апрель 2025</div></div>
+    </a>
+  </div>
 </section>
 
 <!-- ═══ 9. СТРАХИ И ВОЗРАЖЕНИЯ ═══ -->
@@ -895,7 +929,7 @@ footer a{color:var(--plum)}
     </div>
     <a class="btn btn-gold" href="#zapis">
       <svg class="ic" style="width:18px;height:18px"><use href="#i-check"/></svg>
-      Хочу такие же брови</a>
+      Записаться на перманент</a>
   </div>
 </section>
 
@@ -928,11 +962,17 @@ footer a{color:var(--plum)}
 <!-- ═══ 11. ФИНАЛЬНАЯ ФОРМА + КОНТАКТЫ ═══ -->
 <section class="blush" id="contacts">
   <div class="wrap">
-    <form class="form" id="f2" novalidate style="margin-bottom:22px">
+    <form class="form form-duo" id="f2" novalidate style="margin-bottom:22px">
       <div class="form-body">
-        <div class="hr"><i></i></div>
-        <h2 style="text-align:center">Приходите <span class="it">с подругой</span></h2>
-        <p class="fnote">Её первый визит тоже 600 ₽. Подберём время, когда свободны два окна подряд.</p>
+        <div class="duo" aria-hidden="true"><span>Вы</span><i>+</i><span>подруга</span></div>
+        <h2 style="text-align:center;margin-bottom:6px">Приходите <span class="it">вдвоём</span></h2>
+        <p class="fnote" style="text-align:center">Её первый визит тоже <b>600 ₽</b>.
+          Подберём время, когда свободны два окна подряд.</p>
+        <div class="duo-price">
+          <div><span>Вам</span><b>600 ₽</b></div>
+          <i>+</i>
+          <div><span>Подруге</span><b>600 ₽</b></div>
+        </div>
         <div class="field">
           <label for="f2-phone">Телефон</label>
           <input id="f2-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
