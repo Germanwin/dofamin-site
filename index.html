@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Дофамин — аппаратная коррекция фигуры в СПб | Первый визит 600 ₽</title>
-<meta name="description" content="Студия аппаратной коррекции фигуры и косметологии «Дофамин», СПб, пр. Энергетиков 37. Кавитация, RF-лифтинг, лазерный липолиз, прессотерапия. Минус 0,5–2 см за сеанс. Первый визит с замерами, консультацией, процедурой и программой курса — 600 ₽ вместо 4 800 ₽ по прайсу.">
+<title>Дофамин — аппаратная коррекция фигуры в СПб | Первый визит 1 000 ₽</title>
+<meta name="description" content="Студия аппаратной коррекции фигуры и косметологии «Дофамин», СПб, пр. Энергетиков 37. Кавитация, RF-лифтинг, лазерный липолиз, прессотерапия. Минус 0,5–2 см за сеанс. Первый визит с фото до и после, консультацией, процедурой и программой курса — 1 000 ₽ вместо 4 800 ₽ по прайсу.">
 <meta name="theme-color" content="#F7EDE6">
 <!-- Демо-превью для клиента: закрыто от индексации, чтобы не путалось с настоящим сайтом студии.
      После покупки и переезда на домен клиента эту строку нужно удалить. -->
@@ -14,7 +14,7 @@
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Дофамин">
 <meta property="og:title" content="Минус 0,5–2 см объёмов за один сеанс — студия «Дофамин», СПб">
-<meta property="og:description" content="Аппаратная коррекция фигуры у Ладожской. Первый визит с замерами, процедурой и программой курса — 600 ₽ вместо 4 800 ₽ по прайсу.">
+<meta property="og:description" content="Аппаратная коррекция фигуры у Ладожской. Первый визит с фото до и после, процедурой и программой курса — 1 000 ₽ вместо 4 800 ₽ по прайсу.">
 <meta property="og:image" content="assets/img/reception.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23A87C86'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23FDF9F5' text-anchor='middle'%3E%D0%94%3C/text%3E%3C/svg%3E">
 <!-- Сюда вставьте счётчик Яндекс.Метрики (с вебвизором) и/или Google Analytics.
@@ -652,6 +652,14 @@ header{
 .plist li:last-child{border-bottom:0}
 .plist b{white-space:nowrap;font-weight:800;color:var(--plum)}
 .plist span{color:var(--ink-2)}
+/* прайс «Коррекция фигуры»: название с подписью слева, цена справа */
+.ptable.svc .prow{grid-template-columns:1fr auto;gap:10px 22px;align-items:center}
+.ptable.svc .prow.head{letter-spacing:.09em}
+.ptable.svc .pw{display:block;font-size:13.5px;line-height:1.45;color:var(--ink-2);margin-top:4px;font-weight:500}
+.ptable.svc .pv{font-family:'Cormorant',Georgia,serif;font-size:29px;font-weight:600;color:var(--plum);
+  line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ptable.svc .prow.best .pv{color:var(--cta)}
+@media(max-width:720px){.ptable.svc .pv{font-size:25px}.ptable.svc .prow{padding:15px 18px}}
 @media(max-width:720px){
   .prow{grid-template-columns:1fr 1fr;gap:6px 12px;padding:16px 18px}
   .prow.head{display:none}
@@ -967,10 +975,10 @@ footer a{color:#F3E2DC}
     "addressCountry": "RU"
   },
   "telephone": "+7-800-550-86-04",
-  "priceRange": "600–22000 ₽",
+  "priceRange": "500–22000 ₽",
   "sameAs": [
     "https://t.me/dopaminestudio",
-    "https://vk.com/dopaminestudio",
+    "https://vk.com/club223150945",
     "https://yandex.ru/maps/org/dofamin/101290040598/"
   ],
   "makesOffer": [
@@ -1003,6 +1011,7 @@ footer a{color:#F3E2DC}
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></symbol>
   <symbol id="i-tg" viewBox="0 0 24 24"><path d="M21 4 3 11l5 2 2 6 3-4 5 4z"/><path d="m8 13 9-6-6 8"/></symbol>
   <symbol id="i-wa" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12z"/><path d="M8.8 8.4c.4-.1.8 0 1 .4l.7 1.3c.2.3.1.6-.1.8l-.5.5a6 6 0 0 0 2.7 2.7l.5-.5c.2-.2.5-.3.8-.1l1.3.7c.4.2.5.6.4 1a2 2 0 0 1-2 1.3 8 8 0 0 1-6.2-6.2 2 2 0 0 1 1.4-1.9z"/></symbol>
+  <symbol id="i-vk" viewBox="0 0 24 24"><path d="M3 5h3.2c.6 3.4 2 6.1 3.6 7.4V5h3v4.7c1.4-.5 2.7-2.3 3.3-4.7H19c-.5 2.6-1.7 4.6-3 5.7 1.5 1 3 2.7 3.7 5.3h-3.3c-.6-1.9-1.8-3.4-3.3-3.8V16H9.6C6.2 15.4 3.6 11 3 5z"/></symbol>
   <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></symbol>
   <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/><path d="m6.5 6.5 3 3M14.5 14.5l3 3M17.5 6.5l-3 3M9.5 14.5l-3 3"/></symbol>
 </svg>
@@ -1038,11 +1047,11 @@ footer a{color:#F3E2DC}
     <div class="hero-copy">
       <span class="eyebrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-pin"/></svg> СПб, пр. Энергетиков 37 · 10 минут от «Ладожской»</span>
       <h1>Коррекция фигуры <span class="it">без диет и операций</span>: минус <span class="num">0,5–2&nbsp;см</span> объёмов за один сеанс</h1>
-      <p class="lead">Аппаратные методики в студии «Дофамин» у «Ладожской»: кавитация, RF-лифтинг, лазерный липолиз и лимфодренаж. Первый визит с замерами, консультацией, процедурой и программой курса — <b>600&nbsp;₽ вместо 4&nbsp;800&nbsp;₽</b>.</p>
+      <p class="lead">Аппаратные методики в студии «Дофамин» у «Ладожской»: кавитация, RF-лифтинг, лазерный липолиз и лимфодренаж. Первый визит с фото до и после, консультацией, процедурой и программой курса — <b>1&nbsp;000&nbsp;₽ вместо 4&nbsp;800&nbsp;₽</b>.</p>
 
       <ul class="bullets">
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>30 минут</b> на процедуру — успеете в обед или после работы, без реабилитации и следов</span></li>
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>Замеры сантиметром до и после</b> — вы видите результат в цифрах, а не «на глаз»</span></li>
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>Фото до и после — на ваш телефон</b>, плюс контрольное взвешивание: результат видно, а не «кажется»</span></li>
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>7 методик</b> в одной студии — подберём под вашу зону, а не продадим всё подряд</span></li>
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>Одноразовый комплект</b> каждому гостю и обработка аппарата после каждого визита</span></li>
       </ul>
@@ -1058,7 +1067,7 @@ footer a{color:#F3E2DC}
               <path class="a-head" d="M60.2 15.1 L46.4 26.3 Q49.2 18.5 42.5 13.7Z"/>
             </svg>
           </span>
-          <a href="#first" class="btn btn-lg">Записаться за 600 ₽</a>
+          <a href="#first" class="btn btn-lg">Записаться за 1 000 ₽</a>
         </span>
         <a href="#quiz" class="btn btn-ghost">Подобрать программу</a>
       </div>
@@ -1076,11 +1085,11 @@ footer a{color:#F3E2DC}
       <div class="ph ph-sub"><img decoding="async" src="assets/img/reception.jpg" alt="Стойка администратора студии Дофамин с неоновой вывеской" loading="lazy" width="560" height="800"></div>
       <div class="hero-badge">
         <div class="big">−0,5…2 см</div>
-        <div class="cap">в объёмах после первого сеанса прессотерапии — по замерам сантиметром</div>
+        <div class="cap">в объёмах после первого сеанса прессотерапии — видно на фото до и после</div>
       </div>
       <div class="hero-price">
         <div class="s">Первый визит</div>
-        <div class="p">600 ₽ <s>4 800 ₽</s></div>
+        <div class="p">1 000 ₽ <s>4 800 ₽</s></div>
       </div>
     </div>
   </div>
@@ -1150,7 +1159,7 @@ footer a{color:#F3E2DC}
       <div class="step">
         <div class="icon-round sage"><svg class="ic"><use href="#i-drop"/></svg></div>
         <h3>Выводим лишнее</h3>
-        <p>Прессотерапия и вакуумный массаж запускают лимфу: уходят отёки и продукты распада. Именно на этом шаге сантиметр показывает первый минус, а ноги перестают гудеть.</p>
+        <p>Прессотерапия и вакуумный массаж запускают лимфу: уходят отёки и продукты распада. Именно на этом шаге весы показывают первый минус, а ноги перестают гудеть.</p>
       </div>
       <div class="step">
         <div class="icon-round gold"><svg class="ic"><use href="#i-sparkle"/></svg></div>
@@ -1172,8 +1181,7 @@ footer a{color:#F3E2DC}
 <section class="band" id="first">
   <div class="wrap offer-grid">
     <div>
-      <span class="eyebrow">Знакомство со студией</span>
-      <h2>Первый визит за 600 ₽:<br>приходите и <span class="it">убедитесь сами</span></h2>
+      <h2>Первый визит за 1 000 ₽:<br>приходите и <span class="it">убедитесь сами</span></h2>
       <p class="lead">Это не демо на пять минут и не «консультация ради консультации». Вы получаете полноценную процедуру и понятный план — а решаете уже потом, дома, спокойно.</p>
       <!-- ЦЕНЫ-ЗАГЛУШКИ: суммы по каждой позиции придуманы как реалистичный пример,
            согласовать со студией и заменить на настоящий прайс -->
@@ -1183,11 +1191,11 @@ footer a{color:#F3E2DC}
             <div class="vd-sheet">
               <div class="vd-brand"><span class="vd-mono">Д</span>Дофамин · программа</div>
               <div class="vd-zone">Живот и бока</div>
-              <div class="vd-metric"><b>84,0</b><i>→</i><b>82,5</b></div>
-              <div class="vd-delta">−1,5 см за первый сеанс</div>
+              <div class="vd-metric"><b>68,4</b><i>→</i><b>67,6</b></div>
+              <div class="vd-delta">−0,8 кг за первый сеанс</div>
               <div class="vd-rows">
                 <div><span>Курс</span><b>10 процедур</b></div>
-                <div><span>Цена курса</span><b>7 000 ₽</b></div>
+                <div><span>Цена курса</span><b>12 000 ₽</b></div>
                 <div><span>Мастер</span><b>Надежда</b></div>
               </div>
               <div class="vd-seal"><span>ваш<br>экземпляр</span></div>
@@ -1195,13 +1203,13 @@ footer a{color:#F3E2DC}
           </div>
           <div class="vc-intro">
             <h3>Что вы уносите домой</h3>
-            <p>Распечатанную программу с вашими замерами до и после, расчётом курса и ценой — с ней можно уйти думать и сравнивать. Ничего не подписываете на месте.</p>
+            <p>Распечатанную программу с вашим весом до и после, расчётом курса и ценой — плюс фото до и после в вашем же телефоне. Можно уйти думать и сравнивать: ничего не подписываете на месте.</p>
           </div>
         </div>
 
         <ul class="vc-list">
           <li><span>Консультация и анкета здоровья — проверим противопоказания</span><b>1 000 ₽</b></li>
-          <li><span>Замеры сантиметром до и после, карта динамики</span><b>500 ₽</b></li>
+          <li><span>Фото до и после на ваш телефон и контрольное взвешивание</span><b>500 ₽</b></li>
           <li><span>Полноценная процедура 30 минут на выбранной зоне</span><b>1 000 ₽</b></li>
           <li><span>Одноразовый комплект: костюм, носочки, шапочка, бахилы</span><b>300 ₽</b></li>
           <li><span>Индивидуальная программа с расчётом курса — на руки</span><b>2 000 ₽</b></li>
@@ -1209,16 +1217,16 @@ footer a{color:#F3E2DC}
 
         <div class="vc-sum">
           <div class="vc-old"><span>Всё вместе по прайсу</span><b>4 800 ₽</b></div>
-          <div class="vc-new"><span>Первый визит</span><b>600 ₽</b></div>
+          <div class="vc-new"><span>Первый визит</span><b>1 000 ₽</b></div>
         </div>
-        <p class="vc-note">Действует один раз на первое посещение. Приходите с подругой — её первый визит тоже 600 ₽.</p>
+        <p class="vc-note">Действует один раз на первое посещение. Приходите с подругой — её первый визит тоже 1 000 ₽.</p>
       </div>
     </div>
 
     <form class="form" id="form-first" novalidate>
       <div class="form-body">
         <h3>Записаться на первый визит</h3>
-        <p class="fnote">Оставьте номер телефона — администратор перезвонит в течение 15 минут, покажет свободные окна и ответит на вопросы. За вашим номером закрепим цену 600 ₽.</p>
+        <p class="fnote">Оставьте номер телефона — администратор перезвонит в течение 15 минут, покажет свободные окна и ответит на вопросы. За вашим номером закрепим цену 1 000 ₽.</p>
         <div class="field">
           <label for="f1-phone">Телефон, на который позвонить</label>
           <input id="f1-phone" name="phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
@@ -1234,7 +1242,7 @@ footer a{color:#F3E2DC}
             <option selected>Не знаю — нужна консультация</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-wide btn-lg">Записаться за 600 ₽</button>
+        <button type="submit" class="btn btn-wide btn-lg">Записаться за 1 000 ₽</button>
         <label class="agree"><input type="checkbox" checked required><span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a> и на обработку персональных данных</span></label>
       </div>
       <div class="form-ok">
@@ -1260,7 +1268,7 @@ footer a{color:#F3E2DC}
     <div class="grid g2 rv" style="gap:34px 44px">
       <div class="benefit">
         <div class="bnum">−2 см</div>
-        <div><h3>Меньше объёмов уже после первого сеанса</h3><p>За счёт прессотерапии с подогревом: лимфодренаж выводит лишнюю межклеточную жидкость, из-за которой «не сходится» юбка. Замеряем до и после — разницу видите сами.</p></div>
+        <div><h3>Меньше объёмов уже после первого сеанса</h3><p>За счёт прессотерапии с подогревом: лимфодренаж выводит лишнюю межклеточную жидкость, из-за которой «не сходится» юбка. Фотографируем и взвешиваем до и после — разницу видите сами.</p></div>
       </div>
       <div class="benefit">
         <div class="bnum">−17%</div>
@@ -1271,8 +1279,8 @@ footer a{color:#F3E2DC}
         <div><h3>Столько занимает один визит</h3><p>Без наркоза, швов и восстановления: после процедуры вы одеваетесь и идёте по делам. Записываться можно даже в обеденный перерыв — БЦ «Лидер» стоит прямо у проспекта.</p></div>
       </div>
       <div class="benefit m-extra">
-        <div class="bnum">550 ₽</div>
-        <div><h3>Цена одной процедуры в абонементе</h3><p>Абонемент на 40 процедур стоит 22 000 ₽ вместо 40 000 ₽ поштучно — экономия 18 000 ₽. Абонемент можно оформить уже после первого визита, когда вы увидите свои цифры.</p></div>
+        <div class="bnum">от 500 ₽</div>
+        <div><h3>Столько стоит процедура по прайсу</h3><p>Лазерный липолиз — 500 ₽, прессотерапия — 1 000 ₽, кавитация — 1 200 ₽. Весь прайс открыто лежит <a href="#prices" style="color:var(--cta);font-weight:700">на этой странице</a>: вы заранее знаете, во что обойдётся курс, и платите по факту визита.</p></div>
       </div>
       <div class="benefit m-extra">
         <div class="bnum">7</div>
@@ -1293,7 +1301,7 @@ footer a{color:#F3E2DC}
     <div class="center" style="margin-bottom:40px">
       <span class="eyebrow plain">Процедуры для тела</span>
       <h2>Семь методик — <span class="it">под вашу зону и вашу задачу</span></h2>
-      <p class="lead">Все процедуры входят в один абонемент: можно чередовать их внутри курса, а не покупать каждую отдельно. Что именно выбрать — решаем вместе после замеров.</p>
+      <p class="lead">Методики можно чередовать внутри одного курса — под зону и задачу, а не «всё подряд». Что именно выбрать, решаем вместе на первом визите. Цена каждой процедуры — <a href="#prices" style="color:var(--cta);font-weight:700">в прайсе ниже</a>.</p>
     </div>
 
     <div class="grid g3 rv">
@@ -1303,7 +1311,7 @@ footer a{color:#F3E2DC}
           <span class="mtag t-warm">Локальный жир</span>
           <h3>Кавитация</h3>
           <p>Низкочастотный ультразвук разрушает мембраны жировых клеток в конкретной зоне, не задевая соседние ткани. Содержимое выводится естественным путём. Её называют «липосакцией без ножа».</p>
-          <div class="mfoot"><span>30 минут</span><span><b>от 550 ₽</b> в абонементе</span></div>
+          <div class="mfoot"><span>30 минут</span><span><b>1 200 ₽</b> за процедуру</span></div>
         </div>
       </article>
 
@@ -1313,7 +1321,7 @@ footer a{color:#F3E2DC}
           <span class="mtag t-pink">Целлюлит</span>
           <h3>Вакуумный массаж с RF</h3>
           <p>Вакуум разгоняет застой в тканях, RF прогревает и подтягивает. Продукты распада быстрее выводятся, кровообращение улучшается, «апельсиновая корка» становится заметно ровнее.</p>
-          <div class="mfoot"><span>30 минут</span><span><b>от 550 ₽</b> в абонементе</span></div>
+          <div class="mfoot"><span>30 минут</span><span><b>1 700 ₽</b> за процедуру</span></div>
         </div>
       </article>
 
@@ -1323,7 +1331,7 @@ footer a{color:#F3E2DC}
           <span class="mtag t-warm">Контуры тела</span>
           <h3>Лазерный липолиз</h3>
           <p>Мягкая альтернатива липосакции: пластины укладываются на зону, лазер работает по жировым «ловушкам», которые не уходят на диете. Заметные изменения набираются в течение 3 месяцев.</p>
-          <div class="mfoot"><span>30 минут</span><span><b>от 550 ₽</b> в абонементе</span></div>
+          <div class="mfoot"><span>30 минут</span><span><b>500 ₽</b> за процедуру</span></div>
         </div>
       </article>
 
@@ -1333,7 +1341,7 @@ footer a{color:#F3E2DC}
           <span class="mtag t-sage">Отёки</span>
           <h3>Прессотерапия</h3>
           <p>Костюм со сжатым воздухом мягко «прокачивает» лимфу от стоп вверх. Уходят отёки и тяжесть в ногах, минус 0,5–2 см за сеанс. С подогревом за визит уходит до 2 кг лишней воды.</p>
-          <div class="mfoot"><span>30 минут</span><span><b>от 550 ₽</b> в абонементе</span></div>
+          <div class="mfoot"><span>30 минут</span><span><b>1 000 ₽</b> за процедуру</span></div>
         </div>
       </article>
 
@@ -1343,7 +1351,7 @@ footer a{color:#F3E2DC}
           <span class="mtag t-gold">Тонус кожи</span>
           <h3>RF-лифтинг тела</h3>
           <p>Радиочастотный прогрев глубоких слоёв запускает выработку нового коллагена. Решает провисание после родов и похудения, растяжки, дряблость, потерю упругости.</p>
-          <div class="mfoot"><span>30 минут</span><span><b>от 550 ₽</b> в абонементе</span></div>
+          <div class="mfoot"><span>30 минут</span><span><b>1 500 ₽</b> за процедуру</span></div>
         </div>
       </article>
 
@@ -1353,17 +1361,17 @@ footer a{color:#F3E2DC}
           <span class="mtag t-sage">Мышцы и рельеф</span>
           <h3>Миостимуляция</h3>
           <p>Импульсы заставляют мышцы работать так, как на тренировке, — но лёжа. Подтягивает пресс и ягодицы, ускоряет обмен веществ, помогает там, где кожа «поплыла» вслед за мышцами.</p>
-          <div class="mfoot"><span>30 минут</span><span><b>от 550 ₽</b> в абонементе</span></div>
+          <div class="mfoot"><span>30 минут</span><span><b>1 800 ₽</b> за процедуру</span></div>
         </div>
       </article>
 
       <article class="mcard m-extra">
-        <div class="mimg"><img decoding="async" src="assets/img/lipo-device.jpg" alt="Аппаратура студии Дофамин" loading="lazy" width="600" height="800"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/vibro.jpg" alt="Вибрационный массаж в студии Дофамин: манипула аппарата на бедре" loading="lazy" width="448" height="336"></div>
         <div class="mbody">
           <span class="mtag t-plum">Расслабление</span>
           <h3>Вибромассаж</h3>
           <p>Высокочастотная вибрация глубоко прорабатывает мышцы, разгоняет кровообращение и обмен веществ. Даёт ощущение лёгкости и снимает напряжение после рабочего дня.</p>
-          <div class="mfoot"><span>1 зона</span><span><b>от 550 ₽</b> в абонементе</span></div>
+          <div class="mfoot"><span>30 минут</span><span><b>1 300 ₽</b> за процедуру</span></div>
         </div>
       </article>
 
@@ -1402,7 +1410,7 @@ footer a{color:#F3E2DC}
     <div class="center" style="margin-bottom:34px">
       <span class="eyebrow plain">1 минута · 5 вопросов</span>
       <h2>Подберите свою программу <span class="it">и узнайте цену курса</span></h2>
-      <p class="lead">Ответьте на пять простых вопросов — соберём программу под вашу зону, посчитаем количество процедур и стоимость с учётом абонемента. В подарок за прохождение — первый визит за 600 ₽ вместо 4 800 ₽ по прайсу.</p>
+      <p class="lead">Ответьте на пять простых вопросов — соберём программу под вашу зону, посчитаем количество процедур и стоимость курса. В подарок за прохождение — первый визит за 1 000 ₽ вместо 4 800 ₽ по прайсу.</p>
     </div>
 
     <form class="quiz" id="quiz-form" novalidate>
@@ -1473,11 +1481,12 @@ footer a{color:#F3E2DC}
         <div class="qstep" data-step="6">
           <div class="qgift">
             <svg class="ic"><use href="#i-gift"/></svg>
-            <p><b>Готово! Программа собрана.</b> Куда отправить расчёт и подобранную программу? За вашим номером закрепляем первый визит за 600 ₽ вместо 4 800 ₽.</p>
+            <p><b>Готово! Программа собрана.</b> Куда отправить расчёт и подобранную программу? За вашим номером закрепляем первый визит за 1 000 ₽ вместо 4 800 ₽.</p>
           </div>
           <div class="qopts" data-name="Куда отправить" style="margin-bottom:16px">
             <button type="button" class="qopt sel"><span class="qi"><svg class="ic"><use href="#i-check"/></svg></span>В WhatsApp</button>
             <button type="button" class="qopt"><span class="qi"><svg class="ic"><use href="#i-check"/></svg></span>В Telegram</button>
+            <button type="button" class="qopt"><span class="qi"><svg class="ic"><use href="#i-check"/></svg></span>Во ВКонтакте</button>
             <button type="button" class="qopt"><span class="qi"><svg class="ic"><use href="#i-check"/></svg></span>Позвоните мне — расскажу подробнее</button>
             <button type="button" class="qopt"><span class="qi"><svg class="ic"><use href="#i-check"/></svg></span>SMS</button>
           </div>
@@ -1502,6 +1511,7 @@ footer a{color:#F3E2DC}
         <div class="msgs" style="justify-content:center">
           <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
           <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Telegram</a>
+          <a class="msg" href="https://vk.me/club223150945" target="_blank" rel="noopener"><svg class="ic"><use href="#i-vk"/></svg> ВКонтакте</a>
           <a class="msg" href="tel:88005508604"><svg class="ic"><use href="#i-phone"/></svg> 8 800 550-86-04</a>
         </div>
       </div>
@@ -1515,19 +1525,28 @@ footer a{color:#F3E2DC}
   <div class="wrap">
     <div class="center" style="margin-bottom:36px">
       <span class="eyebrow plain">Прозрачные цены</span>
-      <h2>Абонемент «Дофамин»: <span class="it">чем длиннее курс — тем ниже цена</span></h2>
-      <p class="lead">В абонемент входят все аппаратные процедуры: прессотерапия, вакуумный массаж с RF, RF-лифтинг тела, миостимуляция, лазерный липолиз, кавитация и вибромассаж. Их можно чередовать внутри курса.</p>
+      <h2>Коррекция фигуры: <span class="it">цена за одну процедуру</span></h2>
+      <p class="lead">Действующий прайс студии целиком — без «звоните, уточняйте». Первую процедуру берут за 1&nbsp;000&nbsp;₽ по цене знакомства, дальше — по этому списку. Методики внутри курса можно чередовать.</p>
     </div>
 
-    <div class="ptable rv">
-      <div class="prow head"><span>Абонемент</span><span>Стоимость</span><span>Цена процедуры</span><span>Выгода</span></div>
-      <div class="prow"><span><b>1 процедура</b></span><span class="num">1 000 ₽</span><span class="num c3">1 000 ₽</span><span>разовое посещение</span></div>
-      <div class="prow"><span><b>5 процедур</b></span><span class="num">4 000 ₽</span><span class="num c3">800 ₽</span><span class="save">−1 000 ₽</span></div>
-      <div class="prow best"><span><b>10 процедур</b><span class="badge">хит</span></span><span class="num">7 000 ₽</span><span class="num c3">700 ₽</span><span class="save">−3 000 ₽</span></div>
-      <div class="prow"><span><b>30 процедур</b></span><span class="num">18 000 ₽</span><span class="num c3">600 ₽</span><span class="save">−12 000 ₽</span></div>
-      <div class="prow"><span><b>40 процедур</b></span><span class="num">22 000 ₽</span><span class="num c3">550 ₽</span><span class="save">−18 000 ₽</span></div>
+    <div class="ptable svc rv">
+      <div class="prow head"><span>Процедура</span><span>Цена</span></div>
+      <div class="prow"><span><b>Лазерный липолиз</b><i class="pw">Жировые «ловушки», которые не уходят на диете и в зале · 30 минут</i></span><span class="pv">500 ₽</span></div>
+      <div class="prow best"><span><b>Кавитация</b><span class="badge">хит</span><i class="pw">Локальный жир на животе, боках и бёдрах · 30 минут</i></span><span class="pv">1 200 ₽</span></div>
+      <div class="prow"><span><b>Прессотерапия</b><i class="pw">Отёки и тяжесть в ногах, лимфодренаж · 30 минут</i></span><span class="pv">1 000 ₽</span></div>
+      <div class="prow"><span><b>Прессотерапия</b><i class="pw">Полный лимфодренаж всего тела · 1 час</i></span><span class="pv">1 500 ₽</span></div>
+      <div class="prow"><span><b>Прессотерапия + ИК прогрев</b><i class="pw">Отёки и лишняя вода, прогрев усиливает эффект · 30 минут</i></span><span class="pv">1 200 ₽</span></div>
+      <div class="prow"><span><b>Прессотерапия + ИК прогрев</b><i class="pw">До −2 кг лишней воды за один визит · 1 час</i></span><span class="pv">1 700 ₽</span></div>
+      <div class="prow"><span><b>Горячий вакуумный массаж</b><i class="pw">Целлюлит и застой в тканях · 30 минут</i></span><span class="pv">1 000 ₽</span></div>
+      <div class="prow"><span><b>Вакуум + RF</b><i class="pw">Целлюлит и подтяжка кожи в одной процедуре · 30 минут</i></span><span class="pv">1 700 ₽</span></div>
+      <div class="prow"><span><b>Вибрационный массаж</b><i class="pw">Тонус, кровообращение, снятие напряжения · 30 минут</i></span><span class="pv">1 300 ₽</span></div>
+      <div class="prow"><span><b>Вибрационный массаж</b><i class="pw">Всё тело целиком · 1 час</i></span><span class="pv">2 200 ₽</span></div>
+      <div class="prow"><span><b>Вибрационный + горячий вакуумный массаж</b><i class="pw">Комплекс против целлюлита · 1 час</i></span><span class="pv">2 500 ₽</span></div>
+      <div class="prow"><span><b>RF-лифтинг тела</b><i class="pw">Дряблость и растяжки после родов и похудения · 30 минут</i></span><span class="pv">1 500 ₽</span></div>
+      <div class="prow"><span><b>Миостимуляция</b><i class="pw">Пресс и ягодицы, рельеф без тренировки · 30 минут</i></span><span class="pv">1 800 ₽</span></div>
+      <div class="prow"><span><b>Фотон и микротоки</b><i class="pw">Тонус, цвет и свежесть кожи лица · 15 минут</i></span><span class="pv">500 ₽</span></div>
     </div>
-    <p class="note" style="margin:14px 0 40px">Абонемент оформляется когда угодно — в том числе после первого визита за 600 ₽, когда вы уже увидели свои цифры на сантиметре. Курс из 10 процедур закрывает большинство задач по одной зоне.</p>
+    <p class="note" style="margin:14px 0 40px">Цены — из действующего прайса студии, оплата по факту визита. Сколько процедур нужно именно вам, скажем после первого визита: курс из 10 процедур закрывает большинство задач по одной зоне.</p>
 
     <div class="grid g2">
       <div class="card rv">
@@ -1684,12 +1703,12 @@ footer a{color:#F3E2DC}
 
       <details class="sp">
         <summary>А если результата не будет? Не выброшу ли я деньги?</summary>
-        <div class="spb">Поэтому мы и придумали первый визит за 600 ₽: вы платите как за чашку кофе с десертом и <b>проверяете методику на себе, ничем не рискуя</b>. Замеры сантиметром делаем до и после процедуры при вас и записываем в карту. Если цифры не изменились — мы прямо об этом скажем и не станем уговаривать на курс. Честный разговор для нас дороже одной продажи: студия живёт на постоянных гостьях.</div>
+        <div class="spb">Поэтому мы и придумали первый визит за 1 000 ₽: вы платите как за чашку кофе с десертом и <b>проверяете методику на себе, ничем не рискуя</b>. Фото до и после снимаем на ваш телефон в одном ракурсе и взвешиваем при вас — кадры и цифры остаются у вас, а не только у нас. Если цифры не изменились — мы прямо об этом скажем и не станем уговаривать на курс. Честный разговор для нас дороже одной продажи: студия живёт на постоянных гостьях.</div>
       </details>
 
       <details class="sp">
         <summary>Не будут ли навязывать курс и «дополнительные услуги»?</summary>
-        <div class="spb">Не будут. На первом визите мастер считает <b>минимально необходимое</b> количество процедур под вашу задачу, а не максимальное. Абонемент можно не покупать вовсе — ходить поштучно по 1 000 ₽. Мы говорим и «вам это не нужно»: например, если ваша проблема — только отёки, дорогой курс липолиза вам никто предлагать не будет.</div>
+        <div class="spb">Не будут. На первом визите мастер считает <b>минимально необходимое</b> количество процедур под вашу задачу, а не максимальное. Курс можно не брать вовсе — ходить по одной процедуре, цена каждой открыто указана в прайсе. Мы говорим и «вам это не нужно»: например, если ваша проблема — только отёки, дорогой курс липолиза вам никто предлагать не будет.</div>
       </details>
 
       <details class="sp">
@@ -1768,10 +1787,10 @@ footer a{color:#F3E2DC}
   <div class="wrap offer-grid">
     <div>
       <span class="eyebrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-gift"/></svg> Действует сейчас</span>
-      <h2>Приходите с подругой — <span class="it">её первый визит тоже 600 ₽</span></h2>
-      <p class="lead">Вдвоём и не так волнительно, и веселее: можно прийти в один день, лечь в соседние окна и потом вместе сравнить замеры. А если хотите сделать подарок — у нас есть сертификаты на любую сумму и любую услугу.</p>
+      <h2>Приходите с подругой — <span class="it">её первый визит тоже 1 000 ₽</span></h2>
+      <p class="lead">Вдвоём и не так волнительно, и веселее: можно прийти в один день, лечь в соседние окна и потом вместе сравнить фото до и после. А если хотите сделать подарок — у нас есть сертификаты на любую сумму и любую услугу.</p>
       <ul class="offer-list">
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Первый визит за 600 ₽ вместо 4 800 ₽ по прайсу — и вам, и подруге</span></li>
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Первый визит за 1 000 ₽ вместо 4 800 ₽ по прайсу — и вам, и подруге</span></li>
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Подарочный сертификат — на процедуру, курс или любую сумму</span></li>
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Свободные окна публикуем в Telegram — иногда остаются на сегодня</span></li>
       </ul>
@@ -1780,7 +1799,7 @@ footer a{color:#F3E2DC}
     <form class="form" id="form-final" novalidate>
       <div class="form-body">
         <h3>Занять окно на этой неделе</h3>
-        <p class="fnote">Оставьте номер — администратор перезвонит, предложит ближайшие свободные окна и закрепит за вами цену первого визита 600 ₽.</p>
+        <p class="fnote">Оставьте номер — администратор перезвонит, предложит ближайшие свободные окна и закрепит за вами цену первого визита 1 000 ₽.</p>
         <div class="field">
           <label for="f4-phone">Телефон</label>
           <input id="f4-phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
@@ -1795,7 +1814,7 @@ footer a{color:#F3E2DC}
             <option>Лучше напишите в мессенджер</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-wide btn-lg">Записаться за 600 ₽</button>
+        <button type="submit" class="btn btn-wide btn-lg">Записаться за 1 000 ₽</button>
         <label class="agree"><input type="checkbox" checked required><span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a> и на обработку персональных данных</span></label>
       </div>
       <div class="form-ok">
@@ -1840,7 +1859,7 @@ footer a{color:#F3E2DC}
             <div class="msgs">
               <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
               <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Telegram</a>
-              <a class="msg" href="https://vk.com/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-heart"/></svg> ВКонтакте</a>
+              <a class="msg" href="https://vk.com/club223150945" target="_blank" rel="noopener"><svg class="ic"><use href="#i-vk"/></svg> ВКонтакте</a>
               <a class="msg" href="https://n1283597.yclients.com" target="_blank" rel="noopener"><svg class="ic"><use href="#i-clock"/></svg> Онлайн-запись</a>
             </div></div>
         </div>
@@ -1880,7 +1899,7 @@ footer a{color:#F3E2DC}
         <h4>Разделы</h4>
         <ul>
           <li><a href="#methods">Процедуры</a></li>
-          <li><a href="#prices">Цены и абонементы</a></li>
+          <li><a href="#prices">Цены на процедуры</a></li>
           <li><a href="#reviews">Отзывы</a></li>
           <li><a href="#faq">Вопросы и ответы</a></li>
           <li><a href="#contacts">Контакты</a></li>
@@ -1893,7 +1912,7 @@ footer a{color:#F3E2DC}
           <li><a href="tel:88005508604">8 800 550-86-04</a></li>
           <li><a href="https://wa.me/79214334760" target="_blank" rel="noopener">WhatsApp +7 921 433-47-60</a></li>
           <li><a href="https://t.me/dopaminestudio" target="_blank" rel="noopener">Telegram-канал</a></li>
-          <li><a href="https://vk.com/dopaminestudio" target="_blank" rel="noopener">ВКонтакте</a></li>
+          <li><a href="https://vk.com/club223150945" target="_blank" rel="noopener">ВКонтакте</a></li>
           <li><a href="https://n1283597.yclients.com" target="_blank" rel="noopener">Онлайн-запись</a></li>
           <li>пр. Энергетиков, 37, офис 813</li>
         </ul>
@@ -1910,7 +1929,7 @@ footer a{color:#F3E2DC}
 <div class="sticky">
   <a href="tel:88005508604" class="btn btn-ghost" aria-label="Позвонить"><svg class="ic"><use href="#i-phone"/></svg></a>
   <a href="https://wa.me/79214334760" target="_blank" rel="noopener" class="btn btn-ghost" aria-label="Написать в WhatsApp"><svg class="ic"><use href="#i-wa"/></svg></a>
-  <a href="#first" class="btn">Записаться за 600 ₽</a>
+  <a href="#first" class="btn">Записаться за 1 000 ₽</a>
 </div>
 
 <script>
@@ -2034,7 +2053,7 @@ footer a{color:#F3E2DC}
       sendLead(Object.assign({form:'quiz'}, answers));
 
       var ch = answers['Куда отправить'] || '';
-      var text = 'Здравствуйте! Прошла тест на сайте, хочу записаться на первый визит за 600 ₽.\n'
+      var text = 'Здравствуйте! Прошла тест на сайте, хочу записаться на первый визит за 1 000 ₽.\n'
         + 'Зона: ' + (answers['Зона'] || '—') + '\n'
         + 'Задача: ' + (answers['Задача'] || '—') + '\n'
         + 'Опыт: ' + (answers['Опыт'] || '—') + '\n'
@@ -2043,6 +2062,8 @@ footer a{color:#F3E2DC}
         window.open('https://wa.me/79214334760?text=' + encodeURIComponent(text), '_blank', 'noopener');
       } else if(ch.indexOf('Telegram') > -1){
         window.open('https://t.me/dopaminestudio', '_blank', 'noopener');
+      } else if(ch.indexOf('ВКонтакте') > -1){
+        window.open('https://vk.me/club223150945', '_blank', 'noopener');
       }
       done(quiz);
     });
