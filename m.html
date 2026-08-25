@@ -257,12 +257,6 @@ main>section{position:relative}
 .svc em{font-style:normal;font-family:'Cormorant',Georgia,serif;font-size:25px;font-weight:600;
   color:var(--plum);white-space:nowrap;line-height:1}
 .svc li.hit em{color:var(--cta)}
-.gifts{list-style:none;display:grid;gap:10px;margin-bottom:16px;text-align:left}
-.gifts li{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;
-  border-left:3px solid var(--cta)}
-.gifts li.gold{border-left-color:var(--gold)}
-.gifts b{display:block;font-size:15.5px;font-weight:800;color:var(--plum);margin-bottom:4px}
-.gifts i{display:block;font-style:normal;font-size:13.5px;line-height:1.45;color:var(--ink-2)}
 .pcards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .pcard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:15px 14px;
   text-align:center}
@@ -749,13 +743,9 @@ footer a{color:#F3E2DC;text-decoration:none}
 <!-- ═══ 6. КВИЗ: подбор программы (точка захвата №2) ═══ -->
 <section class="blush" id="podbor">
   <div class="wrap">
-    <span class="eyebrow">1 минута · 5 вопросов · два подарка</span>
-    <h2>Пройдите тест — заберите чек-лист <span class="it">и сертификат на 1&nbsp;000&nbsp;₽</span></h2>
-    <p class="lead" style="margin-bottom:14px">Пять вопросов о вашей зоне — и два подарка за прохождение.</p>
-    <ul class="gifts">
-      <li><b>Чек-лист «10 вопросов салону»</b><i>Что спросить до оплаты курса и какие ответы должны насторожить. Открывается сразу после теста.</i></li>
-      <li class="gold"><b>Сертификат на 1 000 ₽</b><i>Списывается при оплате курса от 5 процедур, действует 14 дней.</i></li>
-    </ul>
+    <span class="eyebrow">1 минута · 5 вопросов</span>
+    <h2>Подберите программу <span class="it">и узнайте цену курса</span></h2>
+    <p class="lead" style="margin-bottom:16px">Пять вопросов — и мы посчитаем ваш курс.</p>
 
     <form class="quiz" id="quiz" novalidate>
       <div class="quiz-head">
@@ -821,8 +811,8 @@ footer a{color:#F3E2DC;text-decoration:none}
         </div>
 
         <div class="qstep" data-step="6">
-          <h3>Куда отправить подарки?</h3>
-          <p class="qsub">Пришлём чек-лист и закрепим сертификат на 1 000 ₽ за вашим номером.</p>
+          <h3>Куда отправить программу?</h3>
+          <p class="qsub">Пришлём расчёт курса и закрепим первый визит за 1 000 ₽.</p>
           <div class="qopts" data-name="Куда отправить" style="margin-bottom:14px">
             <button type="button" class="qopt sel"><span class="qi"></span>В WhatsApp</button>
             <button type="button" class="qopt"><span class="qi"></span>В Telegram</button>
@@ -830,11 +820,11 @@ footer a{color:#F3E2DC;text-decoration:none}
             <button type="button" class="qopt"><span class="qi"></span>Позвоните мне</button>
           </div>
           <div class="field">
-            <label for="q-phone">Номер, на который отправить подарки</label>
+            <label for="q-phone">Номер, на который отправить</label>
             <input id="q-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
                    placeholder="+7 999 123-45-67" required>
           </div>
-          <button type="submit" class="btn">Забрать чек-лист и сертификат</button>
+          <button type="submit" class="btn">Получить программу и цену курса</button>
           <label class="agree"><input type="checkbox" checked required>
             <span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a>
             и на обработку персональных данных</span></label>
@@ -846,12 +836,9 @@ footer a{color:#F3E2DC;text-decoration:none}
 
       <div class="quiz-ok">
         <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
-        <h2>Подарки ваши</h2>
-        <p class="lead">Чек-лист открывается прямо сейчас. Сертификат на 1 000 ₽ закреплён
-          за вашим номером — администратор подтвердит его при звонке.</p>
-        <a class="btn" href="checklist.html" target="_blank" rel="noopener"
-           style="margin-bottom:14px">Открыть чек-лист</a>
-        <p class="lead">Хотите быстрее — напишите сами:</p>
+        <h2>Программа собрана</h2>
+        <p class="lead">Администратор пришлёт расчёт курса и свободные окна.
+          Хотите быстрее — напишите сами:</p>
         <div class="msgs">
           <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener">
             <svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
@@ -1068,7 +1055,6 @@ footer a{color:#F3E2DC;text-decoration:none}
            нескамности. Строка ниже раскомментируется, когда придут реквизиты.
       <span>ИП Фамилия И. О. · ИНН 000000000000 · ОГРНИП 000000000000000</span> -->
       <span>© 2026 Студия «Дофамин», Санкт-Петербург</span>
-      <a href="checklist.html">Чек-лист: 10 вопросов салону</a>
       <a href="privacy.html">Политика конфиденциальности</a>
     </div>
   </div>

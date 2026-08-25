@@ -628,17 +628,6 @@ header{
 .qgift{display:flex;gap:15px;align-items:center;border-radius:18px;padding:18px 20px;margin-bottom:18px;
   background:linear-gradient(135deg,#FDF0E4,#FBE6E6);border:1px solid #F6DCD3}
 .qgift svg{width:27px;height:27px;color:var(--cta);flex:none}
-/* два подарка над квизом */
-.gifts{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px;margin:26px auto 0;text-align:left}
-.gift{display:flex;gap:15px;align-items:flex-start;background:var(--g-card);border:1px solid #F6DCE2;
-  border-radius:var(--r);padding:20px 22px;box-shadow:var(--sh-sm)}
-.gift-ic{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
-  background:linear-gradient(135deg,#FBE3EC,#F6CFDD);color:var(--cta)}
-.gift-ic.gold{background:linear-gradient(135deg,#F8EEDB,#EEDCB4);color:#9C7526}
-.gift-ic svg{width:23px;height:23px}
-.gift b{display:block;font-size:16.5px;color:var(--plum);margin-bottom:5px}
-.gift span{display:block;font-size:14.5px;line-height:1.5;color:var(--ink-2)}
-@media(max-width:720px){.gifts{grid-template-columns:1fr;gap:12px}.gift{padding:17px 18px}}
 .qgift p{font-size:14.5px;line-height:1.45}
 @media(max-width:640px){.qopts{grid-template-columns:1fr}.quiz-head,.quiz-body{padding-left:20px;padding-right:20px}}
 
@@ -1081,7 +1070,7 @@ footer a{color:#F3E2DC}
           </span>
           <a href="#first" class="btn btn-lg">Записаться на первый визит</a>
         </span>
-        <a href="#quiz" class="btn btn-ghost">Забрать чек-лист и сертификат</a>
+        <a href="#quiz" class="btn btn-ghost">Подобрать программу</a>
       </div>
       <p class="note">Перезвоним в течение 15 минут в рабочее время и подтвердим удобное окно.</p>
 
@@ -1420,26 +1409,9 @@ footer a{color:#F3E2DC}
 <section class="blush" id="quiz">
   <div class="wrap">
     <div class="center" style="margin-bottom:34px">
-      <span class="eyebrow plain">1 минута · 5 вопросов · два подарка</span>
-      <h2>Пройдите тест — заберите чек-лист<br><span class="it">и сертификат на 1&nbsp;000&nbsp;₽</span></h2>
-      <p class="lead">Пять вопросов о вашей зоне и задаче. За прохождение отдаём два подарка: чек-лист <b>«10 вопросов салону перед покупкой курса»</b> — с ним вы сравните нас с любым другим салоном — и <b>сертификат на 1 000 ₽</b>, который спишется с вашего курса.</p>
-
-      <div class="gifts rv">
-        <div class="gift">
-          <div class="gift-ic"><svg class="ic"><use href="#i-shield"/></svg></div>
-          <div>
-            <b>Чек-лист «10 вопросов салону»</b>
-            <span>Что спросить до того, как оплатить курс, и какие ответы должны насторожить. Открывается сразу после теста — можно распечатать и идти с ним хоть к нам, хоть к соседям.</span>
-          </div>
-        </div>
-        <div class="gift">
-          <div class="gift-ic gold"><svg class="ic"><use href="#i-gift"/></svg></div>
-          <div>
-            <b>Сертификат на 1 000 ₽</b>
-            <span>Списывается при оплате курса от 5 процедур, действует 14 дней. Закрепим за вашим номером — администратор подтвердит при звонке.</span>
-          </div>
-        </div>
-      </div>
+      <span class="eyebrow plain">1 минута · 5 вопросов</span>
+      <h2>Подберите свою программу <span class="it">и узнайте цену курса</span></h2>
+      <p class="lead">Ответьте на пять простых вопросов — соберём программу под вашу зону, посчитаем количество процедур и стоимость курса. В подарок за прохождение — первый визит за 1 000 ₽ вместо 3 800 ₽ по прайсу.</p>
     </div>
 
     <form class="quiz" id="quiz-form" novalidate>
@@ -1510,7 +1482,7 @@ footer a{color:#F3E2DC}
         <div class="qstep" data-step="6">
           <div class="qgift">
             <svg class="ic"><use href="#i-gift"/></svg>
-            <p><b>Готово! Подарки ваши.</b> Куда отправить чек-лист и сертификат? За вашим номером закрепляем 1 000 ₽ на курс — сертификат действует 14 дней.</p>
+            <p><b>Готово! Программа собрана.</b> Куда отправить расчёт и подобранную программу? За вашим номером закрепляем первый визит за 1 000 ₽ вместо 3 800 ₽.</p>
           </div>
           <div class="qopts" data-name="Куда отправить" style="margin-bottom:16px">
             <button type="button" class="qopt sel"><span class="qi"><svg class="ic"><use href="#i-check"/></svg></span>В WhatsApp</button>
@@ -1520,10 +1492,10 @@ footer a{color:#F3E2DC}
             <button type="button" class="qopt"><span class="qi"><svg class="ic"><use href="#i-check"/></svg></span>SMS</button>
           </div>
           <div class="field">
-            <label for="q-phone">Номер, на который отправить подарки</label>
+            <label for="q-phone">Номер, на который отправить программу</label>
             <input id="q-phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel">
           </div>
-          <button type="submit" class="btn btn-wide btn-lg">Забрать чек-лист и сертификат</button>
+          <button type="submit" class="btn btn-wide btn-lg">Получить программу и цену курса</button>
           <label class="agree"><input type="checkbox" checked required><span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a> и на обработку персональных данных</span></label>
         </div>
 
@@ -1535,10 +1507,8 @@ footer a{color:#F3E2DC}
 
       <div class="form-ok" style="padding:36px 32px 40px">
         <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
-        <h4>Подарки ваши</h4>
-        <p>Чек-лист открывается прямо сейчас — <a href="checklist.html" target="_blank" rel="noopener" style="color:var(--cta);font-weight:800">откройте и сохраните его</a>. Сертификат на 1 000 ₽ закреплён за вашим номером: администратор подтвердит его при звонке и заодно посчитает курс под вашу зону.</p>
-        <a href="checklist.html" target="_blank" rel="noopener" class="btn btn-wide" style="max-width:420px;margin:0 auto 18px">Открыть чек-лист</a>
-        <p style="margin-bottom:14px">Хотите быстрее — напишите нам сами:</p>
+        <h4>Программа собрана</h4>
+        <p>Мы получили ваши ответы. Администратор пришлёт программу и расчёт курса, а также покажет ближайшие свободные окна. Хотите быстрее — напишите нам сами:</p>
         <div class="msgs" style="justify-content:center">
           <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
           <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Telegram</a>
@@ -1935,7 +1905,6 @@ footer a{color:#F3E2DC}
           <li><a href="#reviews">Отзывы</a></li>
           <li><a href="#faq">Вопросы и ответы</a></li>
           <li><a href="#contacts">Контакты</a></li>
-          <li><a href="checklist.html">Чек-лист: 10 вопросов салону</a></li>
           <li><a href="privacy.html">Политика конфиденциальности</a></li>
         </ul>
       </div>
@@ -2058,7 +2027,7 @@ footer a{color:#F3E2DC}
       pct.textContent = 'Заполнено на ' + p + '%';
       back.hidden = cur === 1;
       hint.textContent = cur === total
-        ? 'Никакого спама: номер нужен только чтобы прислать подарки'
+        ? 'Никакого спама: номер нужен только чтобы прислать программу'
         : 'Выберите один вариант — перейдём к следующему вопросу';
     }
 
@@ -2086,7 +2055,7 @@ footer a{color:#F3E2DC}
       sendLead(Object.assign({form:'quiz'}, answers));
 
       var ch = answers['Куда отправить'] || '';
-      var text = 'Здравствуйте! Прошла тест на сайте — заберите за мной чек-лист и сертификат на 1 000 ₽.\n'
+      var text = 'Здравствуйте! Прошла тест на сайте, хочу записаться на первый визит за 1 000 ₽.\n'
         + 'Зона: ' + (answers['Зона'] || '—') + '\n'
         + 'Задача: ' + (answers['Задача'] || '—') + '\n'
         + 'Опыт: ' + (answers['Опыт'] || '—') + '\n'
