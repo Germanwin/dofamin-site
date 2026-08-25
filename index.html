@@ -506,13 +506,27 @@ header{
   color:transparent;-webkit-text-fill-color:transparent;padding-right:.06em}
 .vc-note{margin-top:14px;font-size:13px;color:var(--ink-2);line-height:1.45}
 /* четыре ответа, которые гость уносит с первого визита */
-.vc-answers{list-style:none;display:grid;gap:15px;counter-reset:va}
-.vc-answers li{counter-increment:va;display:flex;gap:13px;align-items:flex-start}
-.vc-answers li::before{content:counter(va);flex:none;width:27px;height:27px;border-radius:50%;
-  display:grid;place-items:center;background:var(--g-cta);color:#fff;font-size:13.5px;font-weight:800;
-  margin-top:2px;box-shadow:0 7px 12px -7px rgba(169,66,104,.9)}
-.vc-answers b{display:block;color:var(--plum);font-size:16.5px;line-height:1.35;margin-bottom:3px}
-.vc-answers span{display:block;font-size:14.8px;line-height:1.5;color:var(--ink-2)}
+/* таймлайн первого визита: 50 минут по шагам */
+.visit-flow{list-style:none;margin-bottom:22px}
+.visit-flow li{display:grid;grid-template-columns:66px 14px 1fr;gap:0 13px;padding-bottom:17px}
+.visit-flow li:last-child{padding-bottom:0}
+.visit-flow .vt{font-size:12.5px;font-weight:800;color:var(--cta);text-align:right;padding-top:3px;
+  font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.visit-flow .vp{position:relative;padding-top:6px}
+.visit-flow .vp i{display:block;width:11px;height:11px;border-radius:50%;background:var(--g-cta);
+  box-shadow:0 0 0 3px rgba(192,83,121,.14)}
+.visit-flow li:not(:last-child) .vp::after{content:"";position:absolute;left:5px;top:21px;bottom:-17px;
+  width:1px;background:var(--line-2)}
+.visit-flow b{display:block;color:var(--plum);font-size:16px;line-height:1.3;margin-bottom:2px}
+.visit-flow span{display:block;font-size:14.6px;line-height:1.5;color:var(--ink-2)}
+/* три обещания рядом с бланком */
+.vc-prom{list-style:none;display:grid;gap:12px;margin-top:10px}
+.vc-prom li{display:flex;gap:11px;align-items:flex-start;font-size:14.6px;line-height:1.45;color:var(--ink-2)}
+.vc-prom b{color:var(--plum)}
+.vc-prom .pi{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(135deg,#FBE3EC,#F6CFDD);color:var(--cta);margin-top:1px}
+.vc-prom .pi svg{width:13px;height:13px;stroke-width:2.8}
+@media(max-width:600px){.visit-flow li{grid-template-columns:56px 12px 1fr;gap:0 10px}}
 .vc-price{margin-top:20px;padding-top:16px;border-top:2px solid var(--line-2);
   display:flex;align-items:center;gap:22px;flex-wrap:wrap}
 .vc-price > div{flex:none}
@@ -1200,9 +1214,22 @@ footer a{color:#F3E2DC}
 <section class="band" id="first">
   <div class="wrap offer-grid">
     <div>
-      <h2>Один визит за 1 000 ₽ —<br>и вы <span class="it">перестанете гадать</span></h2>
-      <p class="lead">Курс — это несколько тысяч рублей вперёд и месяц вашего времени. Прежде чем на такое решаться, разумно получить ответы. Один визит их даёт — а решаете вы потом, дома, спокойно.</p>
+      <h2>За 50 минут вы увидите,<br><span class="it">работает ли это на&nbsp;вашем&nbsp;теле</span></h2>
+      <p class="lead">Первый визит стоит 1 000 ₽ — как одна процедура по прайсу. Но это не демо на пять минут: вас расспросят, взвесят, сделают полноценную процедуру на вашей зоне и отдадут программу на руки. Решение — потом, дома.</p>
       <div class="value-card">
+        <!-- СОГЛАСОВАТЬ СО СТУДИЕЙ: тайминг визита по шагам — реалистичная раскладка,
+             но точные минуты должен подтвердить мастер -->
+        <ul class="visit-flow">
+          <li><span class="vt">0–10 мин</span><span class="vp"><i></i></span>
+            <div><b>Разговор и анкета здоровья</b><span>Что беспокоит, что уже пробовали, что не сработало. Проверим противопоказания: беременность, онкология, кардиостимулятор, тромбозы. Раздеваться на этом этапе не нужно.</span></div></li>
+          <li><span class="vt">10–15 мин</span><span class="vp"><i></i></span>
+            <div><b>Снимаем исходные данные</b><span>Встаёте на весы, делаем фото в одном ракурсе — на ваш телефон. Кадры остаются у вас, а не в чужой папке.</span></div></li>
+          <li><span class="vt">15–45 мин</span><span class="vp"><i></i></span>
+            <div><b>Процедура 30 минут на вашей зоне</b><span>Методику подбираем под задачу, а не по прайсу. Закрытый кабинет, мастер-женщина, одноразовый комплект. Без боли, без уколов, без следов — сразу идёте по делам.</span></div></li>
+          <li><span class="vt">45–50 мин</span><span class="vp"><i></i></span>
+            <div><b>Второе взвешивание и программа</b><span>Смотрим, что изменилось за сеанс, считаем курс под вашу задачу, распечатываем и отдаём. Ничего не подписываете на месте.</span></div></li>
+        </ul>
+
         <div class="vc-top">
           <div class="vc-doc" aria-hidden="true">
             <div class="vd-sheet">
@@ -1219,21 +1246,18 @@ footer a{color:#F3E2DC}
             </div>
           </div>
           <div class="vc-intro">
-            <h3>Все ответы — на одном листе</h3>
-            <p>Программу распечатываем и отдаём на руки: ваш вес до и после, число процедур и цена курса. Фото остаются в вашем телефоне. Ничего не подписываете на месте — можно уйти думать и сравнивать.</p>
+            <h3>Три вещи, которые мы обещаем</h3>
+            <ul class="vc-prom">
+              <li><span class="pi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>Не сработало — скажем сами.</b> Если за сеанс цифры не сдвинулись, вы услышите это от нас первой, и курс вам никто не предложит.</span></li>
+              <li><span class="pi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>Считаем минимум, а не максимум.</b> Закрывают задачу три процедуры — назовём три. Не решает её аппарат вовсе — скажем и это.</span></li>
+              <li><span class="pi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>Решаете дома.</b> Никаких «только сегодня»: программа на руках, весь прайс открыт на этой странице.</span></li>
+            </ul>
           </div>
         </div>
 
-        <ul class="vc-answers">
-          <li><div><b>Реагирует ли ваша зона</b><span>Взвешиваем и фотографируем до и после процедуры — в одном ракурсе, на ваш телефон. Если за сеанс ничего не изменилось, вы увидите это первой, и мы скажем об этом прямо.</span></div></li>
-          <li><div><b>Сколько процедур нужно именно вам</b><span>Не «десять, так выгоднее», а число под вашу зону и исходные данные: отёки уходят за пару сеансов, локальный жир и кожа требуют курса.</span></div></li>
-          <li><div><b>Во что обойдётся курс целиком</b><span>Расчёт по действующему прайсу: какая методика, сколько визитов, итоговая сумма. С этим листом можно обойти другие салоны и сравнить.</span></div></li>
-          <li><div><b>Можно ли вам вообще</b><span>Анкета здоровья до процедуры: беременность, онкология, кардиостимулятор, эпилепсия, тромбозы, камни — стоп-факторы, о которых лучше узнать до оплаты курса, а не после.</span></div></li>
-        </ul>
-
         <div class="vc-price">
           <div><span>Первый визит</span><b>1 000 ₽</b></div>
-          <p>Столько же стоит одна процедура по прайсу. Консультацию, фото со взвешиванием, одноразовый комплект и распечатанную программу отдаём сверху.</p>
+          <p>Столько же стоит одна процедура по прайсу. Разговор, взвешивание, фото, одноразовый комплект и программа на руки — сверху, без доплат. Дальше визиты короче: 30 минут, только процедура.</p>
         </div>
         <p class="vc-note">Действует один раз на первое посещение. Приходите с подругой — её первый визит тоже 1 000 ₽.</p>
       </div>
