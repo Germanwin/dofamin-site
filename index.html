@@ -133,7 +133,6 @@ section.band+section{border-radius:60px 60px 0 0}
 main>section:not(.hero),footer{content-visibility:auto}
 #pains{contain-intrinsic-size:auto 603px}
 #how{contain-intrinsic-size:auto 803px}
-#first{contain-intrinsic-size:auto 631px}
 #benefits{contain-intrinsic-size:auto 1100px}
 #methods{contain-intrinsic-size:auto 2116px}
 #quiz{contain-intrinsic-size:auto 717px}
@@ -149,7 +148,6 @@ footer{contain-intrinsic-size:auto 298px}
 @media(max-width:560px){
   #pains{contain-intrinsic-size:auto 709px}
   #how{contain-intrinsic-size:auto 1577px}
-  #first{contain-intrinsic-size:auto 1284px}
   #methods{contain-intrinsic-size:auto 2564px}
   #quiz{contain-intrinsic-size:auto 993px}
   #prices{contain-intrinsic-size:auto 2127px}
@@ -434,40 +432,6 @@ header{
   background:linear-gradient(135deg,rgba(255,255,255,.3),rgba(255,255,255,.12));
   color:#fff;display:grid;place-items:center;margin-top:1px;border:1px solid rgba(255,255,255,.22)}
 .offer-list .bi svg{width:14px;height:14px;stroke-width:2.6}
-/* ── карточка первого визита: сценарий приёма по шагам ─────────────── */
-.value-card{background:#FFFCFB;color:var(--ink);border-radius:var(--r);
-  padding:26px 28px 24px;margin-top:26px;box-shadow:0 26px 44px -26px rgba(74,23,35,.6)}
-.vc-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
-  flex-wrap:wrap;margin-bottom:6px}
-.vc-head h3{color:var(--plum)}
-.vc-head span{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
-  color:var(--ink-2)}
-
-.visit{list-style:none;display:grid;gap:0;margin-top:14px}
-.visit li{display:flex;gap:18px;align-items:flex-start;padding:14px 0;
-  border-top:1px dashed var(--line-2)}
-.visit li:first-child{border-top:0;padding-top:4px}
-.visit .vt{flex:none;width:76px;padding-top:3px;font-size:12.5px;font-weight:800;
-  letter-spacing:.04em;text-transform:uppercase;color:var(--cta)}
-.visit li > span:last-child{font-size:14.8px;line-height:1.5;color:var(--ink-2)}
-.visit b{display:block;color:var(--plum);font-size:16.5px;line-height:1.35;margin-bottom:3px}
-
-.vc-price{margin-top:18px;padding-top:16px;border-top:2px solid var(--line-2);
-  display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.vc-price > div{flex:none}
-.vc-price > div span{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--ink-2);margin-bottom:2px}
-.vc-price > div b{font-family:'Cormorant',Georgia,serif;font-size:46px;font-weight:600;line-height:1;
-  background:var(--g-cta);-webkit-background-clip:text;background-clip:text;
-  color:transparent;-webkit-text-fill-color:transparent;padding-right:.06em}
-.vc-price p{flex:1;min-width:240px;font-size:14px;line-height:1.5;color:var(--ink-2)}
-@media(max-width:600px){
-  .value-card{padding:22px 18px 20px}
-  .visit li{flex-direction:column;gap:4px;padding:12px 0}
-  .visit .vt{width:auto;padding-top:0}
-  .vc-price{gap:14px}
-  .vc-price > div b{font-size:40px}
-}
 .offer-price .v{font-family:'Cormorant',Georgia,serif;font-size:46px;font-weight:600;line-height:1;
   background:linear-gradient(120deg,#F6E2B4,#DDBC78 55%,#F0D9A4);-webkit-background-clip:text;
   background-clip:text;color:transparent;-webkit-text-fill-color:transparent;padding-right:.1em}
@@ -989,7 +953,7 @@ footer a{color:#F3E2DC}
       <a href="tel:88005508604">8 800 550-86-04</a>
       <span>звонок бесплатный</span>
     </div>
-    <a href="#first" class="btn" style="padding:13px 22px;font-size:15.5px">Записаться</a>
+    <a href="#action" class="btn" style="padding:13px 22px;font-size:15.5px">Записаться</a>
   </div>
 </header>
 
@@ -1024,7 +988,7 @@ footer a{color:#F3E2DC}
               <path class="a-head" d="M60.2 15.1 L46.4 26.3 Q49.2 18.5 42.5 13.7Z"/>
             </svg>
           </span>
-          <a href="#first" class="btn btn-lg">Записаться на первый визит</a>
+          <a href="#action" class="btn btn-lg">Записаться на первый визит</a>
         </span>
         <a href="#quiz" class="btn btn-ghost">Подобрать программу</a>
       </div>
@@ -1131,81 +1095,6 @@ footer a{color:#F3E2DC}
       <div class="stat"><div class="sv">5,0 <span class="st">★</span></div><div class="sl">28 отзывов на Яндекс.Картах</div></div>
     </div>
     <p class="note center" style="margin-top:26px;max-width:760px;margin-left:auto;margin-right:auto">Один сеанс — 30 минут. Курс подбираем индивидуально: чаще всего это 10 процедур 2–3 раза в неделю, но точное число скажем только после замеров и анкеты здоровья.</p>
-  </div>
-</section>
-
-<!-- ═══════════ 4. ПЕРВЫЙ ВИЗИТ ПО ШАГАМ + ФОРМА ═══════════ -->
-<section class="band" id="first">
-  <div class="wrap offer-grid">
-    <div>
-      <h2>Как проходит первый визит — <span class="it">40 минут по шагам</span></h2>
-      <p class="lead">Чтобы вы понимали, куда идёте и что с вами будут делать. Ничего не подписываете и не оплачиваете вперёд: за визит платите на месте, решение о курсе принимаете потом и дома.</p>
-      <div class="value-card">
-        <div class="vc-head">
-          <h3>Первый визит по шагам</h3>
-          <span>Красногвардейский район, БЦ «Лидер», 8 этаж</span>
-        </div>
-        <ul class="visit">
-          <li>
-            <span class="vt">0–5 мин</span>
-            <span><b>Анкета здоровья</b>Заполняете короткую анкету: хронические заболевания, беременность, металл в теле, недавние операции. По ней мастер видит, какие аппараты вам не подходят.</span>
-          </li>
-          <li>
-            <span class="vt">5–10 мин</span>
-            <span><b>Мастер смотрит зону</b>Вы показываете, что беспокоит. Мастер говорит, с чем здесь работать — с отёком, локальным жиром или потерей тонуса кожи — и какой аппарат это делает. Если аппаратные методики вашу задачу не решают, вы услышите это сразу.</span>
-          </li>
-          <li>
-            <span class="vt">10–40 мин</span>
-            <span><b>Сама процедура</b>30 минут на выбранной зоне. Закрытый кабинет, мастер-женщина, одноразовый комплект: костюм, носочки, шапочка, бахилы. Полностью раздеваться не нужно — можно остаться в своём белье.</span>
-          </li>
-          <li>
-            <span class="vt">В конце</span>
-            <span><b>Цифры и расчёт</b>Взвешиваемся, при желании снимаем фото до и после на ваш телефон. Мастер называет, сколько процедур обычно берут в такой ситуации и во что это выйдет по прайсу.</span>
-          </li>
-          <li>
-            <span class="vt">Дома</span>
-            <span><b>Решение</b>Курс можно не брать вовсе и ходить по одной процедуре — цена каждой открыто указана в прайсе ниже. Записаться на следующий визит можно потом, из дома.</span>
-          </li>
-        </ul>
-        <div class="vc-price">
-          <div><span>Первый визит</span><b>1 000 ₽</b></div>
-          <p>Цена одна, какой бы аппарат вам ни подошёл. По прайсу процедуры стоят от 500 до 1 800 ₽ — весь список открыто лежит <a href="#prices" style="color:var(--cta);font-weight:700">на этой странице</a>.</p>
-        </div>
-      </div>
-    </div>
-
-    <form class="form" id="form-first" novalidate>
-      <div class="form-body">
-        <h3>Записаться на первый визит за 1 000 ₽</h3>
-        <p class="fnote">Оставьте номер телефона — администратор перезвонит в течение 15 минут, покажет свободные окна и ответит на вопросы. За вашим номером закрепим цену 1 000 ₽.</p>
-        <div class="field">
-          <label for="f1-phone">Телефон, на который позвонить</label>
-          <input id="f1-phone" name="phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
-        </div>
-        <div class="field">
-          <label for="f1-zone">С какой зоной работаем</label>
-          <select id="f1-zone" name="zone">
-            <option>Живот и бока</option>
-            <option>Бёдра и ягодицы</option>
-            <option>Руки</option>
-            <option>Подбородок и овал лица</option>
-            <option>Всё тело</option>
-            <option selected>Не знаю — нужна консультация</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-wide btn-lg">Записаться за 1 000 ₽</button>
-        <label class="agree"><input type="checkbox" checked required><span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a> и на обработку персональных данных</span></label>
-      </div>
-      <div class="form-ok">
-        <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
-        <h4>Заявка у нас</h4>
-        <p>Администратор перезвонит с номера 8 800 550-86-04 в течение 15 минут в рабочее время. Если удобнее в переписке — напишите нам прямо сейчас:</p>
-        <div class="msgs" style="justify-content:center">
-          <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
-          <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Telegram</a>
-        </div>
-      </div>
-    </form>
   </div>
 </section>
 
@@ -1717,7 +1606,7 @@ footer a{color:#F3E2DC}
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>Бизнес-центр «Лидер», наземная парковка у дома</li>
       </ul>
       <div class="cta-row" style="margin-top:28px">
-        <a href="#first" class="btn">Записаться на первый визит</a>
+        <a href="#action" class="btn">Записаться на первый визит</a>
         <a href="https://t.me/dopaminestudio" target="_blank" rel="noopener" class="btn btn-ghost">Смотреть студию в Telegram</a>
       </div>
     </div>
@@ -1744,7 +1633,7 @@ footer a{color:#F3E2DC}
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Про цену спрашивайте прямо: назовём сумму в переписке, без <b>«приходите, на месте всё расскажем»</b></span></li>
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Можно прислать фото — по нему мастер видит, отёк это, жировая «ловушка» или дряблость кожи</span></li>
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Скажем «вам это не нужно», если задачу закроют две процедуры, а не курс из десяти</span></li>
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Захотите проверить на себе — <a href="#first" style="color:#fff;text-decoration:underline">первый визит за 1 000 ₽</a>: анкета здоровья, разбор зоны и процедура 30 минут</span></li>
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Захотите проверить на себе — первый визит за 1 000 ₽: анкета здоровья, разбор зоны и процедура 30 минут</span></li>
       </ul>
       <div class="msgs" style="margin-top:26px">
         <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> Написать в WhatsApp</a>
@@ -1886,7 +1775,7 @@ footer a{color:#F3E2DC}
 <div class="sticky">
   <a href="tel:88005508604" class="btn btn-ghost" aria-label="Позвонить"><svg class="ic"><use href="#i-phone"/></svg></a>
   <a href="https://wa.me/79214334760" target="_blank" rel="noopener" class="btn btn-ghost" aria-label="Написать в WhatsApp"><svg class="ic"><use href="#i-wa"/></svg></a>
-  <a href="#first" class="btn">Записаться за 1 000 ₽</a>
+  <a href="#action" class="btn">Записаться за 1 000 ₽</a>
 </div>
 
 <script>
@@ -1946,7 +1835,7 @@ footer a{color:#F3E2DC}
   }
 
   /* ---- простые формы ---- */
-  ['form-first','form-price','form-final'].forEach(function(id){
+  ['form-price','form-final'].forEach(function(id){
     var f = document.getElementById(id);
     if(!f) return;
     f.addEventListener('submit', function(e){
