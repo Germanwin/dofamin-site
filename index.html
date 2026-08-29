@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Дофамин — аппаратная коррекция фигуры в СПб | Первый визит 1 000 ₽</title>
-<meta name="description" content="Студия аппаратной коррекции фигуры и косметологии «Дофамин», СПб, пр. Энергетиков 37. Кавитация, RF-лифтинг, лазерный липолиз, прессотерапия. Минус 0,5–2 см за сеанс. Первый визит с фото до и после, консультацией, процедурой и программой курса — 1 000 ₽, с возвратом денег, если объём не уйдёт.">
+<meta name="description" content="Студия аппаратной коррекции фигуры и косметологии «Дофамин», СПб, пр. Энергетиков 37. Кавитация, RF-лифтинг, лазерный липолиз, прессотерапия. Первый визит — анкета здоровья, разбор зоны мастером и процедура 30 минут — 1 000 ₽. Прайс открыт на странице.">
 <meta name="theme-color" content="#F7EDE6">
 <!-- Демо-превью для клиента: закрыто от индексации, чтобы не путалось с настоящим сайтом студии.
      После покупки и переезда на домен клиента эту строку нужно удалить. -->
@@ -14,7 +14,7 @@
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Дофамин">
 <meta property="og:title" content="Минус 0,5–2 см объёмов за один сеанс — студия «Дофамин», СПб">
-<meta property="og:description" content="Аппаратная коррекция фигуры у Ладожской. Первый визит с фото до и после, процедурой и программой курса — 1 000 ₽. Не уйдёт объём — вернём деньги.">
+<meta property="og:description" content="Аппаратная коррекция фигуры у Ладожской. Первый визит — анкета здоровья, разбор зоны мастером и процедура 30 минут — 1 000 ₽.">
 <meta property="og:image" content="assets/img/reception.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23A87C86'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23FDF9F5' text-anchor='middle'%3E%D0%94%3C/text%3E%3C/svg%3E">
 <!-- Сюда вставьте счётчик Яндекс.Метрики (с вебвизором) и/или Google Analytics.
@@ -434,91 +434,39 @@ header{
   background:linear-gradient(135deg,rgba(255,255,255,.3),rgba(255,255,255,.12));
   color:#fff;display:grid;place-items:center;margin-top:1px;border:1px solid rgba(255,255,255,.22)}
 .offer-list .bi svg{width:14px;height:14px;stroke-width:2.6}
-/* ── «чек» первого визита: распакованная ценность шага ──────────────── */
+/* ── карточка первого визита: сценарий приёма по шагам ─────────────── */
 .value-card{background:#FFFCFB;color:var(--ink);border-radius:var(--r);
   padding:26px 28px 24px;margin-top:26px;box-shadow:0 26px 44px -26px rgba(74,23,35,.6)}
-.vc-top{display:flex;gap:22px;align-items:flex-start;margin-bottom:20px}
-.vc-intro h3{color:var(--plum);margin-bottom:7px}
-.vc-intro p{font-size:15px;color:var(--ink-2);line-height:1.5}
+.vc-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  flex-wrap:wrap;margin-bottom:6px}
+.vc-head h3{color:var(--plum)}
+.vc-head span{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--ink-2)}
 
-/* нарисованный предмет: именной бланк программы, который гость уносит с собой.
-   Под ним — второй лист из стопки, снизу лист «оторван» фестонами */
-.vc-doc{flex:none;width:214px;position:relative;padding:6px 8px 10px}
-.vc-doc::before{content:"";position:absolute;left:16px;right:2px;top:12px;bottom:16px;
-  background:#FDF3F0;border:1px solid var(--line);border-radius:12px;transform:rotate(4deg);
-  box-shadow:0 10px 18px -14px rgba(74,23,35,.5)}
-.vd-sheet{position:relative;border-radius:12px;padding:0 15px 18px;overflow:hidden;
-  background:#FFFAF8;
-  border:1px solid var(--line);transform:rotate(-2.5deg);
-  box-shadow:0 18px 30px -18px rgba(74,23,35,.65)}
-/* фестоны по нижнему краю — как у отрывного талона */
-.vd-sheet::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:9px;
-  background:radial-gradient(circle at 6px 9px,transparent 5.2px,#FFFCFB 5.4px) repeat-x;
-  background-size:12px 9px}
+.visit{list-style:none;display:grid;gap:0;margin-top:14px}
+.visit li{display:flex;gap:18px;align-items:flex-start;padding:14px 0;
+  border-top:1px dashed var(--line-2)}
+.visit li:first-child{border-top:0;padding-top:4px}
+.visit .vt{flex:none;width:76px;padding-top:3px;font-size:12.5px;font-weight:800;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--cta)}
+.visit li > span:last-child{font-size:14.8px;line-height:1.5;color:var(--ink-2)}
+.visit b{display:block;color:var(--plum);font-size:16.5px;line-height:1.35;margin-bottom:3px}
 
-.vd-brand{display:flex;align-items:center;gap:7px;margin:0 -15px 13px;padding:8px 15px;
-  font-size:9.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:#7A5B1E;
-  background:#F0DFB2}
-.vd-mono{width:19px;height:19px;flex:none;border-radius:50%;display:grid;place-items:center;
-  font-family:'Cormorant',Georgia,serif;font-size:13px;font-weight:600;color:#FFFBF4;
-  background:var(--gold);box-shadow:0 2px 5px -2px rgba(120,90,30,.7)}
-
-.vd-zone{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--ink-2);margin-bottom:5px}
-.vd-metric{display:flex;align-items:baseline;gap:7px;font-family:'Cormorant',Georgia,serif;
-  font-weight:600;line-height:1}
-.vd-metric b{font-size:31px;color:var(--cta)}
-.vd-metric i{font-style:normal;font-size:17px;color:var(--gold)}
-.vd-delta{margin-top:6px;display:inline-block;font-size:10px;font-weight:800;
-  color:#7C6A2A;background:var(--gold-soft);border-radius:99px;padding:4px 9px}
-
-.vd-rows{margin-top:12px;display:grid;gap:0;width:calc(100% - 58px)}
-.vd-rows div{display:flex;justify-content:space-between;gap:8px;font-size:10px;line-height:1.3;
-  padding:5px 0;border-top:1px solid var(--line)}
-.vd-rows span{color:var(--ink-2)}
-.vd-rows b{color:var(--plum);text-align:right}
-
-.vd-seal{position:absolute;right:9px;bottom:16px;width:54px;height:54px;border-radius:50%;
-  display:grid;place-items:center;text-align:center;transform:rotate(-13deg);
-  border:1.5px dashed var(--gold-2);background:rgba(248,238,219,.75);
-  font-size:7.5px;font-weight:800;line-height:1.25;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--gold)}
-.vd-seal::before{content:"";position:absolute;inset:4px;border-radius:50%;
-  border:1px solid rgba(184,145,63,.35)}
-
-.vc-list{list-style:none;display:grid;gap:0}
-.vc-list li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
-  font-size:15px;line-height:1.4;padding:11px 0;border-top:1px dashed var(--line-2)}
-.vc-list li b{flex:none;font-size:15.5px;color:var(--plum);font-variant-numeric:tabular-nums}
-
-.vc-sum{margin-top:16px;padding-top:16px;border-top:2px solid var(--line-2);
-  display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap}
-.vc-old span,.vc-new span{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;
+.vc-price{margin-top:18px;padding-top:16px;border-top:2px solid var(--line-2);
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.vc-price > div{flex:none}
+.vc-price > div span{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;
   text-transform:uppercase;color:var(--ink-2);margin-bottom:2px}
-.vc-old b{font-family:'Cormorant',Georgia,serif;font-size:30px;font-weight:600;color:var(--ink-2);
-  position:relative;display:inline-block;padding:0 3px}
-.vc-old b::after{content:"";position:absolute;left:-2px;right:-2px;top:52%;height:2px;border-radius:2px;
-  background:linear-gradient(90deg,rgba(192,83,121,.25),var(--cta) 22%,var(--cta) 78%,rgba(192,83,121,.25));
-  transform:rotate(-4deg)}
-.vc-new{text-align:right}
-.vc-new b{font-family:'Cormorant',Georgia,serif;font-size:46px;font-weight:600;line-height:1;
+.vc-price > div b{font-family:'Cormorant',Georgia,serif;font-size:46px;font-weight:600;line-height:1;
   background:var(--g-cta);-webkit-background-clip:text;background-clip:text;
   color:transparent;-webkit-text-fill-color:transparent;padding-right:.06em}
-.vc-note{margin-top:14px;font-size:13px;color:var(--ink-2);line-height:1.45}
-/* гарантия возврата рядом с ценой первого визита */
-.vc-sum.guar{align-items:center;justify-content:flex-start;gap:20px}
-.vc-sum.guar .vc-new{text-align:left;flex:none}
-.vc-guar{flex:1;min-width:230px;display:flex;gap:12px;align-items:flex-start;
-  background:var(--gold-soft);border-radius:16px;padding:13px 16px}
-.vc-guar svg{width:23px;height:23px;flex:none;color:var(--gold);stroke-width:2.1;margin-top:1px}
-.vc-guar p{font-size:14px;line-height:1.45;color:var(--ink-2)}
-.vc-guar b{color:var(--plum)}
+.vc-price p{flex:1;min-width:240px;font-size:14px;line-height:1.5;color:var(--ink-2)}
 @media(max-width:600px){
   .value-card{padding:22px 18px 20px}
-  .vc-top{flex-direction:column;gap:16px}
-  .vc-doc{width:100%;max-width:250px;align-self:center}
-  .vc-list li{font-size:14.5px;gap:12px}
-  .vc-new b{font-size:40px}
+  .visit li{flex-direction:column;gap:4px;padding:12px 0}
+  .visit .vt{width:auto;padding-top:0}
+  .vc-price{gap:14px}
+  .vc-price > div b{font-size:40px}
 }
 .offer-price .v{font-family:'Cormorant',Georgia,serif;font-size:46px;font-weight:600;line-height:1;
   background:linear-gradient(120deg,#F6E2B4,#DDBC78 55%,#F0D9A4);-webkit-background-clip:text;
@@ -1055,7 +1003,7 @@ footer a{color:#F3E2DC}
     <div class="hero-copy">
       <span class="eyebrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-pin"/></svg> СПб, пр. Энергетиков 37 · 10 минут от «Ладожской»</span>
       <h1>Коррекция фигуры <span class="it">без диет и операций</span>: минус <span class="num">0,5–2&nbsp;см</span> объёмов за один сеанс</h1>
-      <p class="lead">Аппаратные методики в студии «Дофамин» у «Ладожской»: кавитация, RF-лифтинг, лазерный липолиз и лимфодренаж. Первый визит с фото до и после, консультацией, процедурой и программой курса — <b>1&nbsp;000&nbsp;₽</b>, и мы вернём их, если объём не уйдёт.</p>
+      <p class="lead">Аппаратные методики в студии «Дофамин» у «Ладожской»: кавитация, RF-лифтинг, лазерный липолиз и лимфодренаж. Первый визит — анкета здоровья, разбор зоны и процедура 30 минут — <b>1&nbsp;000&nbsp;₽</b>.</p>
 
       <ul class="bullets">
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>30 минут</b> на процедуру — успеете в обед или после работы, без реабилитации и следов</span></li>
@@ -1186,60 +1134,50 @@ footer a{color:#F3E2DC}
   </div>
 </section>
 
-<!-- ═══════════ 4. КЭВ: ПЕРВЫЙ ВИЗИТ + ФОРМА ═══════════ -->
+<!-- ═══════════ 4. ПЕРВЫЙ ВИЗИТ ПО ШАГАМ + ФОРМА ═══════════ -->
 <section class="band" id="first">
   <div class="wrap offer-grid">
     <div>
-      <h2>Первый визит за 1 000 ₽. <span class="it">Не уйдёт объём — вернём деньги</span></h2>
-      <p class="lead">Тысяча рублей — это цена одной прессотерапии по нашему же прайсу, он открыто лежит ниже на этой странице. Консультацию, замеры, фото и программу курса вы получаете сверху и бесплатно. А если сантиметровая лента после процедуры не показала минус — администратор вернёт деньги, ничего объяснять не нужно.</p>
+      <h2>Как проходит первый визит — <span class="it">40 минут по шагам</span></h2>
+      <p class="lead">Чтобы вы понимали, куда идёте и что с вами будут делать. Ничего не подписываете и не оплачиваете вперёд: за визит платите на месте, решение о курсе принимаете потом и дома.</p>
       <div class="value-card">
-        <div class="vc-top">
-          <div class="vc-doc" aria-hidden="true">
-            <div class="vd-sheet">
-              <div class="vd-brand"><span class="vd-mono">Д</span>Дофамин · программа</div>
-              <div class="vd-zone">Живот и бока</div>
-              <div class="vd-metric"><b>68,4</b><i>→</i><b>67,6</b></div>
-              <div class="vd-delta">−0,8 кг за первый сеанс</div>
-              <div class="vd-rows">
-                <div><span>Курс</span><b>10 процедур</b></div>
-                <div><span>Цена курса</span><b>12 000 ₽</b></div>
-                <div><span>Мастер</span><b>Надежда</b></div>
-              </div>
-              <div class="vd-seal"><span>ваш<br>экземпляр</span></div>
-            </div>
-          </div>
-          <div class="vc-intro">
-            <h3>Что вы уносите домой</h3>
-            <p>Распечатанную программу с вашим весом до и после, расчётом курса и ценой — плюс фото до и после в вашем же телефоне. Можно уйти думать и сравнивать: ничего не подписываете на месте.</p>
-          </div>
+        <div class="vc-head">
+          <h3>Первый визит по шагам</h3>
+          <span>Красногвардейский район, БЦ «Лидер», 8 этаж</span>
         </div>
-
-        <ul class="vc-list">
-          <li><span>Консультация и анкета здоровья — проверим противопоказания</span><b>бесплатно</b></li>
-          <li><span>Замеры сантиметровой лентой до и после — при вас</span><b>бесплатно</b></li>
-          <li><span>Фото до и после на ваш телефон и контрольное взвешивание</span><b>бесплатно</b></li>
-          <li><span>Прессотерапия с лимфодренажем, 30 минут</span><b>1 000 ₽ по прайсу</b></li>
-          <li><span>Одноразовый комплект: костюм, носочки, шапочка, бахилы</span><b>бесплатно</b></li>
-          <li><span>Индивидуальная программа с расчётом курса — на руки</span><b>бесплатно</b></li>
+        <ul class="visit">
+          <li>
+            <span class="vt">0–5 мин</span>
+            <span><b>Анкета здоровья</b>Заполняете короткую анкету: хронические заболевания, беременность, металл в теле, недавние операции. По ней мастер видит, какие аппараты вам не подходят.</span>
+          </li>
+          <li>
+            <span class="vt">5–10 мин</span>
+            <span><b>Мастер смотрит зону</b>Вы показываете, что беспокоит. Мастер говорит, с чем здесь работать — с отёком, локальным жиром или потерей тонуса кожи — и какой аппарат это делает. Если аппаратные методики вашу задачу не решают, вы услышите это сразу.</span>
+          </li>
+          <li>
+            <span class="vt">10–40 мин</span>
+            <span><b>Сама процедура</b>30 минут на выбранной зоне. Закрытый кабинет, мастер-женщина, одноразовый комплект: костюм, носочки, шапочка, бахилы. Полностью раздеваться не нужно — можно остаться в своём белье.</span>
+          </li>
+          <li>
+            <span class="vt">В конце</span>
+            <span><b>Цифры и расчёт</b>Взвешиваемся, при желании снимаем фото до и после на ваш телефон. Мастер называет, сколько процедур обычно берут в такой ситуации и во что это выйдет по прайсу.</span>
+          </li>
+          <li>
+            <span class="vt">Дома</span>
+            <span><b>Решение</b>Курс можно не брать вовсе и ходить по одной процедуре — цена каждой открыто указана в прайсе ниже. Записаться на следующий визит можно потом, из дома.</span>
+          </li>
         </ul>
-
-        <!-- ГАРАНТИЯ ВОЗВРАТА: условие нужно подтвердить со студией и продублировать
-             в регламенте администратора, прежде чем сайт уедет на боевой домен. -->
-        <div class="vc-sum guar">
-          <div class="vc-new"><span>Первый визит</span><b>1 000 ₽</b></div>
-          <div class="vc-guar">
-            <svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>
-            <p><b>Лента не показала минус — возвращаем 1 000 ₽ на месте.</b> Замеряем в одной и той же точке до процедуры и сразу после, обе цифры записываем в вашу программу.</p>
-          </div>
+        <div class="vc-price">
+          <div><span>Первый визит</span><b>1 000 ₽</b></div>
+          <p>Цена одна, какой бы аппарат вам ни подошёл. По прайсу процедуры стоят от 500 до 1 800 ₽ — весь список открыто лежит <a href="#prices" style="color:var(--cta);font-weight:700">на этой странице</a>.</p>
         </div>
-        <p class="vc-note">Методику подбираем под вашу зону: если нужна не прессотерапия, а кавитация или RF-лифтинг, первый визит всё равно стоит 1 000 ₽. Один раз на одну гостью.</p>
       </div>
     </div>
 
     <form class="form" id="form-first" novalidate>
       <div class="form-body">
         <h3>Записаться на первый визит за 1 000 ₽</h3>
-        <p class="fnote">Оставьте номер телефона — администратор перезвонит в течение 15 минут, покажет свободные окна и ответит на вопросы. За вашим номером закрепим цену 1 000 ₽ и гарантию возврата.</p>
+        <p class="fnote">Оставьте номер телефона — администратор перезвонит в течение 15 минут, покажет свободные окна и ответит на вопросы. За вашим номером закрепим цену 1 000 ₽.</p>
         <div class="field">
           <label for="f1-phone">Телефон, на который позвонить</label>
           <input id="f1-phone" name="phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
@@ -1423,7 +1361,7 @@ footer a{color:#F3E2DC}
     <div class="center" style="margin-bottom:34px">
       <span class="eyebrow plain">1 минута · 5 вопросов</span>
       <h2>Подберите свою программу <span class="it">и узнайте цену курса</span></h2>
-      <p class="lead">Ответьте на пять простых вопросов — соберём программу под вашу зону, посчитаем количество процедур и стоимость курса. В подарок за прохождение — первый визит за 1 000 ₽ с гарантией: не уйдёт объём, вернём деньги.</p>
+      <p class="lead">Ответьте на пять простых вопросов — соберём программу под вашу зону, посчитаем количество процедур и стоимость курса. В подарок за прохождение — первый визит за 1 000 ₽.</p>
     </div>
 
     <form class="quiz" id="quiz-form" novalidate>
@@ -1494,7 +1432,7 @@ footer a{color:#F3E2DC}
         <div class="qstep" data-step="6">
           <div class="qgift">
             <svg class="ic"><use href="#i-gift"/></svg>
-            <p><b>Готово! Программа собрана.</b> Куда отправить расчёт и подобранную программу? За вашим номером закрепляем первый визит за 1 000 ₽ с возвратом денег, если объём не уйдёт.</p>
+            <p><b>Готово! Программа собрана.</b> Куда отправить расчёт и подобранную программу? За вашим номером закрепляем первый визит за 1 000 ₽.</p>
           </div>
           <div class="qopts" data-name="Куда отправить" style="margin-bottom:16px">
             <button type="button" class="qopt sel"><span class="qi"><svg class="ic"><use href="#i-check"/></svg></span>В WhatsApp</button>
@@ -1716,7 +1654,7 @@ footer a{color:#F3E2DC}
 
       <details class="sp">
         <summary>А если результата не будет? Не выброшу ли я деньги?</summary>
-        <div class="spb">Не выбросите: на первый визит мы даём гарантию. Замеряем зону сантиметровой лентой при вас, делаем процедуру и замеряем снова. <b>Минуса на ленте нет — администратор возвращает 1 000 ₽ на месте</b>, спорить и что-то доказывать не придётся. Фото до и после снимаем на ваш телефон в одном ракурсе — кадры и цифры остаются у вас, а не только у нас. И если результат нас самих не устроил, мы прямо скажем об этом и не станем уговаривать на курс: студия живёт на постоянных гостьях, а не на одной продаже.</div>
+        <div class="spb">Поэтому мы и придумали первый визит за 1 000 ₽: вы платите как за чашку кофе с десертом и <b>проверяете методику на себе, ничем не рискуя</b>. Фото до и после снимаем на ваш телефон в одном ракурсе и взвешиваем при вас — кадры и цифры остаются у вас, а не только у нас. Если цифры не изменились — мы прямо об этом скажем и не станем уговаривать на курс. Честный разговор для нас дороже одной продажи: студия живёт на постоянных гостьях.</div>
       </details>
 
       <details class="sp">
@@ -1803,10 +1741,10 @@ footer a{color:#F3E2DC}
       <h2>Не готовы записываться? <span class="it">Разберём зону в переписке</span></h2>
       <p class="lead">Расскажите в двух словах, что беспокоит, или пришлите фото зоны. Мастер ответит текстом: с чем мы здесь работаем — с отёками, локальным жиром или тонусом кожи, — какая методика подойдёт и сколько процедур нужно. Никакого звонка: отвечаем в WhatsApp, читаете, когда удобно.</p>
       <ul class="offer-list">
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Разбор зоны и расчёт курса в переписке — <b>бесплатно</b>, без записи на процедуру</span></li>
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Про цену спрашивайте прямо: назовём сумму в переписке, без <b>«приходите, на месте всё расскажем»</b></span></li>
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Можно прислать фото — по нему мастер видит, отёк это, жировая «ловушка» или дряблость кожи</span></li>
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Скажем «вам это не нужно», если задачу закроют две процедуры, а не курс из десяти</span></li>
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Захотите проверить на себе — <a href="#first" style="color:#fff;text-decoration:underline">первый визит за 1 000 ₽</a>, и деньги вернутся, если объём не ушёл</span></li>
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Захотите проверить на себе — <a href="#first" style="color:#fff;text-decoration:underline">первый визит за 1 000 ₽</a>: анкета здоровья, разбор зоны и процедура 30 минут</span></li>
       </ul>
       <div class="msgs" style="margin-top:26px">
         <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> Написать в WhatsApp</a>
