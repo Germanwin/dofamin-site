@@ -443,6 +443,41 @@ header{
 .band.pink .lead{color:#FCE4EA}
 .band.pink .it{background:none;color:#FCDFA8;-webkit-text-fill-color:#FCDFA8}
 #action h2 .it{color:#F5DDAF;-webkit-text-fill-color:#F5DDAF;font-weight:500}
+/* развилка «два способа начать» */
+.fork{display:grid;gap:14px;margin-top:26px}
+.fk{background:#FFFCFB;color:var(--ink);border-radius:22px;padding:20px 22px;
+  display:flex;gap:20px;align-items:flex-start;
+  box-shadow:0 22px 38px -26px rgba(74,23,35,.75)}
+.fk-price{flex:none;width:144px}
+.fk-price span{display:block;font-size:12px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-2);margin-bottom:3px}
+.fk-price b{font-family:'Cormorant',Georgia,serif;font-size:31px;font-weight:600;line-height:1.05;
+  background:var(--g-cta);-webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;padding-right:.06em}
+.fk h3{color:var(--plum);font-size:19px;margin-bottom:5px}
+.fk p{font-size:14.8px;line-height:1.5;color:var(--ink-2)}
+.fk a{color:var(--cta);font-weight:700}
+.fk ul{list-style:none;margin-top:10px;display:grid;gap:6px}
+.fk li{position:relative;padding-left:18px;font-size:14.2px;line-height:1.45;color:var(--ink-2)}
+.fk li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%;
+  background:var(--g-cta)}
+.fork-note{margin-top:24px;font-size:15px;color:#FCE4EA}
+
+/* подпись мастеров под финальной формой */
+.act-col{display:flex;flex-direction:column}
+.master{margin-top:16px;display:flex;gap:15px;align-items:center;
+  background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.26);
+  border-radius:20px;padding:14px 16px}
+.master img{width:104px;height:104px;flex:none;border-radius:15px;object-fit:cover}
+.master p{font-size:14.3px;line-height:1.5;color:#FCE4EA}
+.master b{display:block;margin-top:8px;font-size:13px;color:#fff}
+@media(max-width:700px){
+  .fk{flex-direction:column;gap:8px}
+  .fk-price{width:auto;display:flex;align-items:baseline;gap:10px}
+  .fk-price span{margin-bottom:0}
+  .master{flex-direction:column;text-align:center}
+  .master img{width:100%;max-width:240px;height:150px}
+}
 
 /* формы */
 .form{background:linear-gradient(160deg,#FFFDFC 0%,#FDEFF3 100%);border-radius:26px;padding:34px;
@@ -1622,57 +1657,90 @@ footer a{color:#F3E2DC}
   </div>
 </section>
 
-<!-- ═══════════ 12. РАЗБОР В ПЕРЕПИСКЕ + ФИНАЛЬНАЯ ФОРМА ═══════════ -->
+<!-- ═══════════ 12. РАЗВИЛКА «ДВА СПОСОБА НАЧАТЬ» + ФИНАЛЬНАЯ ФОРМА ═══════════ -->
 <section class="band pink" id="action">
   <div class="wrap offer-grid">
     <div>
-      <span class="eyebrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-wa"/></svg> Ответим в переписке — звонить не будем</span>
-      <h2>Не готовы записываться? <span class="it">Разберём зону в переписке</span></h2>
-      <p class="lead">Расскажите в двух словах, что беспокоит, или пришлите фото зоны. Мастер ответит текстом: с чем мы здесь работаем — с отёками, локальным жиром или тонусом кожи, — какая методика подойдёт и сколько процедур нужно. Никакого звонка: отвечаем в WhatsApp, читаете, когда удобно.</p>
-      <ul class="offer-list">
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Про цену спрашивайте прямо: назовём сумму в переписке, без <b>«приходите, на месте всё расскажем»</b></span></li>
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Можно прислать фото — по нему мастер видит, отёк это, жировая «ловушка» или дряблость кожи</span></li>
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Скажем «вам это не нужно», если задачу закроют две процедуры, а не курс из десяти</span></li>
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span>Захотите проверить на себе — первый визит за 1 000 ₽: анкета здоровья, разбор зоны и процедура 30 минут</span></li>
-      </ul>
-      <div class="msgs" style="margin-top:26px">
+      <span class="eyebrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-check"/></svg> Осталось выбрать формат</span>
+      <h2>Два способа начать — <span class="it">выберите свой</span></h2>
+      <p class="lead">Можно прийти просто поговорить и уйти, ничего не заплатив. А можно в тот же визит попробовать методику на себе. Разговор с мастером будет одинаковый — разница только в том, будет ли процедура.</p>
+
+      <div class="fork">
+        <div class="fk">
+          <div class="fk-price"><span>Консультация</span><b>бесплатно</b></div>
+          <div>
+            <h3>Прийти и поговорить</h3>
+            <p>20 минут в студии. Мастер смотрит зону, проверяет анкету здоровья и говорит, какая методика вашу задачу решает, а какая нет.</p>
+            <ul>
+              <li>Скажет, сколько раз примерно придётся прийти</li>
+              <li>Назовёт цену процедуры по прайсу — он открыто лежит <a href="#prices">на этой странице</a></li>
+              <li>Уходите, ничего не заплатив и ничего не подписав</li>
+            </ul>
+          </div>
+        </div>
+        <div class="fk">
+          <div class="fk-price"><span>Первый визит</span><b>1 000 ₽</b></div>
+          <div>
+            <h3>Попробовать в тот же день</h3>
+            <p>Тот же разговор с мастером, плюс полноценная процедура 30 минут на выбранной зоне.</p>
+            <ul>
+              <li>Фото до и после на ваш телефон и контрольное взвешивание</li>
+              <li>Закрытый кабинет, мастер-женщина, одноразовый комплект</li>
+              <li>Решение о следующих визитах принимаете дома, а не на месте</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p class="fork-note">Не хотите звонить — напишите, ответим текстом:</p>
+      <div class="msgs">
         <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> Написать в WhatsApp</a>
         <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Написать в Telegram</a>
       </div>
     </div>
 
-    <form class="form" id="form-final" novalidate>
-      <div class="form-body">
-        <h3>Получить разбор в WhatsApp</h3>
-        <p class="fnote">Оставьте номер — мастер напишет первым в течение 15 минут в рабочее время, спросит про зону и пришлёт расчёт курса. Звонить не будем: только переписка.</p>
-        <div class="field">
-          <label for="f4-phone">Номер, привязанный к WhatsApp</label>
-          <input id="f4-phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
+    <div class="act-col">
+      <form class="form" id="form-final" novalidate>
+        <div class="form-body">
+          <h3>Записаться на визит</h3>
+          <p class="fnote">Оставьте номер — администратор перезвонит в течение 15 минут в рабочее время, покажет свободные окна и подтвердит выбранный формат.</p>
+          <div class="field">
+            <label for="f4-phone">Телефон</label>
+            <input id="f4-phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
+          </div>
+          <div class="field">
+            <label for="f4-format">Что выбираете</label>
+            <select id="f4-format">
+              <option>Бесплатную консультацию</option>
+              <option>Первый визит за 1 000 ₽</option>
+              <option selected>Пока не решила — нужен совет</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-wide btn-lg">Записаться на визит</button>
+          <label class="agree"><input type="checkbox" checked required><span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a> и на обработку персональных данных</span></label>
         </div>
-        <div class="field">
-          <label for="f4-task">Что беспокоит больше всего</label>
-          <select id="f4-task">
-            <option>Живот и бока</option>
-            <option>Отёки и тяжесть в ногах</option>
-            <option>Бёдра и ягодицы, целлюлит</option>
-            <option>Дряблость кожи после родов или похудения</option>
-            <option>Овал лица и подбородок</option>
-            <option selected>Не знаю — нужен разбор</option>
-          </select>
+        <div class="form-ok">
+          <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
+          <h4>Номер записали</h4>
+          <p>Администратор перезвонит с номера 8 800 550-86-04 в течение 15 минут в рабочее время. Если удобнее в переписке — напишите нам прямо сейчас:</p>
+          <div class="msgs" style="justify-content:center">
+            <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
+            <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Telegram</a>
+          </div>
         </div>
-        <button type="submit" class="btn btn-wide btn-lg">Получить разбор в WhatsApp</button>
-        <label class="agree"><input type="checkbox" checked required><span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a> и на обработку персональных данных</span></label>
-      </div>
-      <div class="form-ok">
-        <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
-        <h4>Номер записали</h4>
-        <p>Мастер напишет вам в WhatsApp в течение 15 минут в рабочее время. Ждать не хочется — напишите сами прямо сейчас, ответим в том же окне:</p>
-        <div class="msgs" style="justify-content:center">
-          <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
-          <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Telegram</a>
+      </form>
+
+      <!-- Подпись от мастеров студии. Если студия согласует имя и личный портрет —
+           заменить общий кадр и подпись на конкретного мастера: личное обращение
+           работает сильнее коллективного. -->
+      <figure class="master">
+        <img decoding="async" src="assets/img/team.jpg" alt="Мастера студии «Дофамин» за работой" loading="lazy" width="800" height="500">
+        <div>
+          <p>Мы не продаём абонементы «пакетом»: на консультации честно скажем, сколько раз нужно прийти именно вам, и назовём цену каждой процедуры. Если аппараты вашу задачу не решают — скажем и это.</p>
+          <b>Мастера студии «Дофамин»</b>
         </div>
-      </div>
-    </form>
+      </figure>
+    </div>
   </div>
 </section>
 
