@@ -333,6 +333,8 @@ header{
   background-clip:text;color:transparent;-webkit-text-fill-color:transparent;padding-right:.1em}
 .hero-price .p s{-webkit-text-fill-color:#E6C7C0;color:#E6C7C0}
 .hero-price .p s{font-size:19px;opacity:.55;margin-left:8px;font-weight:400}
+/* уточнение под ценой: рамка обещает не «процедуру», а любую услугу студии */
+.hero-price .c{font-size:12px;line-height:1.3;color:#F3DDE3;margin-top:3px;max-width:152px}
 .scrollhint{display:inline-flex;align-items:center;gap:10px;margin-top:34px;text-decoration:none;
   color:var(--mauve);font-size:14px;font-weight:700;letter-spacing:.01em}
 .scrollhint svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;
@@ -449,78 +451,87 @@ header{
 /* лид-магнит: обложка чек-листа и форма в обмен на телефон */
 /* Обложка нарисована как сам документ — по разбору лендингов из базы знаний:
    «показан сам чек-лист картинкой, видно, что это реальный документ, а не
-   „подпишитесь“». Поэтому не абстрактная карточка, а страница A4 в тех же
-   пропорциях и с той же структурой, что описана в чек-лист.md: сверху логотип
-   и заголовок, одиннадцать пронумерованных пунктов с квадратиком под галочку,
-   снизу контакты и QR на онлайн-запись.
+   „подпишитесь“». Лист альбомный, лежит под небольшим углом, за ним второй.
+   Структура — из чек-лист.md: шапка с логотипом, заголовок, одиннадцать
+   пунктов с квадратиком под галочку, снизу контакты и QR на онлайн-запись.
+   В альбомном формате пункты идут в две колонки, 6 и 5 — так лист выглядит
+   заполненным и просторным одновременно.
 
    Текста вопросов на странице нет: строки набраны полосками. На таком масштабе
    настоящий текст всё равно был бы нечитаемым пятном, а так человек видит
-   заполненный бланк, но не получает содержимое до того, как оставил номер.
-   Одиннадцать строк — ровно столько же, сколько вопросов в файле; правите
-   чек-лист — поправьте и число строк.
+   заполненный бланк, но содержимое получает только после отправки номера.
+   Пунктов ровно одиннадцать — столько же, сколько вопросов в файле; правите
+   чек-лист — поправьте и число <li>.
 
    Про наклон и резкость: угол задан обычным 2D-поворотом. Субпиксельное
    сглаживание на повёрнутом тексте Chrome отключает сам, поэтому надписи чуть
-   мягче — это цена наклона. Ничего трёхмерного (perspective, rotateY,
-   translateZ, will-change) добавлять нельзя: страница уедет в отдельный слой,
-   отрисуется текстурой, и текст поплывёт по-настоящему. Проходили дважды. */
-.lm-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;
+   мягче — это цена наклона, потому угол и маленький. Ничего трёхмерного
+   (perspective, rotateY, translateZ, will-change) добавлять нельзя: лист
+   уедет в отдельный слой, отрисуется текстурой, и текст поплывёт
+   по-настоящему. Проходили дважды. */
+.lm-grid{display:grid;grid-template-columns:1fr 1.02fr;gap:52px;align-items:center;
   position:relative;z-index:2}
-.lm-cover{position:relative;width:100%;max-width:296px;margin:0 auto;padding:30px 28px}
+.lm-cover{position:relative;width:100%;max-width:508px;margin:0 auto;padding:28px 24px}
 /* мягкое свечение позади стопки — отделяет её от розовой плашки */
-.lm-cover::before{content:"";position:absolute;left:-16%;right:-16%;top:-4%;bottom:-6%;
-  background:radial-gradient(58% 50% at 50% 48%,rgba(255,238,214,.36),rgba(255,238,214,0) 72%)}
+.lm-cover::before{content:"";position:absolute;left:-12%;right:-12%;top:-8%;bottom:-10%;
+  background:radial-gradient(56% 54% at 50% 48%,rgba(255,238,214,.4),rgba(255,238,214,0) 72%)}
 /* лист из стопки: развёрнут в другую сторону, чем верхний */
-.lm-cover::after{content:"";position:absolute;left:10px;right:8px;top:22px;bottom:16px;
-  background:#FBEAEF;border-radius:6px;transform:rotate(4.2deg);
+.lm-cover::after{content:"";position:absolute;left:14px;right:10px;top:16px;bottom:14px;
+  background:#FBEAEF;border-radius:7px;transform:rotate(2.9deg);
   box-shadow:0 20px 34px -24px rgba(40,16,26,.95)}
-/* Пропорции листа A4: 1 к 1,414. Содержимое внутри растянуто по высоте,
-   поэтому при правке блоков страница остаётся заполненной без подгонки. */
+/* Пропорции альбомного листа A4: 1,414 к 1. Содержимое растянуто по высоте,
+   поэтому при правке блоков лист остаётся заполненным без ручной подгонки. */
 .lm-doc{position:relative;z-index:1;display:flex;flex-direction:column;
-  aspect-ratio:1/1.414;background:linear-gradient(168deg,#FFFDFC 0%,#FDF3F5 100%);
-  border-radius:6px;padding:20px 22px 16px;overflow:hidden;
-  transform:rotate(-3.6deg);
-  box-shadow:0 42px 64px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.55);
+  aspect-ratio:1.414/1;background:linear-gradient(152deg,#FFFDFC 0%,#FEF6F7 46%,#FBEDF1 100%);
+  border-radius:7px;padding:20px 24px 16px;overflow:hidden;
+  transform:rotate(-2.4deg);
+  box-shadow:0 44px 66px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.6);
   transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s cubic-bezier(.2,.7,.3,1)}
 /* на наведении лист почти выравнивается — заодно надписи на нём становятся резче */
-.lm-cover:hover .lm-doc{transform:rotate(-1deg);
-  box-shadow:0 50px 70px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.7)}
-.lm-doc::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--g-cta)}
-/* шапка бланка */
-.lm-brand{display:flex;align-items:center;gap:6px;font-size:8px;font-weight:800;
-  letter-spacing:.14em;text-transform:uppercase;color:#8F6C1F;margin-bottom:9px}
-.lm-mono{width:15px;height:15px;flex:none;border-radius:50%;display:grid;place-items:center;
-  font-family:'Cormorant',Georgia,serif;font-size:10px;font-weight:700;letter-spacing:0;
-  color:#FFFBF4;background:#A07A22;box-shadow:0 1px 4px -2px rgba(120,90,30,.7)}
-.lm-title{font-family:'Cormorant',Georgia,serif;font-size:15px;font-weight:700;line-height:1.15;
-  color:#40232C;margin-bottom:4px}
-.lm-sub{font-size:7.5px;line-height:1.4;color:#7B6668;letter-spacing:.01em;
+.lm-cover:hover .lm-doc{transform:rotate(-.6deg);
+  box-shadow:0 54px 74px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.75)}
+.lm-doc::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;z-index:2;background:var(--g-cta)}
+/* косой блик по бумаге: лист читается как снятый на свету, а не как заливка */
+.lm-doc::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(116deg,rgba(255,255,255,.62) 0%,rgba(255,255,255,.16) 26%,rgba(255,255,255,0) 46%)}
+/* всё содержимое — поверх блика */
+.lm-doc > *{position:relative;z-index:1}
+.lm-head{display:flex;align-items:center;justify-content:space-between;gap:12px;
   padding-bottom:9px;border-bottom:1px solid #EFDCC4}
-/* Одиннадцать пунктов бланка. Строка вопроса и строка пояснения под ней —
-   полоски, а не текст: см. комментарий выше. */
-.lm-lines{list-style:none;margin:11px 0 0;display:flex;flex-direction:column;
-  justify-content:space-between;flex:1}
-.lm-lines li{display:flex;align-items:flex-start;gap:6px}
-.lm-lines li::before{content:"";width:7px;height:7px;flex:none;margin-top:1px;border-radius:1.5px;
-  border:1px solid #E0C6CE;background:#fff}
+.lm-brand{display:flex;align-items:center;gap:7px;font-size:8.5px;font-weight:800;
+  letter-spacing:.15em;text-transform:uppercase;color:#8F6C1F}
+.lm-mono{width:17px;height:17px;flex:none;border-radius:50%;display:grid;place-items:center;
+  font-family:'Cormorant',Georgia,serif;font-size:11px;font-weight:700;letter-spacing:0;
+  color:#FFFBF4;background:#A07A22;box-shadow:0 1px 4px -2px rgba(120,90,30,.7)}
+.lm-tag{font-size:7.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:#A8908F;white-space:nowrap}
+.lm-title{font-family:'Cormorant',Georgia,serif;font-size:21px;font-weight:700;line-height:1.1;
+  color:#40232C;margin-top:12px}
+.lm-sub{font-size:8.5px;line-height:1.4;color:#7B6668;margin-top:4px}
+/* Одиннадцать пунктов в две колонки, 6 и 5. Строка вопроса и строка пояснения
+   под ней — полоски, а не текст: см. комментарий выше. */
+.lm-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 26px;flex:1;margin-top:13px}
+.lm-lines{list-style:none;margin:0;display:flex;flex-direction:column;justify-content:space-evenly}
+.lm-lines li{display:flex;align-items:flex-start;gap:7px}
+.lm-lines li::before{content:"";width:8px;height:8px;flex:none;margin-top:1px;border-radius:2px;
+  border:1px solid #E0C6CE;background:#fff;box-shadow:inset 0 1px 2px rgba(78,46,56,.07)}
 .lm-lines i{flex:1;display:block}
 .lm-lines i::before,.lm-lines i::after{content:"";display:block;border-radius:1px}
-.lm-lines i::before{height:3.5px;background:#D9C4C9}
-.lm-lines i::after{height:2.5px;margin-top:3px;background:#EBDCE0;width:74%}
-.lm-lines li:nth-child(2n) i::before{width:88%}
-.lm-lines li:nth-child(3n) i::before{width:79%}
-.lm-lines li:nth-child(4n) i::after{width:58%}
-.lm-lines li:nth-child(5n) i::before{width:94%}
+.lm-lines i::before{height:4px;background:#D7C0C6}
+.lm-lines i::after{height:2.5px;margin-top:3.5px;background:#EBDCE0;width:72%}
+.lm-lines li:nth-child(2n) i::before{width:86%}
+.lm-lines li:nth-child(3n) i::before{width:77%}
+.lm-lines li:nth-child(4n) i::after{width:55%}
+.lm-lines li:nth-child(5n) i::before{width:93%}
 /* подвал бланка: контакты полосками и QR на онлайн-запись */
-.lm-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;
+.lm-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;
   margin-top:12px;padding-top:9px;border-top:1px solid #EFDCC4}
-.lm-foot span{flex:1;display:block}
+.lm-foot span{flex:1;display:block;max-width:190px}
 .lm-foot span::before,.lm-foot span::after{content:"";display:block;height:2.5px;
   border-radius:1px;background:#E2D0D4}
-.lm-foot span::after{margin-top:4px;width:62%}
+.lm-foot span::after{margin-top:4px;width:64%}
 /* QR нарисован клеткой: на таком размере настоящий код всё равно не считался бы */
-.lm-qr{width:28px;height:28px;flex:none;border-radius:2px;border:1px solid #E7D6DA;
+.lm-qr{width:30px;height:30px;flex:none;border-radius:2px;border:1px solid #E7D6DA;
   background-image:repeating-conic-gradient(#5A3B45 0 25%,#FFFDFC 0 50%);
   background-size:3.4px 3.4px;background-position:1.5px 1.5px;opacity:.72}
 .lm-in{margin-top:18px;font-size:16px;line-height:1.62;color:#F7DCE3;max-width:640px}
@@ -554,7 +565,7 @@ header{
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
 @media(max-width:900px){
   .lm-grid{grid-template-columns:1fr;gap:34px}
-  .lm-cover{max-width:302px}
+  .lm-cover{max-width:440px}
 }
 
 /* формы */
@@ -1112,7 +1123,7 @@ footer a{color:#F3E2DC}
     <div class="hero-copy">
       <span class="eyebrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-pin"/></svg> СПб, пр. Энергетиков 37 · 10 минут от «Ладожской»</span>
       <h1>Коррекция фигуры <span class="it">без диет и операций</span>: минус <span class="num">0,5–2&nbsp;см</span> объёмов за один сеанс</h1>
-      <p class="lead">Аппаратные методики в студии «Дофамин» у «Ладожской»: кавитация, RF-лифтинг, лазерный липолиз и лимфодренаж. Первый визит — разбор зоны и процедура 30 минут — <b>1&nbsp;000&nbsp;₽</b>.</p>
+      <p class="lead">Аппаратные методики в студии «Дофамин» у «Ладожской»: кавитация, RF-лифтинг, лазерный липолиз и лимфодренаж. Первый визит — разбор зоны и любая услуга студии на выбор, 30 минут — <b>1&nbsp;000&nbsp;₽</b>.</p>
 
       <ul class="bullets">
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>30 минут</b> на процедуру — успеете в обед или после работы, без реабилитации и следов</span></li>
@@ -1156,6 +1167,7 @@ footer a{color:#F3E2DC}
       <div class="hero-price">
         <div class="s">Первый визит</div>
         <div class="p">1 000 ₽</div>
+        <div class="c">за любую услугу студии</div>
       </div>
     </div>
   </div>
@@ -1514,7 +1526,7 @@ footer a{color:#F3E2DC}
     <div class="center" style="margin-bottom:36px">
       <span class="eyebrow plain">Прозрачные цены</span>
       <h2>Коррекция фигуры: <span class="it">цена за одну процедуру</span></h2>
-      <p class="lead">Действующий прайс студии целиком — без «звоните, уточняйте». Первую процедуру берут за 1&nbsp;000&nbsp;₽ по цене знакомства, дальше — по этому списку. Методики внутри курса можно чередовать.</p>
+      <p class="lead">Действующий прайс студии целиком — без «звоните, уточняйте». Первая процедура за 1&nbsp;000&nbsp;₽ по цене знакомства, дальше — по этому списку. Методики внутри курса можно чередовать.</p>
     </div>
 
     <div class="ptable svc rv">
@@ -1827,14 +1839,22 @@ footer a{color:#F3E2DC}
   <div class="wrap lm-grid">
     <div class="lm-cover" aria-hidden="true">
       <div class="lm-doc">
-        <div class="lm-brand"><span class="lm-mono">Д</span>Дофамин · чек-лист</div>
+        <div class="lm-head">
+          <div class="lm-brand"><span class="lm-mono">Д</span>Дофамин · чек-лист</div>
+          <span class="lm-tag">PDF · 1 страница</span>
+        </div>
         <div class="lm-title">11 вопросов студии аппаратной коррекции</div>
         <div class="lm-sub">Спросите это в любой студии, прежде чем отдать деньги</div>
-        <ul class="lm-lines">
-          <li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li>
-          <li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li>
-          <li><i></i></li><li><i></i></li><li><i></i></li>
-        </ul>
+        <div class="lm-cols">
+          <ul class="lm-lines">
+            <li><i></i></li><li><i></i></li><li><i></i></li>
+            <li><i></i></li><li><i></i></li><li><i></i></li>
+          </ul>
+          <ul class="lm-lines">
+            <li><i></i></li><li><i></i></li><li><i></i></li>
+            <li><i></i></li><li><i></i></li>
+          </ul>
+        </div>
         <div class="lm-foot"><span></span><div class="lm-qr"></div></div>
       </div>
     </div>
