@@ -1104,7 +1104,7 @@ footer a{color:#F3E2DC}
         </span>
         <a href="#quiz" class="btn btn-ghost">Подобрать программу</a>
       </div>
-      <p class="note">Перезвоним в течение 15 минут в рабочее время и подтвердим удобное окно.</p>
+      <p class="note">Перезвоним в рабочее время и подтвердим удобное окно.</p>
 
       <div class="hero-trust">
         <div class="tchip"><div><b>5,0 <span class="stars">★★★★★</span></b>28 отзывов на Яндекс.Картах</div></div>
@@ -1558,7 +1558,7 @@ footer a{color:#F3E2DC}
         <div class="form-ok" style="padding:8px">
           <div class="ok-ic" style="width:52px;height:52px"><svg class="ic"><use href="#i-check"/></svg></div>
           <h4 style="font-size:22px">Спасибо, записали</h4>
-          <p style="margin-bottom:0">Перезвоним в течение 15 минут в рабочее время.</p>
+          <p style="margin-bottom:0">Перезвоним в рабочее время и подтвердим удобное окно.</p>
         </div>
       </form>
     </div>
@@ -1755,7 +1755,7 @@ footer a{color:#F3E2DC}
 
     <div>
       <span class="eyebrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-gift"/></svg> Бесплатно, без звонков</span>
-      <h2>Заберите чек-лист из <span class="lnum">11</span> вопросов — <span class="it">и проверьте любую студию за 10 минут, до первой оплаты</span></h2>
+      <h2>Заберите чек-лист из <span class="lnum">11</span> вопросов — <span class="it">и проверьте любую студию за 4 минуты, до первой оплаты</span></h2>
       <p class="lead">Нам важно, чтобы вы выбирали студию спокойно и с открытыми глазами — даже если выберете не нас. Поэтому мы собрали вопросы, которые стоит задать до того, как вы отдадите деньги, и отдаём их бесплатно и без условий.</p>
       <p class="lm-in">Задать их может кто угодно: специальных знаний не нужно, достаточно прочитать вслух. А вот ответы сразу показывают, с кем вы имеете дело — где работают аккуратно и по документам, а где рассчитывают, что вы не спросите.</p>
 
@@ -1894,20 +1894,10 @@ footer a{color:#F3E2DC}
     <form class="form-plain" id="form-book" novalidate>
       <div class="form-body">
         <h3 id="bookTitle">Записаться в студию</h3>
-        <p class="fnote">Оставьте номер — администратор перезвонит в течение 15 минут в рабочее время, покажет свободные окна и ответит на вопросы.</p>
+        <p class="fnote">Оставьте номер — администратор перезвонит в рабочее время, расспросит про зону, покажет свободные окна и подберёт формат визита.</p>
         <div class="field">
           <label for="fb-phone">Телефон</label>
           <input id="fb-phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
-        </div>
-        <div class="field">
-          <label for="fb-format">Что выбираете</label>
-          <select id="fb-format">
-            <option>Бесплатную консультацию</option>
-            <option>Первый визит за 1 000 ₽</option>
-            <option>Косметологию лица</option>
-            <option>Перманентный макияж</option>
-            <option selected>Пока не решила — нужен совет</option>
-          </select>
         </div>
         <button type="submit" class="btn btn-wide btn-lg">Записаться</button>
         <label class="agree"><input type="checkbox" required><span>Согласна на обработку персональных данных и с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
@@ -1915,7 +1905,7 @@ footer a{color:#F3E2DC}
       <div class="form-ok">
         <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
         <h4>Номер записали</h4>
-        <p>Администратор перезвонит с номера 8 800 550-86-04 в течение 15 минут в рабочее время. Если удобнее в переписке — напишите нам прямо сейчас:</p>
+        <p>Администратор перезвонит с номера 8 800 550-86-04 в рабочее время. Если удобнее в переписке — напишите нам прямо сейчас:</p>
         <div class="msgs" style="justify-content:center">
           <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
           <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Telegram</a>
@@ -2040,7 +2030,7 @@ footer a{color:#F3E2DC}
       if(!validPhone(phone.value)){ shake(phone); return; }
       var agree = fb.querySelector('input[type=checkbox]');
       if(agree && !agree.checked){ needAgree(agree); return; }
-      sendLead({form:'form-book', phone:phone.value, extra:fb.querySelector('select').value});
+      sendLead({form:'form-book', phone:phone.value});
       fb.classList.add('is-done');
     });
   }
