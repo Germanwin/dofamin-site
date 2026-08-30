@@ -141,6 +141,7 @@ main>section:not(.hero),footer{content-visibility:auto}
 #reviews{contain-intrinsic-size:auto 823px}
 #faq{contain-intrinsic-size:auto 1145px}
 #studio{contain-intrinsic-size:auto 1133px}
+#book{contain-intrinsic-size:auto 812px}
 #action{contain-intrinsic-size:auto 1100px}
 #contacts{contain-intrinsic-size:auto 626px}
 footer{contain-intrinsic-size:auto 298px}
@@ -506,24 +507,6 @@ header{
   .lm-doc{max-width:300px}
 }
 
-/* окно записи */
-.ov{position:fixed;inset:0;z-index:120;padding:20px;background:rgba(45,18,28,.74);
-  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
-  display:flex;align-items:center;justify-content:center;overflow-y:auto}
-.ov[hidden]{display:none}
-.mod{position:relative;width:100%;max-width:440px;
-  background:linear-gradient(160deg,#FFFDFC 0%,#FDEFF3 100%);border-radius:26px;
-  padding:32px 30px 28px;box-shadow:0 44px 74px -28px rgba(40,16,26,.95);
-  animation:modIn .32s cubic-bezier(.2,.7,.3,1)}
-@keyframes modIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
-.mod h3{font-family:'Cormorant',Georgia,serif;font-size:25px;font-weight:600;color:var(--plum);margin-bottom:6px}
-.mod .fnote{font-size:14.5px;color:var(--ink-2);margin-bottom:20px;line-height:1.45}
-.mx{position:absolute;right:13px;top:13px;width:36px;height:36px;border-radius:50%;border:0;
-  display:grid;place-items:center;cursor:pointer;color:var(--plum);
-  background:rgba(78,46,56,.07);transition:background .18s}
-.mx:hover{background:rgba(78,46,56,.15)}
-.mx svg{width:18px;height:18px}
-@media(prefers-reduced-motion:reduce){.mod{animation:none}}
 /* формы */
 .form{background:linear-gradient(160deg,#FFFDFC 0%,#FDEFF3 100%);border-radius:26px;padding:34px;
   border:1px solid rgba(255,255,255,.7);
@@ -1065,7 +1048,7 @@ footer a{color:#F3E2DC}
       <a href="tel:88005508604">8 800 550-86-04</a>
       <span>звонок бесплатный</span>
     </div>
-    <a href="#contacts" data-book class="btn" style="padding:13px 22px;font-size:15.5px">Записаться</a>
+    <a href="#book" class="btn" style="padding:13px 22px;font-size:15.5px">Записаться</a>
   </div>
 </header>
 
@@ -1100,7 +1083,7 @@ footer a{color:#F3E2DC}
               <path class="a-head" d="M60.2 15.1 L46.4 26.3 Q49.2 18.5 42.5 13.7Z"/>
             </svg>
           </span>
-          <a href="#contacts" data-book class="btn btn-lg">Записаться на первый визит</a>
+          <a href="#book" class="btn btn-lg">Записаться на первый визит</a>
         </span>
         <a href="#quiz" class="btn btn-ghost">Подобрать программу</a>
       </div>
@@ -1721,7 +1704,7 @@ footer a{color:#F3E2DC}
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>Бизнес-центр «Лидер», наземная парковка у дома</li>
       </ul>
       <div class="cta-row" style="margin-top:28px">
-        <a href="#contacts" data-book class="btn">Записаться на первый визит</a>
+        <a href="#book" class="btn">Записаться на первый визит</a>
         <a href="https://t.me/dopaminestudio" target="_blank" rel="noopener" class="btn btn-ghost">Смотреть студию в Telegram</a>
       </div>
     </div>
@@ -1734,6 +1717,63 @@ footer a{color:#F3E2DC}
       <figure><img decoding="async" src="assets/img/award.jpg" alt="Награда 2ГИС на стойке студии Дофамин" loading="lazy" width="800" height="800"><figcaption><b>Награда 2ГИС</b> и QR для отзыва — прямо на стойке</figcaption></figure>
       <figure><img decoding="async" src="assets/img/certs.jpg" alt="Подарочные сертификаты студии Дофамин" loading="lazy" width="800" height="800"><figcaption><b>Подарочные сертификаты</b> — на любую сумму и услугу</figcaption></figure>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════ 11б. ЗАПИСЬ ═══════════ -->
+<!-- Сюда ведут все кнопки «Записаться». Блок стоит перед чек-листом намеренно:
+     сначала предлагаем записаться, и только тем, кто не записался, отдаём PDF. -->
+<section class="blush" id="book">
+  <div class="wrap offer-grid">
+    <div>
+      <span class="eyebrow plain">Запись</span>
+      <h2>Запишитесь на визит — <span class="it">остальное подберём вместе</span></h2>
+      <p class="lead">Не нужно заранее выбирать методику и считать процедуры. Достаточно оставить номер: администратор перезвонит в рабочее время, расспросит про зону и покажет свободные окна.</p>
+      <ul class="bullets" style="margin-top:26px">
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>Консультация бесплатная</b> — мастер разберёт вашу зону и скажет, сколько раз примерно нужно прийти</span></li>
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>Первый визит — 1 000 ₽:</b> анкета здоровья, разбор зоны и процедура 30 минут с фото до и после</span></li>
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>30 минут на визит</b>, без реабилитации и следов — успеете в обед или после работы</span></li>
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>Ничего не подписываете на месте:</b> решение о следующих визитах принимаете дома</span></li>
+      </ul>
+      <p class="note" style="margin-bottom:12px">Не хотите звонка — напишите, ответим текстом:</p>
+      <div class="msgs">
+        <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
+        <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Telegram</a>
+        <a class="msg" href="tel:88005508604"><svg class="ic"><use href="#i-phone"/></svg> 8 800 550-86-04</a>
+      </div>
+    </div>
+
+    <form class="form" id="form-book" novalidate>
+      <div class="form-body">
+        <h3>Записаться на визит</h3>
+        <p class="fnote">Оставьте номер — администратор перезвонит в рабочее время, покажет свободные окна и подберёт формат визита.</p>
+        <div class="field">
+          <label for="fb-phone">Телефон</label>
+          <input id="fb-phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
+        </div>
+        <div class="field">
+          <label for="fb-format">Что вас интересует</label>
+          <select id="fb-format">
+            <option>Коррекция фигуры</option>
+            <option>Косметология лица</option>
+            <option>Перманентный макияж</option>
+            <option>Массаж</option>
+            <option selected>Пока не решила — нужен совет</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-wide btn-lg">Записаться на визит</button>
+        <label class="agree"><input type="checkbox" required><span>Согласна на обработку персональных данных и с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
+      </div>
+      <div class="form-ok">
+        <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
+        <h4>Номер записали</h4>
+        <p>Администратор перезвонит с номера 8 800 550-86-04 в рабочее время. Если удобнее в переписке — напишите нам прямо сейчас:</p>
+        <div class="msgs" style="justify-content:center">
+          <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
+          <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Telegram</a>
+        </div>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -1878,42 +1918,9 @@ footer a{color:#F3E2DC}
 <div class="sticky">
   <a href="tel:88005508604" class="btn btn-ghost" aria-label="Позвонить"><svg class="ic"><use href="#i-phone"/></svg></a>
   <a href="https://wa.me/79214334760" target="_blank" rel="noopener" class="btn btn-ghost" aria-label="Написать в WhatsApp"><svg class="ic"><use href="#i-wa"/></svg></a>
-  <a href="#contacts" data-book class="btn">Записаться за 1 000 ₽</a>
+  <a href="#book" class="btn">Записаться за 1 000 ₽</a>
 </div>
 
-
-<!-- ═══════════ ОКНО ЗАПИСИ ═══════════ -->
-<!-- Кнопки «Записаться» открывают его, а не уводят на блок с чек-листом:
-     человек, который готов записаться, не должен по дороге натыкаться
-     на форму про PDF. Без JS ссылка ведёт в контакты — там телефон и мессенджеры. -->
-<div class="ov" id="ovBook" role="dialog" aria-modal="true" aria-labelledby="bookTitle" hidden>
-  <div class="mod">
-    <button class="mx" type="button" data-close aria-label="Закрыть окно">
-      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
-    <form class="form-plain" id="form-book" novalidate>
-      <div class="form-body">
-        <h3 id="bookTitle">Записаться в студию</h3>
-        <p class="fnote">Оставьте номер — администратор перезвонит в рабочее время, расспросит про зону, покажет свободные окна и подберёт формат визита.</p>
-        <div class="field">
-          <label for="fb-phone">Телефон</label>
-          <input id="fb-phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
-        </div>
-        <button type="submit" class="btn btn-wide btn-lg">Записаться</button>
-        <label class="agree"><input type="checkbox" required><span>Согласна на обработку персональных данных и с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
-      </div>
-      <div class="form-ok">
-        <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
-        <h4>Номер записали</h4>
-        <p>Администратор перезвонит с номера 8 800 550-86-04 в рабочее время. Если удобнее в переписке — напишите нам прямо сейчас:</p>
-        <div class="msgs" style="justify-content:center">
-          <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
-          <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Telegram</a>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
 <script>
 (function(){
   'use strict';
@@ -1982,7 +1989,7 @@ footer a{color:#F3E2DC}
   }
 
   /* ---- простые формы ---- */
-  ['form-price','form-final'].forEach(function(id){
+  ['form-price','form-final','form-book'].forEach(function(id){
     var f = document.getElementById(id);
     if(!f) return;
     f.addEventListener('submit', function(e){
@@ -1997,43 +2004,6 @@ footer a{color:#F3E2DC}
       done(f);
     });
   });
-
-  /* ---- окно записи ---- */
-  var ovBook = document.getElementById('ovBook');
-  if(ovBook){
-    var bookBack = null;
-    var openBook = function(){
-      bookBack = document.activeElement;
-      ovBook.hidden = false;
-      document.body.style.overflow = 'hidden';
-      var first = ovBook.querySelector('input[type=tel]');
-      if(first) setTimeout(function(){ first.focus(); }, 60);
-    };
-    var closeBook = function(){
-      ovBook.hidden = true;
-      document.body.style.overflow = '';
-      if(bookBack && bookBack.focus) bookBack.focus();
-    };
-    Array.prototype.forEach.call(document.querySelectorAll('[data-book]'), function(el){
-      el.addEventListener('click', function(e){ e.preventDefault(); openBook(); });
-    });
-    ovBook.addEventListener('click', function(e){
-      if(e.target === ovBook || (e.target.closest && e.target.closest('[data-close]'))) closeBook();
-    });
-    document.addEventListener('keydown', function(e){
-      if((e.key === 'Escape' || e.key === 'Esc') && !ovBook.hidden) closeBook();
-    });
-    var fb = document.getElementById('form-book');
-    if(fb) fb.addEventListener('submit', function(e){
-      e.preventDefault();
-      var phone = fb.querySelector('input[type=tel]');
-      if(!validPhone(phone.value)){ shake(phone); return; }
-      var agree = fb.querySelector('input[type=checkbox]');
-      if(agree && !agree.checked){ needAgree(agree); return; }
-      sendLead({form:'form-book', phone:phone.value});
-      fb.classList.add('is-done');
-    });
-  }
 
   /* ---- квиз ---- */
   var quiz = document.getElementById('quiz-form');
