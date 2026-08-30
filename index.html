@@ -172,6 +172,7 @@ h3{font-size:20px;font-weight:800;line-height:1.28;letter-spacing:-.01em}
 .center{text-align:center}
 .center .lead{margin-left:auto;margin-right:auto}
 .num{font-variant-numeric:tabular-nums}
+.lnum{font-variant-numeric:lining-nums}
 
 /* декоративные цветные пятна */
 .blob{position:absolute;border-radius:50%;opacity:.75;pointer-events:none;z-index:0}
@@ -443,25 +444,31 @@ header{
 .band.pink .lead{color:#FCE4EA}
 .band.pink .it{background:none;color:#FCDFA8;-webkit-text-fill-color:#FCDFA8}
 #action h2 .it{color:#F5DDAF;-webkit-text-fill-color:#F5DDAF;font-weight:500}
-/* развилка «два способа начать» */
-.fork{display:grid;gap:14px;margin-top:26px}
-.fk{background:#FFFCFB;color:var(--ink);border-radius:22px;padding:20px 22px;
-  display:flex;gap:20px;align-items:flex-start;
-  box-shadow:0 22px 38px -26px rgba(74,23,35,.75)}
-.fk-price{flex:none;width:144px}
-.fk-price span{display:block;font-size:12px;font-weight:800;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--ink-2);margin-bottom:3px}
-.fk-price b{font-family:'Cormorant',Georgia,serif;font-size:31px;font-weight:600;line-height:1.05;
-  background:var(--g-cta);-webkit-background-clip:text;background-clip:text;
-  color:transparent;-webkit-text-fill-color:transparent;padding-right:.06em}
-.fk h3{color:var(--plum);font-size:19px;margin-bottom:5px}
-.fk p{font-size:14.8px;line-height:1.5;color:var(--ink-2)}
-.fk a{color:var(--cta);font-weight:700}
-.fk ul{list-style:none;margin-top:10px;display:grid;gap:6px}
-.fk li{position:relative;padding-left:18px;font-size:14.2px;line-height:1.45;color:var(--ink-2)}
-.fk li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%;
-  background:var(--g-cta)}
-.fork-note{margin-top:24px;font-size:15px;color:#FCE4EA}
+/* чек-лист «10 вопросов»: бланк, который забирают с собой */
+.chk{background:#FFFCFB;color:var(--ink);border-radius:22px;margin-top:26px;overflow:hidden;
+  box-shadow:0 26px 44px -26px rgba(74,23,35,.8)}
+.chk-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  padding:12px 24px;background:var(--gold-soft);border-bottom:1px solid rgba(184,145,63,.3)}
+.chk-brand{display:flex;align-items:center;gap:9px;font-size:11px;font-weight:800;
+  letter-spacing:.11em;text-transform:uppercase;color:#7A5B1E}
+.chk-mono{width:22px;height:22px;flex:none;border-radius:50%;display:grid;place-items:center;
+  font-family:'Cormorant',Georgia,serif;font-size:14px;font-weight:600;color:#FFFBF4;
+  letter-spacing:0;background:var(--gold);box-shadow:0 2px 5px -2px rgba(120,90,30,.7)}
+.chk-cap{font-size:12px;color:#8A7440}
+.chk-list{list-style:none;counter-reset:chk;padding:6px 24px 2px;display:grid}
+.chk-list li{counter-increment:chk;position:relative;padding:13px 0 13px 44px;
+  border-top:1px dashed var(--line-2)}
+.chk-list li:first-child{border-top:0}
+.chk-list li::before{content:counter(chk);position:absolute;left:0;top:13px;width:28px;height:28px;
+  border-radius:9px;display:grid;place-items:center;font-size:13px;font-weight:800;color:#fff;
+  background:var(--g-cta);box-shadow:0 7px 12px -8px rgba(169,66,104,.95)}
+.chk-list b{display:block;color:var(--plum);font-size:16px;line-height:1.35;margin-bottom:3px}
+.chk-list span{display:block;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.chk-foot{margin:0 24px 20px;padding-top:14px;border-top:2px solid var(--line-2);
+  font-size:14px;line-height:1.55;color:var(--ink-2)}
+.chk-foot b{color:var(--plum)}
+.chk-act{display:flex;gap:11px;flex-wrap:wrap;margin-top:22px}
+button.msg{font-family:inherit;font-size:15px;cursor:pointer}
 
 /* подпись мастеров под финальной формой */
 .act-col{display:flex;flex-direction:column}
@@ -472,11 +479,29 @@ header{
 .master p{font-size:14.3px;line-height:1.5;color:#FCE4EA}
 .master b{display:block;margin-top:8px;font-size:13px;color:#fff}
 @media(max-width:700px){
-  .fk{flex-direction:column;gap:8px}
-  .fk-price{width:auto;display:flex;align-items:baseline;gap:10px}
-  .fk-price span{margin-bottom:0}
+  .chk-list{padding:4px 16px 0}
+  .chk-list li{padding-left:38px}
+  .chk-list li::before{width:25px;height:25px;border-radius:8px}
+  .chk-foot{margin:0 16px 18px}
   .master{flex-direction:column;text-align:center}
   .master img{width:100%;max-width:240px;height:150px}
+}
+/* Печать: на бумагу уходит только чек-лист — его для того и забирают. */
+@page{margin:14mm}
+@media print{
+  header,footer,.ticker,.sticky,.scrollhint{display:none!important}
+  main > *:not(#action){display:none!important}
+  #action{background:#fff!important;padding:0!important;content-visibility:visible!important}
+  #action::before,#action::after{content:none!important}
+  #action .eyebrow,#action .lead,.chk-act,.act-col{display:none!important}
+  #action .wrap{display:block;padding:0 2mm}
+  #action h2{color:#000!important;font-size:26px;margin-bottom:14px}
+  #action h2 .it{color:#000!important;-webkit-text-fill-color:#000}
+  .chk{margin:0;box-shadow:none;border:1px solid #CFCFCF;break-inside:avoid}
+  .chk-head{background:#F4F0E6}
+  .chk-list li::before{background:#8C3B5C;box-shadow:none;-webkit-print-color-adjust:exact;
+    print-color-adjust:exact}
+  .chk-list li{break-inside:avoid}
 }
 
 /* формы */
@@ -981,6 +1006,7 @@ footer a{color:#F3E2DC}
 <svg style="display:none" aria-hidden="true">
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V4h10v5"/><path d="M7 18H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><path d="M7 15h10v5H7z"/></symbol>
   <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M3 15 15 3l6 6L9 21z"/><path d="M7 11l2 2M10 8l2 2M13 5l2 2"/></symbol>
   <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-9.2A3.9 3.9 0 0 1 12 8a3.9 3.9 0 0 1 7 2.8C19 15.6 12 20 12 20z"/></symbol>
   <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.4-3 8-7 9-4-1-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
@@ -1684,45 +1710,37 @@ footer a{color:#F3E2DC}
   </div>
 </section>
 
-<!-- ═══════════ 12. РАЗВИЛКА «ДВА СПОСОБА НАЧАТЬ» + ФИНАЛЬНАЯ ФОРМА ═══════════ -->
+<!-- ═══════════ 12. ЧЕК-ЛИСТ «10 ВОПРОСОВ» + ФИНАЛЬНАЯ ФОРМА ═══════════ -->
 <section class="band pink" id="action">
   <div class="wrap offer-grid">
     <div>
-      <span class="eyebrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-check"/></svg> Осталось выбрать формат</span>
-      <h2>Два способа начать — <span class="it">выберите свой</span></h2>
-      <p class="lead">Можно прийти просто поговорить и уйти, ничего не заплатив. А можно в тот же визит попробовать методику на себе. Разговор с мастером будет одинаковый — разница только в том, будет ли процедура.</p>
+      <span class="eyebrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-check"/></svg> Возьмите с собой</span>
+      <h2><span class="lnum">10</span> вопросов, которые стоит задать <span class="it">любой косметологии</span></h2>
+      <p class="lead">Мы не боимся, что вы пойдёте сравнивать — наоборот. Заберите этот список и задайте те же вопросы там, куда пойдёте. Студии, которой нечего скрывать, все десять ответов даются легко.</p>
 
-      <div class="fork">
-        <div class="fk">
-          <div class="fk-price"><span>Консультация</span><b>бесплатно</b></div>
-          <div>
-            <h3>Прийти и поговорить</h3>
-            <p>20 минут в студии. Мастер смотрит зону, проверяет анкету здоровья и говорит, какая методика вашу задачу решает, а какая нет.</p>
-            <ul>
-              <li>Скажет, сколько раз примерно придётся прийти</li>
-              <li>Назовёт цену процедуры по прайсу — он открыто лежит <a href="#prices">на этой странице</a></li>
-              <li>Уходите, ничего не заплатив и ничего не подписав</li>
-            </ul>
-          </div>
+      <div class="chk" id="chk">
+        <div class="chk-head">
+          <span class="chk-brand"><span class="chk-mono">Д</span>Дофамин · чек-лист</span>
+          <span class="chk-cap">Перед первым визитом в любую студию</span>
         </div>
-        <div class="fk">
-          <div class="fk-price"><span>Первый визит</span><b>1 000 ₽</b></div>
-          <div>
-            <h3>Попробовать в тот же день</h3>
-            <p>Тот же разговор с мастером, плюс полноценная процедура 30 минут на выбранной зоне.</p>
-            <ul>
-              <li>Фото до и после на ваш телефон и контрольное взвешивание</li>
-              <li>Закрытый кабинет, мастер-женщина, одноразовый комплект</li>
-              <li>Решение о следующих визитах принимаете дома, а не на месте</li>
-            </ul>
-          </div>
-        </div>
+        <ol class="chk-list">
+          <li><b>Покажете весь прайс?</b><span>Цену каждой процедуры называют до записи. «Приходите, на месте посчитаем» обычно значит, что сумма зависит от того, насколько вы готовы платить.</span></li>
+          <li><b>Что входит в первый визит и сколько он стоит?</b><span>Сумму и содержимое визита вы должны узнать заранее, а не когда уже лежите под аппаратом.</span></li>
+          <li><b>Консультация платная?</b><span>Осмотр зоны и подбор методики до оплаты — норма, а не одолжение.</span></li>
+          <li><b>Какой аппарат подойдёт моей зоне и почему именно он?</b><span>Отёк, локальный жир и потеря тонуса кожи требуют разного. Один аппарат «от всего» — повод насторожиться.</span></li>
+          <li><b>Кто будет работать и сколько лет он на этом аппарате?</b><span>Спрашивайте про обучение и стаж, а не только про имя мастера.</span></li>
+          <li><b>Как проверяете противопоказания?</b><span>До процедуры должна быть анкета здоровья, а не устное «жалобы есть?».</span></li>
+          <li><b>Одноразовый комплект входит в цену?</b><span>И чем обрабатывают аппарат между гостями — вопрос неловкий, но задать его стоит.</span></li>
+          <li><b>Как фиксируете результат?</b><span>Фото до и после и взвешивание при вас — иначе через месяц сравнивать будет не с чем.</span></li>
+          <li><b>Обязательно ли покупать абонемент?</b><span>Если можно ходить по одной процедуре, вас не загоняют в предоплату.</span></li>
+          <li><b>Можно перенести визит и за сколько часов?</b><span>Про правила лучше знать заранее, а не в тот день, когда вы заболели.</span></li>
+        </ol>
+        <p class="chk-foot">Наши ответы на все десять — выше на этой странице. Если коротко: прайс открыт целиком, <b>консультация бесплатная</b>, <b>первый визит — 1 000 ₽</b>, абонемент покупать не нужно.</p>
       </div>
 
-      <p class="fork-note">Не хотите звонить — напишите, ответим текстом:</p>
-      <div class="msgs">
-        <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> Написать в WhatsApp</a>
-        <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Написать в Telegram</a>
+      <div class="chk-act">
+        <button type="button" class="msg" id="chk-wa"><svg class="ic"><use href="#i-wa"/></svg> Отправить себе в WhatsApp</button>
+        <button type="button" class="msg" id="chk-print"><svg class="ic"><use href="#i-print"/></svg> Распечатать</button>
       </div>
     </div>
 
@@ -2054,6 +2072,24 @@ footer a{color:#F3E2DC}
       sum.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   });
+
+  /* ---- чек-лист: забрать себе ----
+     Текст собираем из самого списка, чтобы правки в разметке не разъезжались
+     с тем, что уходит в мессенджер. wa.me без номера открывает выбор адресата —
+     человек отправляет список себе, а не нам. */
+  var chkWa = document.getElementById('chk-wa');
+  if(chkWa){
+    chkWa.addEventListener('click', function(){
+      var lines = ['10 вопросов, которые стоит задать косметологии перед первым визитом:', ''];
+      document.querySelectorAll('#chk .chk-list > li > b').forEach(function(b, i){
+        lines.push((i + 1) + '. ' + b.textContent.trim());
+      });
+      lines.push('', 'Чек-лист студии «Дофамин» — СПб, пр. Энергетиков 37.');
+      window.open('https://wa.me/?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+    });
+  }
+  var chkPrint = document.getElementById('chk-print');
+  if(chkPrint) chkPrint.addEventListener('click', function(){ window.print(); });
 
   /* ---- индикатор прочитанного в шапке ----
      ВНИМАНИЕ: var здесь общий с кодом выше по файлу — имена не переиспользовать
