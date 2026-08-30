@@ -443,6 +443,7 @@ header{
 .band.pink::after{background:radial-gradient(circle,rgba(255,232,205,.34) 0%,rgba(255,232,205,0) 68%)}
 .band.pink .lead{color:#FCE4EA}
 .band.pink .it{background:none;color:#FCDFA8;-webkit-text-fill-color:#FCDFA8}
+#action h2{font-variant-numeric:lining-nums}
 #action h2 .it{color:#F5DDAF;-webkit-text-fill-color:#F5DDAF;font-weight:500}
 /* лид-магнит: превью чек-листа и форма в обмен на телефон */
 .lm-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;
@@ -473,13 +474,19 @@ header{
   color:var(--plum);margin-bottom:4px}
 .lm-sub{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
   color:var(--ink-2);margin-bottom:16px}
-.lm-q{list-style:none;display:grid;gap:11px;padding-bottom:78px}
-.lm-q li{display:flex;gap:10px;align-items:flex-start;font-size:12.8px;line-height:1.35;
-  color:var(--plum);font-weight:700}
-.lm-q li::before{content:"";width:13px;height:13px;flex:none;margin-top:1px;border-radius:4px;
+/* Строки бланка нарочно без текста: сами вопросы человек видит только в PDF,
+   который приходит на его номер. Здесь — форма документа, а не его содержание. */
+.lm-q{list-style:none;display:grid;gap:15px;padding:2px 0 74px}
+.lm-q li{display:flex;gap:11px;align-items:center}
+.lm-q li::before{content:"";width:14px;height:14px;flex:none;border-radius:4px;
   border:1.5px solid #E3C3CB;background:#FFF9FA}
-.lm-q li:nth-child(4){opacity:.55}
-.lm-q li:nth-child(5){opacity:.28}
+.lm-q li::after{content:"";flex:1;height:8px;border-radius:99px;
+  background:linear-gradient(90deg,#F1D7DE,#FAEFF2)}
+.lm-q li:nth-child(2)::after{max-width:78%}
+.lm-q li:nth-child(3)::after{max-width:88%}
+.lm-q li:nth-child(4)::after{max-width:64%}
+.lm-q li:nth-child(5)::after{max-width:82%}
+.lm-q li:nth-child(6)::after{max-width:70%}
 .lm-seal{position:absolute;right:12px;bottom:14px;z-index:2;width:66px;height:66px;
   border-radius:50%;display:grid;place-items:center;text-align:center;transform:rotate(-12deg);
   border:1.5px dashed var(--gold-2);background:rgba(250,241,225,.9);
@@ -1745,11 +1752,7 @@ footer a{color:#F3E2DC}
         <div class="lm-title">Вопросы студии аппаратной коррекции</div>
         <div class="lm-sub">Отметьте ответы прямо на приёме</div>
         <ul class="lm-q">
-          <li>Покажете документы на аппарат?</li>
-          <li>О чём вы спросите меня до процедуры?</li>
-          <li>Когда вы будете меня замерять?</li>
-          <li>Во сколько обойдётся всё вместе?</li>
-          <li>Что вы дадите мне на руки?</li>
+          <li></li><li></li><li></li><li></li><li></li><li></li>
         </ul>
         <div class="lm-seal"><span><b>11</b>вопросов</span></div>
       </div>
@@ -1757,8 +1760,8 @@ footer a{color:#F3E2DC}
 
     <div>
       <span class="eyebrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-gift"/></svg> Бесплатно, без звонков</span>
-      <h2>Заберите чек-лист — <span class="it">и проверьте по нему любую студию</span></h2>
-      <p class="lead">Одиннадцать простых вопросов, которые стоит задать до того, как вы отдадите деньги. Спросить может кто угодно — а вот ответы сразу показывают, с кем вы имеете дело. Работает в любой студии Петербурга, не только в нашей.</p>
+      <h2>Заберите чек-лист из <span class="lnum">11</span> вопросов — <span class="it">и проверьте любую студию за 10 минут, до первой оплаты</span></h2>
+      <p class="lead">Вопросы, до которых сам не додумаешься: про документы на аппараты, про безопасность и про то, во сколько всё обойдётся на самом деле. Работают в любой студии Петербурга, не только в нашей, — и мы не боимся, что вы зададите их нам.</p>
       <p class="lm-in">Внутри: почему сантиметр сразу после процедуры почти всегда показывает минус; о чём студия обязана спросить вас сама ещё до первой процедуры; какой ответ про перегрев кожи должен насторожить; во сколько на самом деле обойдётся всё, что вам посоветуют; и что вам обязаны дать на руки.</p>
 
       <form class="lm-form" id="form-final" novalidate>
