@@ -269,6 +269,7 @@ header{
 .hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:56px;align-items:center}
 .hero h1{margin-bottom:18px;max-width:640px}
 .hero .lead{font-size:18px;color:#66525A;margin-bottom:24px;max-width:600px}
+.hero .lead b{font-weight:800;color:var(--ink)}
 .bullets{list-style:none;display:grid;gap:11px;margin-bottom:26px}
 .bullets li{display:flex;gap:11px;align-items:flex-start;font-size:15.8px;line-height:1.42}
 .bullets .bi{width:27px;height:27px;flex:none;border-radius:50%;
@@ -276,11 +277,7 @@ header{
   display:grid;place-items:center;margin-top:1px;box-shadow:0 4px 8px -5px rgba(206,83,52,.6)}
 .bullets .bi svg{width:14px;height:14px;stroke-width:2.6}
 .bullets b{font-weight:800}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
-.cta-sub{display:flex;gap:9px;align-items:flex-start;max-width:540px;margin-bottom:9px;
-  font-size:14.5px;line-height:1.42;color:var(--plum-2)}
-.cta-sub .ic{width:17px;height:17px;stroke-width:2.4;color:var(--cta);margin-top:2px}
-.cta-sub b{font-weight:800;color:var(--ink)}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
 /* стрелка-указатель слева от главной кнопки первого экрана.
    В самом ряду слева места нет — колонка начинается ровно с края кнопки,
    поэтому стрелка вынесена абсолютом в левое поле страницы */
@@ -997,7 +994,6 @@ footer a{color:#F3E2DC}
   .hero-copy h1{order:2}
   .hero-copy .lead{order:3}
   .hero-copy .cta-row{order:4;margin-bottom:12px}
-  .hero-copy .cta-sub{order:5;margin-bottom:8px}
   .hero-copy .note{order:5;margin-bottom:24px}
   .hero-copy .bullets{order:6;margin-bottom:0}
   .hero-copy .hero-trust{order:7}
@@ -1126,7 +1122,7 @@ footer a{color:#F3E2DC}
     <div class="hero-copy">
       <span class="eyebrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-pin"/></svg> СПб, пр. Энергетиков 37 · 10 минут от «Ладожской»</span>
       <h1>Коррекция фигуры <span class="it">без диет и операций</span>: минус <span class="num">0,5–2&nbsp;см</span> объёмов за один сеанс</h1>
-      <p class="lead">Аппаратные методики в студии «Дофамин» у «Ладожской»: кавитация, RF-лифтинг, лазерный липолиз и лимфодренаж. Первый визит — разбор зоны и любая услуга студии на выбор, 30 минут — <b>1&nbsp;000&nbsp;₽</b>.</p>
+      <p class="lead">Аппаратные методики в студии «Дофамин» у «Ладожской»: кавитация, RF-лифтинг, лазерный липолиз и лимфодренаж. В первый визит — <b>любая процедура студии на выбор за 1&nbsp;000&nbsp;₽</b>, 30 минут, с разбором зоны.</p>
 
       <ul class="bullets">
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>30 минут</b> на процедуру — успеете в обед или после работы, без реабилитации и следов</span></li>
@@ -1151,7 +1147,6 @@ footer a{color:#F3E2DC}
         </span>
         <a href="#quiz" class="btn btn-ghost">Подобрать программу и цену</a>
       </div>
-      <p class="cta-sub"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span><b>Любая процедура студии на выбор</b> — выбираете вы, а не мы. 30 минут, с разбором зоны и фото до и после.</span></p>
       <p class="note">Оставляете только номер — перезвоним в рабочее время и подберём удобное окно, в том числе в выходные. Онлайн ничего не оплачиваете.</p>
 
       <div class="hero-trust">
