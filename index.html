@@ -276,7 +276,11 @@ header{
   display:grid;place-items:center;margin-top:1px;box-shadow:0 4px 8px -5px rgba(206,83,52,.6)}
 .bullets .bi svg{width:14px;height:14px;stroke-width:2.6}
 .bullets b{font-weight:800}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.cta-sub{display:flex;gap:9px;align-items:flex-start;max-width:540px;margin-bottom:9px;
+  font-size:14.5px;line-height:1.42;color:var(--plum-2)}
+.cta-sub .ic{width:17px;height:17px;stroke-width:2.4;color:var(--cta);margin-top:2px}
+.cta-sub b{font-weight:800;color:var(--ink)}
 /* стрелка-указатель слева от главной кнопки первого экрана.
    В самом ряду слева места нет — колонка начинается ровно с края кнопки,
    поэтому стрелка вынесена абсолютом в левое поле страницы */
@@ -993,6 +997,7 @@ footer a{color:#F3E2DC}
   .hero-copy h1{order:2}
   .hero-copy .lead{order:3}
   .hero-copy .cta-row{order:4;margin-bottom:12px}
+  .hero-copy .cta-sub{order:5;margin-bottom:8px}
   .hero-copy .note{order:5;margin-bottom:24px}
   .hero-copy .bullets{order:6;margin-bottom:0}
   .hero-copy .hero-trust{order:7}
@@ -1142,11 +1147,12 @@ footer a{color:#F3E2DC}
               <path class="a-head" d="M60.2 15.1 L46.4 26.3 Q49.2 18.5 42.5 13.7Z"/>
             </svg>
           </span>
-          <a href="#book" class="btn btn-lg">Хочу первый визит за 1&nbsp;000&nbsp;₽</a>
+          <a href="#book" class="btn btn-lg">Хочу процедуру за 1&nbsp;000&nbsp;₽</a>
         </span>
         <a href="#quiz" class="btn btn-ghost">Подобрать программу и цену</a>
       </div>
-      <p class="note">Перезвоним в рабочее время и подберём удобное окно. Онлайн ничего не оплачиваете, консультация бесплатная.</p>
+      <p class="cta-sub"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span><b>Любая процедура студии на выбор</b> — выбираете вы, а не мы. 30 минут, с разбором зоны и фото до и после.</span></p>
+      <p class="note">Оставляете только номер — перезвоним в рабочее время и подберём удобное окно, в том числе в выходные. Онлайн ничего не оплачиваете.</p>
 
       <div class="hero-trust">
         <div class="tchip"><div><b>5,0 <span class="stars">★★★★★</span></b>28 отзывов на Яндекс.Картах</div></div>
@@ -1805,13 +1811,13 @@ footer a{color:#F3E2DC}
 
     <form class="form" id="form-book" novalidate>
       <div class="form-body">
-        <h3>Первый визит за 1&nbsp;000&nbsp;₽</h3>
-        <p class="fnote">Оставьте номер — администратор перезвонит в рабочее время, покажет свободные окна и подберёт формат визита.</p>
+        <h3>Процедура за 1&nbsp;000&nbsp;₽</h3>
+        <p class="fnote">Любая процедура студии на первом визите. Оставьте номер — администратор перезвонит в рабочее время, покажет свободные окна и подберёт формат визита.</p>
         <div class="field">
           <label for="fb-phone">Телефон</label>
           <input id="fb-phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
         </div>
-        <button type="submit" class="btn btn-wide btn-lg">Хочу первый визит за 1&nbsp;000&nbsp;₽</button>
+        <button type="submit" class="btn btn-wide btn-lg">Хочу процедуру за 1&nbsp;000&nbsp;₽</button>
         <label class="agree"><input type="checkbox" required><span>Согласна на обработку персональных данных и с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
       </div>
       <div class="form-ok">
