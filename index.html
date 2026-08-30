@@ -450,61 +450,63 @@ header{
 #action h2 .it{color:#F5DDAF;-webkit-text-fill-color:#F5DDAF;font-weight:500}
 /* лид-магнит: обложка чек-листа и форма в обмен на телефон */
 /* Обложка — альбомный лист, развёрнутый в перспективе: левый край уходит
-   вглубь, правый ближе к зрителю. На листе только шапка бланка, заголовок
-   и подзаголовок — ни вопросов, ни их тем, ни имитации строк.
+   вглубь, правый ближе к зрителю. По вертикали лист стоит ровно. На нём
+   только шапка бланка, заголовок и подзаголовок — ни вопросов, ни их тем,
+   ни имитации строк.
 
    Про резкость. Разворот в перспективе браузер рисует отдельным слоем и
-   натягивает текстурой, поэтому текст на таком листе мягче обычного. Здесь
-   это терпимо: надписей всего две и обе крупные. Правило прежнее — мелкий
-   текст на разворот не ставить, он поплывёт. Если вернёте на лист строки
-   или подписи кеглем меньше 12px, разворот придётся снимать: этот путь
-   пройден дважды, см. историю правок в README. */
+   натягивает текстурой, поэтому текст на таком листе всегда чуть мягче
+   плоского. Но главную нечёткость давал не разворот, а завал rotateZ:
+   от него строки ложились на косую сетку и пересэмплировались целиком.
+   Разворот без завала проверен рендером — буквы держат форму.
+   Отсюда два правила: rotateZ на лист не возвращать и мелкий текст
+   (меньше 10px) на него не ставить. */
 .lm-grid{display:grid;grid-template-columns:1fr 1.02fr;gap:52px;align-items:center;
   position:relative;z-index:2}
 .lm-cover{position:relative;width:100%;max-width:508px;margin:0 auto;padding:30px 24px;
-  /* перспектива живёт на контейнере: так стопка и лист разворачиваются
-     в одной сцене, а не каждый в своей */
-  perspective:1400px}
-/* мягкое свечение позади стопки — отделяет её от розовой плашки */
+  perspective:1500px}
+/* мягкое свечение позади листа — отделяет его от розовой плашки */
 .lm-cover::before{content:"";position:absolute;left:-12%;right:-12%;top:-8%;bottom:-10%;
   background:radial-gradient(56% 54% at 50% 48%,rgba(255,238,214,.4),rgba(255,238,214,0) 72%)}
-/* лист из стопки: тот же разворот, чуть глубже и со сдвигом */
-.lm-cover::after{content:"";position:absolute;left:16px;right:8px;top:20px;bottom:12px;
-  background:#FBEAEF;border-radius:7px;
-  transform:rotateY(-11deg) rotateZ(-1.6deg);
-  box-shadow:0 20px 34px -24px rgba(40,16,26,.95)}
-/* Пропорции альбомного листа A4: 1,414 к 1. */
+/* Лист чуть вытянут против альбомного A4: 1,55 к 1. */
 .lm-doc{position:relative;z-index:1;display:flex;flex-direction:column;
-  aspect-ratio:1.414/1;background:linear-gradient(152deg,#FFFDFC 0%,#FEF6F7 46%,#FBEDF1 100%);
-  border-radius:7px;padding:22px 30px 26px;overflow:hidden;
-  transform:rotateY(-9deg) rotateZ(1.2deg);
-  box-shadow:0 44px 66px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.6);
+  aspect-ratio:1.55/1;background:linear-gradient(152deg,#FFFDFC 0%,#FEF6F7 46%,#FBEDF1 100%);
+  border-radius:8px;padding:22px 30px 26px;overflow:hidden;
+  transform:rotateY(-13deg);
+  box-shadow:0 44px 66px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.6),
+    inset 0 1px 0 rgba(255,255,255,.9),inset -1px 0 0 rgba(255,255,255,.85);
   transition:transform .5s cubic-bezier(.2,.7,.3,1),box-shadow .5s cubic-bezier(.2,.7,.3,1)}
-/* на наведении лист почти выравнивается — заодно надписи становятся резче */
-.lm-cover:hover .lm-doc{transform:rotateY(-3deg) rotateZ(.3deg);
-  box-shadow:0 54px 74px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.75)}
-.lm-doc::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;z-index:2;background:var(--g-cta)}
-/* косой блик по бумаге: лист читается как снятый на свету, а не как заливка */
-.lm-doc::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(116deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,.15) 26%,rgba(255,255,255,0) 46%)}
-/* всё содержимое — поверх блика */
-.lm-doc > *{position:relative;z-index:1}
+/* на наведении разворот слабеет — лист будто поворачивают к себе */
+.lm-cover:hover .lm-doc{transform:rotateY(-6deg);
+  box-shadow:0 54px 74px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.75),
+    inset 0 1px 0 rgba(255,255,255,.95)}
+.lm-doc::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;z-index:3;background:var(--g-cta)}
+/* Глянцевое покрытие: широкий отблеск от угла плюс узкая косая полоса —
+   так бумага читается ламинированной, а не просто светлой. Слой лежит
+   поверх текста (на то оно и покрытие), поэтому держим его прозрачным:
+   выше примерно .45 по альфе надписи начинают выцветать. */
+.lm-doc::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    linear-gradient(112deg,rgba(255,255,255,0) 54%,rgba(255,255,255,.55) 68%,
+      rgba(255,255,255,.2) 77%,rgba(255,255,255,0) 90%),
+    linear-gradient(158deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,.14) 16%,rgba(255,255,255,0) 32%)}
 .lm-head{display:flex;align-items:center;justify-content:space-between;gap:12px;
   padding-bottom:11px;border-bottom:1px solid #EFDCC4}
-.lm-brand{display:flex;align-items:center;gap:7px;font-size:9px;font-weight:800;
-  letter-spacing:.15em;text-transform:uppercase;color:#8F6C1F}
-.lm-mono{width:18px;height:18px;flex:none;border-radius:50%;display:grid;place-items:center;
-  font-family:'Cormorant',Georgia,serif;font-size:12px;font-weight:700;letter-spacing:0;
+/* Кегли шапки подняты: на развёрнутом листе всё мельче 10px превращается в кашу. */
+.lm-brand{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:800;
+  letter-spacing:.13em;text-transform:uppercase;color:#8A6716}
+.lm-mono{width:20px;height:20px;flex:none;border-radius:50%;display:grid;place-items:center;
+  font-family:'Cormorant',Georgia,serif;font-size:13px;font-weight:700;letter-spacing:0;
   color:#FFFBF4;background:#A07A22;box-shadow:0 1px 4px -2px rgba(120,90,30,.7)}
-.lm-tag{font-size:8px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
-  color:#A8908F;white-space:nowrap}
+.lm-tag{font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:#9E8583;white-space:nowrap}
 /* заголовок и подзаголовок занимают весь лист под шапкой и стоят по центру */
 .lm-body-txt{flex:1;display:flex;flex-direction:column;justify-content:center;
   padding:6px 0 10px}
-.lm-title{font-family:'Cormorant',Georgia,serif;font-size:34px;font-weight:700;line-height:1.08;
-  color:#40232C;letter-spacing:-.005em}
-.lm-rule{width:44px;height:2px;border-radius:1px;background:var(--g-cta);margin:14px 0 13px}
-.lm-sub{font-size:14px;line-height:1.45;color:#6B5658;max-width:88%}
+.lm-title{font-family:'Cormorant',Georgia,serif;font-size:35px;font-weight:700;line-height:1.07;
+  color:#3A1E27;letter-spacing:-.005em}
+.lm-rule{width:46px;height:2px;border-radius:1px;background:var(--g-cta);margin:15px 0 13px}
+.lm-sub{font-size:14.5px;line-height:1.45;color:#5F4A4C;max-width:86%}
 .lm-in{margin-top:18px;font-size:16px;line-height:1.62;color:#F7DCE3;max-width:640px}
 .lm-form{margin-top:28px;max-width:560px}
 .lm-row{display:flex;gap:12px;flex-wrap:wrap}
