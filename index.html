@@ -447,63 +447,82 @@ header{
 #action h2{font-variant-numeric:lining-nums}
 #action h2 .it{color:#F5DDAF;-webkit-text-fill-color:#F5DDAF;font-weight:500}
 /* лид-магнит: обложка чек-листа и форма в обмен на телефон */
-/* Обложка — прямоугольный лист, положенный под углом, за ним стопка таких же
-   листов, развёрнутых чуть иначе. Содержимого на нём намеренно мало: марка,
-   число вопросов и подпись. Ни самих вопросов, ни их тем на обложке нет —
-   всё это видит только тот, кому пришёл PDF.
+/* Обложка нарисована как сам документ — по разбору лендингов из базы знаний:
+   «показан сам чек-лист картинкой, видно, что это реальный документ, а не
+   „подпишитесь“». Поэтому не абстрактная карточка, а страница A4 в тех же
+   пропорциях и с той же структурой, что описана в чек-лист.md: сверху логотип
+   и заголовок, одиннадцать пронумерованных пунктов с квадратиком под галочку,
+   снизу контакты и QR на онлайн-запись.
 
-   Про наклон и резкость. Плоский текст Chrome рисует по пиксельной сетке
-   с субпиксельным сглаживанием; повёрнутый — по наклонной, и субпиксельное
-   сглаживание отключается само (цветные края на наклонных штрихах выглядели
-   бы грязью). Буквы от этого чуть мягче, и это цена наклона, а не ошибка.
-   Важно другое: угол задан обычным 2D-поворотом. Как только к нему добавится
-   что-то трёхмерное — perspective, rotateY, translateZ, will-change — лист
-   уедет в отдельный слой, отрисуется в текстуру и текст поплывёт по-настоящему.
-   Этот путь уже проходили дважды, возвращаться не нужно.
-   Угол держим маленьким (-3.6°): дальше строки заметно «съезжают». */
+   Текста вопросов на странице нет: строки набраны полосками. На таком масштабе
+   настоящий текст всё равно был бы нечитаемым пятном, а так человек видит
+   заполненный бланк, но не получает содержимое до того, как оставил номер.
+   Одиннадцать строк — ровно столько же, сколько вопросов в файле; правите
+   чек-лист — поправьте и число строк.
+
+   Про наклон и резкость: угол задан обычным 2D-поворотом. Субпиксельное
+   сглаживание на повёрнутом тексте Chrome отключает сам, поэтому надписи чуть
+   мягче — это цена наклона. Ничего трёхмерного (perspective, rotateY,
+   translateZ, will-change) добавлять нельзя: страница уедет в отдельный слой,
+   отрисуется текстурой, и текст поплывёт по-настоящему. Проходили дважды. */
 .lm-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;
   position:relative;z-index:2}
-.lm-cover{position:relative;width:100%;max-width:300px;margin:0 auto;padding:34px 30px}
+.lm-cover{position:relative;width:100%;max-width:296px;margin:0 auto;padding:30px 28px}
 /* мягкое свечение позади стопки — отделяет её от розовой плашки */
 .lm-cover::before{content:"";position:absolute;left:-16%;right:-16%;top:-4%;bottom:-6%;
-  background:radial-gradient(58% 50% at 50% 48%,rgba(255,238,214,.38),rgba(255,238,214,0) 72%)}
+  background:radial-gradient(58% 50% at 50% 48%,rgba(255,238,214,.36),rgba(255,238,214,0) 72%)}
 /* лист из стопки: развёрнут в другую сторону, чем верхний */
-.lm-cover::after{content:"";position:absolute;left:8px;right:6px;top:24px;bottom:18px;
-  background:#FBEAEF;border-radius:14px;transform:rotate(4.4deg);
+.lm-cover::after{content:"";position:absolute;left:10px;right:8px;top:22px;bottom:16px;
+  background:#FBEAEF;border-radius:6px;transform:rotate(4.2deg);
   box-shadow:0 20px 34px -24px rgba(40,16,26,.95)}
-.lm-doc{position:relative;z-index:1;text-align:center;
-  background:linear-gradient(168deg,#FFFDFC 0%,#FDF0F3 100%);
-  border-radius:14px;padding:30px 26px 24px;overflow:hidden;
+/* Пропорции листа A4: 1 к 1,414. Содержимое внутри растянуто по высоте,
+   поэтому при правке блоков страница остаётся заполненной без подгонки. */
+.lm-doc{position:relative;z-index:1;display:flex;flex-direction:column;
+  aspect-ratio:1/1.414;background:linear-gradient(168deg,#FFFDFC 0%,#FDF3F5 100%);
+  border-radius:6px;padding:20px 22px 16px;overflow:hidden;
   transform:rotate(-3.6deg);
   box-shadow:0 42px 64px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.55);
   transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s cubic-bezier(.2,.7,.3,1)}
-/* на наведении лист почти выравнивается — заодно текст на нём становится резче */
+/* на наведении лист почти выравнивается — заодно надписи на нём становятся резче */
 .lm-cover:hover .lm-doc{transform:rotate(-1deg);
   box-shadow:0 50px 70px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.7)}
-/* фирменная полоса по верхнему краю листа */
-.lm-doc::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--g-cta)}
-/* золотой контур-паспарту с отступом внутрь */
-.lm-doc::after{content:"";position:absolute;left:12px;right:12px;top:18px;bottom:12px;
-  border:1px solid rgba(184,145,63,.34);border-radius:8px;pointer-events:none}
-.lm-brand{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:800;
-  letter-spacing:.14em;text-transform:uppercase;color:#8F6C1F;margin-bottom:14px}
-.lm-mono{width:21px;height:21px;flex:none;border-radius:50%;display:grid;place-items:center;
-  font-family:'Cormorant',Georgia,serif;font-size:14px;font-weight:700;letter-spacing:0;
-  color:#FFFBF4;background:#A07A22;box-shadow:0 2px 5px -2px rgba(120,90,30,.7)}
-/* Число — главный элемент обложки: набрано градиентом по тексту,
-   color оставлен запасным для браузеров без background-clip. */
-.lm-num{font-family:'Cormorant',Georgia,serif;font-size:76px;font-weight:700;line-height:.86;
-  font-variant-numeric:lining-nums;color:#B04A72;background:var(--g-cta);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.lm-nlabel{font-size:11px;font-weight:700;letter-spacing:.19em;text-transform:uppercase;
-  color:#8F6C1F;margin-top:7px}
-.lm-rule{width:34px;height:1px;background:rgba(184,145,63,.55);margin:16px auto}
-/* Cormorant — тонкая антиква: в мелком кегле 600 выглядит бледно, поэтому здесь 700. */
-.lm-title{font-family:'Cormorant',Georgia,serif;font-size:25px;font-weight:700;line-height:1.16;
-  color:#40232C;margin-bottom:9px}
-.lm-sub{font-size:13.5px;line-height:1.5;color:#63504F}
-.lm-foot{margin-top:18px;font-size:10px;font-weight:700;letter-spacing:.13em;
-  text-transform:uppercase;color:#9C8586}
+.lm-doc::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--g-cta)}
+/* шапка бланка */
+.lm-brand{display:flex;align-items:center;gap:6px;font-size:8px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;color:#8F6C1F;margin-bottom:9px}
+.lm-mono{width:15px;height:15px;flex:none;border-radius:50%;display:grid;place-items:center;
+  font-family:'Cormorant',Georgia,serif;font-size:10px;font-weight:700;letter-spacing:0;
+  color:#FFFBF4;background:#A07A22;box-shadow:0 1px 4px -2px rgba(120,90,30,.7)}
+.lm-title{font-family:'Cormorant',Georgia,serif;font-size:15px;font-weight:700;line-height:1.15;
+  color:#40232C;margin-bottom:4px}
+.lm-sub{font-size:7.5px;line-height:1.4;color:#7B6668;letter-spacing:.01em;
+  padding-bottom:9px;border-bottom:1px solid #EFDCC4}
+/* Одиннадцать пунктов бланка. Строка вопроса и строка пояснения под ней —
+   полоски, а не текст: см. комментарий выше. */
+.lm-lines{list-style:none;margin:11px 0 0;display:flex;flex-direction:column;
+  justify-content:space-between;flex:1}
+.lm-lines li{display:flex;align-items:flex-start;gap:6px}
+.lm-lines li::before{content:"";width:7px;height:7px;flex:none;margin-top:1px;border-radius:1.5px;
+  border:1px solid #E0C6CE;background:#fff}
+.lm-lines i{flex:1;display:block}
+.lm-lines i::before,.lm-lines i::after{content:"";display:block;border-radius:1px}
+.lm-lines i::before{height:3.5px;background:#D9C4C9}
+.lm-lines i::after{height:2.5px;margin-top:3px;background:#EBDCE0;width:74%}
+.lm-lines li:nth-child(2n) i::before{width:88%}
+.lm-lines li:nth-child(3n) i::before{width:79%}
+.lm-lines li:nth-child(4n) i::after{width:58%}
+.lm-lines li:nth-child(5n) i::before{width:94%}
+/* подвал бланка: контакты полосками и QR на онлайн-запись */
+.lm-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;
+  margin-top:12px;padding-top:9px;border-top:1px solid #EFDCC4}
+.lm-foot span{flex:1;display:block}
+.lm-foot span::before,.lm-foot span::after{content:"";display:block;height:2.5px;
+  border-radius:1px;background:#E2D0D4}
+.lm-foot span::after{margin-top:4px;width:62%}
+/* QR нарисован клеткой: на таком размере настоящий код всё равно не считался бы */
+.lm-qr{width:28px;height:28px;flex:none;border-radius:2px;border:1px solid #E7D6DA;
+  background-image:repeating-conic-gradient(#5A3B45 0 25%,#FFFDFC 0 50%);
+  background-size:3.4px 3.4px;background-position:1.5px 1.5px;opacity:.72}
 .lm-in{margin-top:18px;font-size:16px;line-height:1.62;color:#F7DCE3;max-width:640px}
 .lm-form{margin-top:28px;max-width:560px}
 .lm-row{display:flex;gap:12px;flex-wrap:wrap}
@@ -1808,13 +1827,15 @@ footer a{color:#F3E2DC}
   <div class="wrap lm-grid">
     <div class="lm-cover" aria-hidden="true">
       <div class="lm-doc">
-        <div class="lm-brand"><span class="lm-mono">Д</span>Дофамин</div>
-        <div class="lm-num">11</div>
-        <div class="lm-nlabel">вопросов</div>
-        <div class="lm-rule"></div>
-        <div class="lm-title">Чек-лист для проверки косметологии</div>
-        <div class="lm-sub">Чтобы не переплатить и не навредить себе</div>
-        <div class="lm-foot">PDF · 1 страница</div>
+        <div class="lm-brand"><span class="lm-mono">Д</span>Дофамин · чек-лист</div>
+        <div class="lm-title">11 вопросов студии аппаратной коррекции</div>
+        <div class="lm-sub">Спросите это в любой студии, прежде чем отдать деньги</div>
+        <ul class="lm-lines">
+          <li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li>
+          <li><i></i></li><li><i></i></li><li><i></i></li><li><i></i></li>
+          <li><i></i></li><li><i></i></li><li><i></i></li>
+        </ul>
+        <div class="lm-foot"><span></span><div class="lm-qr"></div></div>
       </div>
     </div>
 
