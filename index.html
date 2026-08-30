@@ -515,6 +515,11 @@ header{
 .field input::placeholder{color:#C0AAB0}
 .agree{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--ink-2);line-height:1.4;margin-top:14px}
 .agree input{width:17px;height:17px;flex:none;margin-top:2px;accent-color:var(--cta)}
+@keyframes agshake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.agree.err{animation:agshake .34s ease}
+.agree.err span{font-weight:700}
+.agree.err input{outline:2px solid #C0563B;outline-offset:2px;border-radius:4px}
+#action .agree.err input{outline-color:#FFD9CC}
 .form-ok{display:none;text-align:center;padding:16px 4px}
 .form-ok .ok-ic{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;margin:0 auto 16px;
   background:linear-gradient(135deg,#E8F1E5,#DCE9D8);color:var(--sage);
@@ -1414,7 +1419,10 @@ footer a{color:#F3E2DC}
             <input id="q-phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel">
           </div>
           <button type="submit" class="btn btn-wide btn-lg">Получить программу и цену курса</button>
-          <label class="agree"><input type="checkbox" checked required><span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a> и на обработку персональных данных</span></label>
+          <!-- В этой форме есть вопрос об ограничениях по здоровью — специальная категория
+               персональных данных (ст. 10 152-ФЗ). Согласие должно называть её прямо,
+               иначе оно не считается информированным. Текст менять с осторожностью. -->
+          <label class="agree"><input type="checkbox" required><span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a> и на обработку персональных данных, включая указанные мной сведения об ограничениях по здоровью</span></label>
         </div>
 
         <div class="qnav">
@@ -1517,7 +1525,7 @@ footer a{color:#F3E2DC}
             <input id="f3-phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
           </div>
           <button type="submit" class="btn btn-wide">Узнать, сколько нужно мне</button>
-          <label class="agree"><input type="checkbox" checked required><span>Согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
+          <label class="agree"><input type="checkbox" required><span>Согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
         </div>
         <div class="form-ok" style="padding:8px">
           <div class="ok-ic" style="width:52px;height:52px"><svg class="ic"><use href="#i-check"/></svg></div>
@@ -1731,7 +1739,7 @@ footer a{color:#F3E2DC}
             <input id="f4-phone" type="tel" inputmode="tel" placeholder="Ваш номер телефона" autocomplete="tel" required>
             <button type="submit" class="btn btn-lg">Получить чек-лист</button>
           </div>
-          <label class="agree"><input type="checkbox" checked required><span>Согласна на обработку персональных данных и с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
+          <label class="agree"><input type="checkbox" required><span>Согласна на обработку персональных данных и с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
           <p class="lm-note">Пришлём PDF в WhatsApp или Telegram на этот номер в течение пары минут. Без звонков, если вы сами не попросите.</p>
           <p class="lm-note">Нужна не бумага, а запись? Консультация бесплатная, первый визит — 1 000 ₽: <a href="#contacts">телефон и мессенджеры ниже</a>.</p>
         </div>
@@ -1889,6 +1897,17 @@ footer a{color:#F3E2DC}
     el.focus();
     el.addEventListener('input', function h(){ el.style.borderColor=''; el.removeEventListener('input',h); });
   }
+  /* Галочка согласия не проставлена заранее — по 152-ФЗ согласие должно быть
+     осознанным действием. Значит, о незаполненной галочке нужно сказать заметно,
+     иначе кнопка «молча не работает» и заявка теряется. */
+  function needAgree(cb){
+    var lab = cb.closest('.agree') || cb.parentNode;
+    lab.classList.remove('err');
+    void lab.offsetWidth;
+    lab.classList.add('err');
+    cb.focus({preventScroll:true});
+    cb.addEventListener('change', function h(){ lab.classList.remove('err'); cb.removeEventListener('change',h); });
+  }
   /* Куда уходит заявка: сейчас — только экран «спасибо».
      Чтобы подключить CRM / почту / Telegram-бота, отправьте payload на свой endpoint:
      fetch('/lead', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)}) */
@@ -1911,7 +1930,7 @@ footer a{color:#F3E2DC}
       var phone = f.querySelector('input[type=tel]');
       if(!validPhone(phone.value)) { shake(phone); return; }
       var agree = f.querySelector('input[type=checkbox]');
-      if(agree && !agree.checked){ agree.focus(); return; }
+      if(agree && !agree.checked){ needAgree(agree); return; }
       var data = {form:id, phone:phone.value};
       var sel = f.querySelector('select');   if(sel) data.extra = sel.value;
       sendLead(data);
@@ -1962,7 +1981,7 @@ footer a{color:#F3E2DC}
       var phone = document.getElementById('q-phone');
       if(!validPhone(phone.value)){ shake(phone); return; }
       var agree = quiz.querySelector('.qstep[data-step="6"] input[type=checkbox]');
-      if(agree && !agree.checked){ agree.focus(); return; }
+      if(agree && !agree.checked){ needAgree(agree); return; }
       answers['Телефон'] = phone.value;
       sendLead(Object.assign({form:'quiz'}, answers));
 

@@ -371,6 +371,10 @@ main>section{position:relative}
 .agree{display:flex;gap:9px;align-items:flex-start;margin-top:12px;
   font-size:12.5px;color:var(--ink-2);line-height:1.35}
 .agree input{width:20px;height:20px;flex:none;accent-color:var(--cta);margin-top:1px}
+@keyframes agshake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.agree.err{animation:agshake .34s ease}
+.agree.err span{font-weight:700}
+.agree.err input{outline:2px solid #C0563B;outline-offset:2px;border-radius:4px}
 .form-ok{display:none;text-align:center;padding:6px 0}
 .form.is-done .form-body{display:none}
 .form.is-done .form-ok{display:block}
@@ -699,7 +703,7 @@ footer a{color:#F3E2DC;text-decoration:none}
           </select>
         </div>
         <button type="submit" class="btn">Записаться за 1 000 ₽</button>
-        <label class="agree"><input type="checkbox" checked required>
+        <label class="agree"><input type="checkbox" required>
           <span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a>
           и на обработку персональных данных</span></label>
         <!-- СОГЛАСОВАТЬ СО СТУДИЕЙ: срок брони цены — обещание должно быть выполнимым. -->
@@ -825,7 +829,7 @@ footer a{color:#F3E2DC;text-decoration:none}
                    placeholder="+7 999 123-45-67" required>
           </div>
           <button type="submit" class="btn">Получить программу и цену курса</button>
-          <label class="agree"><input type="checkbox" checked required>
+          <label class="agree"><input type="checkbox" required>
             <span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a>
             и на обработку персональных данных</span></label>
         </div>
@@ -886,7 +890,7 @@ footer a{color:#F3E2DC;text-decoration:none}
                  placeholder="+7 999 123-45-67" required>
         </div>
         <button type="submit" class="btn">Посчитать мой курс</button>
-        <label class="agree"><input type="checkbox" checked required>
+        <label class="agree"><input type="checkbox" required>
           <span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a>
           и на обработку персональных данных</span></label>
       </div>
@@ -1001,7 +1005,7 @@ footer a{color:#F3E2DC;text-decoration:none}
           </select>
         </div>
         <button type="submit" class="btn">Записаться на консультацию</button>
-        <label class="agree"><input type="checkbox" checked required>
+        <label class="agree"><input type="checkbox" required>
           <span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a>
           и на обработку персональных данных</span></label>
       </div>
@@ -1077,6 +1081,17 @@ footer a{color:#F3E2DC;text-decoration:none}
     el.focus();
     el.addEventListener('input', function h(){ el.style.borderColor=''; el.removeEventListener('input',h); });
   }
+  /* Галочка согласия не проставлена заранее — по 152-ФЗ согласие должно быть
+     осознанным действием. Значит, о незаполненной галочке нужно сказать заметно,
+     иначе кнопка «молча не работает» и заявка теряется. */
+  function needAgree(cb){
+    var lab = cb.closest('.agree') || cb.parentNode;
+    lab.classList.remove('err');
+    void lab.offsetWidth;
+    lab.classList.add('err');
+    cb.focus({preventScroll:true});
+    cb.addEventListener('change', function h(){ lab.classList.remove('err'); cb.removeEventListener('change',h); });
+  }
   /* Куда уходит заявка: сейчас — только экран «спасибо».
      Для CRM/почты/бота отправьте payload на свой endpoint:
      fetch('/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}) */
@@ -1092,7 +1107,7 @@ footer a{color:#F3E2DC;text-decoration:none}
       var phone = f.querySelector('input[type=tel]');
       if(!validPhone(phone.value)){ shake(phone); return; }
       var agree = f.querySelector('input[type=checkbox]');
-      if(agree && !agree.checked){ agree.focus(); return; }
+      if(agree && !agree.checked){ needAgree(agree); return; }
       var data = {form:f.id, phone:phone.value};
       var sel = f.querySelector('select');
       if(sel) data[sel.name] = sel.value;
@@ -1151,7 +1166,7 @@ footer a{color:#F3E2DC;text-decoration:none}
       var ph = document.getElementById('q-phone');
       if(!validPhone(ph.value)){ shake(ph); return; }
       var ag = quizForm.querySelector('.qstep[data-step="' + qTotal + '"] input[type=checkbox]');
-      if(ag && !ag.checked){ ag.focus(); return; }
+      if(ag && !ag.checked){ needAgree(ag); return; }
       qAns['Телефон'] = ph.value;
       sendLead(Object.assign({form:'quiz'}, qAns));
       quizForm.classList.add('is-done');
