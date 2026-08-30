@@ -447,63 +447,62 @@ header{
 #action h2{font-variant-numeric:lining-nums}
 #action h2 .it{color:#F5DDAF;-webkit-text-fill-color:#F5DDAF;font-weight:500}
 /* лид-магнит: обложка чек-листа и форма в обмен на телефон */
-/* Обложка — арка: скруглённый купол сверху, прямое основание. Форма из
-   бьюти-графики, на розовой плашке читается как вещь, а не как файл, и не
-   повторяет прямоугольные карточки из остальных блоков.
-   Содержимого на ней намеренно мало: марка, число вопросов и подпись.
-   Ни самих вопросов, ни их тем на обложке нет — всё это видит только тот,
-   кому пришёл PDF.
-   Обложка плоская: 3D-разворот браузер растрирует отдельным слоем и
-   натягивает текстурой, отчего текст мылит. Объём даёт стопка арок позади —
-   на них текста нет, их размытие не мешает. Ничего трансформирующего на
-   .lm-doc вешать нельзя: transform, filter или opacity снова уводят её
-   в отдельный слой. */
+/* Обложка — прямоугольный лист, положенный под углом, за ним стопка таких же
+   листов, развёрнутых чуть иначе. Содержимого на нём намеренно мало: марка,
+   число вопросов и подпись. Ни самих вопросов, ни их тем на обложке нет —
+   всё это видит только тот, кому пришёл PDF.
+
+   Про наклон и резкость. Плоский текст Chrome рисует по пиксельной сетке
+   с субпиксельным сглаживанием; повёрнутый — по наклонной, и субпиксельное
+   сглаживание отключается само (цветные края на наклонных штрихах выглядели
+   бы грязью). Буквы от этого чуть мягче, и это цена наклона, а не ошибка.
+   Важно другое: угол задан обычным 2D-поворотом. Как только к нему добавится
+   что-то трёхмерное — perspective, rotateY, translateZ, will-change — лист
+   уедет в отдельный слой, отрисуется в текстуру и текст поплывёт по-настоящему.
+   Этот путь уже проходили дважды, возвращаться не нужно.
+   Угол держим маленьким (-3.6°): дальше строки заметно «съезжают». */
 .lm-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;
   position:relative;z-index:2}
-.lm-cover{position:relative;width:100%;max-width:314px;margin:0 auto;padding:18px 20px 24px}
-/* Позади арки — не стопка листов (у объекта такой формы её быть не может),
-   а мягкое свечение и парный контур со сдвигом: глубина есть, грязи нет.
-   Арочный радиус задан в процентах, чтобы контур держал ту же форму при
-   своей ширине: 50% по горизонтали — ровный купол. */
-.lm-cover::before{content:"";position:absolute;left:-14%;right:-14%;top:-6%;bottom:-8%;
-  background:radial-gradient(58% 48% at 50% 46%,rgba(255,238,214,.38),rgba(255,238,214,0) 72%)}
-.lm-cover::after{content:"";position:absolute;left:34px;right:-4px;top:34px;bottom:2px;
-  border:1.5px solid rgba(255,255,255,.42);
-  border-radius:50% 50% 16px 16px / 32% 32% 16px 16px}
-/* На обложке тёмный текст по светлому: у body включено
-   -webkit-font-smoothing:antialiased — оно для светлых надписей по тёмному фону,
-   а тут истончает штрихи. Возвращаем субпиксельное сглаживание: буквы чётче.
-   Работает, только пока обложка не в отдельном слое — transform/filter его включат. */
+.lm-cover{position:relative;width:100%;max-width:300px;margin:0 auto;padding:34px 30px}
+/* мягкое свечение позади стопки — отделяет её от розовой плашки */
+.lm-cover::before{content:"";position:absolute;left:-16%;right:-16%;top:-4%;bottom:-6%;
+  background:radial-gradient(58% 50% at 50% 48%,rgba(255,238,214,.38),rgba(255,238,214,0) 72%)}
+/* лист из стопки: развёрнут в другую сторону, чем верхний */
+.lm-cover::after{content:"";position:absolute;left:8px;right:6px;top:24px;bottom:18px;
+  background:#FBEAEF;border-radius:14px;transform:rotate(4.4deg);
+  box-shadow:0 20px 34px -24px rgba(40,16,26,.95)}
 .lm-doc{position:relative;z-index:1;text-align:center;
   background:linear-gradient(168deg,#FFFDFC 0%,#FDF0F3 100%);
-  -webkit-font-smoothing:subpixel-antialiased;-moz-osx-font-smoothing:auto;
-  border-radius:50% 50% 18px 18px / 32% 32% 18px 18px;
-  padding:74px 30px 30px;
+  border-radius:14px;padding:30px 26px 24px;overflow:hidden;
+  transform:rotate(-3.6deg);
   box-shadow:0 42px 64px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.55);
-  transition:box-shadow .4s cubic-bezier(.2,.7,.3,1)}
-.lm-cover:hover .lm-doc{box-shadow:0 50px 70px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.7)}
-/* золотой контур-паспарту повторяет арку с отступом внутрь */
-.lm-doc::before{content:"";position:absolute;left:13px;right:13px;top:13px;bottom:13px;
-  border:1px solid rgba(184,145,63,.38);pointer-events:none;
-  border-radius:50% 50% 10px 10px / 31% 31% 10px 10px}
+  transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s cubic-bezier(.2,.7,.3,1)}
+/* на наведении лист почти выравнивается — заодно текст на нём становится резче */
+.lm-cover:hover .lm-doc{transform:rotate(-1deg);
+  box-shadow:0 50px 70px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.7)}
+/* фирменная полоса по верхнему краю листа */
+.lm-doc::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--g-cta)}
+/* золотой контур-паспарту с отступом внутрь */
+.lm-doc::after{content:"";position:absolute;left:12px;right:12px;top:18px;bottom:12px;
+  border:1px solid rgba(184,145,63,.34);border-radius:8px;pointer-events:none}
 .lm-brand{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:800;
-  letter-spacing:.14em;text-transform:uppercase;color:#8F6C1F;margin-bottom:16px}
+  letter-spacing:.14em;text-transform:uppercase;color:#8F6C1F;margin-bottom:14px}
 .lm-mono{width:21px;height:21px;flex:none;border-radius:50%;display:grid;place-items:center;
   font-family:'Cormorant',Georgia,serif;font-size:14px;font-weight:700;letter-spacing:0;
   color:#FFFBF4;background:#A07A22;box-shadow:0 2px 5px -2px rgba(120,90,30,.7)}
 /* Число — главный элемент обложки: набрано градиентом по тексту,
    color оставлен запасным для браузеров без background-clip. */
-.lm-num{font-family:'Cormorant',Georgia,serif;font-size:78px;font-weight:700;line-height:.86;
+.lm-num{font-family:'Cormorant',Georgia,serif;font-size:76px;font-weight:700;line-height:.86;
   font-variant-numeric:lining-nums;color:#B04A72;background:var(--g-cta);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .lm-nlabel{font-size:11px;font-weight:700;letter-spacing:.19em;text-transform:uppercase;
   color:#8F6C1F;margin-top:7px}
-.lm-rule{width:34px;height:1px;background:rgba(184,145,63,.55);margin:17px auto}
+.lm-rule{width:34px;height:1px;background:rgba(184,145,63,.55);margin:16px auto}
 /* Cormorant — тонкая антиква: в мелком кегле 600 выглядит бледно, поэтому здесь 700. */
 .lm-title{font-family:'Cormorant',Georgia,serif;font-size:25px;font-weight:700;line-height:1.16;
   color:#40232C;margin-bottom:9px}
 .lm-sub{font-size:13.5px;line-height:1.5;color:#63504F}
-.lm-foot{margin-top:20px;font-size:10px;font-weight:700;letter-spacing:.13em;
+.lm-foot{margin-top:18px;font-size:10px;font-weight:700;letter-spacing:.13em;
   text-transform:uppercase;color:#9C8586}
 .lm-in{margin-top:18px;font-size:16px;line-height:1.62;color:#F7DCE3;max-width:640px}
 .lm-form{margin-top:28px;max-width:560px}
