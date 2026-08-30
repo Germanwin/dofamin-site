@@ -447,53 +447,53 @@ header{
 #action h2{font-variant-numeric:lining-nums}
 #action h2 .it{color:#F5DDAF;-webkit-text-fill-color:#F5DDAF;font-weight:500}
 /* лид-магнит: обложка чек-листа и форма в обмен на телефон */
-/* Обложка развёрнута в 3D. Такой слой браузер растрирует отдельной текстурой
-   и натягивает на развёрнутую плоскость — буквы пересэмплируются и мылят.
-   Лечится разрешением растра: масштаб текстуры Chrome берёт из scale() в самой
-   трансформации, поэтому карточка сверстана вдвое мельче (zoom:.5) и возвращена
-   на место scale(2). Геометрия та же, текселей вдвое больше, текст чёткий.
-   Трогая размеры карточки, держите пару zoom/scale согласованной.
+/* Обложка нарочно плоская: 3D-разворот браузер растрирует отдельным слоем
+   и натягивает текстурой, отчего текст на карточке мылит. Пробовали лечить
+   разрешением растра (zoom + scale) — на 1x всё равно хуже плоского.
+   Объём даёт стопка листов позади: на них текста нет, их размытие не мешает.
+   Ничего трансформирующего на .lm-doc вешать не нужно — любой transform,
+   filter или opacity снова уводит карточку в отдельный слой и мылит буквы.
    Вопросов на обложке нет намеренно: их видит только тот, кому пришёл файл. */
 .lm-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;
   position:relative;z-index:2}
-.lm-cover{position:relative;display:grid;place-items:center;padding:0 24px 0 4px;
-  /* zoom ужимает и разметочный бокс — он вдвое ниже видимой карточки.
-     min-height резервирует место под настоящую высоту, иначе она вылезает
-     за блок. Меняете содержимое обложки — проверьте это число. */
-  min-height:330px}
-.lm-doc{position:relative;width:342px;zoom:.5;
-  background:linear-gradient(158deg,#FFFDFC 0%,#FDF0F3 100%);
+.lm-cover{position:relative;max-width:342px;margin:0 auto;padding:10px 26px 20px 4px}
+.lm-cover::before,.lm-cover::after{content:"";position:absolute;border-radius:16px}
+.lm-cover::before{left:34px;right:0;top:24px;bottom:4px;background:#F6DAE2;
+  transform:rotate(4.2deg);box-shadow:0 18px 32px -22px rgba(40,16,26,.9)}
+.lm-cover::after{left:22px;right:12px;top:16px;bottom:12px;background:#FDF3F6;
+  transform:rotate(1.9deg);box-shadow:0 16px 28px -22px rgba(40,16,26,.8)}
+/* На карточке тёмный текст по светлому: у body включено
+   -webkit-font-smoothing:antialiased — оно для светлых надписей по тёмному фону,
+   а тут истончает штрихи. Возвращаем субпиксельное сглаживание: буквы чётче.
+   Работает, только пока карточка не в отдельном слое — transform/filter его включат. */
+.lm-doc{position:relative;z-index:1;background:linear-gradient(158deg,#FFFDFC 0%,#FDF0F3 100%);
+  -webkit-font-smoothing:subpixel-antialiased;-moz-osx-font-smoothing:auto;
   border-radius:7px 16px 16px 7px;padding:34px 30px 28px 46px;
-  transform:perspective(2000px) rotateY(-15deg) rotateX(3deg) scale(2);
   box-shadow:0 42px 64px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.55);
-  transition:transform .55s cubic-bezier(.2,.7,.3,1)}
-.lm-cover:hover .lm-doc{transform:perspective(2000px) rotateY(-7deg) rotateX(1.5deg) scale(2)}
+  transition:box-shadow .4s cubic-bezier(.2,.7,.3,1)}
+.lm-cover:hover .lm-doc{box-shadow:0 50px 70px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.7)}
 .lm-doc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:17px;
   background:var(--g-cta);border-radius:7px 0 0 7px}
 .lm-doc::after{content:"";position:absolute;left:17px;top:0;bottom:0;width:8px;
   background:linear-gradient(90deg,rgba(78,46,56,.15),rgba(78,46,56,0))}
-/* Если zoom не поддерживается (старые Firefox), пара zoom/scale развалила бы
-   размер вдвое — там показываем обычный разворот без трюка с растром. */
-@supports not (zoom: 0.5){
-  .lm-cover{min-height:0}
-  .lm-doc{width:auto;max-width:342px;transform:perspective(1000px) rotateY(-15deg) rotateX(3deg)}
-  .lm-cover:hover .lm-doc{transform:perspective(1000px) rotateY(-7deg) rotateX(1.5deg)}
-}
-.lm-brand{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;
-  letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.lm-brand{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;color:#8F6C1F;margin-bottom:20px}
 .lm-mono{width:19px;height:19px;flex:none;border-radius:50%;display:grid;place-items:center;
-  font-family:'Cormorant',Georgia,serif;font-size:13px;font-weight:600;letter-spacing:0;
-  color:#FFFBF4;background:var(--gold);box-shadow:0 2px 5px -2px rgba(120,90,30,.7)}
-.lm-title{font-family:'Cormorant',Georgia,serif;font-size:27px;font-weight:600;line-height:1.15;
-  color:var(--plum);margin-bottom:10px}
-.lm-sub{font-size:13.5px;line-height:1.5;color:var(--ink-2);margin-bottom:26px}
-.lm-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  font-family:'Cormorant',Georgia,serif;font-size:13px;font-weight:700;letter-spacing:0;
+  color:#FFFBF4;background:#A07A22;box-shadow:0 2px 5px -2px rgba(120,90,30,.7)}
+/* Cormorant — тонкая антиква: в мелком кегле 600 выглядит бледно, поэтому здесь 700. */
+.lm-title{font-family:'Cormorant',Georgia,serif;font-size:27px;font-weight:700;line-height:1.16;
+  color:#40232C;margin-bottom:11px}
+.lm-sub{font-size:14px;line-height:1.55;color:#63504F;margin-bottom:26px}
+.lm-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;
   border-top:1px solid var(--line-2);padding-top:13px}
-.lm-foot span{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
-  color:var(--ink-2)}
-.lm-foot b{font-family:'Cormorant',Georgia,serif;font-size:23px;font-weight:600;line-height:1;
-  font-variant-numeric:lining-nums;background:var(--g-cta);-webkit-background-clip:text;
-  background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.lm-foot span{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;
+  color:#63504F}
+/* Число набрано градиентом по тексту: color оставлен запасным для браузеров
+   без background-clip, иначе надпись пропала бы совсем. */
+.lm-foot b{font-family:'Cormorant',Georgia,serif;font-size:23px;font-weight:700;line-height:1;white-space:nowrap;
+  font-variant-numeric:lining-nums;color:#B04A72;background:var(--g-cta);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .lm-in{margin-top:18px;font-size:16px;line-height:1.62;color:#F7DCE3;max-width:640px}
 .lm-form{margin-top:28px;max-width:560px}
 .lm-row{display:flex;gap:12px;flex-wrap:wrap}
