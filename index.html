@@ -266,10 +266,7 @@ header{
    linear-gradient(165deg,#F9E6E6 0%,#F3D2DC 50%,#F7DED2 100%)}
 .hero .b1{width:420px;height:420px;right:-90px;top:-120px}
 .hero .b2{width:340px;height:340px;left:-120px;bottom:-60px}
-/* 1.12fr — чтобы обе кнопки первого экрана вставали в один ряд, а не переносились */
-.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:48px;align-items:center}
-.hero .cta-row .btn-lg{padding:22px 34px}
-.hero-copy .note{margin-bottom:22px}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:56px;align-items:center}
 .hero h1{margin-bottom:18px;max-width:640px}
 .hero .lead{font-size:18px;color:#66525A;margin-bottom:24px;max-width:600px}
 .bullets{list-style:none;display:grid;gap:11px;margin-bottom:26px}
@@ -299,12 +296,7 @@ header{
 @media(max-width:1359px){.cta-arrow{display:none}}
 .hero-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px;padding-top:22px;
   border-top:1px solid var(--line-2)}
-@media(max-width:1180px) and (min-width:981px){
-  .hero-trust{grid-template-columns:1fr 1fr}
-  /* колонка уже, а сетка ещё в две полосы — ужимаем кнопки, чтобы держались в один ряд */
-  .hero .cta-row .btn-lg{padding:19px 24px;font-size:16.5px}
-  .hero .cta-row .btn-ghost{padding:16px 20px;font-size:15.5px}
-}
+@media(max-width:1180px) and (min-width:981px){.hero-trust{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.hero-trust{grid-template-columns:1fr}}
 .tchip{display:flex;align-items:center;gap:9px;background:linear-gradient(150deg,rgba(255,255,255,.88),rgba(253,231,239,.82));
   border:1px solid rgba(255,255,255,.85);border-radius:16px;padding:11px 15px;font-size:13.5px;
@@ -1131,6 +1123,14 @@ footer a{color:#F3E2DC}
       <h1>Коррекция фигуры <span class="it">без диет и операций</span>: минус <span class="num">0,5–2&nbsp;см</span> объёмов за один сеанс</h1>
       <p class="lead">Аппаратные методики в студии «Дофамин» у «Ладожской»: кавитация, RF-лифтинг, лазерный липолиз и лимфодренаж. Первый визит — разбор зоны и любая услуга студии на выбор, 30 минут — <b>1&nbsp;000&nbsp;₽</b>.</p>
 
+      <ul class="bullets">
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>30 минут</b> на процедуру — успеете в обед или после работы, без реабилитации и следов</span></li>
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>Фото до и после — на ваш телефон</b>, плюс контрольное взвешивание: результат видно, а не «кажется»</span></li>
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>7 методик</b> в одной студии — подберём под вашу зону, а не продадим всё подряд</span></li>
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>1 000 ₽ за любую услугу</b> на первом визите — выбираете, что попробовать, а не берёте, что предложат</span></li>
+        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>Консультация — бесплатно</b>: разберём зону и посчитаем курс, даже если записываться вы не будете</span></li>
+      </ul>
+
       <div class="cta-row">
         <span class="cta-wrap">
           <span class="cta-arrow" aria-hidden="true">
@@ -1142,17 +1142,11 @@ footer a{color:#F3E2DC}
               <path class="a-head" d="M60.2 15.1 L46.4 26.3 Q49.2 18.5 42.5 13.7Z"/>
             </svg>
           </span>
-          <a href="#book" class="btn btn-lg">Выбрать процедуру за 1&nbsp;000&nbsp;₽</a>
+          <a href="#book" class="btn btn-lg">Хочу первый визит за 1&nbsp;000&nbsp;₽</a>
         </span>
-        <a href="#quiz" class="btn btn-ghost">Подобрать программу</a>
+        <a href="#quiz" class="btn btn-ghost">Подобрать программу и цену</a>
       </div>
       <p class="note">Перезвоним в рабочее время и подберём удобное окно. Онлайн ничего не оплачиваете, консультация бесплатная.</p>
-
-      <ul class="bullets">
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>30 минут</b> — успеете в обед или после работы, без следов и реабилитации</span></li>
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>Фото до и после на ваш телефон</b> и контрольное взвешивание — результат видно, а не «кажется»</span></li>
-        <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>7 методик</b> — подберём под вашу зону, а не продадим всё подряд</span></li>
-      </ul>
 
       <div class="hero-trust">
         <div class="tchip"><div><b>5,0 <span class="stars">★★★★★</span></b>28 отзывов на Яндекс.Картах</div></div>
@@ -1811,13 +1805,13 @@ footer a{color:#F3E2DC}
 
     <form class="form" id="form-book" novalidate>
       <div class="form-body">
-        <h3>Выберите процедуру на первый визит</h3>
-        <p class="fnote">Не нужно решать прямо сейчас. Оставьте номер — администратор перезвонит в рабочее время, расскажет про методики, поможет выбрать, что попробовать за 1&nbsp;000&nbsp;₽, и покажет свободные окна.</p>
+        <h3>Первый визит за 1&nbsp;000&nbsp;₽</h3>
+        <p class="fnote">Оставьте номер — администратор перезвонит в рабочее время, покажет свободные окна и подберёт формат визита.</p>
         <div class="field">
           <label for="fb-phone">Телефон</label>
           <input id="fb-phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
         </div>
-        <button type="submit" class="btn btn-wide btn-lg">Выбрать процедуру за 1&nbsp;000&nbsp;₽</button>
+        <button type="submit" class="btn btn-wide btn-lg">Хочу первый визит за 1&nbsp;000&nbsp;₽</button>
         <label class="agree"><input type="checkbox" required><span>Согласна на обработку персональных данных и с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
       </div>
       <div class="form-ok">
