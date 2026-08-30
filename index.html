@@ -447,63 +447,64 @@ header{
 #action h2{font-variant-numeric:lining-nums}
 #action h2 .it{color:#F5DDAF;-webkit-text-fill-color:#F5DDAF;font-weight:500}
 /* лид-магнит: обложка чек-листа и форма в обмен на телефон */
-/* Обложка — вертикальный лист в пропорции печатной страницы: так она читается
-   как «PDF, одна страница», а не как визитка. Плоская нарочно: 3D-разворот
-   браузер растрирует отдельным слоем и натягивает текстурой, отчего текст
-   мылит. Объём даёт стопка листов позади — на них текста нет, их размытие
-   не мешает. Ничего трансформирующего на .lm-doc вешать нельзя: любой
-   transform, filter или opacity снова уводит лист в отдельный слой.
-   На обложке только темы вопросов и пустые квадратики под галочки —
-   формулировки видит тот, кому пришёл файл. Темы взяты из чек-лист.md,
-   правите чек-лист — проверьте и здесь. */
+/* Обложка — арка: скруглённый купол сверху, прямое основание. Форма из
+   бьюти-графики, на розовой плашке читается как вещь, а не как файл, и не
+   повторяет прямоугольные карточки из остальных блоков.
+   Содержимого на ней намеренно мало: марка, число вопросов и подпись.
+   Ни самих вопросов, ни их тем на обложке нет — всё это видит только тот,
+   кому пришёл PDF.
+   Обложка плоская: 3D-разворот браузер растрирует отдельным слоем и
+   натягивает текстурой, отчего текст мылит. Объём даёт стопка арок позади —
+   на них текста нет, их размытие не мешает. Ничего трансформирующего на
+   .lm-doc вешать нельзя: transform, filter или opacity снова уводят её
+   в отдельный слой. */
 .lm-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;
   position:relative;z-index:2}
-.lm-cover{position:relative;width:100%;max-width:318px;margin:0 auto;padding:14px 24px 24px 6px}
-.lm-cover::before,.lm-cover::after{content:"";position:absolute;border-radius:14px}
-.lm-cover::before{left:28px;right:0;top:34px;bottom:6px;background:#F3D2DC;
-  transform:rotate(3.1deg);box-shadow:0 18px 32px -22px rgba(40,16,26,.9)}
-.lm-cover::after{left:17px;right:12px;top:24px;bottom:15px;background:#FDF3F6;
-  transform:rotate(1.4deg);box-shadow:0 16px 28px -22px rgba(40,16,26,.8)}
-/* На листе тёмный текст по светлому: у body включено
+.lm-cover{position:relative;width:100%;max-width:314px;margin:0 auto;padding:18px 20px 24px}
+/* Позади арки — не стопка листов (у объекта такой формы её быть не может),
+   а мягкое свечение и парный контур со сдвигом: глубина есть, грязи нет.
+   Арочный радиус задан в процентах, чтобы контур держал ту же форму при
+   своей ширине: 50% по горизонтали — ровный купол. */
+.lm-cover::before{content:"";position:absolute;left:-14%;right:-14%;top:-6%;bottom:-8%;
+  background:radial-gradient(58% 48% at 50% 46%,rgba(255,238,214,.38),rgba(255,238,214,0) 72%)}
+.lm-cover::after{content:"";position:absolute;left:34px;right:-4px;top:34px;bottom:2px;
+  border:1.5px solid rgba(255,255,255,.42);
+  border-radius:50% 50% 16px 16px / 32% 32% 16px 16px}
+/* На обложке тёмный текст по светлому: у body включено
    -webkit-font-smoothing:antialiased — оно для светлых надписей по тёмному фону,
    а тут истончает штрихи. Возвращаем субпиксельное сглаживание: буквы чётче.
-   Работает, только пока лист не в отдельном слое — transform/filter его включат. */
-.lm-doc{position:relative;z-index:1;display:flex;flex-direction:column;
+   Работает, только пока обложка не в отдельном слое — transform/filter его включат. */
+.lm-doc{position:relative;z-index:1;text-align:center;
   background:linear-gradient(168deg,#FFFDFC 0%,#FDF0F3 100%);
   -webkit-font-smoothing:subpixel-antialiased;-moz-osx-font-smoothing:auto;
-  border-radius:14px;padding:28px 26px 20px;overflow:hidden;
+  border-radius:50% 50% 18px 18px / 32% 32% 18px 18px;
+  padding:74px 30px 30px;
   box-shadow:0 42px 64px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.55);
   transition:box-shadow .4s cubic-bezier(.2,.7,.3,1)}
 .lm-cover:hover .lm-doc{box-shadow:0 50px 70px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.7)}
-/* фирменная полоса по верхнему краю листа — вместо прежнего корешка сбоку */
-.lm-doc::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--g-cta)}
-.lm-brand{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:800;
-  letter-spacing:.12em;text-transform:uppercase;color:#8F6C1F;
-  border-bottom:1px solid #EFDCC4;padding-bottom:13px;margin-bottom:15px}
-.lm-mono{width:19px;height:19px;flex:none;border-radius:50%;display:grid;place-items:center;
-  font-family:'Cormorant',Georgia,serif;font-size:13px;font-weight:700;letter-spacing:0;
+/* золотой контур-паспарту повторяет арку с отступом внутрь */
+.lm-doc::before{content:"";position:absolute;left:13px;right:13px;top:13px;bottom:13px;
+  border:1px solid rgba(184,145,63,.38);pointer-events:none;
+  border-radius:50% 50% 10px 10px / 31% 31% 10px 10px}
+.lm-brand{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;color:#8F6C1F;margin-bottom:16px}
+.lm-mono{width:21px;height:21px;flex:none;border-radius:50%;display:grid;place-items:center;
+  font-family:'Cormorant',Georgia,serif;font-size:14px;font-weight:700;letter-spacing:0;
   color:#FFFBF4;background:#A07A22;box-shadow:0 2px 5px -2px rgba(120,90,30,.7)}
-/* Cormorant — тонкая антиква: в мелком кегле 600 выглядит бледно, поэтому здесь 700. */
-.lm-title{font-family:'Cormorant',Georgia,serif;font-size:26px;font-weight:700;line-height:1.14;
-  color:#40232C;margin-bottom:9px}
-.lm-sub{font-size:13.5px;line-height:1.5;color:#63504F;margin-bottom:17px}
-/* Список тем: квадратик под галочку слева, как в самом бланке. */
-.lm-list{list-style:none;margin:0 0 18px;display:grid;gap:10px}
-.lm-list li{display:flex;align-items:center;gap:10px;font-size:13px;line-height:1.25;
-  font-weight:600;color:#5A4747}
-.lm-list li::before{content:"";width:15px;height:15px;flex:none;border-radius:4px;
-  background:#fff;border:1.5px solid #E6C9D1;box-shadow:inset 0 1px 2px rgba(78,46,56,.09)}
-.lm-list .more{font-weight:500;font-style:italic;color:#9C8586}
-.lm-list .more::before{border:0;background:none;box-shadow:none;width:15px}
-.lm-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;
-  border-top:1px solid var(--line-2);padding-top:13px}
-.lm-foot span{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;
-  color:#63504F}
-/* Число набрано градиентом по тексту: color оставлен запасным для браузеров
-   без background-clip, иначе надпись пропала бы совсем. */
-.lm-foot b{font-family:'Cormorant',Georgia,serif;font-size:23px;font-weight:700;line-height:1;white-space:nowrap;
+/* Число — главный элемент обложки: набрано градиентом по тексту,
+   color оставлен запасным для браузеров без background-clip. */
+.lm-num{font-family:'Cormorant',Georgia,serif;font-size:78px;font-weight:700;line-height:.86;
   font-variant-numeric:lining-nums;color:#B04A72;background:var(--g-cta);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lm-nlabel{font-size:11px;font-weight:700;letter-spacing:.19em;text-transform:uppercase;
+  color:#8F6C1F;margin-top:7px}
+.lm-rule{width:34px;height:1px;background:rgba(184,145,63,.55);margin:17px auto}
+/* Cormorant — тонкая антиква: в мелком кегле 600 выглядит бледно, поэтому здесь 700. */
+.lm-title{font-family:'Cormorant',Georgia,serif;font-size:25px;font-weight:700;line-height:1.16;
+  color:#40232C;margin-bottom:9px}
+.lm-sub{font-size:13.5px;line-height:1.5;color:#63504F}
+.lm-foot{margin-top:20px;font-size:10px;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;color:#9C8586}
 .lm-in{margin-top:18px;font-size:16px;line-height:1.62;color:#F7DCE3;max-width:640px}
 .lm-form{margin-top:28px;max-width:560px}
 .lm-row{display:flex;gap:12px;flex-wrap:wrap}
@@ -1808,17 +1809,13 @@ footer a{color:#F3E2DC}
   <div class="wrap lm-grid">
     <div class="lm-cover" aria-hidden="true">
       <div class="lm-doc">
-        <div class="lm-brand"><span class="lm-mono">Д</span>Дофамин · чек-лист</div>
-        <div class="lm-title">Ваш чек-лист вопросов для косметологии</div>
+        <div class="lm-brand"><span class="lm-mono">Д</span>Дофамин</div>
+        <div class="lm-num">11</div>
+        <div class="lm-nlabel">вопросов</div>
+        <div class="lm-rule"></div>
+        <div class="lm-title">Чек-лист для проверки косметологии</div>
         <div class="lm-sub">Чтобы не переплатить и не навредить себе</div>
-        <ul class="lm-list">
-          <li>Документы на аппарат</li>
-          <li>Медицинская лицензия</li>
-          <li>Кто проводит процедуру</li>
-          <li>Полная сумма курса</li>
-          <li class="more">…и ещё 7 вопросов</li>
-        </ul>
-        <div class="lm-foot"><span>PDF · 1 страница</span><b>11 вопросов</b></div>
+        <div class="lm-foot">PDF · 1 страница</div>
       </div>
     </div>
 
