@@ -447,27 +447,38 @@ header{
 #action h2{font-variant-numeric:lining-nums}
 #action h2 .it{color:#F5DDAF;-webkit-text-fill-color:#F5DDAF;font-weight:500}
 /* лид-магнит: обложка чек-листа и форма в обмен на телефон */
-/* Обложка нарочно плоская: 3D-разворот браузер растрирует отдельным слоем
-   и натягивает текстурой, отчего текст на карточке мылит. Объём даёт стопка
-   листов позади — на них текста нет, и их размытие никого не смущает.
+/* Обложка развёрнута в 3D. Такой слой браузер растрирует отдельной текстурой
+   и натягивает на развёрнутую плоскость — буквы пересэмплируются и мылят.
+   Лечится разрешением растра: масштаб текстуры Chrome берёт из scale() в самой
+   трансформации, поэтому карточка сверстана вдвое мельче (zoom:.5) и возвращена
+   на место scale(2). Геометрия та же, текселей вдвое больше, текст чёткий.
+   Трогая размеры карточки, держите пару zoom/scale согласованной.
    Вопросов на обложке нет намеренно: их видит только тот, кому пришёл файл. */
 .lm-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;
   position:relative;z-index:2}
-.lm-cover{position:relative;max-width:342px;margin:0 auto;padding:10px 26px 20px 4px}
-.lm-cover::before,.lm-cover::after{content:"";position:absolute;border-radius:16px}
-.lm-cover::before{left:34px;right:0;top:24px;bottom:4px;background:#F6DAE2;
-  transform:rotate(4.2deg);box-shadow:0 18px 32px -22px rgba(40,16,26,.9)}
-.lm-cover::after{left:22px;right:12px;top:16px;bottom:12px;background:#FDF3F6;
-  transform:rotate(1.9deg);box-shadow:0 16px 28px -22px rgba(40,16,26,.8)}
-.lm-doc{position:relative;z-index:1;background:linear-gradient(158deg,#FFFDFC 0%,#FDF0F3 100%);
+.lm-cover{position:relative;display:grid;place-items:center;padding:0 24px 0 4px;
+  /* zoom ужимает и разметочный бокс — он вдвое ниже видимой карточки.
+     min-height резервирует место под настоящую высоту, иначе она вылезает
+     за блок. Меняете содержимое обложки — проверьте это число. */
+  min-height:330px}
+.lm-doc{position:relative;width:342px;zoom:.5;
+  background:linear-gradient(158deg,#FFFDFC 0%,#FDF0F3 100%);
   border-radius:7px 16px 16px 7px;padding:34px 30px 28px 46px;
+  transform:perspective(2000px) rotateY(-15deg) rotateX(3deg) scale(2);
   box-shadow:0 42px 64px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.55);
-  transition:transform .4s cubic-bezier(.2,.7,.3,1)}
-.lm-cover:hover .lm-doc{transform:translateY(-5px)}
+  transition:transform .55s cubic-bezier(.2,.7,.3,1)}
+.lm-cover:hover .lm-doc{transform:perspective(2000px) rotateY(-7deg) rotateX(1.5deg) scale(2)}
 .lm-doc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:17px;
   background:var(--g-cta);border-radius:7px 0 0 7px}
 .lm-doc::after{content:"";position:absolute;left:17px;top:0;bottom:0;width:8px;
   background:linear-gradient(90deg,rgba(78,46,56,.15),rgba(78,46,56,0))}
+/* Если zoom не поддерживается (старые Firefox), пара zoom/scale развалила бы
+   размер вдвое — там показываем обычный разворот без трюка с растром. */
+@supports not (zoom: 0.5){
+  .lm-cover{min-height:0}
+  .lm-doc{width:auto;max-width:342px;transform:perspective(1000px) rotateY(-15deg) rotateX(3deg)}
+  .lm-cover:hover .lm-doc{transform:perspective(1000px) rotateY(-7deg) rotateX(1.5deg)}
+}
 .lm-brand{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;
   letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
 .lm-mono{width:19px;height:19px;flex:none;border-radius:50%;display:grid;place-items:center;
