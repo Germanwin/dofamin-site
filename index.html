@@ -449,64 +449,89 @@ header{
 #action h2{font-variant-numeric:lining-nums}
 #action h2 .it{color:#F5DDAF;-webkit-text-fill-color:#F5DDAF;font-weight:500}
 /* лид-магнит: обложка чек-листа и форма в обмен на телефон */
-/* Обложка — альбомный лист, развёрнутый в перспективе: левый край уходит
-   вглубь, правый ближе к зрителю. По вертикали лист стоит ровно. На нём
-   только шапка бланка, заголовок и подзаголовок — ни вопросов, ни их тем,
-   ни имитации строк.
+/* Обложка — напечатанный лист, развёрнутый в перспективе: левый край уходит
+   вглубь, правый ближе к зрителю, по вертикали лист стоит ровно. На листе
+   только шапка бланка, заголовок и подзаголовок.
 
-   Про резкость. Разворот в перспективе браузер рисует отдельным слоем и
-   натягивает текстурой, поэтому текст на таком листе всегда чуть мягче
-   плоского. Но главную нечёткость давал не разворот, а завал rotateZ:
-   от него строки ложились на косую сетку и пересэмплировались целиком.
-   Разворот без завала проверен рендером — буквы держат форму.
-   Отсюда два правила: rotateZ на лист не возвращать и мелкий текст
-   (меньше 10px) на него не ставить. */
+   Достоверность собрана из физики, а не из эффектов:
+
+   1. Свет один и сверху слева. Отсюда светлое пятно в левом верхнем углу,
+      общий уход тона в тень к правому нижнему и лёгкое затемнение дальнего
+      левого края — он дальше от зрителя и хуже освещён. Никаких косых
+      бликов: глянцевая полоса поперёк листа выглядела наклейкой и мылила
+      надписи, её убрали.
+   2. Тень не одна, а три: контактная (узкая и тёмная, лист лежит на ней),
+      средняя и мягкая объёмная со сносом вправо-вниз — по направлению света.
+   3. Торец бумаги — жёсткая тень без размытия со сдвигом влево-вниз
+      (первым в списке box-shadow). Она повторяет и скругление, и разворот,
+      поэтому лист выглядит вещью с толщиной, а не прямоугольником.
+   4. Зерно бумаги — фоновым слоем из feTurbulence поверх остальных.
+      Пять процентов: заметно глазу как фактура, не мешает тексту.
+   5. Внутренняя виньетка: у краёв бумага чуть темнее, как у настоящего листа.
+
+   Про резкость: rotateZ на лист не возвращать (строки лягут на косую сетку
+   и поплывут) и текст мельче 10px на него не ставить. */
 .lm-grid{display:grid;grid-template-columns:1fr 1.02fr;gap:52px;align-items:center;
   position:relative;z-index:2}
 .lm-cover{position:relative;width:100%;max-width:508px;margin:0 auto;padding:30px 24px;
   perspective:1500px}
-/* мягкое свечение позади листа — отделяет его от розовой плашки */
+/* тёплое свечение позади листа — отделяет его от розовой плашки */
 .lm-cover::before{content:"";position:absolute;left:-12%;right:-12%;top:-8%;bottom:-10%;
-  background:radial-gradient(56% 54% at 50% 48%,rgba(255,238,214,.4),rgba(255,238,214,0) 72%)}
+  background:radial-gradient(56% 54% at 46% 46%,rgba(255,238,214,.42),rgba(255,238,214,0) 72%)}
 /* Лист чуть вытянут против альбомного A4: 1,55 к 1. */
 .lm-doc{position:relative;z-index:1;display:flex;flex-direction:column;
-  aspect-ratio:1.55/1;background:linear-gradient(152deg,#FFFDFC 0%,#FEF6F7 46%,#FBEDF1 100%);
-  border-radius:8px;padding:22px 30px 26px;overflow:hidden;
+  aspect-ratio:1.55/1;border-radius:6px;padding:24px 34px 26px 32px;overflow:hidden;
   transform:rotateY(-13deg);
-  box-shadow:0 44px 66px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.6),
-    inset 0 1px 0 rgba(255,255,255,.9),inset -1px 0 0 rgba(255,255,255,.85);
+  background:
+    /* зерно бумаги */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.085'/%3E%3C/svg%3E"),
+    /* фирменная полоса по верхней кромке */
+    linear-gradient(135deg,#D0608A 0%,#A94268 100%) no-repeat top left/100% 6px,
+    /* свет сверху слева */
+    radial-gradient(118% 92% at 20% 4%,#FFFEFE 0%,rgba(255,255,255,.42) 38%,rgba(255,255,255,0) 66%),
+    /* лёгкий прогиб бумаги: низ листа уходит в полутень */
+    radial-gradient(150% 62% at 50% 122%,rgba(122,72,84,.09) 0%,rgba(122,72,84,0) 62%),
+    /* дальний левый край в полутени */
+    linear-gradient(97deg,rgba(96,56,66,.09) 0%,rgba(96,56,66,0) 22%),
+    /* тон бумаги: тёплый белый в тень к правому нижнему углу */
+    linear-gradient(153deg,#FFFDFC 0%,#FEF7F7 46%,#F7E9EC 100%);
+  box-shadow:
+    -1px 3px 0 0 #E7D4D8,                    /* торец бумаги */
+    0 3px 6px -2px rgba(58,24,38,.45),       /* контактная тень */
+    0 22px 30px -18px rgba(52,20,34,.55),    /* средняя */
+    10px 60px 78px -40px rgba(40,16,26,.95), /* объёмная, со сносом по свету */
+    inset 0 1px 0 rgba(255,255,255,.92),     /* блик на верхней кромке */
+    inset 0 0 46px rgba(120,70,80,.055);     /* виньетка по краям листа */
   transition:transform .5s cubic-bezier(.2,.7,.3,1),box-shadow .5s cubic-bezier(.2,.7,.3,1)}
 /* на наведении разворот слабеет — лист будто поворачивают к себе */
 .lm-cover:hover .lm-doc{transform:rotateY(-6deg);
-  box-shadow:0 54px 74px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.75),
-    inset 0 1px 0 rgba(255,255,255,.95)}
-.lm-doc::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;z-index:3;background:var(--g-cta)}
-/* Глянцевое покрытие: широкий отблеск от угла плюс узкая косая полоса —
-   так бумага читается ламинированной, а не просто светлой. Слой лежит
-   поверх текста (на то оно и покрытие), поэтому держим его прозрачным:
-   выше примерно .45 по альфе надписи начинают выцветать. */
-.lm-doc::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:
-    linear-gradient(112deg,rgba(255,255,255,0) 54%,rgba(255,255,255,.55) 68%,
-      rgba(255,255,255,.2) 77%,rgba(255,255,255,0) 90%),
-    linear-gradient(158deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,.14) 16%,rgba(255,255,255,0) 32%)}
+  box-shadow:
+    -1px 3px 0 0 #E7D4D8,
+    0 3px 6px -2px rgba(58,24,38,.45),
+    0 26px 34px -18px rgba(52,20,34,.5),
+    10px 70px 86px -40px rgba(40,16,26,.95),
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 0 46px rgba(120,70,80,.045)}
 .lm-head{display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding-bottom:11px;border-bottom:1px solid #EFDCC4}
-/* Кегли шапки подняты: на развёрнутом листе всё мельче 10px превращается в кашу. */
+  padding-bottom:12px;border-bottom:1px solid #EADBCA}
+/* Кегли шапки: на развёрнутом листе всё мельче 10px превращается в кашу. */
 .lm-brand{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:800;
   letter-spacing:.13em;text-transform:uppercase;color:#8A6716}
 .lm-mono{width:20px;height:20px;flex:none;border-radius:50%;display:grid;place-items:center;
   font-family:'Cormorant',Georgia,serif;font-size:13px;font-weight:700;letter-spacing:0;
-  color:#FFFBF4;background:#A07A22;box-shadow:0 1px 4px -2px rgba(120,90,30,.7)}
+  color:#FFFBF4;background:linear-gradient(140deg,#C29A3E,#93701C);
+  box-shadow:0 1px 4px -2px rgba(120,90,30,.8),inset 0 1px 0 rgba(255,255,255,.45)}
 .lm-tag{font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
   color:#9E8583;white-space:nowrap}
 /* заголовок и подзаголовок занимают весь лист под шапкой и стоят по центру */
 .lm-body-txt{flex:1;display:flex;flex-direction:column;justify-content:center;
-  padding:6px 0 10px}
-.lm-title{font-family:'Cormorant',Georgia,serif;font-size:35px;font-weight:700;line-height:1.07;
-  color:#3A1E27;letter-spacing:-.005em}
-.lm-rule{width:46px;height:2px;border-radius:1px;background:var(--g-cta);margin:15px 0 13px}
-.lm-sub{font-size:14.5px;line-height:1.45;color:#5F4A4C;max-width:86%}
+  padding:4px 0 8px}
+.lm-title{font-family:'Cormorant',Georgia,serif;font-size:36px;font-weight:700;line-height:1.06;
+  color:#371C25;letter-spacing:-.006em;max-width:92%}
+/* печатный отбивочный штрих: толстый и тонкий, как в типографике бланков */
+.lm-rule{width:52px;height:3px;border-radius:2px;background:var(--g-cta);margin:16px 0 14px;
+  box-shadow:0 6px 0 -2px rgba(169,66,104,.28)}
+.lm-sub{font-size:14.5px;line-height:1.45;color:#5C4749;max-width:84%}
 .lm-in{margin-top:18px;font-size:16px;line-height:1.62;color:#F7DCE3;max-width:640px}
 .lm-form{margin-top:28px;max-width:560px}
 .lm-row{display:flex;gap:12px;flex-wrap:wrap}
@@ -1117,11 +1142,11 @@ footer a{color:#F3E2DC}
               <path class="a-head" d="M60.2 15.1 L46.4 26.3 Q49.2 18.5 42.5 13.7Z"/>
             </svg>
           </span>
-          <a href="#book" class="btn btn-lg">Записаться на первый визит</a>
+          <a href="#book" class="btn btn-lg">Хочу первый визит за 1&nbsp;000&nbsp;₽</a>
         </span>
-        <a href="#quiz" class="btn btn-ghost">Подобрать программу</a>
+        <a href="#quiz" class="btn btn-ghost">Подобрать программу и цену</a>
       </div>
-      <p class="note">Перезвоним в рабочее время и подтвердим удобное окно.</p>
+      <p class="note">Перезвоним в рабочее время и подберём удобное окно. Онлайн ничего не оплачиваете, консультация бесплатная.</p>
 
       <div class="hero-trust">
         <div class="tchip"><div><b>5,0 <span class="stars">★★★★★</span></b>28 отзывов на Яндекс.Картах</div></div>
@@ -1780,13 +1805,13 @@ footer a{color:#F3E2DC}
 
     <form class="form" id="form-book" novalidate>
       <div class="form-body">
-        <h3>Записаться на визит</h3>
+        <h3>Первый визит за 1&nbsp;000&nbsp;₽</h3>
         <p class="fnote">Оставьте номер — администратор перезвонит в рабочее время, покажет свободные окна и подберёт формат визита.</p>
         <div class="field">
           <label for="fb-phone">Телефон</label>
           <input id="fb-phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
         </div>
-        <button type="submit" class="btn btn-wide btn-lg">Записаться на визит</button>
+        <button type="submit" class="btn btn-wide btn-lg">Хочу первый визит за 1&nbsp;000&nbsp;₽</button>
         <label class="agree"><input type="checkbox" required><span>Согласна на обработку персональных данных и с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
       </div>
       <div class="form-ok">
