@@ -447,18 +447,23 @@ header{
 #action h2{font-variant-numeric:lining-nums}
 #action h2 .it{color:#F5DDAF;-webkit-text-fill-color:#F5DDAF;font-weight:500}
 /* лид-магнит: обложка чек-листа и форма в обмен на телефон */
-/* Обложка развёрнута в 3D и с корешком — так PDF читается как предмет, а не
-   как картинка. Вопросов на ней нет намеренно: их видит только тот, кому
-   файл пришёл на номер. */
+/* Обложка нарочно плоская: 3D-разворот браузер растрирует отдельным слоем
+   и натягивает текстурой, отчего текст на карточке мылит. Объём даёт стопка
+   листов позади — на них текста нет, и их размытие никого не смущает.
+   Вопросов на обложке нет намеренно: их видит только тот, кому пришёл файл. */
 .lm-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;
   position:relative;z-index:2}
-.lm-cover{position:relative;perspective:1000px;padding:0 24px 0 4px}
-.lm-doc{position:relative;background:linear-gradient(158deg,#FFFDFC 0%,#FDF0F3 100%);
+.lm-cover{position:relative;max-width:342px;margin:0 auto;padding:10px 26px 20px 4px}
+.lm-cover::before,.lm-cover::after{content:"";position:absolute;border-radius:16px}
+.lm-cover::before{left:34px;right:0;top:24px;bottom:4px;background:#F6DAE2;
+  transform:rotate(4.2deg);box-shadow:0 18px 32px -22px rgba(40,16,26,.9)}
+.lm-cover::after{left:22px;right:12px;top:16px;bottom:12px;background:#FDF3F6;
+  transform:rotate(1.9deg);box-shadow:0 16px 28px -22px rgba(40,16,26,.8)}
+.lm-doc{position:relative;z-index:1;background:linear-gradient(158deg,#FFFDFC 0%,#FDF0F3 100%);
   border-radius:7px 16px 16px 7px;padding:34px 30px 28px 46px;
-  transform:rotateY(-15deg) rotateX(3deg);
   box-shadow:0 42px 64px -30px rgba(40,16,26,.95),0 0 0 1px rgba(255,255,255,.55);
-  transition:transform .55s cubic-bezier(.2,.7,.3,1)}
-.lm-cover:hover .lm-doc{transform:rotateY(-7deg) rotateX(1.5deg)}
+  transition:transform .4s cubic-bezier(.2,.7,.3,1)}
+.lm-cover:hover .lm-doc{transform:translateY(-5px)}
 .lm-doc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:17px;
   background:var(--g-cta);border-radius:7px 0 0 7px}
 .lm-doc::after{content:"";position:absolute;left:17px;top:0;bottom:0;width:8px;
