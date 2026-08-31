@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Дофамин — чек-лист: 11 вопросов студии аппаратной коррекции</title>
+<style>
+/* Печатный бланк лид-магнита: одна страница A4, ровно 11 пунктов.
+   Текст-исходник — чек-лист.md, правки вносить сначала туда.
+   Рендер в PDF: chrome --headless --print-to-pdf, команда в README. */
+@font-face{font-family:'Manrope';font-style:normal;font-weight:400 800;
+  src:url(assets/fonts/manrope-cyrillic.woff2) format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:400 800;
+  src:url(assets/fonts/manrope-latin.woff2) format('woff2')}
+@font-face{font-family:'Cormorant';font-style:normal;font-weight:400 700;
+  src:url(assets/fonts/cormorant-cyrillic-500.woff2) format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Cormorant';font-style:normal;font-weight:400 700;
+  src:url(assets/fonts/cormorant-latin-500.woff2) format('woff2')}
+@font-face{font-family:'Cormorant';font-style:italic;font-weight:400 700;
+  src:url(assets/fonts/cormorant-cyrillic-500-italic.woff2) format('woff2');
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+
+@page{size:A4;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#3A2A2C;      /* основной текст */
+  --ink-2:#7E6B6B;    /* пояснение под вопросом */
+  --plum:#4E2E38;
+  --cta:#C05379;
+  --gold:#B8913F;
+  --line:#EADCDC;
+}
+html,body{width:210mm;height:297mm}
+body{
+  font-family:'Manrope',"Segoe UI",Arial,sans-serif;
+  color:var(--ink);background:#fff;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.page{position:relative;width:210mm;height:297mm;overflow:hidden;
+  padding:12mm 14mm 9mm;display:flex;flex-direction:column}
+/* фирменная полоса по верхней кромке листа */
+.page::before{content:"";position:absolute;left:0;right:0;top:0;height:4mm;
+  background:linear-gradient(135deg,#D0608A 0%,#A94268 100%)}
+
+/* ── шапка бланка ─────────────────────────────────────────── */
+.head{display:flex;align-items:center;justify-content:space-between;gap:8mm;
+  padding:3mm 0 3mm;border-bottom:.4mm solid var(--line)}
+.brand{display:flex;align-items:center;gap:3mm}
+.mark{width:9mm;height:9mm;border-radius:2.4mm;flex:none;
+  background:linear-gradient(135deg,#D0608A 0%,#A94268 100%);
+  color:#FDF9F5;font-family:'Cormorant',Georgia,serif;font-size:15pt;line-height:9mm;
+  text-align:center}
+.brand b{display:block;font-size:11pt;font-weight:800;letter-spacing:.02em;line-height:1.15}
+.brand span{display:block;font-size:6.8pt;color:var(--ink-2);letter-spacing:.06em;
+  text-transform:uppercase;margin-top:.6mm}
+.tag{flex:none;font-size:7.2pt;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:#8A6716;background:#F8EEDB;border:.3mm solid #EBDCB6;
+  padding:1.7mm 3.4mm;border-radius:10mm}
+
+/* ── заголовок ────────────────────────────────────────────── */
+.title{font-family:'Cormorant',Georgia,serif;font-weight:700;font-size:22pt;line-height:1.06;
+  letter-spacing:-.01em;color:var(--plum);margin:4mm 0 2mm;max-width:172mm}
+.title i{font-style:italic;color:var(--cta)}
+.lead{font-size:8.5pt;line-height:1.45;color:var(--ink-2);max-width:170mm}
+.lead b{color:var(--ink);font-weight:700}
+
+/* ── список вопросов ──────────────────────────────────────── */
+.list{margin-top:3.5mm;flex:1}
+.q{display:grid;grid-template-columns:5mm 6mm 1fr;column-gap:2.2mm;
+  padding:2mm 0;border-top:.25mm solid #F5EAEA;break-inside:avoid}
+.q:first-child{border-top:0;padding-top:0}
+.box{width:4.2mm;height:4.2mm;margin-top:.6mm;border:.4mm solid #D8BEC6;border-radius:1mm;
+  background:#FFF9FA}
+.num{font-family:'Cormorant',Georgia,serif;font-size:13pt;font-weight:700;line-height:1;
+  color:var(--cta);margin-top:.3mm;text-align:right;padding-right:.6mm}
+.q h2{font-size:9.4pt;font-weight:800;line-height:1.28;letter-spacing:-.005em;color:var(--ink)}
+.q p{font-size:8pt;line-height:1.4;color:var(--ink-2);margin-top:.8mm}
+
+/* ── подвал: ответы студии, контакты, QR ──────────────────── */
+.foot{margin-top:3mm;padding-top:3mm;border-top:.4mm solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:8mm}
+.foot-txt{max-width:146mm}
+.foot-txt .ans{font-size:8.4pt;line-height:1.45;color:var(--ink)}
+.foot-txt .ans b{color:var(--cta)}
+.contacts{margin-top:1.8mm;font-size:8pt;line-height:1.5;color:var(--ink-2)}
+.contacts b{color:var(--ink);font-weight:700}
+.qr{flex:none;text-align:center;width:26mm}
+.qr img{display:block;width:23mm;height:23mm;margin:0 auto;outline:.3mm solid var(--line)}
+.qr span{display:block;margin-top:1.3mm;font-size:6.4pt;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="head">
+    <div class="brand">
+      <div class="mark">Д</div>
+      <div>
+        <b>Дофамин</b>
+        <span>Студия аппаратной коррекции · СПб</span>
+      </div>
+    </div>
+    <div class="tag">Чек-лист · 11 вопросов</div>
+  </div>
+
+  <h1 class="title">Спросите это в любой студии,<br><i>прежде чем отдать деньги</i></h1>
+  <p class="lead">Вопросы простые, и отвечать на них должны так же просто. <b>Заминка, раздражение или «зачем вам это» — уже ответ.</b> Отмечайте галочкой то, на что вам ответили спокойно и по делу.</p>
+
+  <div class="list">
+
+    <div class="q"><div class="box"></div><div class="num">1</div><div>
+      <h2>Что происходит с насадками и бельём между клиентами?</h2>
+      <p>Нормальный ответ — одноразовый комплект на каждого и обработка аппарата после каждого визита. Попросите показать, чем обрабатывают, и посмотрите на кабинет: чистота видна без объяснений.</p>
+    </div></div>
+
+    <div class="q"><div class="box"></div><div class="num">2</div><div>
+      <h2>Можно прийти на одну процедуру, не покупая курс?</h2>
+      <p>Студия, которая продаёт только абонементы, защищает свою выручку, а не ваш результат. Хороший ответ — «приходите на одну, дальше решите сами». Заодно спросите, что будет с деньгами, если вы купите курс и передумаете на середине.</p>
+    </div></div>
+
+    <div class="q"><div class="box"></div><div class="num">3</div><div>
+      <h2>Кто будет со мной работать и где он этому учился?</h2>
+      <p>Просите показать документ об обучении именно на этом аппарате, а не диплом вообще. Трёхдневные курсы и обучение у производителя — разные вещи.</p>
+    </div></div>
+
+    <div class="q"><div class="box"></div><div class="num">4</div><div>
+      <h2>О чём вы спросите меня до процедуры?</h2>
+      <p>Хорошая студия сама спрашивает про спираль, кардиостимулятор, металл в теле, камни в желчном, эпилепсию и беременность. Если ни о чём таком не спросили — о вашей безопасности здесь не думают.</p>
+    </div></div>
+
+    <div class="q"><div class="box"></div><div class="num">5</div><div>
+      <h2>Как вы поймёте, что кожу не перегрели?</h2>
+      <p>На процедурах с нагревом должен быть датчик температуры или другой понятный способ контроля. Ответ «мастер чувствует рукой» — плохой ответ.</p>
+    </div></div>
+
+    <div class="q"><div class="box"></div><div class="num">6</div><div>
+      <h2>Что мне делать сразу после процедуры?</h2>
+      <p>После процедур, которые расщепляют жир, организму нужно его вывести: обычно в тот же день делают лимфодренаж и просят больше пить. «Ничего не нужно» — повод переспросить почему.</p>
+    </div></div>
+
+    <div class="q"><div class="box"></div><div class="num">7</div><div>
+      <h2>Как часто можно ходить и почему не чаще?</h2>
+      <p>У любой процедуры есть предел — и по частоте, и по площади за один раз. Студия, готовая принимать вас хоть каждый день и обрабатывать всё тело сразу, экономит ваше время в ущерб безопасности.</p>
+    </div></div>
+
+    <div class="q"><div class="box"></div><div class="num">8</div><div>
+      <h2>Когда вы будете меня замерять?</h2>
+      <p>Сразу после процедуры сантиметр почти всегда покажет минус: из тканей ушла лишняя жидкость. Спросите, замеряют ли ещё и через несколько дней — вот эта цифра и есть настоящая. Фото до и после должны снимать в одном свете и ракурсе, иначе разница появляется прямо на фотографии.</p>
+    </div></div>
+
+    <div class="q"><div class="box"></div><div class="num">9</div><div>
+      <h2>Во сколько мне обойдётся всё, что вы посоветуете?</h2>
+      <p>Просите назвать не цену одной процедуры, а сумму целиком — вместе с уходами, обёртываниями и массажем, которые обычно предлагают в довесок. Хороший ответ — конкретное число и слова «остановиться можно в любой момент».</p>
+    </div></div>
+
+    <div class="q"><div class="box"></div><div class="num">10</div><div>
+      <h2>Что будет, если через три-четыре раза ничего не изменится?</h2>
+      <p>Хороший ответ — поменяем методику или честно остановимся. Плохой — «нужно просто больше сеансов».</p>
+    </div></div>
+
+    <div class="q"><div class="box"></div><div class="num">11</div><div>
+      <h2>Что вы дадите мне на руки?</h2>
+      <p>Договор и кассовый чек. На словах не бывает ни гарантий, ни ответственности. Заодно прочитайте, что написано про возврат денег за неиспользованные визиты.</p>
+    </div></div>
+
+  </div>
+
+  <div class="foot">
+    <div class="foot-txt">
+      <div class="ans">Наши ответы на все одиннадцать — на сайте студии «Дофамин». Если коротко: <b>прайс открыт целиком, консультация бесплатная, первый визит — 1 000 ₽, абонемент покупать не нужно.</b></div>
+      <div class="contacts">
+        <b>Студия «Дофамин»</b> · СПб, пр. Энергетиков, 37, БЦ «Лидер», офис 813<br>
+        <b>8 800 550-86-04</b> · WhatsApp и Telegram <b>+7 921 433-47-60</b>
+      </div>
+    </div>
+    <div class="qr">
+      <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMzc3IiBoZWlnaHQ9IjM3NyI+Cgk8IS0tIENyZWF0ZWQgd2l0aCBodHRwczovL2FwaS5xcnNlcnZlci5jb20gKFFSIENvZGUgQVBJLCBzZWUgZ29RUi5tZS9hcGkgZm9yIGluZm9ybWF0aW9uKSAtLT4KCTx0aXRsZT5RUiBDb2RlPC90aXRsZT4KCTxkZXNjPmh0dHBzOi8vbjEyODM1OTcueWNsaWVudHMuY29tPC9kZXNjPgoJPHJlY3Qgc3R5bGU9ImZpbGw6cmdiKDI1NSwgMjU1LCAyNTUpO2ZpbGwtb3BhY2l0eToxIiB4PSIwIiB5PSIwIiB3aWR0aD0iMzc3IiBoZWlnaHQ9IjM3NyIgLz4KCTxnIGlkPSJlbGVtZW50cyI+CgkJPHBhdGggc3R5bGU9ImZpbGw6cmdiKDAsIDAsIDApIiBkPSJNIDAsMCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTMsMCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjYsMCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzksMCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNTIsMCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNjUsMCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNzgsMCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTE3LDAgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE0MywwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNjksMCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTgyLDAgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE5NSwwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyMjEsMCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjM0LDAgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI0NywwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyODYsMCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjk5LDAgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMxMiwwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAzMjUsMCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzM4LDAgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDM1MSwwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAzNjQsMCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMCwxMyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNzgsMTMgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDExNywxMyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTMwLDEzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNjksMTMgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE4MiwxMyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTk1LDEzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyMDgsMTMgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIyMSwxMyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjM0LDEzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNjAsMTMgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI4NiwxMyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzY0LDEzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAwLDI2IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNiwyNiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzksMjYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDUyLDI2IGwgMTMsMCAwLDEzIC0xMywwIHogTSA3OCwyNiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTA0LDI2IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNDMsMjYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE1NiwyNiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTY5LDI2IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxOTUsMjYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI0NywyNiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjg2LDI2IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzMTIsMjYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMyNSwyNiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzM4LDI2IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzNjQsMjYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDAsMzkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI2LDM5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzOSwzOSBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNTIsMzkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDc4LDM5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMDQsMzkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEzMCwzOSBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTQzLDM5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxODIsMzkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE5NSwzOSBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjIxLDM5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNDcsMzkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI4NiwzOSBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzEyLDM5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzMjUsMzkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMzOCwzOSBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzY0LDM5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAwLDUyIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNiw1MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzksNTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDUyLDUyIGwgMTMsMCAwLDEzIC0xMywwIHogTSA3OCw1MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTA0LDUyIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNDMsNTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE1Niw1MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTk1LDUyIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyMDgsNTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI2MCw1MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjg2LDUyIGwgMTMsMCAwLDEzIC0xMywwIHogTSAzMTIsNTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMyNSw1MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzM4LDUyIGwgMTMsMCAwLDEzIC0xMywwIHogTSAzNjQsNTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDAsNjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDc4LDY1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMDQsNjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIyMSw2NSBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjM0LDY1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNjAsNjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI4Niw2NSBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzY0LDY1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAwLDc4IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMyw3OCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjYsNzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDM5LDc4IGwgMTMsMCAwLDEzIC0xMywwIHogTSA1Miw3OCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNjUsNzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDc4LDc4IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMDQsNzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEzMCw3OCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTU2LDc4IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxODIsNzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIwOCw3OCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjM0LDc4IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNjAsNzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI4Niw3OCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjk5LDc4IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzMTIsNzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMyNSw3OCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzM4LDc4IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzNTEsNzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDM2NCw3OCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTA0LDkxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMTcsOTEgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE1Niw5MSBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTgyLDkxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyMDgsOTEgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIyMSw5MSBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjQ3LDkxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAwLDEwNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjYsMTA0IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzOSwxMDQgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDUyLDEwNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNjUsMTA0IGwgMTMsMCAwLDEzIC0xMywwIHogTSA3OCwxMDQgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE0MywxMDQgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIwOCwxMDQgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIyMSwxMDQgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIzNCwxMDQgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI4NiwxMDQgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI5OSwxMDQgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMxMiwxMDQgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMyNSwxMDQgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMzOCwxMDQgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDM5LDExNyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNjUsMTE3IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMDQsMTE3IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMTcsMTE3IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNTYsMTE3IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNjksMTE3IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxODIsMTE3IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxOTUsMTE3IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyMzQsMTE3IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNDcsMTE3IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNjAsMTE3IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNzMsMTE3IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyODYsMTE3IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzMTIsMTE3IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzNjQsMTE3IGwgMTMsMCAwLDEzIC0xMywwIHogTSAwLDEzMCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjYsMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSA1MiwxMzAgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDc4LDEzMCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gOTEsMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMDQsMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMzAsMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNDMsMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNTYsMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNjksMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxODIsMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxOTUsMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyMDgsMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyMjEsMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyMzQsMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNjAsMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyODYsMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyOTksMTMwIGwgMTMsMCAwLDEzIC0xMywwIHogTSAwLDE0MyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTMsMTQzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNiwxNDMgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDUyLDE0MyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNjUsMTQzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMTcsMTQzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMzAsMTQzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNTYsMTQzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNjksMTQzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxOTUsMTQzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyMjEsMTQzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNDcsMTQzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyOTksMTQzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAzMjUsMTQzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAzNTEsMTQzIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMywxNTYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI2LDE1NiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNTIsMTU2IGwgMTMsMCAwLDEzIC0xMywwIHogTSA3OCwxNTYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDExNywxNTYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEzMCwxNTYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE1NiwxNTYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE4MiwxNTYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE5NSwxNTYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIzNCwxNTYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI0NywxNTYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI2MCwxNTYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMyNSwxNTYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMzOCwxNTYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEzLDE2OSBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gOTEsMTY5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMDQsMTY5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMzAsMTY5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNDMsMTY5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNTYsMTY5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxOTUsMTY5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyMDgsMTY5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyMjEsMTY5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNzMsMTY5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyODYsMTY5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzMTIsMTY5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzNjQsMTY5IGwgMTMsMCAwLDEzIC0xMywwIHogTSAwLDE4MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjYsMTgyIGwgMTMsMCAwLDEzIC0xMywwIHogTSAzOSwxODIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDc4LDE4MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTE3LDE4MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTQzLDE4MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTU2LDE4MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjM0LDE4MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjYwLDE4MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjczLDE4MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzEyLDE4MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzI1LDE4MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzM4LDE4MiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTMsMTk1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNiwxOTUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDM5LDE5NSBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNTIsMTk1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMDQsMTk1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMTcsMTk1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMzAsMTk1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxODIsMTk1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyMDgsMTk1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNDcsMTk1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyODYsMTk1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzMTIsMTk1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzNTEsMTk1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMywyMDggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI2LDIwOCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNTIsMjA4IGwgMTMsMCAwLDEzIC0xMywwIHogTSA3OCwyMDggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEwNCwyMDggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIwOCwyMDggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIyMSwyMDggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI0NywyMDggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI3MywyMDggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI4NiwyMDggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMxMiwyMDggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMyNSwyMDggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMzOCwyMDggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDAsMjIxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNiwyMjEgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDM5LDIyMSBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNjUsMjIxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMTcsMjIxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNjksMjIxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxODIsMjIxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAxOTUsMjIxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNjAsMjIxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNzMsMjIxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyODYsMjIxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyOTksMjIxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAzMTIsMjIxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAzMzgsMjIxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAzNjQsMjIxIGwgMTMsMCAwLDEzIC0xMywwIHogTSAwLDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzksMjM0IGwgMTMsMCAwLDEzIC0xMywwIHogTSA3OCwyMzQgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDkxLDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTA0LDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTE3LDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTU2LDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTY5LDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTgyLDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTk1LDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjA4LDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjIxLDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjM0LDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjQ3LDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjYwLDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjczLDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjg2LDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzEyLDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzM4LDIzNCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMCwyNDcgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI2LDI0NyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTA0LDI0NyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTE3LDI0NyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTMwLDI0NyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTQzLDI0NyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTY5LDI0NyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTk1LDI0NyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjQ3LDI0NyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjczLDI0NyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzEyLDI0NyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzUxLDI0NyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMCwyNjAgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI2LDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzksMjYwIGwgMTMsMCAwLDEzIC0xMywwIHogTSA2NSwyNjAgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDc4LDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTE3LDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTMwLDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTU2LDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTgyLDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTk1LDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjM0LDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjYwLDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjczLDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjg2LDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjk5LDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzEyLDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzM4LDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzUxLDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzY0LDI2MCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTA0LDI3MyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTE3LDI3MyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTQzLDI3MyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMTk1LDI3MyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjA4LDI3MyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjIxLDI3MyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjYwLDI3MyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzEyLDI3MyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzI1LDI3MyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzM4LDI3MyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzUxLDI3MyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzY0LDI3MyBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMCwyODYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEzLDI4NiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMjYsMjg2IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzOSwyODYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDUyLDI4NiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNjUsMjg2IGwgMTMsMCAwLDEzIC0xMywwIHogTSA3OCwyODYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDExNywyODYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEzMCwyODYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE1NiwyODYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIyMSwyODYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIzNCwyODYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI0NywyODYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI2MCwyODYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI4NiwyODYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMxMiwyODYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMyNSwyODYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMzOCwyODYgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDAsMjk5IGwgMTMsMCAwLDEzIC0xMywwIHogTSA3OCwyOTkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEwNCwyOTkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEzMCwyOTkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE0MywyOTkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE1NiwyOTkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE4MiwyOTkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIwOCwyOTkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI0NywyOTkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI2MCwyOTkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMxMiwyOTkgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDAsMzEyIGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNiwzMTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDM5LDMxMiBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNTIsMzEyIGwgMTMsMCAwLDEzIC0xMywwIHogTSA3OCwzMTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEwNCwzMTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEzMCwzMTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIyMSwzMTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI2MCwzMTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI3MywzMTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI4NiwzMTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI5OSwzMTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMxMiwzMTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMzOCwzMTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDM1MSwzMTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDM2NCwzMTIgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDAsMzI1IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNiwzMjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDM5LDMyNSBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNTIsMzI1IGwgMTMsMCAwLDEzIC0xMywwIHogTSA3OCwzMjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEwNCwzMjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEzMCwzMjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE4MiwzMjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE5NSwzMjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIyMSwzMjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI3MywzMjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI4NiwzMjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMyNSwzMjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMzOCwzMjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDM1MSwzMjUgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDAsMzM4IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNiwzMzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDM5LDMzOCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNTIsMzM4IGwgMTMsMCAwLDEzIC0xMywwIHogTSA3OCwzMzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEwNCwzMzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDEzMCwzMzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE5NSwzMzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIyMSwzMzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDIzNCwzMzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI4NiwzMzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMxMiwzMzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMyNSwzMzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMzOCwzMzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDM1MSwzMzggbCAxMywwIDAsMTMgLTEzLDAgeiBNIDAsMzUxIGwgMTMsMCAwLDEzIC0xMywwIHogTSA3OCwzNTEgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE0MywzNTEgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE1NiwzNTEgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDE5NSwzNTEgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI2MCwzNTEgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI3MywzNTEgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDMyNSwzNTEgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDM1MSwzNTEgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDAsMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMywzNjQgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDI2LDM2NCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gMzksMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogTSA1MiwzNjQgbCAxMywwIDAsMTMgLTEzLDAgeiBNIDY1LDM2NCBsIDEzLDAgMCwxMyAtMTMsMCB6IE0gNzgsMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMDQsMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMTcsMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxMzAsMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNDMsMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxNTYsMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogTSAxODIsMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyMjEsMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNjAsMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyNzMsMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyODYsMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogTSAyOTksMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogTSAzMzgsMzY0IGwgMTMsMCAwLDEzIC0xMywwIHogIiAvPgoJPC9nPgo8L3N2Zz4K" alt="QR-код на онлайн-запись в студию Дофамин">
+      <span>Онлайн-запись</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
