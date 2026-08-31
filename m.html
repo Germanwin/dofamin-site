@@ -129,6 +129,26 @@ h3{font-size:17px;font-weight:800;line-height:1.3}
              linear-gradient(120deg,#EBD29A,#C9A24E) border-box;
   border:1.5px solid transparent;box-shadow:none}
 .btn-gold .ic{color:#C9A24E}
+
+/* ───── стрелка-указатель у главной кнопки первого экрана ─────
+   На десктопе она вынесена абсолютом в левое поле страницы. Здесь поля 18px —
+   выносить некуда, поэтому стрелка стоит в строке и забирает свою ширину
+   у кнопки: кнопка становится уже ровно на стрелку с зазором. */
+.cta-hero{display:flex;align-items:center;gap:8px}
+.cta-hero .btn{width:auto;flex:1 1 auto;min-width:0;padding:16px 12px;font-size:16px}
+.cta-arrow{flex:0 0 50px;width:50px;line-height:0;pointer-events:none}
+.cta-arrow svg{display:block;width:100%;height:auto;overflow:visible;
+  filter:drop-shadow(0 4px 7px rgba(192,83,121,.28));
+  animation:cta-point 2.9s ease-in-out infinite}
+.cta-arrow .a-body,.cta-arrow .a-head{fill:url(#ag)}
+@keyframes cta-point{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+@media(prefers-reduced-motion:reduce){.cta-arrow svg{animation:none}}
+/* узкие экраны (SE, старые Android): ужимаем стрелку и кегль, иначе надпись
+   на кнопке переносится на вторую строку */
+@media(max-width:359px){
+  .cta-arrow{flex-basis:40px;width:40px}
+  .cta-hero .btn{font-size:15px;padding:16px 8px}
+}
 .under{margin-top:10px;font-size:13px;color:var(--ink-2);text-align:center;line-height:1.4}
 
 /* мессенджеры — по всему лендингу */
@@ -304,6 +324,10 @@ main>section{position:relative}
 .pinkhead .hr i{background:#FCDFA8}
 .form h2{margin-bottom:8px}
 .form .fnote{font-size:14.5px;color:var(--ink-2);line-height:1.45;margin-bottom:16px}
+/* «Любая процедура студии» — главное обещание блока записи, вытаскиваем
+   из серого текста цветом и весом */
+.fnote .hl{color:var(--cta);font-weight:800}
+.form .pinkhead .fnote .hl{color:#fff}
 .field{margin-bottom:14px}
 .field label{display:block;font-size:13.5px;font-weight:800;color:var(--plum);margin-bottom:6px}
 .field input,.field select{width:100%;min-height:56px;background:#fff;
@@ -491,7 +515,16 @@ footer a{color:#F3E2DC;text-decoration:none}
   border-top:1px solid var(--line)}
 .sticky .ib{width:56px;flex:none;display:grid;place-items:center;border-radius:99px;
   background:#fff;border:1.5px solid var(--line-2);color:var(--plum)}
-.sticky .btn{flex:1;min-height:56px;font-size:16.5px;box-shadow:none}
+/* надпись целиком должна лечь в одну строку рядом с двумя круглыми кнопками:
+   на 360-375px при кегле 16,5 и полях 20px она переносилась */
+.sticky .btn{flex:1;min-width:0;min-height:56px;font-size:16px;padding:16px 10px;
+  box-shadow:none;white-space:nowrap}
+.sticky .s-short{display:none}
+@media(max-width:359px){
+  .sticky .btn{font-size:15px}
+  .sticky .s-long{display:none}
+  .sticky .s-short{display:inline}
+}
 
 /* вторая кнопка первого экрана: тот же вес, но не спорит с главным действием */
 .cta2{margin-top:9px}
@@ -675,7 +708,21 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
         <span><b>Консультация бесплатно</b> — разберём зону и посчитаем курс</span></li>
     </ul>
 
-    <a class="btn" href="#zapis">Хочу процедуру за 1&nbsp;000&nbsp;₽</a>
+    <!-- Главная кнопка ужата: слева от неё в той же строке стоит стрелка-указатель
+         с десктопа. На телефоне поля страницы 18px, вынести стрелку за край некуда,
+         поэтому она нарисована в потоке и забирает свою ширину у кнопки. -->
+    <div class="cta-hero">
+      <span class="cta-arrow" aria-hidden="true">
+        <svg viewBox="1 1 60 26" width="60" height="26">
+          <defs><linearGradient id="ag" x1="0" y1="0" x2="1" y2=".8">
+            <stop offset="0" stop-color="#F2C8D5"/><stop offset=".45" stop-color="#D2648B"/>
+            <stop offset="1" stop-color="#B8446C"/></linearGradient></defs>
+          <path class="a-body" d="M1.8 2.1 L2.4 3.5 L3.0 4.9 L3.6 6.2 L4.3 7.5 L5.0 8.7 L5.7 9.9 L6.5 11.0 L7.2 12.1 L8.0 13.1 L8.8 14.0 L9.7 14.9 L10.5 15.8 L11.4 16.6 L12.3 17.4 L13.2 18.1 L14.1 18.8 L15.0 19.4 L16.0 20.0 L17.0 20.5 L17.9 21.0 L18.9 21.5 L19.9 21.9 L20.9 22.3 L21.9 22.6 L23.0 22.9 L24.0 23.2 L25.0 23.4 L26.1 23.6 L27.1 23.8 L28.1 23.9 L29.2 24.0 L30.2 24.1 L31.3 24.1 L32.3 24.1 L33.4 24.1 L34.4 24.1 L35.4 24.0 L36.4 23.9 L37.5 23.8 L38.5 23.7 L39.5 23.5 L40.5 23.3 L41.5 23.2 L42.5 23.0 L43.4 22.7 L44.4 22.5 L45.3 22.2 L46.3 22.0 L47.2 21.7 L48.1 21.4 L49.0 21.1 L49.9 20.8 L48.0 16.0 L47.2 16.4 L46.4 16.7 L45.6 17.0 L44.7 17.3 L43.9 17.7 L43.0 18.0 L42.2 18.2 L41.3 18.5 L40.4 18.8 L39.5 19.0 L38.6 19.2 L37.7 19.5 L36.8 19.6 L35.9 19.8 L35.0 20.0 L34.0 20.1 L33.1 20.2 L32.2 20.3 L31.2 20.4 L30.3 20.4 L29.3 20.4 L28.4 20.4 L27.4 20.4 L26.5 20.3 L25.6 20.2 L24.6 20.1 L23.7 19.9 L22.7 19.7 L21.8 19.5 L20.9 19.2 L19.9 18.9 L19.0 18.6 L18.1 18.2 L17.2 17.8 L16.3 17.3 L15.4 16.8 L14.5 16.3 L13.6 15.7 L12.7 15.0 L11.8 14.3 L11.0 13.6 L10.1 12.8 L9.3 12.0 L8.4 11.1 L7.6 10.1 L6.8 9.1 L6.0 8.1 L5.2 7.0 L4.4 5.8 L3.7 4.6 L2.9 3.3 L2.2 1.9Z"/>
+          <path class="a-head" d="M60.2 15.1 L46.4 26.3 Q49.2 18.5 42.5 13.7Z"/>
+        </svg>
+      </span>
+      <a class="btn" href="#zapis">Хочу процедуру за 1&nbsp;000&nbsp;₽</a>
+    </div>
     <a class="btn btn-ghost cta2" href="#podbor">Подобрать программу и цену</a>
 
     <p class="under">Оставляете только номер — перезвоним в рабочее время и подберём удобное
@@ -796,7 +843,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       <div class="form-body">
         <div class="hr"><i></i></div>
         <h2 style="text-align:center">Процедура <span class="it">за 1 000 ₽</span></h2>
-        <p class="fnote">Любая процедура студии на первом визите. Оставьте номер —
+        <p class="fnote"><b class="hl">Любая процедура студии</b> на первом визите. Оставьте номер —
           администратор перезвонит в рабочее время, покажет свободные окна и подберёт формат визита.</p>
         <div class="field">
           <label for="f1-phone">Телефон</label>
@@ -835,7 +882,9 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       под зону и задачу, а не «всё подряд». Что выбрать, решаем вместе на первом визите.
       Полный прайс — <a href="#prices" style="color:var(--cta);font-weight:700">ниже на странице</a>.</p>
 
-    <details><summary><span class="tag-s t-warm">Локальный жир</span>Кавитация<span class="sum-price">1 200 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/cavitation-2.jpg" alt="Кавитация — ультразвуковая коррекция живота" loading="lazy" decoding="async">Низкочастотный ультразвук разрушает мембраны жировых клеток точечно, не задевая соседние ткани, — живот, бока, галифе. Её называют «липосакцией без ножа». 30 минут.</p></div></div></details>
+    <!-- Первый спойлер раскрыт с порога: так сразу видно, что внутри карточки
+         фото и описание, а не пустая строка прайса. -->
+    <details open><summary><span class="tag-s t-warm">Локальный жир</span>Кавитация<span class="sum-price">1 200 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/cavitation-2.jpg" alt="Кавитация — ультразвуковая коррекция живота" loading="lazy" decoding="async">Низкочастотный ультразвук разрушает мембраны жировых клеток точечно, не задевая соседние ткани, — живот, бока, галифе. Её называют «липосакцией без ножа». 30 минут.</p></div></div></details>
     <details><summary><span class="tag-s t-pink">Целлюлит</span>Вакуумный массаж с RF<span class="sum-price">1 700 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/estetik.jpg" alt="Аппарат Estetik Beauty Body в студии «Дофамин» — на нём делают вакуумный массаж с RF" loading="lazy" decoding="async">Вакуум разгоняет застой в тканях, RF прогревает и подтягивает. Кровообращение улучшается, «апельсиновая корка» становится заметно ровнее. 30 минут.</p></div></div></details>
     <details><summary><span class="tag-s t-warm">Контуры</span>Лазерный липолиз<span class="sum-price">500 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/lipolysis-process.jpg" alt="Лазерный липолиз: пластины с лазерными диодами на бёдрах и ягодицах" loading="lazy" decoding="async">Мягкая альтернатива липосакции: пластины укладываются на зону, лазер работает по жиру, который не уходит на диете. Изменения набираются за 3 месяца. 30 минут.</p></div></div></details>
     <details><summary><span class="tag-s t-sage">Отёки</span>Прессотерапия<span class="sum-price">1 000 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/presso.jpg" alt="Прессотерапия: костюм лимфодренажного массажа на кушетке" loading="lazy" decoding="async">Костюм со сжатым воздухом мягко «прокачивает» лимфу от стоп вверх. Минус 0,5–2 см за сеанс, с подогревом — до 2 кг лишней воды за визит. 30 минут.</p></div></div></details>
@@ -1342,7 +1391,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
     <svg class="ic ic-f" style="width:22px;height:22px"><use href="#i-phone"/></svg></a>
   <a class="ib" href="https://wa.me/79214334760" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
     <svg class="ic" style="width:22px;height:22px"><use href="#i-wa"/></svg></a>
-  <a class="btn" href="#zapis">Записаться за 1 000 ₽</a>
+  <a class="btn" href="#zapis"><span class="s-long">Записаться за 1&nbsp;000&nbsp;₽</span><span class="s-short">Запись за 1&nbsp;000&nbsp;₽</span></a>
 </div>
 
 <script>
