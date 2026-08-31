@@ -523,21 +523,52 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 .lm h2{color:#fff}
 .lm .it{color:#FCDFA8}
 .lm .lead{color:#FBE2E4;margin-bottom:14px}
-/* обложка: один лист бумаги, слегка развёрнутый — предмет, а не иконка */
-.lm-cover{position:relative;margin:0 auto 18px;max-width:320px;padding:6px 0 10px}
-.lm-cover::before{content:"";position:absolute;left:-10%;right:-10%;top:-6%;bottom:-8%;
-  background:radial-gradient(56% 54% at 46% 46%,rgba(255,238,214,.4),rgba(255,238,214,0) 72%)}
+/* ─── обложка чек-листа: печатный лист, а не карточка интерфейса ───
+   Бумага получается достоверной за счёт пяти вещей: зерно, видимая толщина
+   листа, две тени вместо одной размытой (плотная контактная под кромкой и
+   длинная рассеянная), единое направление света — сверху слева, и прогиб:
+   ровной бумага не бывает. Вторая страница из-под обложки делает из карточки
+   буклет, который держали в руках. Разворота по оси Y здесь нет намеренно:
+   на мелком кегле мобильной обложки он мылит текст. */
+.lm-cover{position:relative;margin:0 auto 22px;max-width:310px;padding:9px 0 22px}
+/* рассеянный тёплый свет позади бумаги — отбивает лист от розовой плашки */
+.lm-cover::before{content:"";position:absolute;left:-16%;right:-16%;top:-12%;bottom:-14%;
+  background:radial-gradient(58% 56% at 40% 38%,rgba(255,240,220,.38),rgba(255,240,220,0) 74%)}
+/* страница под обложкой: ниже и правее, повёрнута в другую сторону — так стопку
+   кладут рукой, а не выравнивают по линейке */
+.lm-cover::after{content:"";position:absolute;z-index:0;left:20px;right:-7px;top:27px;
+  aspect-ratio:1.55/1;border-radius:1.5px;transform:rotate(1.9deg);
+  /* лежит в тени обложки, поэтому заметно темнее и глуше её */
+  background:linear-gradient(158deg,#E6D5D4 0%,#DDC8C9 58%,#D2B9BD 100%);
+  box-shadow:0 3px 3px -1px rgba(58,24,38,.55),
+             0 16px 24px -14px rgba(45,18,28,.9)}
 .lm-doc{position:relative;z-index:1;display:flex;flex-direction:column;
-  aspect-ratio:1.55/1;border-radius:5px;padding:14px 18px 16px;overflow:hidden;
-  transform:rotate(-1.6deg);
+  aspect-ratio:1.55/1;border-radius:2.5px;padding:15px 17px 16px;overflow:hidden;
+  transform:rotate(-1.5deg);
   background:
-    linear-gradient(135deg,#D0608A 0%,#A94268 100%) no-repeat top left/100% 5px,
-    radial-gradient(118% 92% at 20% 4%,#FFFEFE 0%,rgba(255,255,255,.42) 38%,rgba(255,255,255,0) 66%),
-    linear-gradient(153deg,#FFFDFC 0%,#FEF7F7 46%,#F7E9EC 100%);
+    /* зерно: без него любой градиент читается как пластик, а не как бумага.
+       Размер плитки задан в самой SVG — background-size тут занят плашкой. */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='90' height='90' filter='url(%23n)' opacity='.19'/%3E%3C/svg%3E"),
+    /* фирменная плашка, запечатанная в верхнюю кромку */
+    linear-gradient(135deg,#D0608A 0%,#A94268 100%) no-repeat top left/100% 4.5px,
+    /* свет сверху слева */
+    radial-gradient(122% 96% at 18% 0%,#FFFFFF 0%,rgba(255,255,255,.45) 40%,rgba(255,255,255,0) 70%),
+    /* прогиб: нижняя треть листа уходит в полутень */
+    radial-gradient(155% 58% at 52% 126%,rgba(116,68,80,.13) 0%,rgba(116,68,80,0) 64%),
+    /* дальний левый край в полутени */
+    linear-gradient(95deg,rgba(92,54,64,.08) 0%,rgba(92,54,64,0) 18%),
+    /* тон бумаги: тёплый некрашеный белый, в тень к правому нижнему углу */
+    linear-gradient(152deg,#FFFEFC 0%,#FCF6F2 46%,#F3E6E5 100%);
   box-shadow:
-    -1px 3px 0 0 #E7D4D8,
-    0 3px 6px -2px rgba(58,24,38,.4),
-    0 20px 30px -18px rgba(52,20,34,.6)}
+    -1px 2px 0 0 #E0C9CE,                   /* торец: у листа есть толщина */
+    /* тени только вниз и вправо: сверху их нет вовсе, иначе лист «парит» */
+    0 3px 3px -1px rgba(48,18,30,.75),      /* контактная: тугая и тёмная */
+    3px 9px 10px -5px rgba(46,18,30,.5),    /* средняя */
+    10px 26px 30px -14px rgba(36,12,22,.6), /* длинная, со сносом по свету */
+    inset 0 1px 0 rgba(255,255,255,.95),    /* верхняя кромка ловит свет */
+    inset -1px 0 0 rgba(150,96,106,.16),    /* правый рез — в тени */
+    inset 0 -7px 11px -7px rgba(120,70,80,.2), /* низ листа прилегает к столу */
+    inset 0 0 26px rgba(118,68,78,.07)}     /* виньетка по краям листа */
 .lm-head{display:flex;align-items:center;justify-content:space-between;gap:10px;
   padding-bottom:8px;border-bottom:1px solid #EADBCA}
 .lm-brand{display:flex;align-items:center;gap:6px;font-size:8.5px;font-weight:800;
