@@ -1,0 +1,17 @@
+# Сайт студии «Дофамин». Открыт для поиска целиком, кроме служебных адресов.
+User-agent: *
+Allow: /
+
+# Заявки клиентов — закрыто наглухо: там персональные данные.
+Disallow: /leads/
+Disallow: /lead.php
+
+# Страница «спасибо» показывается только после отправки формы,
+# в поиске ей делать нечего.
+Disallow: /thanks.html
+
+# ?full=1 — это та же главная, открытая с телефона в десктопном виде.
+# Директива говорит Яндексу не считать её отдельной страницей-дублем.
+Clean-param: full&utm_source&utm_medium&utm_campaign&utm_term&utm_content&yclid&gclid
+
+Sitemap: https://REPLACE-ME.ru/sitemap.xml
