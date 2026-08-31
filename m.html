@@ -579,11 +579,15 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 .lm-tag{font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
   color:#9E8583;white-space:nowrap}
 .lm-body-txt{flex:1;display:flex;flex-direction:column;justify-content:center;padding:2px 0 4px}
+/* Цифры обязательно маюскульные и в табличной ширине: минускульные цифры
+   Cormorant рисуют единицу палочкой с засечками, и «11» читается как римская II. */
 .lm-title{font-family:'Cormorant',Georgia,serif;font-size:23px;font-weight:700;line-height:1.06;
-  color:#371C25;letter-spacing:-.006em}
+  color:#371C25;letter-spacing:-.006em;
+  font-variant-numeric:lining-nums tabular-nums}
+/* то же для числа в заголовке блока — там «11» набрано той же антиквой */
+.lnum{font-variant-numeric:lining-nums tabular-nums}
 .lm-rule{width:38px;height:2.5px;border-radius:2px;background:var(--g-cta);margin:9px 0 8px}
 .lm-sub{font-size:10.5px;line-height:1.4;color:#5C4749}
-.lm-in{font-size:14.5px;line-height:1.55;color:#F7DCE3;margin-bottom:16px}
 /* поле на розовой плашке белое: рамка на цветном фоне читается хуже заливки */
 .lm-form .field label{color:#FFF2E8}
 .lm-form .agree{color:#F7DCE3}
@@ -1170,13 +1174,11 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
     </div>
 
     <span class="eyebrow">Бесплатно, без звонков</span>
-    <h2>Заберите чек-лист из 11 вопросов — <span class="it">и проверьте любую студию
+    <h2>Заберите чек-лист из <span class="lnum">11</span> вопросов — <span class="it">и проверьте любую студию
       за 4 минуты, до первой оплаты</span></h2>
     <p class="lead">Нам важно, чтобы вы выбирали студию спокойно и с открытыми глазами —
       даже если выберете не нас. Поэтому мы собрали вопросы, которые стоит задать до того,
       как вы отдадите деньги, и отдаём их бесплатно и без условий.</p>
-    <p class="lm-in">Задать их может кто угодно: специальных знаний не нужно, достаточно
-      прочитать вслух. А вот ответы сразу показывают, с кем вы имеете дело.</p>
 
     <form class="lm-form" id="f4" novalidate>
       <div class="form-body">

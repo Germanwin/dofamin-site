@@ -527,13 +527,15 @@ header{
 /* заголовок и подзаголовок занимают весь лист под шапкой и стоят по центру */
 .lm-body-txt{flex:1;display:flex;flex-direction:column;justify-content:center;
   padding:4px 0 8px}
+/* Цифры обязательно маюскульные и в табличной ширине: минускульные цифры
+   Cormorant рисуют единицу палочкой с засечками, и «11» читается как римская II. */
 .lm-title{font-family:'Cormorant',Georgia,serif;font-size:36px;font-weight:700;line-height:1.06;
-  color:#371C25;letter-spacing:-.006em;max-width:92%}
+  color:#371C25;letter-spacing:-.006em;max-width:92%;
+  font-variant-numeric:lining-nums tabular-nums}
 /* печатный отбивочный штрих: толстый и тонкий, как в типографике бланков */
 .lm-rule{width:52px;height:3px;border-radius:2px;background:var(--g-cta);margin:16px 0 14px;
   box-shadow:0 6px 0 -2px rgba(169,66,104,.28)}
 .lm-sub{font-size:14.5px;line-height:1.45;color:#5C4749;max-width:84%}
-.lm-in{margin-top:18px;font-size:16px;line-height:1.62;color:#F7DCE3;max-width:640px}
 .lm-form{margin-top:28px;max-width:560px}
 .lm-row{display:flex;gap:12px;flex-wrap:wrap}
 .lm-row input{flex:1;min-width:230px;background:#fff;color:var(--ink);
@@ -1854,7 +1856,6 @@ footer a{color:#F3E2DC}
       <span class="eyebrow"><svg class="ic" style="width:14px;height:14px"><use href="#i-gift"/></svg> Бесплатно, без звонков</span>
       <h2>Заберите чек-лист из <span class="lnum">11</span> вопросов — <span class="it">и проверьте любую студию за 4 минуты, до первой оплаты</span></h2>
       <p class="lead">Нам важно, чтобы вы выбирали студию спокойно и с открытыми глазами — даже если выберете не нас. Поэтому мы собрали вопросы, которые стоит задать до того, как вы отдадите деньги, и отдаём их бесплатно и без условий.</p>
-      <p class="lm-in">Задать их может кто угодно: специальных знаний не нужно, достаточно прочитать вслух. А вот ответы сразу показывают, с кем вы имеете дело — где работают аккуратно и по документам, а где рассчитывают, что вы не спросите.</p>
 
       <form class="lm-form" id="form-final" novalidate>
         <div class="lm-body">
