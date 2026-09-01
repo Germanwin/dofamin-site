@@ -68,12 +68,19 @@
 [hidden]{display:none!important}
 /* pan-x pan-y = разрешены только прокрутки: браузер сам гасит и щипок,
    и зум по двойному тапу. Работает в Chrome/Android и в Safari от 13. */
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth;
+/* scroll-behavior:smooth убран: на странице в 15 000 px переход по якорю
+   анимировал прокрутку через десяток блоков и отрисовывал каждый кадр.
+   Короткие подкрутки (квиз, спойлеры) остались плавными — они просят
+   behavior в самом вызове scrollTo. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;
   touch-action:pan-x pan-y}
 body{
   font-family:'Manrope',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   background:var(--bg);color:var(--ink);font-size:16.5px;line-height:1.55;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  /* clip вместо hidden: hidden делает body полноценным контейнером прокрутки
+     и мешает браузеру её оптимизировать */
+  overflow-x:clip;
   /* место под липкую панель, чтобы она не перекрывала последний блок */
   padding-bottom:calc(78px + env(safe-area-inset-bottom))
 }
@@ -144,9 +151,12 @@ h3{font-size:17px;font-weight:800;line-height:1.3}
 .cta-hero{display:flex;align-items:center;gap:8px}
 .cta-hero .btn{width:auto;flex:1 1 auto;min-width:0;padding:16px 12px;font-size:16px}
 .cta-arrow{flex:0 0 50px;width:50px;line-height:0;pointer-events:none}
+/* drop-shadow под анимацией = перерисовка стрелки каждый кадр. На 50-пиксельной
+   стрелке тень с телефона всё равно не читалась — сняли, осталось чистое
+   compositor-преобразование. Анимация встаёт, когда кнопка уходит с экрана. */
 .cta-arrow svg{display:block;width:100%;height:auto;overflow:visible;
-  filter:drop-shadow(0 4px 7px rgba(192,83,121,.28));
   animation:cta-point 2.9s ease-in-out infinite}
+.cta-arrow.rest svg{animation-play-state:paused}
 .cta-arrow .a-body,.cta-arrow .a-head{fill:url(#ag)}
 @keyframes cta-point{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
 @media(prefers-reduced-motion:reduce){.cta-arrow svg{animation:none}}
@@ -168,8 +178,11 @@ h3{font-size:17px;font-weight:800;line-height:1.3}
 .ic-f{fill:currentColor;stroke:none}
 
 /* ───── шапка ───── */
-header{position:sticky;top:0;z-index:60;background:rgba(255,250,248,.95);
-  backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line)}
+/* Без backdrop-filter: размытие под шапкой пересчитывалось каждый кадр прокрутки
+   и было главным источником рывков на телефоне. Фон и так почти непрозрачный —
+   делаем его сплошным, на глаз разницы нет. */
+header{position:sticky;top:0;z-index:60;background:#FFFAF8;
+  border-bottom:1px solid var(--line)}
 .hd{display:flex;align-items:center;gap:10px;min-height:54px;padding:5px 18px}
 .brand{display:block;text-decoration:none}
 .logo{display:block;font-family:'Cormorant',Georgia,serif;font-size:21px;font-weight:600;
@@ -389,7 +402,8 @@ main>section{position:relative}
 .quiz.is-done .quiz-ok{display:block}
 
 /* ───── спойлеры вместо слайдеров ───── */
-details{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:9px;
+/* contain: раскрытие спойлера пересчитывает только его самого, а не всю страницу */
+details{contain:layout paint;background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:9px;
   overflow:hidden}
 details+details{margin-top:0}
 summary{display:flex;align-items:center;gap:10px;justify-content:space-between;
@@ -524,8 +538,7 @@ footer a{color:#F3E2DC;text-decoration:none}
 .sticky{position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;gap:9px;
   transition:transform .28s ease;
   padding:9px 12px calc(9px + env(safe-area-inset-bottom));
-  background:rgba(255,255,255,.96);backdrop-filter:saturate(140%) blur(10px);
-  border-top:1px solid var(--line)}
+  background:#fff;border-top:1px solid var(--line)}
 .sticky .ib{width:56px;flex:none;display:grid;place-items:center;border-radius:99px;
   background:#fff;border:1.5px solid var(--line-2);color:var(--plum)}
 /* надпись целиком должна лечь в одну строку рядом с двумя круглыми кнопками:
@@ -712,7 +725,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 
     <div class="hero-photo">
       <img src="assets/img/hero-process.jpg" width="1600" height="1040" fetchpriority="high"
-           alt="Кавитация в студии «Дофамин»: мастер ведёт манипулу по зоне живота">
+           alt="Кавитация в студии «Дофамин»: мастер ведёт манипулу по зоне живота" decoding="async">
       <div class="hero-price">
         <span>Первый<br>визит</span><b>1 000 ₽</b>
       </div>
@@ -1177,9 +1190,9 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       а мастер помнит, на какой процедуре курса вы находитесь.</p>
     <div class="g2">
       <img src="assets/img/room.jpg" width="800" height="600" loading="lazy"
-           alt="Кабинет студии «Дофамин»: кушетка и аппарат для коррекции фигуры">
+           alt="Кабинет студии «Дофамин»: кушетка и аппарат для коррекции фигуры" decoding="async">
       <img src="assets/img/team.jpg" width="1000" height="626" loading="lazy"
-           alt="Мастера студии «Дофамин»">
+           alt="Мастера студии «Дофамин»" decoding="async">
     </div>
     <ul class="facts">
       <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
@@ -1195,11 +1208,11 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
     </ul>
     <div class="g3">
       <figure><img src="assets/img/reception.jpg" width="800" height="800" loading="lazy"
-        alt="Стойка администратора с неоновой вывеской «Дофамин»"><figcaption><b>Ресепшн</b> — здесь начинается визит</figcaption></figure>
+        alt="Стойка администратора с неоновой вывеской «Дофамин»" decoding="async"><figcaption><b>Ресепшн</b> — здесь начинается визит</figcaption></figure>
       <figure><img src="assets/img/award.jpg" width="800" height="800" loading="lazy"
-        alt="Награда 2ГИС на стойке студии «Дофамин»"><figcaption><b>Награда 2ГИС</b> — прямо на стойке</figcaption></figure>
+        alt="Награда 2ГИС на стойке студии «Дофамин»" decoding="async"><figcaption><b>Награда 2ГИС</b> — прямо на стойке</figcaption></figure>
       <figure><img src="assets/img/certs.jpg" width="800" height="800" loading="lazy"
-        alt="Подарочные сертификаты студии «Дофамин»"><figcaption><b>Сертификаты</b> — на любую сумму</figcaption></figure>
+        alt="Подарочные сертификаты студии «Дофамин»" decoding="async"><figcaption><b>Сертификаты</b> — на любую сумму</figcaption></figure>
     </div>
     <a class="btn btn-ghost" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"
        style="margin-top:16px">Смотреть студию в Telegram</a>
@@ -1215,9 +1228,9 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       уходовые средства отдаём с собой.</p>
     <div class="works">
       <figure><img src="assets/img/ba-brows.jpg" width="800" height="800" loading="lazy"
-        alt="Перманентный макияж бровей: до и после"><figcaption><b>Брови</b> — до и после</figcaption></figure>
+        alt="Перманентный макияж бровей: до и после" decoding="async"><figcaption><b>Брови</b> — до и после</figcaption></figure>
       <figure><img src="assets/img/ba-lips.jpg" width="524" height="800" loading="lazy"
-        alt="Перманентный макияж губ: до и после"><figcaption><b>Губы</b> — до и после</figcaption></figure>
+        alt="Перманентный макияж губ: до и после" decoding="async"><figcaption><b>Губы</b> — до и после</figcaption></figure>
     </div>
     <a class="btn btn-gold" href="https://wa.me/79214334760" target="_blank" rel="noopener">
       <svg class="ic" style="width:18px;height:18px"><use href="#i-wa"/></svg>
@@ -1576,14 +1589,17 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
      из-за которых кнопка не влезала в первый экран. */
   var heroCta = document.querySelector(".cta-hero");
   var sticky = document.querySelector(".sticky");
-  if(sticky){
-    if(heroCta && window.IntersectionObserver){
-      new IntersectionObserver(function(en){
-        sticky.classList.toggle("off", en[0].isIntersecting);
-      }, {threshold:0}).observe(heroCta);
-    } else {
-      sticky.classList.remove("off");
-    }
+  var arrow = document.querySelector(".cta-arrow");
+  if(heroCta && window.IntersectionObserver){
+    new IntersectionObserver(function(en){
+      var seen = en[0].isIntersecting;
+      if(sticky) sticky.classList.toggle("off", seen);
+      /* стрелка качается только пока её видно: незачем крутить анимацию
+         в фоне через всю страницу */
+      if(arrow) arrow.classList.toggle("rest", !seen);
+    }, {threshold:0}).observe(heroCta);
+  } else if(sticky) {
+    sticky.classList.remove("off");
   }
 
   /* Спойлеры. Атрибут open ставим один раз и больше не трогаем: закрытый
