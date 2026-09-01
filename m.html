@@ -163,9 +163,9 @@ h3{font-size:17px;font-weight:800;line-height:1.3}
 /* ───── шапка ───── */
 header{position:sticky;top:0;z-index:60;background:rgba(255,250,248,.95);
   backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line)}
-.hd{display:flex;align-items:center;gap:10px;min-height:62px;padding:7px 18px}
+.hd{display:flex;align-items:center;gap:10px;min-height:54px;padding:5px 18px}
 .brand{display:block;text-decoration:none}
-.logo{display:block;font-family:'Cormorant',Georgia,serif;font-size:23px;font-weight:600;
+.logo{display:block;font-family:'Cormorant',Georgia,serif;font-size:21px;font-weight:600;
   line-height:1.1;letter-spacing:.01em;color:var(--plum)}
 .logo b{color:var(--cta)}
 .desc{display:block;font-size:10px;line-height:1.25;color:var(--ink-2);margin-top:2px}
@@ -175,19 +175,19 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,250,248,.95);
   font-size:14.5px;font-weight:800;text-decoration:none}
 
 /* ───── первый экран ───── */
-.hero{padding:12px 0 26px;
+.hero{padding:10px 0 22px;
   background:
     radial-gradient(520px 380px at 92% -6%, #FBDDE4 0%, rgba(251,221,228,0) 62%),
     radial-gradient(420px 320px at -8% 12%, #FBE7D8 0%, rgba(251,231,216,0) 60%),
     linear-gradient(180deg,#FFF8F6,#FFFFFF 72%)}
-.hero .place{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;
-  color:var(--ink-2);margin-bottom:12px}
-.hero h1{margin-bottom:12px}
-.hero .lead{margin-bottom:12px}
+.hero .place{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;
+  color:var(--ink-2);margin-bottom:9px}
+.hero h1{font-size:clamp(26px,7.2vw,34px);margin-bottom:9px}
+.hero .lead{font-size:15.5px;line-height:1.45;margin-bottom:10px}
 .hero .lead b{color:var(--ink);font-weight:800}
-.hero-photo{position:relative;border-radius:var(--r);overflow:hidden;margin-bottom:14px;
+.hero-photo{position:relative;border-radius:var(--r);overflow:hidden;margin-bottom:11px;
   box-shadow:var(--sh)}
-.hero-photo img{width:100%;aspect-ratio:16/11;object-fit:cover;object-position:center 45%}
+.hero-photo img{width:100%;aspect-ratio:2.35/1;object-fit:cover;object-position:center 45%}
 .hero-price{position:absolute;left:10px;bottom:10px;display:flex;align-items:baseline;gap:7px;
   background:rgba(255,255,255,.95);border-radius:12px;padding:7px 12px;
   box-shadow:0 8px 16px -10px rgba(74,34,46,.7)}
@@ -196,6 +196,8 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,250,248,.95);
 .hero-price span{font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
   color:var(--ink-2);line-height:1.25}
 .bullets{list-style:none;display:grid;gap:7px;margin-bottom:14px}
+.hero .bullets{gap:6px;margin-bottom:11px}
+.hero .bullets li{font-size:15px}
 .bullets li{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;line-height:1.4}
 .bullets .bi{width:24px;height:24px;flex:none;border-radius:50%;
   background:linear-gradient(135deg,#F7E7CE,#F6D9DF);color:var(--gold);
@@ -509,7 +511,11 @@ footer a{color:#F3E2DC;text-decoration:none}
   display:grid;gap:6px;font-size:12px;opacity:.72}
 
 /* ───── липкая панель: главное действие всегда под пальцем ───── */
+/* Пока кнопка первого экрана на экране, панель убрана вниз: она дублирует
+   то же действие и съедала 76px высоты — из-за неё кнопка уходила за сгиб.
+   Возвращается, как только кнопка уезжает вверх. */
 .sticky{position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;gap:9px;
+  transition:transform .28s ease;
   padding:9px 12px calc(9px + env(safe-area-inset-bottom));
   background:rgba(255,255,255,.96);backdrop-filter:saturate(140%) blur(10px);
   border-top:1px solid var(--line)}
@@ -519,6 +525,7 @@ footer a{color:#F3E2DC;text-decoration:none}
    на 360-375px при кегле 16,5 и полях 20px она переносилась */
 .sticky .btn{flex:1;min-width:0;min-height:56px;font-size:16px;padding:16px 10px;
   box-shadow:none;white-space:nowrap}
+.sticky.off{transform:translateY(120%)}
 .sticky .s-short{display:none}
 @media(max-width:359px){
   .sticky .btn{font-size:15px}
@@ -662,7 +669,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
   <div class="hd">
     <a class="brand" href="#top">
       <span class="logo">Дофамин<b>.</b></span>
-      <span class="desc">Аппаратная коррекция фигуры · СПб</span>
+      <span class="desc">Аппаратная коррекция фигуры</span>
     </a>
     <div class="hd-sp"></div>
     <a class="hd-call" href="tel:88005508604" aria-label="Позвонить">
@@ -678,14 +685,13 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
   <div class="wrap">
     <div class="place">
       <svg class="ic" style="width:15px;height:15px;color:#C05379"><use href="#i-pin"/></svg>
-      СПб, пр. Энергетиков 37 · 10 минут от «Ладожской»
+      СПб · Энергетиков 37 · 10 мин от «Ладожской»
     </div>
 
     <h1>Коррекция фигуры <span class="it">без диет и операций</span>: минус 0,5–2 см объёмов за один сеанс</h1>
 
-    <p class="lead">Аппаратные методики у «Ладожской»: кавитация, RF-лифтинг, лазерный липолиз
-      и лимфодренаж. В первый визит — <b>любая процедура студии на выбор за 1&nbsp;000&nbsp;₽</b>,
-      30 минут, с разбором зоны.</p>
+    <p class="lead">Кавитация, RF-лифтинг, липолиз, лимфодренаж — у «Ладожской».
+      Первый визит: <b>любая процедура на выбор за 1&nbsp;000&nbsp;₽</b>, 30 минут.</p>
 
     <div class="hero-photo">
       <img src="assets/img/hero-process.jpg" width="1600" height="1040" fetchpriority="high"
@@ -697,15 +703,13 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 
     <ul class="bullets">
       <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
-        <span><b>30 минут</b> на процедуру — успеете в обед, без реабилитации и следов</span></li>
+        <span><b>30 минут</b> на процедуру, без следов</span></li>
       <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
-        <span><b>Фото до и после — на ваш телефон</b>, плюс взвешивание при вас</span></li>
+        <span><b>Фото до и после</b> — на ваш телефон</span></li>
       <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
-        <span><b>7 методик</b> в одной студии — подберём под зону, а не продадим всё подряд</span></li>
+        <span><b>7 методик</b> — подберём под вашу зону</span></li>
       <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
-        <span><b>1 000 ₽ за любую услугу</b> на первом визите — выбираете вы</span></li>
-      <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span>
-        <span><b>Консультация бесплатно</b> — разберём зону и посчитаем курс</span></li>
+        <span><b>Консультация — бесплатно</b></span></li>
     </ul>
 
     <!-- Главная кнопка ужата: слева от неё в той же строке стоит стрелка-указатель
@@ -1386,7 +1390,8 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
   </div>
 </footer>
 
-<div class="sticky">
+<noscript><style>.sticky.off{transform:none}</style></noscript>
+<div class="sticky off">
   <a class="ib" href="tel:88005508604" aria-label="Позвонить">
     <svg class="ic ic-f" style="width:22px;height:22px"><use href="#i-phone"/></svg></a>
   <a class="ib" href="https://wa.me/79214334760" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
@@ -1547,6 +1552,21 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       }, {rootMargin:'600px 0px'});
       io.observe(methods);
     } else { preload(); }
+  }
+
+  /* Липкая панель прячется, пока кнопка первого экрана видна: два одинаковых
+     призыва рядом мешают друг другу, а панель ещё и съедает нижние 76px,
+     из-за которых кнопка не влезала в первый экран. */
+  var heroCta = document.querySelector(".cta-hero");
+  var sticky = document.querySelector(".sticky");
+  if(sticky){
+    if(heroCta && window.IntersectionObserver){
+      new IntersectionObserver(function(en){
+        sticky.classList.toggle("off", en[0].isIntersecting);
+      }, {threshold:0}).observe(heroCta);
+    } else {
+      sticky.classList.remove("off");
+    }
   }
 
   /* Спойлеры. Атрибут open ставим один раз и больше не трогаем: закрытый
