@@ -447,8 +447,9 @@ details p b{color:var(--plum)}
    пока картинка ещё грузится */
 /* ширина явная: у img задана высота, а с width:auto заменяемый элемент
    считает ширину по пропорции, а не растягивается на контейнер */
+/* тёплая подложка вместо белой дыры, если фото всё-таки не успело доехать */
 .d-pic{width:calc(100% - 32px);height:172px;object-fit:cover;border-radius:12px;
-  border:1px solid var(--line);margin:2px 16px 11px}
+  background:#F6EDE4;border:1px solid var(--line);margin:2px 16px 11px}
 .sum-price{font-size:13px;font-weight:800;color:var(--cta);white-space:nowrap}
 .tag-s{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.04em;
   border-radius:99px;padding:3px 9px;margin-right:7px;vertical-align:middle;white-space:nowrap}
@@ -1566,22 +1567,61 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
     qRender();
   }
 
-  /* Фото в спойлерах грузим заранее, когда блок методик подходит к экрану:
-     иначе картинка приезжает уже после раскрытия и выглядит как рывок. */
+  /* Фото в спойлерах. Раньше все девять разом переводились в eager и разом
+     просились на декодирование: на телефоне это давало и долгую загрузку
+     (девять запросов в одну секунду), и рывок в момент раскрытия.
+     Теперь: раскрытый спойлер получает своё фото сразу и с высоким приоритетом,
+     остальные догружаются по одному, друг за другом и с низким — они не отнимают
+     канал у того, что человек смотрит прямо сейчас. */
+
+  /* любой шаг цепочки ограничен по времени: одна зависшая картинка
+     не должна останавливать очередь */
+  var capped = function(p, ms){
+    return new Promise(function(done){
+      var fired = false, go = function(){ if(!fired){ fired = true; done(); } };
+      p.then(go, go);
+      setTimeout(go, ms);
+    });
+  };
+
+  var warmPic = function(img, show){
+    if(!img || img.dataset.warm) return Promise.resolve();
+    img.dataset.warm = '1';
+    img.loading = 'eager';
+    if('fetchPriority' in img) img.fetchPriority = show ? 'high' : 'low';
+    var loaded = img.complete ? Promise.resolve() : new Promise(function(done){
+      img.addEventListener('load', done, {once:true});
+      img.addEventListener('error', done, {once:true});
+    });
+    /* декодируем заранее только то, что человек сейчас увидит: у картинки,
+       которую браузер не рисует, decode() в некоторых случаях не отвечает */
+    if(!show) return loaded;
+    return loaded.then(function(){
+      return img.decode ? img.decode().catch(function(){}) : null;
+    });
+  };
+
   var methods = document.getElementById('methods');
   if(methods){
-    var preload = function(){
-      methods.querySelectorAll('.d-pic[loading="lazy"]').forEach(function(img){
-        img.loading = 'eager';
-        if(!img.complete && img.decode) img.decode().catch(function(){});
+    var pics = [].slice.call(methods.querySelectorAll('.d-pic'));
+    var warmAll = function(){
+      /* .is-open ставит скрипт спойлеров ниже; атрибут open к этому моменту
+         стоит на всех, по нему раскрытый не найти */
+      var first = methods.querySelector('details.is-open .d-pic') || pics[0];
+      var rest = pics.filter(function(p){ return p !== first; });
+      capped(warmPic(first, true), 3000).then(function next(){
+        var img = rest.shift();
+        if(img) return capped(warmPic(img), 3000).then(next);
       });
     };
     if(window.IntersectionObserver){
+      /* 900px вместо 600: у медленной сети должно остаться время доехать
+         до того, как блок появится на экране */
       var io = new IntersectionObserver(function(en){
-        if(en[0].isIntersecting){ preload(); io.disconnect(); }
-      }, {rootMargin:'600px 0px'});
+        if(en[0].isIntersecting){ warmAll(); io.disconnect(); }
+      }, {rootMargin:'900px 0px'});
       io.observe(methods);
-    } else { preload(); }
+    } else { warmAll(); }
   }
 
   /* Липкая панель прячется, пока кнопка первого экрана видна: два одинаковых
@@ -1619,9 +1659,8 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
     if(wasOpen) d.classList.add('is-open');
     sum.setAttribute('aria-expanded', wasOpen ? 'true' : 'false');
 
-    sum.addEventListener('click', function(e){
-      e.preventDefault();
-      var open = d.classList.toggle('is-open');
+    var setOpen = function(open){
+      d.classList.toggle('is-open', open);
       sum.setAttribute('aria-expanded', open ? 'true' : 'false');
       if(!open) return;
       /* открытый ответ подтягиваем к экрану, чтобы не листать вслепую */
@@ -1631,6 +1670,29 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
           window.scrollTo({top:r.top + window.pageYOffset - 70, behavior:'smooth'});
         }
       }, D_MS + 20);
+    };
+
+    sum.addEventListener('click', function(e){
+      e.preventDefault();
+      if(d.classList.contains('is-open')){ setOpen(false); return; }
+
+      /* Если фото ещё едет, ждём его и только потом начинаем раскрытие:
+         иначе загрузка и декодирование попадают ровно в кадры анимации —
+         это и читалось как «лагает». Ждём не дольше 220 мс, чтобы на плохой
+         связи спойлер всё равно открылся сразу по нажатию. */
+      var pic = d.querySelector('.d-pic');
+      if(pic && !pic.complete){
+        var started = false;
+        var go = function(){ if(!started){ started = true; setOpen(true); } };
+        pic.loading = 'eager';
+        if('fetchPriority' in pic) pic.fetchPriority = 'high';
+        pic.addEventListener('load', function(){
+          (pic.decode ? pic.decode().catch(function(){}) : Promise.resolve()).then(go);
+        }, {once:true});
+        setTimeout(go, 220);
+      } else {
+        setOpen(true);
+      }
     });
   });
 })();
