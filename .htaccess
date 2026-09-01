@@ -1,0 +1,15 @@
+# Служебные файлы репозитория не должны быть доступны из браузера:
+# внутренние заметки, вёрстка чек-листа и папка .git с историей проекта.
+RedirectMatch 404 /\.git
+<FilesMatch "\.(md|MD)$">
+  Require all denied
+</FilesMatch>
+<Files "checklist.html">
+  Require all denied
+</Files>
+
+# Единый адрес: без www. Редирект на https добавим после выпуска
+# SSL-сертификата — раньше он уведёт посетителей на неработающий адрес.
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [L,R=301]
