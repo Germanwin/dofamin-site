@@ -68,12 +68,17 @@
 [hidden]{display:none!important}
 /* pan-x pan-y = разрешены только прокрутки: браузер сам гасит и щипок,
    и зум по двойному тапу. Работает в Chrome/Android и в Safari от 13. */
-/* scroll-behavior:smooth убран: на странице в 15 000 px переход по якорю
-   анимировал прокрутку через десяток блоков и отрисовывал каждый кадр.
-   Короткие подкрутки (квиз, спойлеры) остались плавными — они просят
-   behavior в самом вызове scrollTo. */
+/* Переходы по якорям плавные. Один раз это правило снимали ради скорости —
+   и получили телепортацию: блок просто возникал. Настоящей причиной рывков
+   было размытие под шапкой и панелью, его больше нет, а длительность
+   нативной плавной прокрутки браузер ограничивает сам, она не зависит
+   от расстояния. */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;
-  touch-action:pan-x pan-y}
+  touch-action:pan-x pan-y;scroll-behavior:smooth}
+/* якорь не должен приезжать под липкую шапку: она 55px */
+main>section,#book{scroll-margin-top:58px}
+main#top{scroll-margin-top:0}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{
   font-family:'Manrope',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   background:var(--bg);color:var(--ink);font-size:16.5px;line-height:1.55;
