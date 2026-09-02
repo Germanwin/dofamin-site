@@ -630,18 +630,30 @@ html{-webkit-tap-highlight-color:transparent}
 /* ── подсветка: то же «загорание», что на десктопе при наведении ──
    Палец держат доли секунды, поэтому одного :active мало — эффект не успеет
    показаться. Класс .lit вешает скрипт по касанию и снимает по окончании
-   анимации, так что подсветка доигрывает целиком, даже если тап был мгновенный. */
-.btn:active,.btn.lit{background:var(--g-cta-hi)}
-.btn:active{box-shadow:0 6px 14px -8px rgba(208,96,138,.9),inset 0 1px 0 rgba(255,255,255,.45)}
-.btn.lit{box-shadow:0 14px 24px -10px rgba(208,96,138,.85),inset 0 1px 0 rgba(255,255,255,.45)}
+   анимации, так что подсветка доигрывает целиком, даже если тап был мгновенный.
+
+   Только для сплошных кнопок. Светлым — «подобрать программу», перманент,
+   скачивание чек-листа — розовый градиент заливал бы весь фон: на белом это
+   читается как чужая фиолетовая плашка, а не как нажатие. */
+.btn:not(.btn-ghost):not(.btn-gold):active,
+.btn:not(.btn-ghost):not(.btn-gold).lit{background:var(--g-cta-hi)}
+.btn:not(.btn-ghost):not(.btn-gold):active{
+  box-shadow:0 6px 14px -8px rgba(208,96,138,.9),inset 0 1px 0 rgba(255,255,255,.45)}
+.btn:not(.btn-ghost):not(.btn-gold).lit{
+  box-shadow:0 14px 24px -10px rgba(208,96,138,.85),inset 0 1px 0 rgba(255,255,255,.45)}
+
+/* Светлым кнопкам отдача нужна не менее заметная, но своя: рамка и надпись
+   набирают фирменный розовый, фон едва теплеет. Вжатие вниз общее для всех. */
+.btn-ghost:active,.btn-ghost.lit{background:var(--bg-3);border-color:var(--cta);color:var(--cta)}
 
 /* Блик пробегает по кнопке слева направо. Двигаем transform, а не left:
-   на телефоне это единственный вариант, который не пересчитывает раскладку. */
-.btn::after{
+   на телефоне это единственный вариант, который не пересчитывает раскладку.
+   На светлых кнопках белый блик по белому фону не виден — не рисуем его вовсе. */
+.btn:not(.btn-ghost):not(.btn-gold)::after{
   content:"";position:absolute;top:0;left:-55%;width:45%;height:100%;z-index:-1;
   background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.42),rgba(255,255,255,0));
   transform:translateX(0) skewX(-18deg);opacity:0}
-.btn.lit::after{animation:btn-shine .5s cubic-bezier(.25,.6,.35,1)}
+.btn:not(.btn-ghost):not(.btn-gold).lit::after{animation:btn-shine .5s cubic-bezier(.25,.6,.35,1)}
 @keyframes btn-shine{
   from{transform:translateX(0) skewX(-18deg);opacity:1}
   to  {transform:translateX(340%) skewX(-18deg);opacity:1}
