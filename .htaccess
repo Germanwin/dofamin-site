@@ -8,6 +8,12 @@ RedirectMatch 404 /\.git
   Require all denied
 </Files>
 
+# config.php с токеном бота: PHP-файлы наружу не отдаются, но если PHP
+# на сервере вдруг отвалится, файл уйдёт посетителю простым текстом.
+<Files "config.php">
+  Require all denied
+</Files>
+
 # Единый адрес: без www. Редирект на https добавим после выпуска
 # SSL-сертификата — раньше он уведёт посетителей на неработающий адрес.
 RewriteEngine On

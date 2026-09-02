@@ -1,3 +1,13 @@
-# Сайт закрыт от поисковых систем целиком.
+# Сайт открыт для поисковых систем.
 User-agent: *
-Disallow: /
+Allow: /
+
+# Страница «спасибо» показывается только после отправки формы —
+# в поиске она бесполезна и портит статистику.
+Disallow: /thanks.html
+
+# Служебные файлы репозитория (закрыты и на уровне сервера, см. .htaccess).
+Disallow: /README.md
+Disallow: /checklist.html
+
+Sitemap: https://dopaminestudio.site/sitemap.xml
