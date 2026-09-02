@@ -147,7 +147,6 @@ h3{font-size:17px;font-weight:800;line-height:1.3}
   min-height:58px;padding:16px 20px;border:0;border-radius:99px;cursor:pointer;
   background:var(--g-cta);color:#fff;font-size:17px;font-weight:800;text-decoration:none;
   box-shadow:0 12px 20px -12px rgba(169,66,104,.85)}
-.btn:active{transform:translateY(1px)}
 .btn-ghost{background:#fff;color:var(--plum);border:1.5px solid var(--line-2);box-shadow:none}
 /* кнопка перманента: тонкая золотая оправа — зовёт, но не спорит с записью за 1 000 ₽ */
 .btn-gold{margin-top:16px;white-space:nowrap;color:#8A6A22;font-weight:700;
@@ -583,6 +582,51 @@ footer a{color:#F3E2DC;text-decoration:none}
 /* вторая кнопка первого экрана: тот же вес, но не спорит с главным действием */
 .cta2{margin-top:9px}
 
+/* ───── плавность прокрутки ───── */
+/* Страница длиной 15 000px, на экране всегда меньше тысячи. Изоляция говорит
+   браузеру, что перерисовка внутри секции наружу не влияет: пересчитывать
+   всю страницу из-за одного блока больше не нужно. Секции и так
+   position:relative с overflow:hidden, так что визуально ничего не меняется. */
+main>section{contain:layout paint}
+
+/* content-visibility:auto разрешает вовсе не размечать и не рисовать то, что
+   далеко за экраном. На телефоне это главный рычаг плавности длинной страницы.
+   contain-intrinsic-size задаёт заранее известную высоту, чтобы полоса
+   прокрутки не скакала; ключевое слово auto означает «а после первого показа
+   запомни настоящую и пользуйся ей». Высоты сняты с реальной вёрстки на 390px.
+   Не трогаем: первые два экрана (их видно сразу, откладывать нечего),
+   формы записи и лид-магнита, квиз и блок методик — там интерактив и
+   предзагрузка фото, которым нужна живая разметка. */
+#prices  {content-visibility:auto;contain-intrinsic-size:auto 1943px}
+#reviews {content-visibility:auto;contain-intrinsic-size:auto 639px}
+#faq     {content-visibility:auto;contain-intrinsic-size:auto 1032px}
+#studio  {content-visibility:auto;contain-intrinsic-size:auto 882px}
+#works   {content-visibility:auto;contain-intrinsic-size:auto 572px}
+#contacts{content-visibility:auto;contain-intrinsic-size:auto 1396px}
+main>section:nth-of-type(3){content-visibility:auto;contain-intrinsic-size:auto 1484px}
+
+/* ───── нажатие ───── */
+/* Синий полупрозрачный прямоугольник, который браузер рисует поверх нажатого
+   элемента: он появляется с задержкой и живёт дольше самого касания, поэтому
+   читается как подтормаживание. Убираем и даём вместо него свою отдачу. */
+html{-webkit-tap-highlight-color:transparent}
+
+/* Кнопка ведёт себя как физическая: под пальцем уходит вниз и слегка
+   вжимается, тень при этом подбирается — будто прижали к поверхности.
+   Нажатие быстрое (.06s), возврат медленнее (.18s): так движение читается
+   упругим, а не резиновым. */
+.btn,.msg,.qopt,.chip,#methods summary,#faq summary{
+  transition:transform .18s cubic-bezier(.2,.7,.3,1),box-shadow .18s ease}
+.btn:active,.msg:active,.qopt:active,.chip:active,
+#methods summary:active,#faq summary:active{
+  transform:translateY(2px) scale(.985);transition-duration:.06s}
+.btn:active{box-shadow:0 5px 10px -9px rgba(169,66,104,.9)}
+@media(prefers-reduced-motion:reduce){
+  .btn,.msg,.qopt,.chip,#methods summary,#faq summary{transition:none}
+  .btn:active,.msg:active,.qopt:active,.chip:active,
+  #methods summary:active,#faq summary:active{transform:none}
+}
+
 /* ───── подобранная программа на экране «спасибо» ───── */
 .qprog{text-align:left;background:#FFF9F4;border:1px solid var(--line);
   border-radius:16px;padding:18px 18px 16px;margin:0 auto 20px;max-width:460px}
@@ -747,13 +791,13 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 }
 </style>
 <script>
-/* Замок масштаба для iOS: Safari игнорирует user-scalable=no с iOS 10, но
-   отдаёт свои gesture-события на щипок — гасим их. В других браузерах этих
-   событий нет, слушатели просто молчат, там хватает viewport и touch-action. */
+/* Пустой слушатель касания: без него Safari на iPhone не применяет :active,
+   и кнопка не вжимается под пальцем. passive — чтобы не мешать прокрутке.
+   Здесь же раньше стоял «замок масштаба»: он гасил gesture-события iOS и
+   не давал отдалить страницу щипком. Снят вместе с user-scalable=no —
+   запрет зума ломает доступность, а починить им нечего. */
 (function(){
-  ["gesturestart","gesturechange","gestureend"].forEach(function(t){
-    document.addEventListener(t, function(e){ e.preventDefault(); }, {passive:false});
-  });
+  document.addEventListener('touchstart', function(){}, {passive:true});
 })();
 </script>
 </head>
