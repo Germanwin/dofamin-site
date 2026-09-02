@@ -2272,7 +2272,9 @@ footer a{color:#F3E2DC}
       if(!validPhone(phone.value)){ shake(phone); return; }
       var agree = quiz.querySelector('.qstep[data-step="6"] input[type=checkbox]');
       if(agree && !agree.checked){ needAgree(agree); return; }
-      answers['Телефон'] = phone.value;
+      /* Ключ именно 'phone': под ним телефон ищет lead.php. С кириллическим
+         'Телефон' заявка молча отбрасывалась как «bad phone». */
+      answers['phone'] = phone.value;
       /* Программа считается до отправки: тот же текст уходит в Telegram,
          чтобы администратору осталось скопировать его клиенту, а не сочинять. */
       var prog = buildProgram(answers);

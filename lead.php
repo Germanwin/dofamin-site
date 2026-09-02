@@ -46,7 +46,12 @@ $data = json_decode($raw, true);
 if (!is_array($data)) reply(false, 'bad payload');
 
 // Телефон обязателен: без него заявка бесполезна и почти наверняка это бот.
-$phone  = preg_replace('/\D/', '', (string)($data['phone'] ?? ''));
+//
+// Принимаем и кириллический ключ «Телефон»: квиз слал именно его, и заявки
+// молча терялись — человек видел «спасибо», а телефон никуда не уходил.
+// Формы починены, но подстраховка остаётся: цена ошибки тут — потерянный клиент.
+$raw_phone = $data['phone'] ?? $data['Телефон'] ?? '';
+$phone  = preg_replace('/\D/', '', (string)$raw_phone);
 if (strlen($phone) < 10) reply(false, 'bad phone');
 
 // Папка для заявок закрыта от посторонних: в ней лежат телефоны клиентов,
@@ -83,7 +88,7 @@ $FORMS = [
 $form = $FORMS[$data['form'] ?? ''] ?? 'Форма на сайте';
 $when = date('d.m.Y H:i');
 
-$lines = ["Заявка с сайта: $form", "Телефон: " . ($data['phone'] ?? ''), "Время: $when"];
+$lines = ["Заявка с сайта: $form", "Телефон: " . $raw_phone, "Время: $when"];
 foreach ($data as $k => $v) {
     if (in_array($k, ['form', 'phone', 'Телефон'], true)) continue;
     if (is_scalar($v) && $v !== '') $lines[] = "$k: $v";
@@ -101,7 +106,7 @@ if ($fh = @fopen($csv, 'a')) {
         if (in_array($k, ['form', 'phone'], true)) continue;
         if (is_scalar($v) && $v !== '') $extra[] = "$k: $v";
     }
-    fputcsv($fh, [$when, $form, $data['phone'] ?? '', implode(' | ', $extra)], ';');
+    fputcsv($fh, [$when, $form, $raw_phone, implode(' | ', $extra)], ';');
     fclose($fh);
 }
 

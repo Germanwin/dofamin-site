@@ -1692,7 +1692,9 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       if(!validPhone(ph.value)){ shake(ph); return; }
       var ag = quizForm.querySelector('.qstep[data-step="' + qTotal + '"] input[type=checkbox]');
       if(ag && !ag.checked){ needAgree(ag); return; }
-      qAns['Телефон'] = ph.value;
+      /* Ключ именно 'phone': под ним телефон ищет lead.php. С кириллическим
+         'Телефон' заявка молча отбрасывалась как «bad phone». */
+      qAns['phone'] = ph.value;
       /* Тот же расчёт уходит в Telegram: администратору останется скопировать. */
       var qProg = buildProgram(qAns);
       qAns['Программа'] = qProg.text;
