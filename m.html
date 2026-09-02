@@ -1556,7 +1556,9 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
     } catch(e){ onFail(p); }
   }
   function sendLead(payload){
-    if (window.ym)  { try { ym(0,'reachGoal','lead'); } catch(e){} }
+    /* Цель засчитывается только если гостья согласилась на cookie:
+       без согласия счётчик не подключён и window.YM_ID пуст. */
+    if (window.ym && window.YM_ID) { try { ym(window.YM_ID,'reachGoal','lead'); } catch(e){} }
     if (window.gtag){ try { gtag('event','generate_lead'); } catch(e){} }
     postLead(payload, keepLead);
   }
@@ -1849,7 +1851,10 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 (function(){
   /* Номер счётчика Яндекс.Метрики. Пусто — счётчик не подключается,
      и баннер не показывается: спрашивать согласие не на что. */
-  var YM_ID = '';
+  var YM_ID = '112173743';
+  /* Тот же номер нужен коду форм для цели «оставил заявку»: он живёт
+     в другой области видимости, поэтому кладём номер в window. */
+  window.YM_ID = YM_ID;
 
   var KEY = 'dof-cookie';
   var box = document.getElementById('ck');

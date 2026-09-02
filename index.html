@@ -23,8 +23,10 @@
      что это одна страница, а не две одинаковых. -->
 <link rel="alternate" media="only screen and (max-width: 700px)" href="/m.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23A87C86'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23FDF9F5' text-anchor='middle'%3E%D0%94%3C/text%3E%3C/svg%3E">
-<!-- Сюда вставьте счётчик Яндекс.Метрики (с вебвизором) и/или Google Analytics.
-     Цели уже вызываются из кода формы: ym(0,'reachGoal','lead') и gtag('event','generate_lead'). -->
+<!-- Счётчик Яндекс.Метрики подключается внизу страницы и только после согласия
+     на cookie — номер задан там в YM_ID. Цель «оставил заявку» вызывается из
+     кода формы: ym(YM_ID,'reachGoal','lead'). Место под Google Analytics
+     свободно: gtag('event','generate_lead') уже вызывается оттуда же. -->
 <script>
 /* Мобильная версия живёт отдельным файлом m.html: на телефоне у неё своя,
    сокращённая структура. Уводим туда до первой отрисовки, чтобы не мигало.
@@ -2125,7 +2127,9 @@ footer a{color:#F3E2DC}
     } catch(e){ onFail(p); }
   }
   function sendLead(payload){
-    if (window.ym)  { try { ym(0,'reachGoal','lead'); } catch(e){} }
+    /* Цель засчитывается только если гостья согласилась на cookie:
+       без согласия счётчик не подключён и window.YM_ID пуст. */
+    if (window.ym && window.YM_ID) { try { ym(window.YM_ID,'reachGoal','lead'); } catch(e){} }
     if (window.gtag){ try { gtag('event','generate_lead'); } catch(e){} }
     postLead(payload, keepLead);
   }
@@ -2389,7 +2393,10 @@ footer a{color:#F3E2DC}
 (function(){
   /* Номер счётчика Яндекс.Метрики. Пусто — счётчик не подключается,
      и баннер не показывается: спрашивать согласие не на что. */
-  var YM_ID = '';
+  var YM_ID = '112173743';
+  /* Тот же номер нужен коду форм для цели «оставил заявку»: он живёт
+     в другой области видимости, поэтому кладём номер в window. */
+  window.YM_ID = YM_ID;
 
   var KEY = 'dof-cookie';
   var box = document.getElementById('ck');
