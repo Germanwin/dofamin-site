@@ -567,6 +567,21 @@ header{
 .lm-ok .msgs{justify-content:center}
 .lm-form.is-done .lm-body{display:none}
 .lm-form.is-done .lm-ok{display:block}
+/* ───── подобранная программа на экране «спасибо» ───── */
+.qprog{text-align:left;background:#FFF9F4;border:1px solid var(--line);
+  border-radius:16px;padding:18px 18px 16px;margin:0 auto 20px;max-width:460px}
+.qprog-t{display:block;font-size:15px;font-weight:800;color:var(--plum);margin-bottom:12px}
+.qprog-l{list-style:none;padding:0;margin:0}
+.qprog-l li{display:grid;grid-template-columns:1fr auto;gap:2px 12px;
+  padding:10px 0;border-bottom:1px dashed var(--line-2)}
+.qprog-l li:last-child{border-bottom:0}
+.qprog-n{font-size:15.5px;font-weight:700;color:var(--ink)}
+.qprog-p{font-size:15px;font-weight:800;color:var(--cta);white-space:nowrap}
+.qprog-w{grid-column:1/-1;font-size:13.5px;line-height:1.4;color:var(--ink-2)}
+.qprog-f{font-size:13.5px;line-height:1.5;color:var(--ink-2);margin:12px 0 0}
+/* кнопка выдачи чек-листа: главное действие экрана, поэтому полноширинная */
+.lm-get{display:block;text-align:center;text-decoration:none;margin:0 0 16px}
+
 /* подпись только для скринридеров: визуально плейсхолдер, но поле остаётся подписанным */
 .vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -1544,7 +1559,10 @@ footer a{color:#F3E2DC}
       <div class="form-ok" style="padding:36px 32px 40px">
         <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
         <h4>Программа собрана</h4>
-        <p>Мы получили ваши ответы. Администратор пришлёт программу и расчёт курса, а также покажет ближайшие свободные окна. Хотите быстрее — напишите нам сами:</p>
+        <!-- Сюда JS кладёт подобранную программу: человек видит обещанное
+             сразу, а не ждёт сообщения от администратора. -->
+        <div id="q-prog"></div>
+        <p>Администратор свяжется с вами, уточнит детали и покажет ближайшие свободные окна. Хотите быстрее — напишите нам сами:</p>
         <div class="msgs" style="justify-content:center">
           <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
           <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Telegram</a>
@@ -1869,9 +1887,10 @@ footer a{color:#F3E2DC}
 
 <!-- ═══════════ 12. ЛИД-МАГНИТ: ЧЕК-ЛИСТ В ОБМЕН НА ТЕЛЕФОН ═══════════ -->
 <!-- PDF чек-листа: checklist.pdf (вёрстка — checklist.html, текст — чек-лист.md).
-     Заявка с этой формы уходит в lead.php и падает админу в Telegram; файл
-     отправляют клиенту в мессенджер руками. Автоотправку можно добавить позже,
-     но обещание «пришлём в течение пары минут» уже выполнимо. -->
+     Заявка уходит в lead.php и падает админу в Telegram, а сам PDF человек
+     скачивает прямо с экрана «спасибо»: ждать сообщения от администратора
+     не нужно. Отправить файл в мессенджер по номеру автоматически нельзя —
+     для этого нужен платный шлюз, см. ПУБЛИКАЦИЯ.md. -->
 <section class="band pink" id="action">
   <div class="wrap lm-grid">
     <div class="lm-cover" aria-hidden="true">
@@ -1901,13 +1920,17 @@ footer a{color:#F3E2DC}
             <button type="submit" class="btn btn-lg">Получить чек-лист</button>
           </div>
           <label class="agree"><input type="checkbox" required><span>Согласна на обработку персональных данных и с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
-          <p class="lm-note">Пришлём PDF в WhatsApp или Telegram на этот номер в течение пары минут. Без звонков, если вы сами не попросите.</p>
+          <p class="lm-note">PDF откроется сразу после отправки — ждать не придётся. Номер нужен, чтобы ответить на вопросы по чек-листу. Без звонков, если сами не попросите.</p>
           <p class="lm-note">Нужна не бумага, а запись? Консультация бесплатная, первый визит — 1 000 ₽: <a href="#contacts">телефон и мессенджеры ниже</a>.</p>
         </div>
         <div class="lm-ok">
           <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
-          <b>Номер записали</b>
-          <p>Чек-лист придёт в WhatsApp или Telegram на этот номер в течение пары минут. Не дождётесь — напишите нам сами, отправим сразу:</p>
+          <b>Чек-лист готов</b>
+          <p>Забирайте прямо сейчас — ждать сообщения не нужно. Номер мы записали: если появятся вопросы по пунктам, ответим в мессенджере.</p>
+          <!-- Выдаём файл на месте: обещание «пришлём за пару минут» требовало
+               живого человека, а так клиент получает его в ту же секунду. -->
+          <a class="btn lm-get" href="checklist.pdf" download>Скачать чек-лист (PDF)</a>
+          <p>Удобнее в мессенджере? Напишите нам, отправим файл туда:</p>
           <div class="msgs">
             <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
             <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Telegram</a>
@@ -2147,6 +2170,61 @@ footer a{color:#F3E2DC}
   });
 
   /* ---- квиз ---- */
+  /* ── подбор программы по ответам квиза ────────────────────────────
+     Методики и цены взяты из прайса студии на этой же странице.
+     Связка «задача → методики» повторяет то, под что методику продают:
+     кавитация — локальный жир, прессотерапия — отёки, RF — тонус кожи.
+     Порядок внутри набора = порядок, в котором их логично давать курсом.
+     Если студия захочет другую связку — правится только BY_TASK. */
+  var METHODS = {
+    cav:   ['Кавитация', '1 200 ₽', 'разбивает локальные жировые «ловушки»'],
+    vac:   ['Вакуумный массаж с RF', '1 700 ₽', 'разгоняет застой, выравнивает «апельсиновую корку»'],
+    lipo:  ['Лазерный липолиз', '500 ₽', 'работает по жиру, который не уходит на диете'],
+    press: ['Прессотерапия', '1 000 ₽', 'выводит лишнюю жидкость и снимает тяжесть'],
+    rf:    ['RF-лифтинг тела', '1 500 ₽', 'прогревает глубокие слои, запускает коллаген'],
+    myo:   ['Миостимуляция', '1 800 ₽', 'подтягивает мышцы — тренировка лёжа'],
+    vibro: ['Вибромассаж', '1 300 ₽', 'снимает напряжение, разгоняет кровообращение'],
+    face:  ['Косметология лица', 'по записи', 'уход, RF-лифтинг лица, работа с тонусом кожи']
+  };
+  /* Ключ — кусок текста ответа, по которому его узнаём: сами формулировки
+     в разметке длинные, а менять их ради кода не хочется. */
+  var BY_TASK = [
+    ['объёмы',       ['cav', 'lipo', 'press']],
+    ['Отёки',        ['press', 'vibro', 'vac']],
+    ['Целлюлит',     ['vac', 'press', 'rf']],
+    ['Дряблость',    ['rf', 'myo', 'vibro']],
+    ['Всё сразу',    ['cav', 'press', 'rf']],
+    ['расслабиться', ['vibro', 'myo', 'press']]
+  ];
+  function buildProgram(a){
+    var zone = a['Зона'] || '', task = a['Задача'] || '', exp = a['Опыт'] || '', hlt = a['Здоровье'] || '';
+    var keys = ['cav', 'press', 'rf'];               /* если задача не распознана — базовый комплекс */
+    for (var i = 0; i < BY_TASK.length; i++){
+      if (task.indexOf(BY_TASK[i][0]) > -1){ keys = BY_TASK[i][1]; break; }
+    }
+    /* Лицо — отдельная история: методики для тела к нему не применяют. */
+    if (zone.indexOf('Подбородок') > -1) keys = ['face', 'rf'];
+
+    var notes = [];
+    if (zone.indexOf('Не знаю') > -1)     notes.push('Зону подберём на бесплатной консультации.');
+    if (exp.indexOf('Никогда') > -1)      notes.push('Первый визит проведём на щадящих параметрах.');
+    if (exp.indexOf('липосакция') > -1)   notes.push('После пластики параметры подбирает мастер лично.');
+    if (hlt.indexOf('Есть') > -1 || hlt.indexOf('Не уверена') > -1)
+      notes.push('Противопоказания мастер уточнит до начала процедуры.');
+
+    var rows = keys.map(function(k){ return METHODS[k]; }).filter(Boolean);
+    var html = '<div class="qprog"><b class="qprog-t">Ваша программа</b><ul class="qprog-l">'
+      + rows.map(function(m){
+          return '<li><span class="qprog-n">' + m[0] + '</span><span class="qprog-p">' + m[1] + '</span>'
+               + '<span class="qprog-w">' + m[2] + '</span></li>';
+        }).join('')
+      + '</ul><p class="qprog-f">Первый визит — любая из этих процедур за <b>1 000 ₽</b>, 30 минут.'
+      + (notes.length ? ' ' + notes.join(' ') : '') + '</p></div>';
+    var text = rows.map(function(m){ return m[0] + ' — ' + m[1]; }).join('; ')
+      + (notes.length ? '. ' + notes.join(' ') : '');
+    return {html: html, text: text};
+  }
+
   var quiz = document.getElementById('quiz-form');
   if(quiz){
     var steps = quiz.querySelectorAll('.qstep');
@@ -2191,7 +2269,13 @@ footer a{color:#F3E2DC}
       var agree = quiz.querySelector('.qstep[data-step="6"] input[type=checkbox]');
       if(agree && !agree.checked){ needAgree(agree); return; }
       answers['Телефон'] = phone.value;
+      /* Программа считается до отправки: тот же текст уходит в Telegram,
+         чтобы администратору осталось скопировать его клиенту, а не сочинять. */
+      var prog = buildProgram(answers);
+      answers['Программа'] = prog.text;
       sendLead(Object.assign({form:'quiz'}, answers));
+      var progBox = document.getElementById('q-prog');
+      if(progBox) progBox.innerHTML = prog.html;
 
       var ch = answers['Куда отправить'] || '';
       var text = 'Здравствуйте! Прошла тест на сайте, хочу записаться на первый визит за 1 000 ₽.\n'
