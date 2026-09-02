@@ -221,6 +221,14 @@ h3{font-size:20px;font-weight:800;line-height:1.28;letter-spacing:-.01em}
   box-shadow:0 18px 26px -10px rgba(208,96,138,.75),inset 0 1px 0 rgba(255,255,255,.35)}
 .btn:hover::after{left:120%}
 .btn:active{transform:translateY(-1px)}
+/* ── тот же блик, что при наведении, но сам по себе, раз в 22 секунды ──
+   Кнопка на длинной странице теряется среди текста; короткий пробег света
+   возвращает к ней взгляд, ничего не двигая и не мигая. Анимируем то же
+   свойство left, что и наведение выше: пока анимация идёт, она перекрывает
+   переход, а после — блик возвращается на исходную позицию сам.
+   На светлых кнопках блика нет вовсе (.btn-ghost::after{display:none}). */
+.btn.shine::after{animation:btn-sweep .62s cubic-bezier(.25,.6,.35,1)}
+@keyframes btn-sweep{ from{left:-60%} to{left:120%} }
 .btn-lg{padding:22px 42px;font-size:18px}
 .btn-ghost{
   background:linear-gradient(#fff,#fff) padding-box,var(--g-warm) border-box;
@@ -1092,6 +1100,9 @@ footer a{color:#F3E2DC}
   .ck button{flex:1 1 50%;padding:12px 10px}
 }
 </style>
+<!-- Разметка организации для поисковиков: Яндекс и Google берут отсюда адрес,
+     телефон, часы работы и цены и показывают их прямо в выдаче.
+     Это JSON — комментарии внутри недопустимы, разметка от них ломается. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -1105,6 +1116,12 @@ footer a{color:#F3E2DC}
     "addressCountry": "RU"
   },
   "telephone": "+7-800-550-86-04",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "10:00",
+    "closes": "20:00"
+  },
   "priceRange": "500–22000 ₽",
   "sameAs": [
     "https://t.me/dopaminestudio",
@@ -1202,7 +1219,7 @@ footer a{color:#F3E2DC}
         </span>
         <a href="#quiz" class="btn btn-ghost">Подобрать программу и цену</a>
       </div>
-      <p class="note">Оставляете только номер — перезвоним в рабочее время и подберём удобное окно, в том числе в выходные. Онлайн ничего не оплачиваете.</p>
+      <p class="note">Оставляете только номер — перезвоним с 10:00 до 20:00 и подберём удобное окно, в том числе в выходные. Онлайн ничего не оплачиваете.</p>
 
       <div class="hero-trust">
         <div class="tchip"><div><b>5,0 <span class="stars">★★★★★</span></b>28 отзывов на Яндекс.Картах</div></div>
@@ -1660,7 +1677,7 @@ footer a{color:#F3E2DC}
         <div class="form-ok" style="padding:8px">
           <div class="ok-ic" style="width:52px;height:52px"><svg class="ic"><use href="#i-check"/></svg></div>
           <h4 style="font-size:22px">Спасибо, записали</h4>
-          <p style="margin-bottom:0">Перезвоним в рабочее время и подтвердим удобное окно.</p>
+          <p style="margin-bottom:0">Перезвоним с 10:00 до 20:00 и подтвердим удобное окно.</p>
         </div>
       </form>
     </div>
@@ -1846,7 +1863,7 @@ footer a{color:#F3E2DC}
     <div>
       <span class="eyebrow plain">Запись</span>
       <h2>Запишитесь на визит — <span class="it">остальное подберём вместе</span></h2>
-      <p class="lead">Не нужно заранее выбирать методику и считать процедуры. Достаточно оставить номер: администратор перезвонит в рабочее время, расспросит про зону и покажет свободные окна.</p>
+      <p class="lead">Не нужно заранее выбирать методику и считать процедуры. Достаточно оставить номер: администратор перезвонит с 10:00 до 20:00, расспросит про зону и покажет свободные окна.</p>
       <ul class="bullets" style="margin-top:26px">
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>Консультация бесплатная</b> — мастер разберёт вашу зону и скажет, сколько раз примерно нужно прийти</span></li>
         <li><span class="bi"><svg class="ic"><use href="#i-check"/></svg></span><span><b>Первый визит — 1 000 ₽:</b> разбор зоны мастером и процедура 30 минут с фото до и после</span></li>
@@ -1865,7 +1882,7 @@ footer a{color:#F3E2DC}
     <form class="form" id="form-book" novalidate>
       <div class="form-body">
         <h3>Процедура за 1&nbsp;000&nbsp;₽</h3>
-        <p class="fnote">Любая процедура студии на первом визите. Оставьте номер — администратор перезвонит в рабочее время, покажет свободные окна и подберёт формат визита.</p>
+        <p class="fnote">Любая процедура студии на первом визите. Оставьте номер — администратор перезвонит с 10:00 до 20:00, покажет свободные окна и подберёт формат визита.</p>
         <div class="field">
           <label for="fb-phone">Телефон</label>
           <input id="fb-phone" type="tel" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" required>
@@ -1876,7 +1893,7 @@ footer a{color:#F3E2DC}
       <div class="form-ok">
         <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
         <h4>Номер записали</h4>
-        <p>Администратор перезвонит с номера 8 800 550-86-04 в рабочее время. Если удобнее в переписке — напишите нам прямо сейчас:</p>
+        <p>Администратор перезвонит с номера 8 800 550-86-04 с 10:00 до 20:00. Если удобнее в переписке — напишите нам прямо сейчас:</p>
         <div class="msgs" style="justify-content:center">
           <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener"><svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
           <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg> Telegram</a>
@@ -1979,7 +1996,7 @@ footer a{color:#F3E2DC}
         <div class="crow">
           <span class="ci"><svg class="ic"><use href="#i-clock"/></svg></span>
           <div><div class="ct">Режим работы</div>
-            <div class="cv">Ежедневно, по записи</div>
+            <div class="cv">Ежедневно, 10:00–20:00</div>
             <small>Свободные окна на ближайшие дни публикуем в Telegram-канале — иногда остаются места на сегодня.</small></div>
         </div>
       </div>
@@ -2028,6 +2045,7 @@ footer a{color:#F3E2DC}
           <li><a href="https://vk.com/club223150945" target="_blank" rel="noopener">ВКонтакте</a></li>
           <li><a href="https://n1283597.yclients.com" target="_blank" rel="noopener">Онлайн-запись</a></li>
           <li>пр. Энергетиков, 37, офис 813</li>
+          <li>Ежедневно, 10:00–20:00</li>
         </ul>
       </div>
     </div>
@@ -2302,6 +2320,59 @@ footer a{color:#F3E2DC}
     render();
   }
 
+
+  /* ── блик по кнопкам раз в 22 секунды ─────────────────────────────
+     Зачем: на длинной странице кнопка теряется среди текста. Короткий
+     пробег света возвращает к ней взгляд, ничего не двигая и не мигая.
+
+     22 секунды выбраны так: примерно столько человек читает один блок.
+     Чаще — начинает раздражать и выглядит как неисправность, реже —
+     пробег не застаёт читателя на нужном экране. Первый блик через 9
+     секунд: сразу после загрузки внимание и так занято.
+
+     Что НЕ делаем:
+     — не трогаем кнопки за пределами экрана: анимация впустую и
+       заставляет браузер рисовать невидимое;
+     — молчим, пока вкладка в фоне, иначе накопится очередь пробегов
+       и они выстрелят все разом при возвращении;
+     — молчим, пока человек заполняет форму: мигание рядом с полем
+       сбивает, а не помогает;
+     — молчим при системной настройке «уменьшить движение». */
+  var SHINE_SEL = '.btn:not(.btn-ghost)';
+  var shineTimer = null;
+  var calm = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)');
+  if(!(calm && calm.matches)){
+    var runShine = function(){
+      if(document.hidden) return;
+      var el = document.activeElement;
+      if(el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return;
+      var vh = window.innerHeight, seen = 0;
+      document.querySelectorAll(SHINE_SEL).forEach(function(b){
+        var r = b.getBoundingClientRect();
+        /* кнопка должна быть на экране целиком: у наполовину срезанной
+           блик обрывается и выглядит как подёргивание */
+        if(r.top < 0 || r.bottom > vh || !r.width) return;
+        /* если кнопок в поле зрения несколько, пускаем их не разом,
+           а лесенкой — так это читается как задумка, а не как сбой */
+        setTimeout(function(){ b.classList.add('shine'); }, seen * 220);
+        seen++;
+      });
+    };
+    document.addEventListener('animationend', function(e){
+      if(e.target.classList && e.target.classList.contains('shine')){
+        e.target.classList.remove('shine');
+      }
+    }, true);
+    /* класс снимаем и по таймеру: animationend не придёт, если кнопка
+       уехала с экрана в середине пробега */
+    setInterval(function(){
+      document.querySelectorAll('.shine').forEach(function(b){ b.classList.remove('shine'); });
+    }, 3000);
+    setTimeout(function(){
+      runShine();
+      shineTimer = setInterval(runShine, 22000);
+    }, 9000);
+  }
   /* ---- бегущая строка крутится только когда видна ---- */
   var tick_row = document.querySelector('.ticker-row');
   if (tick_row && 'IntersectionObserver' in window) {

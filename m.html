@@ -659,6 +659,13 @@ html{-webkit-tap-highlight-color:transparent}
   to  {transform:translateX(340%) skewX(-18deg);opacity:1}
 }
 
+/* ── тот же блик, но сам по себе, раз в 22 секунды ──
+   Кнопка на длинной странице легко теряется среди текста. Короткий пробег
+   света возвращает к ней взгляд, ничего при этом не двигая и не мигая.
+   Класс .shine вешает скрипт и снимает по окончании анимации. */
+.btn:not(.btn-ghost):not(.btn-gold).shine::after{
+  animation:btn-shine .55s cubic-bezier(.25,.6,.35,1)}
+
 /* Светлые кнопки: мессенджеры и варианты квиза перекрашиваются в фирменный
    розовый и приподнимают тень — то же, что даёт наведение на десктопе. */
 .msg:active,.msg.lit{color:var(--cta);border-color:#E9C1CA;
@@ -982,7 +989,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
     </div>
     <a class="btn btn-ghost cta2" href="#podbor">Подобрать программу и цену</a>
 
-    <p class="under">Оставляете только номер — перезвоним в рабочее время и подберём удобное
+    <p class="under">Оставляете только номер — перезвоним с 10:00 до 20:00 и подберём удобное
       окно, в том числе в выходные. Онлайн ничего не оплачиваете.</p>
 
     <div class="chips">
@@ -1072,7 +1079,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
   <div class="wrap">
     <h2>Запишитесь на визит — <span class="it">остальное подберём вместе</span></h2>
     <p class="lead" style="margin-bottom:16px">Не нужно заранее выбирать методику и считать
-      процедуры. Достаточно оставить номер: администратор перезвонит в рабочее время,
+      процедуры. Достаточно оставить номер: администратор перезвонит с 10:00 до 20:00,
       расспросит про зону и покажет свободные окна.</p>
 
     <ul class="bullets">
@@ -1101,7 +1108,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
         <div class="hr"><i></i></div>
         <h2 style="text-align:center">Процедура <span class="it">за 1 000 ₽</span></h2>
         <p class="fnote"><b class="hl">Любая процедура студии</b> на первом визите. Оставьте номер —
-          администратор перезвонит в рабочее время, покажет свободные окна и подберёт формат визита.</p>
+          администратор перезвонит с 10:00 до 20:00, покажет свободные окна и подберёт формат визита.</p>
         <div class="field">
           <label for="f1-phone">Телефон</label>
           <input id="f1-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
@@ -1115,7 +1122,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       <div class="form-ok">
         <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
         <h2>Номер записали</h2>
-        <p class="lead">Администратор перезвонит с номера 8 800 550-86-04 в рабочее время.
+        <p class="lead">Администратор перезвонит с номера 8 800 550-86-04 с 10:00 до 20:00.
           Если удобнее в переписке — напишите нам прямо сейчас:</p>
         <div class="msgs">
           <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener">
@@ -1354,7 +1361,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       <div class="form-ok">
         <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
         <h2>Спасибо, записали</h2>
-        <p class="lead">Перезвоним в рабочее время и подтвердим удобное окно.</p>
+        <p class="lead">Перезвоним с 10:00 до 20:00 и подтвердим удобное окно.</p>
       </div>
     </form>
   </div>
@@ -1562,7 +1569,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       <div class="form-ok">
         <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
         <h2>Заявка у нас</h2>
-        <p class="lead">Перезвоним с номера 8 800 550-86-04 в рабочее время.</p>
+        <p class="lead">Перезвоним с номера 8 800 550-86-04 с 10:00 до 20:00.</p>
         <div class="msgs">
           <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener">
             <svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
@@ -1583,7 +1590,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
         <span><b>Адрес</b>пр. Энергетиков, 37, БЦ «Лидер», 8 этаж, офис 813 · метро «Ладожская»
         или «Новочеркасская», рядом наземная парковка</span></a>
       <div><svg class="ic"><use href="#i-clock"/></svg>
-        <span><b>Режим работы</b>ежедневно, по записи. Свободные окна на ближайшие дни
+        <span><b>Режим работы</b>ежедневно, 10:00–20:00, по записи. Свободные окна на ближайшие дни
         публикуем в Telegram-канале — иногда остаются места на сегодня</span></div>
       <a href="https://n1283597.yclients.com" target="_blank" rel="noopener">
         <svg class="ic"><use href="#i-clock"/></svg>
@@ -1637,7 +1644,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       </div>
     </div>
 
-    <p class="faddr">пр. Энергетиков, 37, БЦ «Лидер», офис 813 · ежедневно, по записи</p>
+    <p class="faddr">пр. Энергетиков, 37, БЦ «Лидер», офис 813 · ежедневно 10:00–20:00</p>
     <p class="fnote-law">Информация на сайте не является медицинской рекомендацией и публичной
       офертой. Имеются противопоказания — необходима консультация специалиста.</p>
 
@@ -1688,7 +1695,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
     <div class="form-ok">
       <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
       <h2>Номер записали</h2>
-      <p class="lead">Администратор перезвонит с номера 8 800 550-86-04 в рабочее время.
+      <p class="lead">Администратор перезвонит с номера 8 800 550-86-04 с 10:00 до 20:00.
         Если удобнее в переписке — напишите прямо сейчас:</p>
       <div class="msgs">
         <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener">
@@ -1965,6 +1972,59 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
   }
 
 
+
+  /* ── блик по кнопкам раз в 22 секунды ─────────────────────────────
+     Зачем: на длинной странице кнопка теряется среди текста. Короткий
+     пробег света возвращает к ней взгляд, ничего не двигая и не мигая.
+
+     22 секунды выбраны так: примерно столько человек читает один блок.
+     Чаще — начинает раздражать и выглядит как неисправность, реже —
+     пробег не застаёт читателя на нужном экране. Первый блик через 9
+     секунд: сразу после загрузки внимание и так занято.
+
+     Что НЕ делаем:
+     — не трогаем кнопки за пределами экрана: анимация впустую и
+       заставляет браузер рисовать невидимое;
+     — молчим, пока вкладка в фоне, иначе накопится очередь пробегов
+       и они выстрелят все разом при возвращении;
+     — молчим, пока человек заполняет форму: мигание рядом с полем
+       сбивает, а не помогает;
+     — молчим при системной настройке «уменьшить движение». */
+  var SHINE_SEL = '.btn:not(.btn-ghost):not(.btn-gold)';
+  var shineTimer = null;
+  var calm = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)');
+  if(!(calm && calm.matches)){
+    var runShine = function(){
+      if(document.hidden) return;
+      var el = document.activeElement;
+      if(el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return;
+      var vh = window.innerHeight, seen = 0;
+      document.querySelectorAll(SHINE_SEL).forEach(function(b){
+        var r = b.getBoundingClientRect();
+        /* кнопка должна быть на экране целиком: у наполовину срезанной
+           блик обрывается и выглядит как подёргивание */
+        if(r.top < 0 || r.bottom > vh || !r.width) return;
+        /* если кнопок в поле зрения несколько, пускаем их не разом,
+           а лесенкой — так это читается как задумка, а не как сбой */
+        setTimeout(function(){ b.classList.add('shine'); }, seen * 220);
+        seen++;
+      });
+    };
+    document.addEventListener('animationend', function(e){
+      if(e.target.classList && e.target.classList.contains('shine')){
+        e.target.classList.remove('shine');
+      }
+    }, true);
+    /* класс снимаем и по таймеру: animationend не придёт, если кнопка
+       уехала с экрана в середине пробега */
+    setInterval(function(){
+      document.querySelectorAll('.shine').forEach(function(b){ b.classList.remove('shine'); });
+    }, 3000);
+    setTimeout(function(){
+      runShine();
+      shineTimer = setInterval(runShine, 22000);
+    }, 9000);
+  }
   /* ── мини-окно записи от липкой панели ────────────────────────────
      Открываем поверх страницы, а не уводим прокруткой: человек не теряет
      место, где читал. Закрыть можно крестиком, тапом по затемнению,
