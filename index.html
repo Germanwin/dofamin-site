@@ -645,6 +645,12 @@ header{
   background:linear-gradient(160deg,rgba(255,196,150,.22),rgba(200,120,150,.2) 55%,rgba(74,34,51,.28))}
 .mcard:hover .mimg::after{opacity:.35}
 .mcard .mimg img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.3,1)}
+/* На снимке RF-лифтинга поверх фото набрана подпись «RF-лифтинг» — она у нас
+   и так есть в заголовке карточки, а на фото выглядит как чужая наклейка.
+   Сдвигаем видимую область вниз: в кадр попадают манипулы, подпись остаётся
+   выше границы. Считано под пропорцию 4:3 этой карточки — при другой высоте
+   значение придётся пересчитать. */
+.mcard .mimg img.crop-82{object-position:center 82%}
 .mcard:hover .mimg img{transform:scale(1.07)}
 .mcard .mbody{padding:24px 24px 26px;display:flex;flex-direction:column;flex:1}
 .mcard h3{margin-bottom:8px;color:var(--plum)}
@@ -1414,7 +1420,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard m-extra">
-        <div class="mimg"><img decoding="async" src="assets/img/rf-body.jpg" alt="RF-лифтинг тела: мастер ведёт по животу манипулу с электродами" loading="lazy" width="720" height="552"></div>
+        <div class="mimg"><img class="crop-82" decoding="async" src="assets/img/rf-body-2.jpg" alt="Манипулы RF-лифтинга с металлическими электродами" loading="lazy" width="719" height="737"></div>
         <div class="mbody">
           <span class="mtag t-gold">Тонус кожи</span>
           <h3>RF-лифтинг тела</h3>
@@ -1424,7 +1430,7 @@ footer a{color:#F3E2DC}
       </article>
 
       <article class="mcard m-extra">
-        <div class="mimg"><img decoding="async" src="assets/img/myostim.jpg" alt="Миостимуляция: электроды на поясах на бёдрах и ягодицах" loading="lazy" width="720" height="552"></div>
+        <div class="mimg"><img decoding="async" src="assets/img/myostim-2.jpg" alt="Миостимуляция в студии «Дофамин»: мастер закрепляет пояса с электродами" loading="lazy" width="591" height="742"></div>
         <div class="mbody">
           <span class="mtag t-sage">Мышцы и рельеф</span>
           <h3>Миостимуляция</h3>
