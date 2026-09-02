@@ -103,7 +103,7 @@ if ($fh = @fopen($csv, 'a')) {
     if ($new) { fwrite($fh, "\xEF\xBB\xBF"); fputcsv($fh, ['Дата', 'Форма', 'Телефон', 'Подробности'], ';'); }
     $extra = [];
     foreach ($data as $k => $v) {
-        if (in_array($k, ['form', 'phone'], true)) continue;
+        if (in_array($k, ['form', 'phone', 'Телефон'], true)) continue;
         if (is_scalar($v) && $v !== '') $extra[] = "$k: $v";
     }
     fputcsv($fh, [$when, $form, $raw_phone, implode(' | ', $extra)], ';');
