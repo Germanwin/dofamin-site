@@ -9,5 +9,6 @@ Disallow: /thanks.html
 # Служебные файлы репозитория (закрыты и на уровне сервера, см. .htaccess).
 Disallow: /README.md
 Disallow: /checklist.html
+Disallow: /leads/
 
 Sitemap: https://dopaminestudio.site/sitemap.xml

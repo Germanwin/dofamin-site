@@ -1044,6 +1044,36 @@ footer a{color:#F3E2DC}
   .cta-row{gap:11px}
   .eyebrow{font-size:11.5px;letter-spacing:.1em}
 }
+
+/* ── Баннер согласия на аналитические cookie ──────────────────────────
+   Метрика не грузится, пока гостья не нажала «Принять»: до согласия
+   счётчик не подключается и статистика не собирается вовсе. Так проще
+   и честнее, чем ставить счётчик сразу и спрашивать задним числом. */
+.ck{position:fixed;left:14px;right:14px;bottom:14px;z-index:9000;
+  display:none;gap:16px;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;max-width:940px;margin:0 auto;
+  background:var(--cream);border:1px solid var(--line-2);border-radius:18px;
+  padding:16px 18px;box-shadow:0 14px 40px rgba(78,46,56,.16)}
+.ck.on{display:flex}
+.ck p{margin:0;flex:1 1 380px;font-size:14.5px;line-height:1.5;color:var(--plum-2)}
+.ck a{color:var(--cta);text-decoration:underline}
+.ck-btns{display:flex;gap:9px;flex:0 0 auto}
+.ck button{font:inherit;font-size:14px;font-weight:700;cursor:pointer;
+  border-radius:11px;padding:11px 18px;border:1px solid transparent;white-space:nowrap}
+.ck-yes{background:var(--g-cta);color:#fff}
+.ck-yes:hover{background:var(--g-cta-hi)}
+.ck-no{background:transparent;color:var(--plum-2);border-color:var(--line-2)}
+.ck-no:hover{border-color:var(--cta);color:var(--plum)}
+@media(max-width:760px){
+  /* липкая панель занимает низ экрана — баннер встаёт над ней */
+  .ck{bottom:calc(90px + env(safe-area-inset-bottom))}
+}
+@media(max-width:560px){
+  .ck{padding:14px 15px;gap:12px}
+  .ck p{flex:1 1 100%;font-size:14px}
+  .ck-btns{flex:1 1 100%}
+  .ck button{flex:1 1 50%;padding:12px 10px}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -2258,6 +2288,51 @@ footer a{color:#F3E2DC}
       scrollToY(function(){ return t.getBoundingClientRect().top + window.pageYOffset - 84; });
       history.replaceState(null, '', id);
     });
+  });
+})();
+</script>
+
+<!-- Баннер согласия на аналитику. Разметка и скрипт держатся вместе,
+     чтобы при переносе на другой сайт копировался один кусок. -->
+<div class="ck" id="ck" role="dialog" aria-label="Использование cookie">
+  <p>Мы используем cookie, чтобы понимать, какими страницами пользуются, и делать сайт удобнее. Подробности — в <a href="privacy.html">политике конфиденциальности</a>.</p>
+  <div class="ck-btns">
+    <button type="button" class="ck-yes" id="ck-yes">Принять</button>
+    <button type="button" class="ck-no"  id="ck-no">Только необходимые</button>
+  </div>
+</div>
+<script>
+(function(){
+  /* Номер счётчика Яндекс.Метрики. Пусто — счётчик не подключается,
+     и баннер не показывается: спрашивать согласие не на что. */
+  var YM_ID = '';
+
+  var KEY = 'dof-cookie';
+  var box = document.getElementById('ck');
+  if(!box) return;
+
+  function saved(){ try { return localStorage.getItem(KEY); } catch(e){ return null; } }
+  function save(v){ try { localStorage.setItem(KEY, v); } catch(e){} }
+
+  function loadMetrika(){
+    if(!YM_ID || window.ym) return;
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+     m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
+     k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})
+     (window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
+    ym(YM_ID,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
+  }
+
+  if(!YM_ID) return;                       /* нечего подключать — молчим */
+  if(saved() === 'yes'){ loadMetrika(); return; }
+  if(saved() === 'no')  return;            /* отказ уважаем, не переспрашиваем */
+
+  box.classList.add('on');
+  document.getElementById('ck-yes').addEventListener('click', function(){
+    save('yes'); box.classList.remove('on'); loadMetrika();
+  });
+  document.getElementById('ck-no').addEventListener('click', function(){
+    save('no'); box.classList.remove('on');
   });
 })();
 </script>
