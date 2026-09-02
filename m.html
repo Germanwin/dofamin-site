@@ -663,6 +663,44 @@ html{-webkit-tap-highlight-color:transparent}
   .btn.lit::after{animation:none}
 }
 
+
+/* ───── мини-окно записи от липкой панели ─────
+   Кнопка внизу экрана раньше уводила прокруткой к форме в середине страницы:
+   человек терял место, где читал, и половину пути смотрел на промелькнувшие
+   блоки. Окно открывается поверх — прочитанное остаётся под ним, а закрыть
+   его можно одним движением. */
+.sheet-bd{position:fixed;inset:0;z-index:9100;background:rgba(46,33,36,.45);
+  opacity:0;pointer-events:none;transition:opacity .25s ease}
+.sheet-bd.on{opacity:1;pointer-events:auto}
+
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:9200;
+  background:var(--bg);border-radius:22px 22px 0 0;
+  padding:10px 16px calc(18px + env(safe-area-inset-bottom));
+  box-shadow:0 -12px 40px rgba(74,34,46,.22);
+  /* уезжает вниз целиком, вместе с областью под вырез экрана */
+  transform:translateY(101%);transition:transform .3s cubic-bezier(.25,.8,.35,1);
+  /* на невысоких экранах окно не должно упереться в шапку */
+  max-height:88vh;overflow-y:auto;overscroll-behavior:contain}
+.sheet.on{transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){
+  .sheet,.sheet-bd{transition:none}
+}
+
+/* полоска-«ручка»: привычный знак, что окно тянется и закрывается вниз */
+.sheet-grip{width:38px;height:4px;border-radius:99px;background:var(--line-2);
+  margin:0 auto 12px}
+.sheet-x{position:absolute;top:12px;right:12px;width:36px;height:36px;
+  display:grid;place-items:center;border:0;border-radius:50%;
+  background:var(--bg-2);color:var(--ink-2);font-size:20px;line-height:1;cursor:pointer}
+.sheet h2{font-size:23px;text-align:center;margin-bottom:6px}
+.sheet .fnote{text-align:center;margin-bottom:14px}
+/* внутри окна форме не нужен внешний отступ — его задаёт само окно */
+.sheet .form{margin:0}
+.sheet .form-ok{padding:6px 0 4px}
+.sheet .form-ok h2{margin-bottom:8px}
+
+/* пока окно открыто, страница под ним не прокручивается */
+body.sheet-lock{overflow:hidden}
 /* ───── подобранная программа на экране «спасибо» ───── */
 .qprog{text-align:left;background:#FFF9F4;border:1px solid var(--line);
   border-radius:16px;padding:18px 18px 16px;margin:0 auto 20px;max-width:460px}
@@ -1610,7 +1648,48 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
     <svg class="ic ic-f" style="width:22px;height:22px"><use href="#i-phone"/></svg></a>
   <a class="ib" href="https://wa.me/79214334760" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
     <svg class="ic" style="width:22px;height:22px"><use href="#i-wa"/></svg></a>
-  <a class="btn" href="#zapis"><span class="s-long">Записаться за 1&nbsp;000&nbsp;₽</span><span class="s-short">Запись за 1&nbsp;000&nbsp;₽</span></a>
+  <!-- href остаётся рабочим: без JS кнопка по-прежнему уводит к форме записи,
+       со скриптом — открывает окно поверх страницы -->
+  <a class="btn" href="#zapis" id="sticky-cta"><span class="s-long">Записаться за 1&nbsp;000&nbsp;₽</span><span class="s-short">Запись за 1&nbsp;000&nbsp;₽</span></a>
+</div>
+
+<!-- Мини-окно записи. Открывается кнопкой липкой панели, чтобы не уводить
+     человека прокруткой с того места, где он читает. Форма та же, что в
+     блоке записи, и уходит тем же путём в lead.php — отличается только id,
+     по нему в Telegram видно, откуда пришла заявка. -->
+<div class="sheet-bd" id="sheet-bd" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-t" hidden>
+  <button class="sheet-x" type="button" id="sheet-x" aria-label="Закрыть">&times;</button>
+  <div class="sheet-grip" aria-hidden="true"></div>
+  <form class="form" id="f5" novalidate>
+    <div class="form-body">
+      <h2 id="sheet-t">Запись <span class="it">за 1 000 ₽</span></h2>
+      <p class="fnote"><b class="hl">Любая процедура студии</b> на первом визите, 30 минут.
+        Оставьте номер — администратор перезвонит и покажет свободные окна.</p>
+      <div class="field">
+        <label for="f5-phone">Телефон</label>
+        <input id="f5-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
+               placeholder="+7 999 123-45-67" required>
+      </div>
+      <button type="submit" class="btn">Записаться за 1&nbsp;000&nbsp;₽</button>
+      <label class="agree"><input type="checkbox" required>
+        <span>Я согласна с <a href="privacy.html" target="_blank">политикой конфиденциальности</a>
+        и на обработку персональных данных, включая передачу
+        заявки в мессенджер Telegram</span></label>
+    </div>
+    <div class="form-ok">
+      <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
+      <h2>Номер записали</h2>
+      <p class="lead">Администратор перезвонит с номера 8 800 550-86-04 в рабочее время.
+        Если удобнее в переписке — напишите прямо сейчас:</p>
+      <div class="msgs">
+        <a class="msg" href="https://wa.me/79214334760" target="_blank" rel="noopener">
+          <svg class="ic"><use href="#i-wa"/></svg> WhatsApp</a>
+        <a class="msg" href="https://t.me/dopaminestudio" target="_blank" rel="noopener">
+          <svg class="ic ic-f"><use href="#i-tg"/></svg> Telegram</a>
+      </div>
+    </div>
+  </form>
 </div>
 
 <script>
@@ -1688,6 +1767,10 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       if(sel) data[sel.name] = sel.value;
       sendLead(data);
       f.classList.add('is-done');
+      /* Форма в мини-окне уже перед глазами — страницу под ним не трогаем.
+         Прокрутка здесь увела бы фон, а после закрытия человек оказался бы
+         не там, где читал. */
+      if(f.closest('.sheet')) return;
       /* экран «заявка принята» должен оказаться перед глазами, а не выше сгиба */
       var y = f.getBoundingClientRect().top + window.pageYOffset - 70;
       window.scrollTo({top:y, behavior:'smooth'});
@@ -1873,6 +1956,70 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
     } else { warmAll(); }
   }
 
+
+  /* ── мини-окно записи от липкой панели ────────────────────────────
+     Открываем поверх страницы, а не уводим прокруткой: человек не теряет
+     место, где читал. Закрыть можно крестиком, тапом по затемнению,
+     клавишей Esc и кнопкой «назад» — последнее важнее всего на телефоне,
+     там это первый рефлекс. */
+  var sheet = document.getElementById('sheet');
+  var sheetBd = document.getElementById('sheet-bd');
+  var stickyCta = document.getElementById('sticky-cta');
+  if(sheet && sheetBd && stickyCta){
+    var sheetOpen = false, lastFocus = null, pushed = false;
+
+    var showSheet = function(){
+      if(sheetOpen) return;
+      sheetOpen = true;
+      lastFocus = document.activeElement;
+      sheet.hidden = false; sheetBd.hidden = false;
+      /* следующий кадр: элемент должен успеть отрисоваться скрытым,
+         иначе переход стартовать не с чего и окно просто возникает */
+      requestAnimationFrame(function(){
+        sheetBd.classList.add('on');
+        sheet.classList.add('on');
+      });
+      document.body.classList.add('sheet-lock');
+      /* Поле не фокусируем: на телефоне это мгновенно выбрасывает клавиатуру
+         и она закрывает половину окна вместе с текстом про 1 000 ₽.
+         Фокус переводим на крестик — с клавиатуры окно управляемо, а тем,
+         кто пришёл пальцем, ничего не мешает. */
+      setTimeout(function(){ document.getElementById('sheet-x').focus(); }, 320);
+      /* отдельная запись в истории: «назад» закроет окно, а не уведёт с сайта.
+         Запоминаем, удалось ли её создать: если нет, то и history.back()
+         при закрытии звать нельзя — он утащит человека со страницы. */
+      pushed = false;
+      try { history.pushState({sheet:1}, ''); pushed = true; } catch(e){}
+    };
+
+    var hideSheet = function(fromPop){
+      if(!sheetOpen) return;
+      sheetOpen = false;
+      sheet.classList.remove('on');
+      sheetBd.classList.remove('on');
+      document.body.classList.remove('sheet-lock');
+      setTimeout(function(){
+        if(!sheetOpen){ sheet.hidden = true; sheetBd.hidden = true; }
+      }, 320);
+      if(lastFocus && lastFocus.focus) lastFocus.focus();
+      /* если закрыли не кнопкой «назад» — убираем свою запись из истории сами */
+      if(!fromPop && pushed){ pushed = false; try { history.back(); } catch(e){} }
+    };
+
+    stickyCta.addEventListener('click', function(e){ e.preventDefault(); showSheet(); });
+    document.getElementById('sheet-x').addEventListener('click', function(){ hideSheet(); });
+    sheetBd.addEventListener('click', function(){ hideSheet(); });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && sheetOpen) hideSheet();
+    });
+    window.addEventListener('popstate', function(){ if(sheetOpen) hideSheet(true); });
+
+    /* Заявку отправляет общий обработчик форм выше — здесь только закрываем
+       окно, дав человеку прочитать «номер записали». */
+    document.getElementById('f5').addEventListener('submit', function(){
+      setTimeout(function(){ if(sheetOpen) hideSheet(); }, 2600);
+    });
+  }
   /* Липкая панель прячется, пока кнопка первого экрана видна: два одинаковых
      призыва рядом мешают друг другу, а панель ещё и съедает нижние 76px,
      из-за которых кнопка не влезала в первый экран. */
