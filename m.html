@@ -55,6 +55,8 @@
   --bg-4:#FBF1E8;      /* персиковая */
   --bg-5:#F7EFF4;      /* лавандовая */
   --g-cta:linear-gradient(135deg,#D0608A,#A94268);
+  /* светлый вариант — им кнопка «загорается» под пальцем, как на десктопе при наведении */
+  --g-cta-hi:linear-gradient(135deg,#DE7099 0%,#BC4E75 100%);
   --g-num:linear-gradient(120deg,#C89A3F,#C4638A 60%,#A5798A);
   --ink:#2E2124;
   --ink-2:#6E5F61;
@@ -146,7 +148,10 @@ h3{font-size:17px;font-weight:800;line-height:1.3}
 .btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;
   min-height:58px;padding:16px 20px;border:0;border-radius:99px;cursor:pointer;
   background:var(--g-cta);color:#fff;font-size:17px;font-weight:800;text-decoration:none;
-  box-shadow:0 12px 20px -12px rgba(169,66,104,.85)}
+  /* position+overflow+isolation — под блик: он живёт в ::after и обрезается
+     по скруглению кнопки. inset-подсветка сверху даёт объём, как на десктопе. */
+  position:relative;overflow:hidden;isolation:isolate;
+  box-shadow:0 12px 20px -12px rgba(169,66,104,.85),inset 0 1px 0 rgba(255,255,255,.3)}
 .btn-ghost{background:#fff;color:var(--plum);border:1.5px solid var(--line-2);box-shadow:none}
 /* кнопка перманента: тонкая золотая оправа — зовёт, но не спорит с записью за 1 000 ₽ */
 .btn-gold{margin-top:16px;white-space:nowrap;color:#8A6A22;font-weight:700;
@@ -616,15 +621,46 @@ html{-webkit-tap-highlight-color:transparent}
    Нажатие быстрое (.06s), возврат медленнее (.18s): так движение читается
    упругим, а не резиновым. */
 .btn,.msg,.qopt,.chip,#methods summary,#faq summary{
-  transition:transform .18s cubic-bezier(.2,.7,.3,1),box-shadow .18s ease}
+  transition:transform .18s cubic-bezier(.2,.7,.3,1),box-shadow .18s ease,
+             background .18s ease,color .18s ease,border-color .18s ease}
 .btn:active,.msg:active,.qopt:active,.chip:active,
 #methods summary:active,#faq summary:active{
   transform:translateY(2px) scale(.985);transition-duration:.06s}
-.btn:active{box-shadow:0 5px 10px -9px rgba(169,66,104,.9)}
+
+/* ── подсветка: то же «загорание», что на десктопе при наведении ──
+   Палец держат доли секунды, поэтому одного :active мало — эффект не успеет
+   показаться. Класс .lit вешает скрипт по касанию и снимает по окончании
+   анимации, так что подсветка доигрывает целиком, даже если тап был мгновенный. */
+.btn:active,.btn.lit{background:var(--g-cta-hi)}
+.btn:active{box-shadow:0 6px 14px -8px rgba(208,96,138,.9),inset 0 1px 0 rgba(255,255,255,.45)}
+.btn.lit{box-shadow:0 14px 24px -10px rgba(208,96,138,.85),inset 0 1px 0 rgba(255,255,255,.45)}
+
+/* Блик пробегает по кнопке слева направо. Двигаем transform, а не left:
+   на телефоне это единственный вариант, который не пересчитывает раскладку. */
+.btn::after{
+  content:"";position:absolute;top:0;left:-55%;width:45%;height:100%;z-index:-1;
+  background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.42),rgba(255,255,255,0));
+  transform:translateX(0) skewX(-18deg);opacity:0}
+.btn.lit::after{animation:btn-shine .5s cubic-bezier(.25,.6,.35,1)}
+@keyframes btn-shine{
+  from{transform:translateX(0) skewX(-18deg);opacity:1}
+  to  {transform:translateX(340%) skewX(-18deg);opacity:1}
+}
+
+/* Светлые кнопки: мессенджеры и варианты квиза перекрашиваются в фирменный
+   розовый и приподнимают тень — то же, что даёт наведение на десктопе. */
+.msg:active,.msg.lit{color:var(--cta);border-color:#E9C1CA;
+  box-shadow:0 10px 16px -12px rgba(206,83,52,.85)}
+.qopt:active,.qopt.lit{border-color:#D9B871;
+  background:linear-gradient(135deg,#FFF9FB,#FDF4EF);
+  box-shadow:0 8px 14px -12px rgba(184,145,63,.8)}
+.chip:active,.chip.lit{border-color:var(--cta);color:var(--cta)}
+
 @media(prefers-reduced-motion:reduce){
   .btn,.msg,.qopt,.chip,#methods summary,#faq summary{transition:none}
   .btn:active,.msg:active,.qopt:active,.chip:active,
   #methods summary:active,#faq summary:active{transform:none}
+  .btn.lit::after{animation:none}
 }
 
 /* ───── подобранная программа на экране «спасибо» ───── */
@@ -791,13 +827,30 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 }
 </style>
 <script>
-/* Пустой слушатель касания: без него Safari на iPhone не применяет :active,
-   и кнопка не вжимается под пальцем. passive — чтобы не мешать прокрутке.
+/* Отклик кнопок на касание.
+   Пустой слушатель touchstart обязателен: без него Safari на iPhone вообще
+   не применяет :active, и кнопка не вжимается под пальцем.
    Здесь же раньше стоял «замок масштаба»: он гасил gesture-события iOS и
    не давал отдалить страницу щипком. Снят вместе с user-scalable=no —
    запрет зума ломает доступность, а починить им нечего. */
 (function(){
   document.addEventListener('touchstart', function(){}, {passive:true});
+
+  /* Подсветка живёт дольше касания. Палец на кнопке доли секунды, и одного
+     :active мало — блик не успел бы пробежать. Класс .lit вешаем по касанию
+     и снимаем через полсекунды, чтобы эффект доиграл целиком. */
+  var SEL = '.btn,.msg,.qopt,.chip';
+  var lit = function(e){
+    var el = e.target.closest && e.target.closest(SEL);
+    if(!el || el.classList.contains('lit')) return;
+    el.classList.add('lit');
+    setTimeout(function(){ el.classList.remove('lit'); }, 520);
+  };
+  document.addEventListener('touchstart', lit, {passive:true});
+  /* pointerdown — для тех, кто открыл мобильную версию мышью или стилусом */
+  document.addEventListener('pointerdown', function(e){
+    if(e.pointerType !== 'touch') lit(e);
+  }, {passive:true});
 })();
 </script>
 </head>
