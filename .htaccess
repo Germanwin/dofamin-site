@@ -14,22 +14,20 @@ RedirectMatch 404 /\.git
   Require all denied
 </FilesMatch>
 
-# Единый адрес: без www. Редирект на https добавим после выпуска
-# SSL-сертификата — раньше он уведёт посетителей на неработающий адрес.
-RewriteEngine On
-RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-RewriteRule ^(.*)$ http://%1/$1 [L,R=301]
-
 # Папка с заявками: в CSV лежат телефоны гостей и ответы про здоровье.
 # lead.php кладёт внутрь свой .htaccess при первой заявке, но если папку
 # создадут вручную или сервер окажется на nginx, эта защита не сработает —
 # поэтому закрываем ещё и отсюда.
 RedirectMatch 404 ^/leads(/|$)
 
-# ── ВКЛЮЧИТЬ ПОСЛЕ ВЫПУСКА SSL-СЕРТИФИКАТА ───────────────────────────
-# Убрать «#» у трёх строк ниже. До этого момента формы уходят открытым
-# текстом, а политика конфиденциальности (п. 11) обещает HTTPS —
-# без этого редиректа обещание не выполняется.
-# RewriteCond %{HTTPS} !=on
-# RewriteCond %{HTTP:X-Forwarded-Proto} !https
-# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=301]
+# ── Единый адрес: https и без www ────────────────────────────────────
+# Иначе поисковик видит четыре копии сайта (http/https × с www/без) и делит
+# вес между ними, а политика конфиденциальности обещает передачу по HTTPS.
+#
+# Условие по X-Forwarded-Proto, а не по %{HTTPS}: сайт стоит за прокси Beget,
+# до Apache соединение доходит уже расшифрованным. Проверено на сервере:
+# при заходе по http приходит X-Forwarded-Proto: http, по https — https.
+RewriteEngine On
+RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^(.*)$ https://dopaminestudio.site/$1 [L,R=301]
