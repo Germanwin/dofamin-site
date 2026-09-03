@@ -166,9 +166,14 @@ footer{contain-intrinsic-size:auto 298px}
   #contacts{contain-intrinsic-size:auto 1134px}
   footer{contain-intrinsic-size:auto 878px}
 }
-/* на время программной прокрутки раскладку разворачиваем целиком,
-   иначе якорь промахнётся мимо блока */
-html.cv-off main>section,html.cv-off footer{content-visibility:visible}
+/* Отступ под липкую шапку при переходе по якорю: шапка 74px плюс воздух.
+   Саму прокрутку делает браузер — он разворачивает свёрнутые выше блоки сам
+   и попадает точно. Скрипт этого не умел: замерял цель на развёрнутой
+   раскладке, а после прокрутки блоки схлопывались обратно, страница уезжала
+   вверх примерно на 1000px, и «Записаться» приводило на чек-лист,
+   а «Контакты» — в подвал. */
+main>section,footer{scroll-margin-top:84px}
+main#top{scroll-margin-top:0}
 .blush{background:linear-gradient(165deg,#F2CFDC 0%,#F7DFD8 100%)}
 h1,h2,h3.serif,.serif{font-family:'Cormorant',Georgia,'Times New Roman',serif;font-weight:600}
 h1{font-size:clamp(33px,3.95vw,53px);line-height:1.04;letter-spacing:-.005em;color:var(--plum)}
@@ -2073,26 +2078,17 @@ footer a{color:#F3E2DC}
 (function(){
   'use strict';
 
-  /* ---- прокрутка с учётом content-visibility ----
-     Пока часть секций не отрисована, их высота — оценка, и якорь промахнётся.
-     Поэтому на время перехода раскладку разворачиваем целиком. */
-  var root = document.documentElement, cvTimer = 0;
-  function cvBack(){
-    clearTimeout(cvTimer);
-    window.removeEventListener('scrollend', cvBack);
-    root.classList.remove('cv-off');
-    measure();
-  }
-  function scrollToY(getY){
-    root.classList.add('cv-off');
-    void document.body.offsetHeight;          /* форсируем полную раскладку */
-    window.scrollTo({top: Math.max(0, getY()), behavior:'smooth'});
-    /* возвращаем экономию только когда прокрутка реально закончилась,
-       иначе блоки схлопнутся на лету и якорь промахнётся */
-    clearTimeout(cvTimer);
-    window.removeEventListener('scrollend', cvBack);
-    window.addEventListener('scrollend', cvBack);
-    cvTimer = setTimeout(cvBack, 2500);
+  /* ---- прокрутка к блоку, который уже на экране ----
+     Годится только для близких целей: экран «заявка принята», свёрнутый
+     обратно список. Их координата верна, потому что блок уже отрисован.
+     Для дальних целей это не работает — нижние секции свёрнуты
+     (content-visibility), их высота лишь оценка. Поэтому переходы по
+     якорям отданы браузеру, см. scroll-margin-top в стилях. */
+  function scrollToEl(el, gap){
+    window.scrollTo({
+      top: Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - gap),
+      behavior: 'smooth'
+    });
   }
 
   /* ---- появление блоков при скролле ---- */
@@ -2177,7 +2173,7 @@ footer a{color:#F3E2DC}
       return;
     }
     form.classList.add('is-done');
-    scrollToY(function(){ return form.getBoundingClientRect().top + window.pageYOffset - 110; });
+    scrollToEl(form, 110);
   }
 
   /* ---- простые формы ---- */
@@ -2395,7 +2391,7 @@ footer a{color:#F3E2DC}
       var label = b.querySelector('span');
       if(label) label.textContent = open ? b.dataset.less : b.dataset.more;
       if(!open){
-        scrollToY(function(){ return box.getBoundingClientRect().top + window.pageYOffset - 70; });
+        scrollToEl(box, 70);
       }
     });
   });
@@ -2444,18 +2440,10 @@ footer a{color:#F3E2DC}
   measure();
   progress();
 
-  /* ---- плавный переход по якорям с учётом липкой шапки ---- */
-  document.querySelectorAll('a[href^="#"]').forEach(function(a){
-    a.addEventListener('click', function(e){
-      var id = a.getAttribute('href');
-      if(id.length < 2) return;
-      var t = document.querySelector(id);
-      if(!t) return;
-      e.preventDefault();
-      scrollToY(function(){ return t.getBoundingClientRect().top + window.pageYOffset - 84; });
-      history.replaceState(null, '', id);
-    });
-  });
+  /* Переходы по якорям своего кода не требуют: плавность даёт
+     scroll-behavior:smooth, отступ под шапку — scroll-margin-top,
+     а свёрнутые секции браузер разворачивает по дороге сам.
+     Ровно из-за самодельного варианта «Записаться» уводило на чек-лист. */
 })();
 </script>
 
