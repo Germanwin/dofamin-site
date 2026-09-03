@@ -137,43 +137,19 @@ section.band+section{border-radius:60px 60px 0 0}
 @media(max-width:760px){section.sand,section.blush,section.band,footer,section.band+section{border-radius:34px 34px 0 0}}
 .sand{background:linear-gradient(165deg,#F8E2DA 0%,#F3D3DC 55%,#F6DED6 100%)}
 
-/* страница высотой ~17 700 px: всё, что вне экрана, браузер пропускает */
-main>section:not(.hero),footer{content-visibility:auto}
-#pains{contain-intrinsic-size:auto 603px}
-#how{contain-intrinsic-size:auto 803px}
-#benefits{contain-intrinsic-size:auto 1100px}
-#methods{contain-intrinsic-size:auto 2116px}
-#quiz{contain-intrinsic-size:auto 717px}
-#prices{contain-intrinsic-size:auto 1646px}
-#works{contain-intrinsic-size:auto 1025px}
-#reviews{contain-intrinsic-size:auto 823px}
-#faq{contain-intrinsic-size:auto 1145px}
-#studio{contain-intrinsic-size:auto 1133px}
-#book{contain-intrinsic-size:auto 812px}
-#action{contain-intrinsic-size:auto 1100px}
-#contacts{contain-intrinsic-size:auto 626px}
-footer{contain-intrinsic-size:auto 298px}
-/* на телефоне блоки перестраиваются — оценки высот другие */
-@media(max-width:560px){
-  #pains{contain-intrinsic-size:auto 709px}
-  #how{contain-intrinsic-size:auto 1577px}
-  #methods{contain-intrinsic-size:auto 2564px}
-  #quiz{contain-intrinsic-size:auto 993px}
-  #prices{contain-intrinsic-size:auto 2127px}
-  #reviews{contain-intrinsic-size:auto 1207px}
-  #faq{contain-intrinsic-size:auto 1350px}
-  #studio{contain-intrinsic-size:auto 1718px}
-  #contacts{contain-intrinsic-size:auto 1134px}
-  footer{contain-intrinsic-size:auto 878px}
-}
-/* Отступ под липкую шапку при переходе по якорю: шапка 74px плюс воздух.
-   Саму прокрутку делает браузер — он разворачивает свёрнутые выше блоки сам
-   и попадает точно. Скрипт этого не умел: замерял цель на развёрнутой
-   раскладке, а после прокрутки блоки схлопывались обратно, страница уезжала
-   вверх примерно на 1000px, и «Записаться» приводило на чек-лист,
-   а «Контакты» — в подвал. */
+/* ЗДЕСЬ БЫЛО content-visibility:auto — НЕ ВОЗВРАЩАТЬ.
+   Оно давало браузеру пропускать блоки за экраном, задавая вместо них
+   заглушки высотой contain-intrinsic-size. Заглушки оказались короче
+   настоящих блоков на 900–1100px, и высота страницы менялась прямо во время
+   прокрутки: пока браузер ехал к блоку записи, блоки над ним разворачивались
+   в полный рост, страница удлинялась, и человека уносило на экран дальше —
+   на чек-лист. Экономия была на первую отрисовку, цена — сломанная кнопка
+   «Записаться», главная кнопка сайта. Теперь высота страницы неизменна
+   с первой секунды, и прокрутке некуда промахнуться. */
+
+/* Отступ под липкую шапку (74px) при переходе по якорю. */
 main>section,footer{scroll-margin-top:84px}
-main#top{scroll-margin-top:0}
+main#top{scroll-margin-top:84px}   /* по логотипу — на самый верх страницы */
 .blush{background:linear-gradient(165deg,#F2CFDC 0%,#F7DFD8 100%)}
 h1,h2,h3.serif,.serif{font-family:'Cormorant',Georgia,'Times New Roman',serif;font-weight:600}
 h1{font-size:clamp(33px,3.95vw,53px);line-height:1.04;letter-spacing:-.005em;color:var(--plum)}
@@ -927,8 +903,9 @@ footer a{color:#F3E2DC}
 }
 
 
-/* секции вне экрана не отрисовываются, пока до них не долистают */
-#pains,#benefits,#works,#action{content-visibility:auto;contain-intrinsic-size:0 1100px}
+/* Второе такое же место: этим четырём секциям всем подряд назначалась
+   заглушка ростом 1100px, хотя настоящие высоты у них разные. Убрано по той
+   же причине — из-за прыгающей высоты страницы прокрутка промахивалась. */
 
 /* ══════════ МОБИЛЬНАЯ ВЕРСИЯ ══════════
    Тот же URL и та же страница: на узких экранах меняется композиция.
@@ -2440,10 +2417,39 @@ footer a{color:#F3E2DC}
   measure();
   progress();
 
-  /* Переходы по якорям своего кода не требуют: плавность даёт
-     scroll-behavior:smooth, отступ под шапку — scroll-margin-top,
-     а свёрнутые секции браузер разворачивает по дороге сам.
-     Ровно из-за самодельного варианта «Записаться» уводило на чек-лист. */
+  /* ---- страховка на переходах по якорям ----
+     Везёт браузер: плавность из scroll-behavior:smooth, отступ под шапку из
+     scroll-margin-top. Своей арифметики здесь нет намеренно — из-за неё
+     «Записаться» уводило на чек-лист.
+     Но пока догружаются шрифты, высоты текста ещё чуть меняются, и цель
+     может уехать на сотню-другую пикселей. Поэтому после остановки сверяем,
+     где оказался верх блока, и при промахе больше 4px тихо доводим.
+     Если человек в это время сам взялся за колесо или тачпад — не лезем. */
+  var GAP = 84, job = 0;
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(){
+      var id = a.getAttribute('href');
+      if(id.length < 2 || id === '#top') return;
+      var t = document.querySelector(id);
+      if(!t) return;
+
+      var mine = ++job, tries = 0;
+      var EV = ['wheel','touchstart','keydown'];
+      function stop(){ mine = -1; }
+      function off(){ EV.forEach(function(ev){ window.removeEventListener(ev, stop); }); }
+      EV.forEach(function(ev){ window.addEventListener(ev, stop, {passive:true}); });
+
+      function check(){
+        if(mine !== job) { off(); return; }          /* новый клик или человек вмешался */
+        var delta = Math.round(t.getBoundingClientRect().top - GAP);
+        if(Math.abs(delta) > 4 && tries++ < 4){
+          window.scrollBy({top: delta, behavior:'auto'});
+          setTimeout(check, 150);
+        } else off();
+      }
+      setTimeout(check, 700);
+    });
+  });
 })();
 </script>
 
