@@ -441,32 +441,39 @@ summary::after{content:"";position:absolute;right:18px;top:50%;width:11px;height
   border-right:2.2px solid var(--cta);border-bottom:2.2px solid var(--cta);
   transform:translateY(-70%) rotate(45deg);transition:transform .2s}
 details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
-/* плавное раскрытие: анимируем ТОЛЬКО строку грида. Раньше поверх этого
-   шла ещё и WAAPI-анимация height — две анимации на одном узле дёргались. */
-.d-body{display:grid;grid-template-rows:0fr;
-  transition:grid-template-rows .34s cubic-bezier(.3,.7,.3,1)}
-/* клипуем обёртку, а не текст: фото внутри выкатывается вместе с содержимым,
-   а не проявляется прозрачностью поверх уже раскрытого блока */
-.d-in{overflow:hidden;min-height:0;
-  /* layout paint: пересчёт высоты при раскрытии не выходит за пределы
-     спойлера. Без этого каждый кадр анимации трогал раскладку всей
-     страницы — девять спойлеров, и на телефоне это заметно дёргалось. */
+/* ═══ Раскрытие спойлера ══════════════════════════════════════════════
+   Анимируется height в пикселях: точное число ставит скрипт в момент
+   открытия, а когда переход закончился — меняет его на auto, чтобы поздно
+   доехавшее фото или перенос строки ничего не обрезали.
+
+   НЕ ПЕРЕДЕЛЫВАТЬ на другой способ. Каждый из них здесь уже стоял и лагал:
+   • grid-template-rows: 0fr→1fr — Safari на айфоне тянет такую анимацию
+     рывками, и браузеру приходится каждый кадр пересчитывать весь грид;
+   • max-height с запасом — врёт скорость: сначала рывок, потом ползёт;
+   • WAAPI-анимация height поверх CSS-перехода — две анимации на одном узле
+     дерутся за одно свойство.
+   Менять можно длительность и кривую, но не само свойство. */
+.d-body{overflow:hidden;
+  /* пересчёт при раскрытии не выходит за пределы спойлера: без этого каждый
+     кадр анимации трогал раскладку всей страницы — девять спойлеров,
+     и на телефоне это заметно дёргалось */
   contain:layout paint}
-.d-body p{padding:0 16px 15px;font-size:14.5px;color:var(--ink-2);line-height:1.5;
-  opacity:0;transition:opacity .24s ease .06s}
-details[open] .d-body{grid-template-rows:1fr}
-details[open] .d-body p{opacity:1}
+.d-in{min-height:0}
+.d-body p{padding:0 16px 15px;font-size:14.5px;color:var(--ink-2);line-height:1.5}
 /* JS-режим: атрибут open стоит всегда, состояние держит .is-open.
    Иначе закрытый <details> браузер не рендерит вовсе — переходу не от чего
    стартовать, и содержимое просто возникает без анимации. */
-details.js-sp .d-body{grid-template-rows:0fr}
-details.js-sp .d-body p{opacity:0;transition-delay:0s}
+details.js-sp .d-body{height:0;transition:height .34s cubic-bezier(.3,.7,.3,1)}
+details.js-sp .d-body p{opacity:0;transition:opacity .24s ease}
 details.js-sp summary::after{transform:translateY(-70%) rotate(45deg)}
-details.js-sp.is-open .d-body{grid-template-rows:1fr}
 details.js-sp.is-open .d-body p{opacity:1;transition-delay:.06s}
 details.js-sp.is-open summary::after{transform:translateY(-30%) rotate(225deg)}
+/* Селекторы длиннее обычных намеренно: правило должно перебить
+   details.js-sp .d-body выше, иначе «отключить анимацию» в настройках
+   телефона ничего не отключает. */
 @media(prefers-reduced-motion:reduce){
-  .d-body,.d-body p{transition:none}
+  details.js-sp .d-body,details.js-sp .d-body p,
+  details.js-sp .d-body .plist{transition:none}
 }
 details p b{color:var(--plum)}
 /* фото методики внутри спойлера: фиксированная высота — раскрытие не прыгает,
@@ -763,9 +770,7 @@ body.sheet-lock{overflow:hidden}
 .plist li b{flex:none;font-weight:800;color:var(--plum);font-variant-numeric:tabular-nums}
 .plist li span{color:var(--ink-2)}
 /* содержимое спойлера проявляется вместе с текстом — иначе список «моргает» */
-.d-body .plist{opacity:0;transition:opacity .24s ease .06s}
-details[open] .d-body .plist{opacity:1}
-details.js-sp .d-body .plist{opacity:0;transition-delay:0s}
+details.js-sp .d-body .plist{opacity:0;transition:opacity .24s ease}
 details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 .note{font-size:13px;line-height:1.5;color:var(--ink-2)}
 .note a{color:var(--cta);font-weight:700}
@@ -2130,44 +2135,76 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
     var sum = d.querySelector('summary');
     var body = d.querySelector('.d-body');
     if(!sum || !body) return;
+    var inner = body.firstElementChild || body;   /* .d-in — по нему меряем высоту */
 
     var wasOpen = d.open;
     d.classList.add('js-sp');
     d.open = true;
-    if(wasOpen) d.classList.add('is-open');
+    if(wasOpen){ d.classList.add('is-open'); body.style.height = 'auto'; }
     sum.setAttribute('aria-expanded', wasOpen ? 'true' : 'false');
 
-    var setOpen = function(open){
+    /* Отпускаем высоту, когда переход закончился: дальше блок живёт с auto,
+       и доехавшее фото или перенос строки его не обрежут. Таймер —
+       страховка: при prefers-reduced-motion перехода нет вовсе, а значит
+       не будет и transitionend. */
+    var free = 0;
+    function releaseHeight(){
+      clearTimeout(free);
+      if(d.classList.contains('is-open')) body.style.height = 'auto';
+    }
+    body.addEventListener('transitionend', function(e){
+      if(e.target === body && e.propertyName === 'height') releaseHeight();
+    });
+
+    function setOpen(open){
       d.classList.toggle('is-open', open);
       sum.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if(!open) return;
-      /* открытый ответ подтягиваем к экрану, чтобы не листать вслепую */
-      setTimeout(function(){
+      clearTimeout(free);
+      if(open){
+        body.style.height = inner.offsetHeight + 'px';
+        free = setTimeout(releaseHeight, D_MS + 80);
+        /* Подтягиваем к экрану сразу, а не после анимации: отдельное
+           движение через треть секунды читается как подвисание. Конечный
+           низ блока считаем заранее — он ещё не вырос. */
         var r = d.getBoundingClientRect();
-        if(r.top < 56 || r.bottom > window.innerHeight - 90){
+        var willBottom = r.top + sum.offsetHeight + inner.offsetHeight;
+        if(r.top < 56 || willBottom > window.innerHeight - 90){
           window.scrollTo({top:r.top + window.pageYOffset - 70, behavior:'smooth'});
         }
-      }, D_MS + 20);
-    };
+      } else {
+        /* от auto к числу и только потом к нулю: без промежуточного замера
+           переходу не от чего стартовать, блок просто схлопывается */
+        body.style.height = body.offsetHeight + 'px';
+        void body.offsetHeight;
+        body.style.height = '0px';
+      }
+    }
+
+    /* Фото начинаем тянуть на касании — это на 100–150 мс раньше клика.
+       Декодирование картинки посреди анимации и есть та самая заминка,
+       которую видно на телефоне. Место под фото зарезервировано (172px
+       и тёплая подложка), поэтому опоздавшая картинка ничего не двигает. */
+    function warmPic(){
+      var pic = d.querySelector('.d-pic');
+      if(!pic || pic.dataset.warm) return;
+      pic.dataset.warm = '1';
+      pic.loading = 'eager';
+      if('fetchPriority' in pic) pic.fetchPriority = 'high';
+      if(!pic.complete){
+        pic.classList.add('pic-wait');
+        var show = function(){ pic.classList.remove('pic-wait'); };
+        pic.addEventListener('load', show, {once:true});
+        pic.addEventListener('error', show, {once:true});
+      }
+      if(pic.decode) pic.decode().catch(function(){});
+    }
+    sum.addEventListener('pointerdown', warmPic);
+    sum.addEventListener('touchstart', warmPic, {passive:true});
 
     sum.addEventListener('click', function(e){
       e.preventDefault();
-      if(d.classList.contains('is-open')){ setOpen(false); return; }
-
-      /* Раскрываем сразу по нажатию. Раньше ждали фото до 220 мс — палец уже
-         отпустили, а спойлер стоит на месте: это и ощущалось как «лагает».
-         Ждать незачем: место под фото зарезервировано (172px и тёплая
-         подложка), поэтому опоздавшая картинка ничего не двигает —
-         она просто проявляется на своём месте. */
-      var pic = d.querySelector('.d-pic');
-      if(pic && !pic.complete){
-        pic.loading = 'eager';
-        if('fetchPriority' in pic) pic.fetchPriority = 'high';
-        pic.classList.add('pic-wait');
-        pic.addEventListener('load', function(){ pic.classList.remove('pic-wait'); }, {once:true});
-        pic.addEventListener('error', function(){ pic.classList.remove('pic-wait'); }, {once:true});
-      }
-      setOpen(true);
+      warmPic();
+      setOpen(!d.classList.contains('is-open'));
     });
   });
 })();

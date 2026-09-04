@@ -772,17 +772,16 @@ details.sp summary::after{content:"";position:absolute;right:24px;top:50%;width:
   border-right:2px solid var(--cta);border-bottom:2px solid var(--cta);
   transform:translateY(-70%) rotate(45deg);transition:transform .25s}
 details.sp .spb{padding:0 26px 24px;font-size:15.5px;color:var(--ink-2);line-height:1.6;
-  overflow:hidden;min-height:0;opacity:0;transition:opacity .24s ease .06s}
+  min-height:0}
 details.sp .spb b{color:var(--plum)}
 details.sp:hover{box-shadow:0 16px 26px -19px rgba(74,34,51,.7)}
 
-/* Плавное раскрытие — тот же приём, что в мобильной версии: анимируем строку
-   грида, а содержимое клипуем. Высоту не трогаем: она неизвестна заранее,
-   и две анимации на одном узле дёргаются. */
-.sp-body{display:grid;grid-template-rows:0fr;
-  transition:grid-template-rows .34s cubic-bezier(.3,.7,.3,1)}
-details.sp[open] .sp-body{grid-template-rows:1fr}
-details.sp[open] .spb{opacity:1}
+/* Раскрытие спойлера — тот же приём, что в мобильной версии: анимируем
+   height в пикселях, число ставит скрипт, после перехода меняет на auto.
+   НЕ ПЕРЕДЕЛЫВАТЬ на grid-template-rows 0fr→1fr, на max-height с запасом
+   и на WAAPI поверх перехода — все три здесь уже стояли и дёргались,
+   подробности в комментарии к тому же месту в m.html. */
+.sp-body{overflow:hidden;contain:layout paint}
 details.sp[open] summary::after{transform:translateY(-30%) rotate(225deg);
   border-color:var(--gold)}
 details.sp[open]{border-color:transparent;box-shadow:0 20px 30px -20px rgba(74,34,51,.7);
@@ -793,18 +792,20 @@ details.sp[open]{border-color:transparent;box-shadow:0 20px 30px -20px rgba(74,3
    Закрытый <details> браузер не рендерит вовсе, поэтому переходу не от чего
    стартовать — без этого содержимое просто возникало. */
 details.sp.js-sp{border:1px solid #F6DCE2;background:var(--g-card);box-shadow:var(--sh-sm)}
-details.sp.js-sp .sp-body{grid-template-rows:0fr}
-details.sp.js-sp .spb{opacity:0;transition-delay:0s}
+details.sp.js-sp .sp-body{height:0;transition:height .34s cubic-bezier(.3,.7,.3,1)}
+details.sp.js-sp .spb{opacity:0;transition:opacity .24s ease}
 details.sp.js-sp summary::after{transform:translateY(-70%) rotate(45deg);border-color:var(--cta)}
 details.sp.js-sp.is-open{border-color:transparent;box-shadow:0 20px 30px -20px rgba(74,34,51,.7);
   background:linear-gradient(#fff,#fff) padding-box,linear-gradient(140deg,#EFC3D0,#E6C88E) border-box;
   border:1.5px solid transparent}
-details.sp.js-sp.is-open .sp-body{grid-template-rows:1fr}
 details.sp.js-sp.is-open .spb{opacity:1;transition-delay:.06s}
 details.sp.js-sp.is-open summary::after{transform:translateY(-30%) rotate(225deg);
   border-color:var(--gold)}
+/* Селекторы длиннее обычных намеренно: правило должно перебить
+   details.sp.js-sp .sp-body выше, иначе «уменьшить движение» в системе
+   ничего не отключает. */
 @media(prefers-reduced-motion:reduce){
-  .sp-body,details.sp .spb{transition:none}
+  details.sp.js-sp .sp-body,details.sp.js-sp .spb{transition:none}
 }
 
 /* безопасность / галерея */
@@ -2384,17 +2385,42 @@ footer a{color:#F3E2DC}
     var sum  = d.querySelector('summary');
     var body = d.querySelector('.sp-body');
     if(!sum || !body) return;
+    var inner = body.firstElementChild || body;   /* .spb — по нему меряем высоту */
 
     var wasOpen = d.open;
     d.classList.add('js-sp');
     d.open = true;
-    if(wasOpen) d.classList.add('is-open');
+    if(wasOpen){ d.classList.add('is-open'); body.style.height = 'auto'; }
     sum.setAttribute('aria-expanded', wasOpen ? 'true' : 'false');
+
+    /* Отпускаем высоту после перехода: дальше блок живёт с auto, и перенос
+       строки при смене ширины окна его не обрежет. Таймер — страховка:
+       при prefers-reduced-motion перехода нет, значит нет и transitionend. */
+    var free = 0;
+    function releaseHeight(){
+      clearTimeout(free);
+      if(d.classList.contains('is-open')) body.style.height = 'auto';
+    }
+    body.addEventListener('transitionend', function(e){
+      if(e.target === body && e.propertyName === 'height') releaseHeight();
+    });
 
     sum.addEventListener('click', function(e){
       e.preventDefault();
-      var open = d.classList.toggle('is-open');
+      var open = !d.classList.contains('is-open');
+      d.classList.toggle('is-open', open);
       sum.setAttribute('aria-expanded', open ? 'true' : 'false');
+      clearTimeout(free);
+      if(open){
+        body.style.height = inner.offsetHeight + 'px';
+        free = setTimeout(releaseHeight, 420);
+      } else {
+        /* от auto к числу и только потом к нулю: без промежуточного замера
+           переходу не от чего стартовать, блок просто схлопывается */
+        body.style.height = body.offsetHeight + 'px';
+        void body.offsetHeight;
+        body.style.height = '0px';
+      }
     });
   });
 
