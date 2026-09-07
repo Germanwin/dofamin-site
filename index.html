@@ -2292,10 +2292,13 @@ footer a{color:#F3E2DC}
         + 'Опыт: ' + (answers['Опыт'] || '—') + '\n'
         + 'Удобное время: ' + (answers['Время'] || '—');
       if(ch.indexOf('WhatsApp') > -1){
+        if(window.dofGoal) window.dofGoal('whatsapp');
         window.open('https://wa.me/79214334760?text=' + encodeURIComponent(text), '_blank', 'noopener');
       } else if(ch.indexOf('Telegram') > -1){
+        if(window.dofGoal) window.dofGoal('telegram');
         window.open('https://t.me/dopaminestudio', '_blank', 'noopener');
       } else if(ch.indexOf('ВКонтакте') > -1){
+        if(window.dofGoal) window.dofGoal('vk');
         window.open('https://vk.me/club223150945', '_blank', 'noopener');
       }
       done(quiz);
@@ -2558,6 +2561,45 @@ footer a{color:#F3E2DC}
   document.getElementById('ck-no').addEventListener('click', function(){
     save('no'); box.classList.remove('on'); stopMetrika();
   });
+})();
+</script>
+
+<!-- Цели «нажала позвонить» и «ушла в мессенджер».
+     Метрика такие клики сама не считает: trackLinks ловит только переходы
+     на чужие сайты, а tel: и ссылки в мессенджеры проходят мимо него.
+
+     Цели в Метрике нужно завести руками: Настройка → Цели → JavaScript-событие
+     с идентификаторами call, whatsapp, telegram, vk и zapis. Пока их там нет,
+     события просто уходят в никуда и ничего не ломают. -->
+<script>
+(function(){
+  var GOALS = [
+    [/^tel:/i,         'call'],
+    [/wa\.me/i,        'whatsapp'],
+    [/t\.me/i,         'telegram'],
+    [/vk\.me/i,        'vk'],
+    [/yclients\.com/i, 'zapis']
+  ];
+
+  /* Одна точка отправки цели: ею же пользуется квиз, который уводит
+     в мессенджер программно, без клика по ссылке. */
+  function goal(name){
+    if(window.ym && window.YM_ID){ try { ym(window.YM_ID,'reachGoal',name); } catch(e){} }
+    if(window.gtag){ try { gtag('event',name); } catch(e){} }
+  }
+  window.dofGoal = goal;
+
+  /* Слушаем весь документ: ссылок на телефон и мессенджеры на странице
+     под три десятка, и вешать обработчик на каждую — лишний код.
+     Ловим в фазе перехвата, чтобы цель ушла раньше самого перехода. */
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if(!a) return;
+    var href = a.getAttribute('href') || '';
+    for(var i = 0; i < GOALS.length; i++){
+      if(GOALS[i][0].test(href)){ goal(GOALS[i][1]); return; }
+    }
+  }, true);
 })();
 </script>
 </body>
