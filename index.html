@@ -1060,18 +1060,22 @@ footer a{color:#F3E2DC}
 }
 
 /* ── Баннер согласия на аналитические cookie ──────────────────────────
-   Метрика не грузится, пока гостья не нажала «Принять»: до согласия
-   счётчик не подключается и статистика не собирается вовсе. Так проще
-   и честнее, чем ставить счётчик сразу и спрашивать задним числом. */
-.ck{position:fixed;left:14px;right:14px;bottom:14px;z-index:9000;
-  display:none;gap:16px;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;max-width:940px;margin:0 auto;
+   Счётчик работает с первого захода, а баннер уведомляет и даёт отказаться:
+   152-ФЗ требует уведомления, а не предварительного разрешения. Пока
+   разрешение спрашивали заранее, статистики не было ни у кого — в Метрику
+   попадали только те, кто нажал кнопку. */
+/* Прижат к правому нижнему углу и не растянут на всю ширину: слева внизу
+   первого экрана стоит кнопка «Хочу процедуру за 1 000 ₽», и плашка поверх
+   неё обходилась дороже, чем ответ про cookie. */
+.ck{position:fixed;right:16px;bottom:16px;z-index:9000;
+  display:none;gap:13px;flex-direction:column;align-items:stretch;
+  width:min(430px,calc(100vw - 32px));
   background:var(--cream);border:1px solid var(--line-2);border-radius:18px;
   padding:16px 18px;box-shadow:0 14px 40px rgba(78,46,56,.16)}
 .ck.on{display:flex}
-.ck p{margin:0;flex:1 1 380px;font-size:14.5px;line-height:1.5;color:var(--plum-2)}
+.ck p{margin:0;font-size:14px;line-height:1.5;color:var(--plum-2)}
 .ck a{color:var(--cta);text-decoration:underline}
-.ck-btns{display:flex;gap:9px;flex:0 0 auto}
+.ck-btns{display:flex;gap:9px}
 .ck button{font:inherit;font-size:14px;font-weight:700;cursor:pointer;
   border-radius:11px;padding:11px 18px;border:1px solid transparent;white-space:nowrap}
 .ck-yes{background:var(--g-cta);color:#fff}
@@ -1079,13 +1083,11 @@ footer a{color:#F3E2DC}
 .ck-no{background:transparent;color:var(--plum-2);border-color:var(--line-2)}
 .ck-no:hover{border-color:var(--cta);color:var(--plum)}
 @media(max-width:760px){
-  /* липкая панель занимает низ экрана — баннер встаёт над ней */
-  .ck{bottom:calc(90px + env(safe-area-inset-bottom))}
+  /* липкая панель занимает низ экрана — баннер встаёт над ней и во всю ширину */
+  .ck{left:14px;right:14px;width:auto;bottom:calc(90px + env(safe-area-inset-bottom))}
 }
 @media(max-width:560px){
   .ck{padding:14px 15px;gap:12px}
-  .ck p{flex:1 1 100%;font-size:14px}
-  .ck-btns{flex:1 1 100%}
   .ck button{flex:1 1 50%;padding:12px 10px}
 }
 </style>
@@ -2484,10 +2486,10 @@ footer a{color:#F3E2DC}
 <!-- Баннер согласия на аналитику. Разметка и скрипт держатся вместе,
      чтобы при переносе на другой сайт копировался один кусок. -->
 <div class="ck" id="ck" role="dialog" aria-label="Использование cookie">
-  <p>Мы используем cookie, чтобы понимать, какими страницами пользуются, и делать сайт удобнее. Подробности — в <a href="privacy.html">политике конфиденциальности</a>.</p>
+  <p>Мы используем cookie и «Яндекс Метрику», чтобы понимать, какими страницами пользуются, и делать сайт удобнее. Аналитику можно отключить — на работу сайта это не влияет. Подробности — в <a href="privacy.html">политике конфиденциальности</a>.</p>
   <div class="ck-btns">
-    <button type="button" class="ck-yes" id="ck-yes">Принять</button>
-    <button type="button" class="ck-no"  id="ck-no">Только необходимые</button>
+    <button type="button" class="ck-yes" id="ck-yes">Хорошо</button>
+    <button type="button" class="ck-no"  id="ck-no">Отключить аналитику</button>
   </div>
 </div>
 <script>
@@ -2516,15 +2518,45 @@ footer a{color:#F3E2DC}
   }
 
   if(!YM_ID) return;                       /* нечего подключать — молчим */
-  if(saved() === 'yes'){ loadMetrika(); return; }
   if(saved() === 'no')  return;            /* отказ уважаем, не переспрашиваем */
 
-  box.classList.add('on');
+  /* Счётчик подключается с первого захода. Раньше он ждал нажатия «Принять» —
+     и в статистику попадали только те, кто ответил на баннер, то есть
+     меньшинство. Владелец при этом не видел трафика вовсе и не мог понять,
+     заходит ли кто-нибудь на сайт. */
+  loadMetrika();
+  if(saved() === 'yes') return;            /* уже ответила — не переспрашиваем */
+
+  /* Баннер не выскакивает сразу: на первом экране он вставал поверх главной
+     кнопки. Показываем, когда гостья пролистала первый экран или задержалась
+     на странице. */
+  var shown = false;
+  function onScroll(){ if(window.pageYOffset > 600) show(); }
+  function show(){
+    if(shown) return;
+    shown = true;
+    box.classList.add('on');
+    window.removeEventListener('scroll', onScroll);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  setTimeout(show, 9000);
+
+  /* Отказ останавливает уже загруженный счётчик и стирает его cookie.
+     disableYaCounter<номер> — штатный флаг Метрики: увидев его, счётчик
+     перестаёт отправлять данные. */
+  function stopMetrika(){
+    window['disableYaCounter' + YM_ID] = true;
+    ['_ym_uid','_ym_d','_ym_isad','_ym_visorc'].forEach(function(n){
+      document.cookie = n + '=; Max-Age=0; path=/';
+      document.cookie = n + '=; Max-Age=0; path=/; domain=.' + location.hostname;
+    });
+  }
+
   document.getElementById('ck-yes').addEventListener('click', function(){
-    save('yes'); box.classList.remove('on'); loadMetrika();
+    save('yes'); box.classList.remove('on');
   });
   document.getElementById('ck-no').addEventListener('click', function(){
-    save('no'); box.classList.remove('on');
+    save('no'); box.classList.remove('on'); stopMetrika();
   });
 })();
 </script>

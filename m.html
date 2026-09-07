@@ -872,9 +872,10 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 .band>.wrap>.bullets .bi{background:rgba(255,255,255,.92);color:var(--cta);box-shadow:none}
 
 /* ── Баннер согласия на аналитические cookie ──────────────────────────
-   Метрика не грузится, пока гостья не нажала «Принять»: до согласия
-   счётчик не подключается и статистика не собирается вовсе. Так проще
-   и честнее, чем ставить счётчик сразу и спрашивать задним числом. */
+   Счётчик работает с первого захода, а баннер уведомляет и даёт отказаться:
+   152-ФЗ требует уведомления, а не предварительного разрешения. Пока
+   разрешение спрашивали заранее, статистики не было ни у кого — в Метрику
+   попадали только те, кто нажал кнопку. */
 .ck{position:fixed;left:14px;right:14px;
   /* липкая панель внизу видна всегда — баннер встаёт над ней */
   bottom:calc(92px + env(safe-area-inset-bottom));z-index:9000;
@@ -2212,10 +2213,10 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 <!-- Баннер согласия на аналитику. Разметка и скрипт держатся вместе,
      чтобы при переносе на другой сайт копировался один кусок. -->
 <div class="ck" id="ck" role="dialog" aria-label="Использование cookie">
-  <p>Мы используем cookie, чтобы понимать, какими страницами пользуются, и делать сайт удобнее. Подробности — в <a href="privacy.html">политике конфиденциальности</a>.</p>
+  <p>Мы используем cookie и «Яндекс Метрику», чтобы понимать, какими страницами пользуются, и делать сайт удобнее. Аналитику можно отключить — на работу сайта это не влияет. Подробности — в <a href="privacy.html">политике конфиденциальности</a>.</p>
   <div class="ck-btns">
-    <button type="button" class="ck-yes" id="ck-yes">Принять</button>
-    <button type="button" class="ck-no"  id="ck-no">Только необходимые</button>
+    <button type="button" class="ck-yes" id="ck-yes">Хорошо</button>
+    <button type="button" class="ck-no"  id="ck-no">Отключить аналитику</button>
   </div>
 </div>
 <script>
@@ -2244,15 +2245,45 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
   }
 
   if(!YM_ID) return;                       /* нечего подключать — молчим */
-  if(saved() === 'yes'){ loadMetrika(); return; }
   if(saved() === 'no')  return;            /* отказ уважаем, не переспрашиваем */
 
-  box.classList.add('on');
+  /* Счётчик подключается с первого захода. Раньше он ждал нажатия «Принять» —
+     и в статистику попадали только те, кто ответил на баннер, то есть
+     меньшинство. Владелец при этом не видел трафика вовсе и не мог понять,
+     заходит ли кто-нибудь на сайт. */
+  loadMetrika();
+  if(saved() === 'yes') return;            /* уже ответила — не переспрашиваем */
+
+  /* Баннер не выскакивает сразу: на первом экране он вставал поверх главной
+     кнопки. Показываем, когда гостья пролистала первый экран или задержалась
+     на странице. */
+  var shown = false;
+  function onScroll(){ if(window.pageYOffset > 600) show(); }
+  function show(){
+    if(shown) return;
+    shown = true;
+    box.classList.add('on');
+    window.removeEventListener('scroll', onScroll);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  setTimeout(show, 9000);
+
+  /* Отказ останавливает уже загруженный счётчик и стирает его cookie.
+     disableYaCounter<номер> — штатный флаг Метрики: увидев его, счётчик
+     перестаёт отправлять данные. */
+  function stopMetrika(){
+    window['disableYaCounter' + YM_ID] = true;
+    ['_ym_uid','_ym_d','_ym_isad','_ym_visorc'].forEach(function(n){
+      document.cookie = n + '=; Max-Age=0; path=/';
+      document.cookie = n + '=; Max-Age=0; path=/; domain=.' + location.hostname;
+    });
+  }
+
   document.getElementById('ck-yes').addEventListener('click', function(){
-    save('yes'); box.classList.remove('on'); loadMetrika();
+    save('yes'); box.classList.remove('on');
   });
   document.getElementById('ck-no').addEventListener('click', function(){
-    save('no'); box.classList.remove('on');
+    save('no'); box.classList.remove('on'); stopMetrika();
   });
 })();
 </script>
