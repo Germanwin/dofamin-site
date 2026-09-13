@@ -872,10 +872,10 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 .band>.wrap>.bullets .bi{background:rgba(255,255,255,.92);color:var(--cta);box-shadow:none}
 
 /* ── Баннер согласия на аналитические cookie ──────────────────────────
-   Счётчик работает с первого захода, а баннер уведомляет и даёт отказаться:
-   152-ФЗ требует уведомления, а не предварительного разрешения. Пока
-   разрешение спрашивали заранее, статистики не было ни у кого — в Метрику
-   попадали только те, кто нажал кнопку. */
+   Счётчик работает с первого захода, а баннер уведомляет об этом: 152-ФЗ
+   требует уведомления, а не предварительного разрешения. Пока разрешение
+   спрашивали заранее, статистики не было ни у кого — в Метрику попадали
+   только те, кто нажал кнопку. */
 .ck{position:fixed;left:14px;right:14px;
   /* липкая панель внизу видна всегда — баннер встаёт над ней */
   bottom:calc(92px + env(safe-area-inset-bottom));z-index:9000;
@@ -891,13 +891,12 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
   border-radius:11px;padding:11px 18px;border:1px solid transparent;white-space:nowrap}
 .ck-yes{background:var(--g-cta);color:#fff}
 .ck-yes:hover{background:linear-gradient(135deg,#DE7099,#BC4E75)}
-.ck-no{background:transparent;color:var(--ink-2);border-color:var(--line-2)}
-.ck-no:hover{border-color:var(--cta);color:var(--plum)}
 @media(max-width:560px){
   .ck{padding:14px 15px;gap:12px}
   .ck p{flex:1 1 100%;font-size:14px}
   .ck-btns{flex:1 1 100%}
-  .ck button{flex:1 1 50%;padding:12px 10px}
+  /* кнопка одна — занимает всю ширину баннера */
+  .ck button{flex:1 1 auto;padding:12px 10px}
 }
 </style>
 <script>
@@ -2213,10 +2212,9 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 <!-- Баннер согласия на аналитику. Разметка и скрипт держатся вместе,
      чтобы при переносе на другой сайт копировался один кусок. -->
 <div class="ck" id="ck" role="dialog" aria-label="Использование cookie">
-  <p>Мы используем cookie и «Яндекс Метрику», чтобы понимать, какими страницами пользуются, и делать сайт удобнее. Аналитику можно отключить — на работу сайта это не влияет. Подробности — в <a href="privacy.html">политике конфиденциальности</a>.</p>
+  <p>Мы используем cookie и «Яндекс Метрику», чтобы понимать, какими страницами пользуются, и делать сайт удобнее. Подробности — в <a href="privacy.html">политике конфиденциальности</a>.</p>
   <div class="ck-btns">
-    <button type="button" class="ck-yes" id="ck-yes">Хорошо</button>
-    <button type="button" class="ck-no"  id="ck-no">Отключить аналитику</button>
+    <button type="button" class="ck-yes" id="ck-yes">Принять куки</button>
   </div>
 </div>
 <script>
@@ -2245,7 +2243,6 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
   }
 
   if(!YM_ID) return;                       /* нечего подключать — молчим */
-  if(saved() === 'no')  return;            /* отказ уважаем, не переспрашиваем */
 
   /* Счётчик подключается с первого захода. Раньше он ждал нажатия «Принять» —
      и в статистику попадали только те, кто ответил на баннер, то есть
@@ -2268,22 +2265,8 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
   window.addEventListener('scroll', onScroll, {passive:true});
   setTimeout(show, 9000);
 
-  /* Отказ останавливает уже загруженный счётчик и стирает его cookie.
-     disableYaCounter<номер> — штатный флаг Метрики: увидев его, счётчик
-     перестаёт отправлять данные. */
-  function stopMetrika(){
-    window['disableYaCounter' + YM_ID] = true;
-    ['_ym_uid','_ym_d','_ym_isad','_ym_visorc'].forEach(function(n){
-      document.cookie = n + '=; Max-Age=0; path=/';
-      document.cookie = n + '=; Max-Age=0; path=/; domain=.' + location.hostname;
-    });
-  }
-
   document.getElementById('ck-yes').addEventListener('click', function(){
     save('yes'); box.classList.remove('on');
-  });
-  document.getElementById('ck-no').addEventListener('click', function(){
-    save('no'); box.classList.remove('on'); stopMetrika();
   });
 })();
 </script>
