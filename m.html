@@ -86,6 +86,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%;
 /* якорь не должен приезжать под липкую шапку: она 55px */
 main>section,#book{scroll-margin-top:58px}
 main#top{scroll-margin-top:0}
+#methods details{scroll-margin-top:58px}   /* якоря на услуги: m.html#kavitaciya и т.п. */
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{
   font-family:'Manrope',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
@@ -1167,15 +1168,15 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 
     <!-- Первый спойлер раскрыт с порога: так сразу видно, что внутри карточки
          фото и описание, а не пустая строка прайса. -->
-    <details open><summary><span class="tag-s t-warm">Локальный жир</span>Кавитация<span class="sum-price">1 200 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic crop-30" src="assets/img/cavitation-3.jpg" alt="Аппарат для кавитации в студии «Дофамин»: манипулы на держателе" loading="lazy" decoding="async">Низкочастотный ультразвук разрушает мембраны жировых клеток точечно, не задевая соседние ткани, — живот, бока, галифе. Её называют «липосакцией без ножа». 30 минут.</p></div></div></details>
-    <details><summary><span class="tag-s t-pink">Целлюлит</span>Вакуумный массаж с RF<span class="sum-price">1 700 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/cavitation-2.jpg" alt="Вакуумный массаж с RF: манипула с подсветкой на животе" loading="lazy" decoding="async">Вакуум разгоняет застой в тканях, RF прогревает и подтягивает. Кровообращение улучшается, «апельсиновая корка» становится заметно ровнее. 30 минут.</p></div></div></details>
-    <details><summary><span class="tag-s t-warm">Контуры</span>Лазерный липолиз<span class="sum-price">500 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/lipolysis-process.jpg" alt="Лазерный липолиз: пластины с лазерными диодами на бёдрах и ягодицах" loading="lazy" decoding="async">Мягкая альтернатива липосакции: пластины укладываются на зону, лазер работает по жиру, который не уходит на диете. Изменения набираются за 3 месяца. 30 минут.</p></div></div></details>
-    <details><summary><span class="tag-s t-sage">Отёки</span>Прессотерапия<span class="sum-price">1 000 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/presso.jpg" alt="Прессотерапия: костюм лимфодренажного массажа на кушетке" loading="lazy" decoding="async">Костюм со сжатым воздухом мягко «прокачивает» лимфу от стоп вверх. Минус 0,5–2 см за сеанс, с подогревом — до 2 кг лишней воды за визит. 30 минут.</p></div></div></details>
-    <details><summary><span class="tag-s t-gold">Тонус кожи</span>RF-лифтинг тела<span class="sum-price">1 500 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic crop-58" src="assets/img/rf-body-2.jpg" alt="Манипулы RF-лифтинга с металлическими электродами" loading="lazy" decoding="async">Радиочастотный прогрев глубоких слоёв запускает выработку нового коллагена. Провисание после родов и похудения, растяжки, дряблость. 30 минут.</p></div></div></details>
-    <details><summary><span class="tag-s t-sage">Мышцы</span>Миостимуляция<span class="sum-price">1 800 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic crop-75" src="assets/img/myostim-2.jpg" alt="Миостимуляция в студии «Дофамин»: мастер закрепляет пояса с электродами" loading="lazy" decoding="async">Импульсы заставляют мышцы работать как на тренировке, только лёжа. Подтягивает пресс и ягодицы, ускоряет обмен веществ. 30 минут.</p></div></div></details>
-    <details><summary><span class="tag-s t-plum">Расслабление</span>Вибромассаж<span class="sum-price">1 300 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/vibro.jpg" alt="Вибрационный массаж в студии «Дофамин»: манипула аппарата на бедре" loading="lazy" decoding="async">Высокочастотная вибрация глубоко прорабатывает мышцы, разгоняет кровообращение и обмен веществ. Снимает напряжение после рабочего дня. 30 минут.</p></div></div></details>
-    <details><summary><span class="tag-s t-gold">Лицо</span>Косметология лица<span class="sum-price">по записи</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/face.jpg" alt="Косметология лица в студии «Дофамин»" loading="lazy" decoding="async">Уходовые процедуры, RF-лифтинг лица и карбокситерапия: тонус, цвет, лифтинг овала, работа с пигментацией и постакне. Подбираем по состоянию кожи, а не по прайсу.</p></div></div></details>
-    <details><summary><span class="tag-s t-plum">Перманент</span>Перманентный макияж<span class="sum-price">от 7 000 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/pm-brows.jpg" alt="Перманентный макияж бровей — мастер за работой" loading="lazy" decoding="async">Брови, губы, межресничка и стрелки с растушёвкой. Мастер со стажем более 10 лет, только проверенные пигменты, средства для домашнего ухода — с собой. От 2 часов.</p></div></div></details>
+    <details id="kavitaciya" open><summary><span class="tag-s t-warm">Локальный жир</span>Кавитация<span class="sum-price">1 200 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic crop-30" src="assets/img/cavitation-3.jpg" alt="Аппарат для кавитации в студии «Дофамин»: манипулы на держателе" loading="lazy" decoding="async">Низкочастотный ультразвук разрушает мембраны жировых клеток точечно, не задевая соседние ткани, — живот, бока, галифе. Её называют «липосакцией без ножа». 30 минут.</p></div></div></details>
+    <details id="vakuum-rf"><summary><span class="tag-s t-pink">Целлюлит</span>Вакуумный массаж с RF<span class="sum-price">1 700 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/cavitation-2.jpg" alt="Вакуумный массаж с RF: манипула с подсветкой на животе" loading="lazy" decoding="async">Вакуум разгоняет застой в тканях, RF прогревает и подтягивает. Кровообращение улучшается, «апельсиновая корка» становится заметно ровнее. 30 минут.</p></div></div></details>
+    <details id="lipoliz"><summary><span class="tag-s t-warm">Контуры</span>Лазерный липолиз<span class="sum-price">500 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/lipolysis-process.jpg" alt="Лазерный липолиз: пластины с лазерными диодами на бёдрах и ягодицах" loading="lazy" decoding="async">Мягкая альтернатива липосакции: пластины укладываются на зону, лазер работает по жиру, который не уходит на диете. Изменения набираются за 3 месяца. 30 минут.</p></div></div></details>
+    <details id="pressoterapiya"><summary><span class="tag-s t-sage">Отёки</span>Прессотерапия<span class="sum-price">1 000 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/presso.jpg" alt="Прессотерапия: костюм лимфодренажного массажа на кушетке" loading="lazy" decoding="async">Костюм со сжатым воздухом мягко «прокачивает» лимфу от стоп вверх. Минус 0,5–2 см за сеанс, с подогревом — до 2 кг лишней воды за визит. 30 минут.</p></div></div></details>
+    <details id="rf-lifting"><summary><span class="tag-s t-gold">Тонус кожи</span>RF-лифтинг тела<span class="sum-price">1 500 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic crop-58" src="assets/img/rf-body-2.jpg" alt="Манипулы RF-лифтинга с металлическими электродами" loading="lazy" decoding="async">Радиочастотный прогрев глубоких слоёв запускает выработку нового коллагена. Провисание после родов и похудения, растяжки, дряблость. 30 минут.</p></div></div></details>
+    <details id="miostimulyaciya"><summary><span class="tag-s t-sage">Мышцы</span>Миостимуляция<span class="sum-price">1 800 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic crop-75" src="assets/img/myostim-2.jpg" alt="Миостимуляция в студии «Дофамин»: мастер закрепляет пояса с электродами" loading="lazy" decoding="async">Импульсы заставляют мышцы работать как на тренировке, только лёжа. Подтягивает пресс и ягодицы, ускоряет обмен веществ. 30 минут.</p></div></div></details>
+    <details id="vibromassazh"><summary><span class="tag-s t-plum">Расслабление</span>Вибромассаж<span class="sum-price">1 300 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/vibro.jpg" alt="Вибрационный массаж в студии «Дофамин»: манипула аппарата на бедре" loading="lazy" decoding="async">Высокочастотная вибрация глубоко прорабатывает мышцы, разгоняет кровообращение и обмен веществ. Снимает напряжение после рабочего дня. 30 минут.</p></div></div></details>
+    <details id="kosmetologiya"><summary><span class="tag-s t-gold">Лицо</span>Косметология лица<span class="sum-price">по записи</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/face.jpg" alt="Косметология лица в студии «Дофамин»" loading="lazy" decoding="async">Уходовые процедуры, RF-лифтинг лица и карбокситерапия: тонус, цвет, лифтинг овала, работа с пигментацией и постакне. Подбираем по состоянию кожи, а не по прайсу.</p></div></div></details>
+    <details id="permanent"><summary><span class="tag-s t-plum">Перманент</span>Перманентный макияж<span class="sum-price">от 7 000 ₽</span></summary><div class="d-body"><div class="d-in"><p><img class="d-pic" src="assets/img/pm-brows.jpg" alt="Перманентный макияж бровей — мастер за работой" loading="lazy" decoding="async">Брови, губы, межресничка и стрелки с растушёвкой. Мастер со стажем более 10 лет, только проверенные пигменты, средства для домашнего ухода — с собой. От 2 часов.</p></div></div></details>
 
     <p class="note" style="margin-top:14px">Ещё в студии: классический и лимфодренажный массаж,
       массаж спины в магнитно-рефлекторной технике, ламинирование ресниц.</p>
@@ -1772,11 +1773,11 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       }).then(function(r){ if(!r.ok) onFail(p); }).catch(function(){ onFail(p); });
     } catch(e){ onFail(p); }
   }
-  function sendLead(payload){
-    /* Цель засчитывается только если гостья согласилась на cookie:
-       без согласия счётчик не подключён и window.YM_ID пуст. */
-    if (window.ym && window.YM_ID) { try { ym(window.YM_ID,'reachGoal','lead'); } catch(e){} }
-    if (window.gtag){ try { gtag('event','generate_lead'); } catch(e){} }
+  function sendLead(payload, goalName){
+    /* Счётчик подключается с первого захода, так что цель уходит всегда.
+       Имя цели передаёт форма (FORM_GOAL ниже); без имени — 'lead', как у квиза. */
+    if (window.ym && window.YM_ID) { try { ym(window.YM_ID,'reachGoal',goalName || 'lead'); } catch(e){} }
+    if (window.gtag){ try { gtag('event',goalName || 'generate_lead'); } catch(e){} }
     postLead(payload, keepLead);
   }
   /* Досылаем то, что не ушло в прошлый раз. */
@@ -1788,6 +1789,11 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
     }
   } catch(e){}
 
+  /* У каждой формы своя цель. В Метрике есть цель «идентификатор содержит
+     lead», поэтому у чек-листа имя без «lead»: это не заявка на запись.
+     f1 — «Процедура за 1 000 ₽», f5 — запись из липкой панели, f3 — «Узнать,
+     сколько нужно мне», f2 — «Приходите просто поговорить», f4 — чек-лист. */
+  var FORM_GOAL = {f1:'lead_1000', f5:'lead_1000', f3:'lead_consult', f2:'lead_consult', f4:'checklist'};
   document.querySelectorAll('form:not(#quiz)').forEach(function(f){
     f.addEventListener('submit', function(e){
       e.preventDefault();
@@ -1798,7 +1804,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       var data = {form:f.id, phone:phone.value};
       var sel = f.querySelector('select');
       if(sel) data[sel.name] = sel.value;
-      sendLead(data);
+      sendLead(data, FORM_GOAL[f.id]);
       f.classList.add('is-done');
       /* Форма в мини-окне уже перед глазами — страницу под ним не трогаем.
          Прокрутка здесь увела бы фон, а после закрытия человек оказался бы
@@ -1878,6 +1884,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
     var qBack  = document.getElementById('q-back');
     var qHint  = document.getElementById('q-hint');
     var qAns   = {'Куда отправить':'В WhatsApp'};
+    var qStarted = false;                /* quiz_start — один раз за загрузку */
 
     function qRender(){
       qSteps.forEach(function(st){ st.classList.toggle('on', +st.dataset.step === qCur); });
@@ -1894,6 +1901,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
     quizForm.querySelectorAll('.qopts').forEach(function(group){
       group.querySelectorAll('.qopt').forEach(function(opt){
         opt.addEventListener('click', function(){
+          if(!qStarted){ qStarted = true; if(window.dofGoal) window.dofGoal('quiz_start'); }
           group.querySelectorAll('.qopt').forEach(function(o){ o.classList.remove('sel'); });
           opt.classList.add('sel');
           qAns[group.dataset.name] = opt.textContent.trim();
@@ -1919,6 +1927,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       /* Тот же расчёт уходит в Telegram: администратору останется скопировать. */
       var qProg = buildProgram(qAns);
       qAns['Программа'] = qProg.text;
+      if(window.dofGoal) window.dofGoal('quiz_done');
       sendLead(Object.assign({form:'quiz'}, qAns));
       var qBox = document.getElementById('q-prog');
       if(qBox) qBox.innerHTML = qProg.html;
@@ -2206,6 +2215,12 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
       setOpen(!d.classList.contains('is-open'));
     });
   });
+  /* Пришли по якорю на услугу (m.html#lipoliz) — раскрываем её спойлер,
+     чтобы сразу было видно фото и описание, а не одну строку с ценой. */
+  var hashSp = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
+  if(hashSp && hashSp.matches('#methods details.js-sp:not(.is-open)')){
+    hashSp.querySelector('summary').click();
+  }
 })();
 </script>
 
@@ -2239,7 +2254,13 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
      m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
      k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})
      (window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
-    ym(YM_ID,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
+    /* Пришли переброской с index.html — отдаём Метрике настоящий источник,
+       который та сохранила в dof-ref: иначе визит запишется как внутренний. */
+    var ref = null;
+    try { ref = sessionStorage.getItem('dof-ref'); sessionStorage.removeItem('dof-ref'); } catch(e){}
+    var opts = {clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true};
+    if(ref !== null) opts.referrer = ref;
+    ym(YM_ID,'init',opts);
   }
 
   if(!YM_ID) return;                       /* нечего подключать — молчим */

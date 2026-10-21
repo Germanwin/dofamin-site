@@ -23,21 +23,25 @@
      что это одна страница, а не две одинаковых. -->
 <link rel="alternate" media="only screen and (max-width: 700px)" href="/m.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23A87C86'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23FDF9F5' text-anchor='middle'%3E%D0%94%3C/text%3E%3C/svg%3E">
-<!-- Счётчик Яндекс.Метрики подключается внизу страницы и только после согласия
-     на cookie — номер задан там в YM_ID. Цель «оставил заявку» вызывается из
-     кода формы: ym(YM_ID,'reachGoal','lead'). Место под Google Analytics
-     свободно: gtag('event','generate_lead') уже вызывается оттуда же. -->
+<!-- Счётчик Яндекс.Метрики подключается внизу страницы с первого захода —
+     номер задан там в YM_ID. Цели заявок вызываются из кода форм:
+     ym(YM_ID,'reachGoal',…), имя цели — по назначению формы (FORM_GOAL).
+     Место под Google Analytics свободно: gtag('event',…) вызывается оттуда же. -->
 <script>
 /* Мобильная версия живёт отдельным файлом m.html: на телефоне у неё своя,
    сокращённая структура. Уводим туда до первой отрисовки, чтобы не мигало.
    «Полная версия сайта» открывается по ссылке из подвала m.html (?full=1)
-   и запоминается на время сессии. */
+   и запоминается на время сессии.
+   Строка запроса едет вместе с переходом: в ней UTM-метки и yclid Директа.
+   Настоящий реферер кладём в dof-ref — иначе Метрика на m.html увидит
+   источником наш же сайт и запишет рекламный визит как внутренний переход. */
 (function(){
   try{
     if(location.search.indexOf('full=1') > -1){ sessionStorage.setItem('dof-full','1'); return; }
     if(sessionStorage.getItem('dof-full') === '1') return;
     if(window.matchMedia && matchMedia('(max-width:700px)').matches){
-      location.replace('m.html' + location.hash);
+      try { sessionStorage.setItem('dof-ref', document.referrer); } catch(e){}
+      location.replace('m.html' + location.search + location.hash);
     }
   }catch(e){}
 })();
@@ -150,6 +154,10 @@ section.band+section{border-radius:60px 60px 0 0}
 /* Отступ под липкую шапку (74px) при переходе по якорю. */
 main>section,footer{scroll-margin-top:84px}
 main#top{scroll-margin-top:84px}   /* по логотипу — на самый верх страницы */
+/* Якоря на услуги: index.html#kavitaciya и т.п. Сетка карточек выезжает
+   снизу на 24px (.rv), и браузер целится в ещё не доехавшую карточку:
+   84px под шапку + 24px на этот подъезд. */
+#methods .mcard{scroll-margin-top:108px}
 .blush{background:linear-gradient(165deg,#F2CFDC 0%,#F7DFD8 100%)}
 h1,h2,h3.serif,.serif{font-family:'Cormorant',Georgia,'Times New Roman',serif;font-weight:600}
 h1{font-size:clamp(33px,3.95vw,53px);line-height:1.04;letter-spacing:-.005em;color:var(--plum)}
@@ -1366,7 +1374,7 @@ footer a{color:#F3E2DC}
     </div>
 
     <div class="grid g3 rv">
-      <article class="mcard">
+      <article class="mcard" id="kavitaciya">
         <div class="mimg"><img decoding="async" src="assets/img/cavitation-3.jpg" alt="Аппарат для кавитации в студии «Дофамин»: манипулы на держателе" loading="lazy" width="1095" height="853"></div>
         <div class="mbody">
           <span class="mtag t-warm">Локальный жир</span>
@@ -1376,7 +1384,7 @@ footer a{color:#F3E2DC}
         </div>
       </article>
 
-      <article class="mcard">
+      <article class="mcard" id="vakuum-rf">
         <div class="mimg"><img decoding="async" src="assets/img/cavitation-2.jpg" alt="Вакуумный массаж с RF: манипула с подсветкой на животе" loading="lazy" width="800" height="800"></div>
         <div class="mbody">
           <span class="mtag t-pink">Целлюлит</span>
@@ -1386,7 +1394,7 @@ footer a{color:#F3E2DC}
         </div>
       </article>
 
-      <article class="mcard">
+      <article class="mcard" id="lipoliz">
         <div class="mimg"><img decoding="async" src="assets/img/lipolysis-process.jpg" alt="Лазерный липолиз: пластины с лазерными диодами на бёдрах и ягодицах" loading="lazy" width="766" height="800"></div>
         <div class="mbody">
           <span class="mtag t-warm">Контуры тела</span>
@@ -1396,7 +1404,7 @@ footer a{color:#F3E2DC}
         </div>
       </article>
 
-      <article class="mcard">
+      <article class="mcard" id="pressoterapiya">
         <div class="mimg"><img decoding="async" src="assets/img/presso.jpg" alt="Прессотерапия: костюм лимфодренажного массажа на кушетке" loading="lazy" width="447" height="372"></div>
         <div class="mbody">
           <span class="mtag t-sage">Отёки</span>
@@ -1406,7 +1414,7 @@ footer a{color:#F3E2DC}
         </div>
       </article>
 
-      <article class="mcard m-extra">
+      <article class="mcard m-extra" id="rf-lifting">
         <div class="mimg"><img class="crop-82" decoding="async" src="assets/img/rf-body-2.jpg" alt="Манипулы RF-лифтинга с металлическими электродами" loading="lazy" width="719" height="737"></div>
         <div class="mbody">
           <span class="mtag t-gold">Тонус кожи</span>
@@ -1416,7 +1424,7 @@ footer a{color:#F3E2DC}
         </div>
       </article>
 
-      <article class="mcard m-extra">
+      <article class="mcard m-extra" id="miostimulyaciya">
         <div class="mimg"><img decoding="async" src="assets/img/myostim-2.jpg" alt="Миостимуляция в студии «Дофамин»: мастер закрепляет пояса с электродами" loading="lazy" width="591" height="742"></div>
         <div class="mbody">
           <span class="mtag t-sage">Мышцы и рельеф</span>
@@ -1426,7 +1434,7 @@ footer a{color:#F3E2DC}
         </div>
       </article>
 
-      <article class="mcard m-extra">
+      <article class="mcard m-extra" id="vibromassazh">
         <div class="mimg"><img decoding="async" src="assets/img/vibro.jpg" alt="Вибрационный массаж в студии Дофамин: манипула аппарата на бедре" loading="lazy" width="448" height="336"></div>
         <div class="mbody">
           <span class="mtag t-plum">Расслабление</span>
@@ -1436,7 +1444,7 @@ footer a{color:#F3E2DC}
         </div>
       </article>
 
-      <article class="mcard m-extra">
+      <article class="mcard m-extra" id="kosmetologiya">
         <div class="mimg"><img decoding="async" src="assets/img/face.jpg" alt="Косметология лица в студии Дофамин" loading="lazy" width="583" height="800"></div>
         <div class="mbody">
           <span class="mtag t-gold">Лицо</span>
@@ -1446,7 +1454,7 @@ footer a{color:#F3E2DC}
         </div>
       </article>
 
-      <article class="mcard m-extra">
+      <article class="mcard m-extra" id="permanent">
         <div class="mimg"><img decoding="async" src="assets/img/pm-brows.jpg" alt="Перманентный макияж бровей — мастер за работой" loading="lazy" width="800" height="800"></div>
         <div class="mbody">
           <span class="mtag t-plum">Перманент</span>
@@ -2127,11 +2135,11 @@ footer a{color:#F3E2DC}
       }).then(function(r){ if(!r.ok) onFail(p); }).catch(function(){ onFail(p); });
     } catch(e){ onFail(p); }
   }
-  function sendLead(payload){
-    /* Цель засчитывается только если гостья согласилась на cookie:
-       без согласия счётчик не подключён и window.YM_ID пуст. */
-    if (window.ym && window.YM_ID) { try { ym(window.YM_ID,'reachGoal','lead'); } catch(e){} }
-    if (window.gtag){ try { gtag('event','generate_lead'); } catch(e){} }
+  function sendLead(payload, goalName){
+    /* Счётчик подключается с первого захода, так что цель уходит всегда.
+       Имя цели передаёт форма (FORM_GOAL ниже); без имени — 'lead', как у квиза. */
+    if (window.ym && window.YM_ID) { try { ym(window.YM_ID,'reachGoal',goalName || 'lead'); } catch(e){} }
+    if (window.gtag){ try { gtag('event',goalName || 'generate_lead'); } catch(e){} }
     postLead(payload, keepLead);
   }
   /* Досылаем то, что не ушло в прошлый раз. */
@@ -2157,7 +2165,10 @@ footer a{color:#F3E2DC}
     scrollToEl(form, 110);
   }
 
-  /* ---- простые формы ---- */
+  /* ---- простые формы ----
+     У каждой формы своя цель. В Метрике есть цель «идентификатор содержит
+     lead», поэтому у чек-листа имя без «lead»: это не заявка на запись. */
+  var FORM_GOAL = {'form-book':'lead_1000', 'form-price':'lead_consult', 'form-final':'checklist'};
   ['form-price','form-final','form-book'].forEach(function(id){
     var f = document.getElementById(id);
     if(!f) return;
@@ -2169,7 +2180,7 @@ footer a{color:#F3E2DC}
       if(agree && !agree.checked){ needAgree(agree); return; }
       var data = {form:id, phone:phone.value};
       var sel = f.querySelector('select');   if(sel) data.extra = sel.value;
-      sendLead(data);
+      sendLead(data, FORM_GOAL[id]);
       done(f, id === 'form-final');
     });
   });
@@ -2240,6 +2251,7 @@ footer a{color:#F3E2DC}
     var back  = document.getElementById('q-back');
     var hint  = document.getElementById('q-hint');
     var answers = {};
+    var started = false;                 /* quiz_start — один раз за загрузку */
 
     function render(){
       steps.forEach(function(s){ s.classList.toggle('active', +s.dataset.step === cur); });
@@ -2256,6 +2268,7 @@ footer a{color:#F3E2DC}
     quiz.querySelectorAll('.qopts').forEach(function(group){
       group.querySelectorAll('.qopt').forEach(function(opt){
         opt.addEventListener('click', function(){
+          if(!started){ started = true; if(window.dofGoal) window.dofGoal('quiz_start'); }
           group.querySelectorAll('.qopt').forEach(function(o){ o.classList.remove('sel'); });
           opt.classList.add('sel');
           answers[group.dataset.name] = opt.textContent.trim();
@@ -2280,6 +2293,8 @@ footer a{color:#F3E2DC}
          чтобы администратору осталось скопировать его клиенту, а не сочинять. */
       var prog = buildProgram(answers);
       answers['Программа'] = prog.text;
+      /* Раньше window.open: вкладка мессенджера не должна опередить цель. */
+      if(window.dofGoal) window.dofGoal('quiz_done');
       sendLead(Object.assign({form:'quiz'}, answers));
       var progBox = document.getElementById('q-prog');
       if(progBox) progBox.innerHTML = prog.html;
@@ -2379,6 +2394,13 @@ footer a{color:#F3E2DC}
       }
     });
   });
+  /* Якорь на услугу из свёрнутой части списка (узкое окно полной версии):
+     сначала раскрываем список, иначе прокручивать не к чему. */
+  var hashCard = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
+  if(hashCard && hashCard.classList.contains('m-extra') && getComputedStyle(hashCard).display === 'none'){
+    var hashMore = hashCard.closest('section').querySelector('.m-more');
+    if(hashMore){ hashMore.click(); hashCard.scrollIntoView(); }
+  }
 
   /* ---- спойлеры раскрываются плавно ----
      Атрибут open ставим один раз и больше не трогаем: закрытый <details>
