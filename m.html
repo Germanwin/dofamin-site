@@ -2221,6 +2221,23 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
   if(hashSp && hashSp.matches('#methods details.js-sp:not(.is-open)')){
     hashSp.querySelector('summary').click();
   }
+  /* Браузер приезжает к якорю ещё на запасном шрифте. Фирменные шрифты
+     догружаются следом, текст выше цели становится короче, и цель уезжает
+     под шапку (на живом сайте ~90px). Один раз доводим после загрузки
+     шрифтов — если человек к этому времени сам не взялся листать. */
+  if(hashSp && document.fonts && document.fonts.ready){
+    var touched = false;
+    var mark = function(){ touched = true; };
+    ['touchstart','wheel','keydown'].forEach(function(ev){
+      window.addEventListener(ev, mark, {passive:true, once:true});
+    });
+    document.fonts.ready.then(function(){
+      if(touched) return;
+      var gap = parseFloat(getComputedStyle(hashSp).scrollMarginTop) || 0;
+      var dy = hashSp.getBoundingClientRect().top - gap;
+      if(Math.abs(dy) > 4) window.scrollTo({top: window.pageYOffset + dy, behavior: 'auto'});
+    });
+  }
 })();
 </script>
 
