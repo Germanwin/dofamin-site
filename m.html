@@ -27,6 +27,24 @@
 <!-- canonical относительный: работает на любом домене, менять при переезде не нужно. -->
 <link rel="canonical" href="/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23C05379'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23FDF9F5' text-anchor='middle'%3E%D0%94%3C/text%3E%3C/svg%3E">
+<!-- Яндекс.Метрика. По требованиям Метрики код стоит как можно ближе к началу
+     страницы. window.YM_ID нужен целям форм, квиза и баннеру cookie. -->
+<script>
+window.YM_ID = '112173743';
+(function(){
+  (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
+   k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})
+   (window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
+  /* Пришли переброской с index.html — отдаём Метрике настоящий источник,
+     который та сохранила в dof-ref: иначе визит запишется как внутренний. */
+  var ref = null;
+  try { ref = sessionStorage.getItem('dof-ref'); sessionStorage.removeItem('dof-ref'); } catch(e){}
+  var opts = {clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true};
+  if(ref !== null) opts.referrer = ref;
+  ym(112173743,'init',opts);
+})();
+</script>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/cormorant-cyrillic-500.woff2" crossorigin>
 <link rel="preload" as="image" href="assets/img/hero-process.jpg" fetchpriority="high">
@@ -929,6 +947,7 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 </script>
 </head>
 <body>
+<noscript><div><img src="https://mc.yandex.ru/watch/112173743" style="position:absolute;left:-9999px" alt=""></div></noscript>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
@@ -2251,12 +2270,9 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
 </div>
 <script>
 (function(){
-  /* Номер счётчика Яндекс.Метрики. Пусто — счётчик не подключается,
-     и баннер не показывается: спрашивать согласие не на что. */
-  var YM_ID = '112173743';
-  /* Тот же номер нужен коду форм для цели «оставил заявку»: он живёт
-     в другой области видимости, поэтому кладём номер в window. */
-  window.YM_ID = YM_ID;
+  /* Номер счётчика Яндекс.Метрики задан в <head>, там же счётчик и
+     запускается. Пусто — баннер не показывается: спрашивать согласие не на что. */
+  var YM_ID = window.YM_ID || '';
 
   var KEY = 'dof-cookie';
   var box = document.getElementById('ck');
@@ -2265,28 +2281,12 @@ details.js-sp.is-open .d-body .plist{opacity:1;transition-delay:.06s}
   function saved(){ try { return localStorage.getItem(KEY); } catch(e){ return null; } }
   function save(v){ try { localStorage.setItem(KEY, v); } catch(e){} }
 
-  function loadMetrika(){
-    if(!YM_ID || window.ym) return;
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-     m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
-     k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})
-     (window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
-    /* Пришли переброской с index.html — отдаём Метрике настоящий источник,
-       который та сохранила в dof-ref: иначе визит запишется как внутренний. */
-    var ref = null;
-    try { ref = sessionStorage.getItem('dof-ref'); sessionStorage.removeItem('dof-ref'); } catch(e){}
-    var opts = {clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true};
-    if(ref !== null) opts.referrer = ref;
-    ym(YM_ID,'init',opts);
-  }
-
   if(!YM_ID) return;                       /* нечего подключать — молчим */
 
-  /* Счётчик подключается с первого захода. Раньше он ждал нажатия «Принять» —
-     и в статистику попадали только те, кто ответил на баннер, то есть
-     меньшинство. Владелец при этом не видел трафика вовсе и не мог понять,
-     заходит ли кто-нибудь на сайт. */
-  loadMetrika();
+  /* Счётчик подключается с первого захода, в <head>. Раньше он ждал нажатия
+     «Принять» — и в статистику попадали только те, кто ответил на баннер,
+     то есть меньшинство. Владелец при этом не видел трафика вовсе и не мог
+     понять, заходит ли кто-нибудь на сайт. */
   if(saved() === 'yes') return;            /* уже ответила — не переспрашиваем */
 
   /* Баннер не выскакивает сразу: на первом экране он вставал поверх главной

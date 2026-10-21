@@ -23,8 +23,8 @@
      что это одна страница, а не две одинаковых. -->
 <link rel="alternate" media="only screen and (max-width: 700px)" href="/m.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23A87C86'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23FDF9F5' text-anchor='middle'%3E%D0%94%3C/text%3E%3C/svg%3E">
-<!-- Счётчик Яндекс.Метрики подключается внизу страницы с первого захода —
-     номер задан там в YM_ID. Цели заявок вызываются из кода форм:
+<!-- Счётчик Яндекс.Метрики подключается в <head> сразу после переброса
+     на m.html — номер задан там в window.YM_ID. Цели заявок вызываются из кода форм:
      ym(YM_ID,'reachGoal',…), имя цели — по назначению формы (FORM_GOAL).
      Место под Google Analytics свободно: gtag('event',…) вызывается оттуда же. -->
 <script>
@@ -41,9 +41,25 @@
     if(sessionStorage.getItem('dof-full') === '1') return;
     if(window.matchMedia && matchMedia('(max-width:700px)').matches){
       try { sessionStorage.setItem('dof-ref', document.referrer); } catch(e){}
+      window.dofToMobile = true;          /* Метрика ниже по этому флагу молчит */
       location.replace('m.html' + location.search + location.hash);
     }
   }catch(e){}
+})();
+</script>
+<!-- Яндекс.Метрика. По требованиям Метрики код стоит как можно ближе к началу
+     страницы — сразу за перебросом, который должен остаться первым. Если
+     переброс уже уводит на m.html, визит здесь не считаем: его посчитает m.html.
+     window.YM_ID нужен целям форм, квиза и баннеру cookie. -->
+<script>
+window.YM_ID = '112173743';
+(function(){
+  if(window.dofToMobile) return;
+  (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
+   k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})
+   (window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
+  ym(112173743,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
 })();
 </script>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/manrope-cyrillic.woff2" crossorigin>
@@ -1140,6 +1156,7 @@ footer a{color:#F3E2DC}
 </script>
 </head>
 <body>
+<noscript><div><img src="https://mc.yandex.ru/watch/112173743" style="position:absolute;left:-9999px" alt=""></div></noscript>
 
 <svg style="display:none" aria-hidden="true">
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
@@ -2517,12 +2534,9 @@ footer a{color:#F3E2DC}
 </div>
 <script>
 (function(){
-  /* Номер счётчика Яндекс.Метрики. Пусто — счётчик не подключается,
-     и баннер не показывается: спрашивать согласие не на что. */
-  var YM_ID = '112173743';
-  /* Тот же номер нужен коду форм для цели «оставил заявку»: он живёт
-     в другой области видимости, поэтому кладём номер в window. */
-  window.YM_ID = YM_ID;
+  /* Номер счётчика Яндекс.Метрики задан в <head>, там же счётчик и
+     запускается. Пусто — баннер не показывается: спрашивать согласие не на что. */
+  var YM_ID = window.YM_ID || '';
 
   var KEY = 'dof-cookie';
   var box = document.getElementById('ck');
@@ -2531,22 +2545,12 @@ footer a{color:#F3E2DC}
   function saved(){ try { return localStorage.getItem(KEY); } catch(e){ return null; } }
   function save(v){ try { localStorage.setItem(KEY, v); } catch(e){} }
 
-  function loadMetrika(){
-    if(!YM_ID || window.ym) return;
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-     m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
-     k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})
-     (window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
-    ym(YM_ID,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
-  }
-
   if(!YM_ID) return;                       /* нечего подключать — молчим */
 
-  /* Счётчик подключается с первого захода. Раньше он ждал нажатия «Принять» —
-     и в статистику попадали только те, кто ответил на баннер, то есть
-     меньшинство. Владелец при этом не видел трафика вовсе и не мог понять,
-     заходит ли кто-нибудь на сайт. */
-  loadMetrika();
+  /* Счётчик подключается с первого захода, в <head>. Раньше он ждал нажатия
+     «Принять» — и в статистику попадали только те, кто ответил на баннер,
+     то есть меньшинство. Владелец при этом не видел трафика вовсе и не мог
+     понять, заходит ли кто-нибудь на сайт. */
   if(saved() === 'yes') return;            /* уже ответила — не переспрашиваем */
 
   /* Баннер не выскакивает сразу: на первом экране он вставал поверх главной
